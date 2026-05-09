@@ -19,10 +19,7 @@ export function AboutSection() {
                 </p>
                 <div className="flex flex-wrap gap-2 mt-1">
                     {badges.map((badge) => (
-                        <span
-                            key={badge}
-                            className="bg-[#3D6B5C] text-white text-[0.7rem] font-medium px-4 py-1.5 rounded-full whitespace-nowrap"
-                        >
+                        <span key={badge} className="bg-[#3D6B5C] text-white text-[0.7rem] font-medium px-4 py-1.5 rounded-full whitespace-nowrap">
                             {badge}
                         </span>
                     ))}
