@@ -17,7 +17,7 @@ export function Header() {
 
             {/* My Account Button */}
             <button onClick={() => router.push("/minhaconta/signin")}
-                className="rounded-lg font-light text-[#5A5A58] transition-colors hover:opacity-90 cursor-pointer">
+                className="rounded-lg font-light text-[#5A5A58] text-sm transition-colors hover:opacity-90 cursor-pointer">
                 Minha conta
             </button>
         </header>
