@@ -6,20 +6,26 @@ export function AboutSection() {
     ];
 
     return (
-        <div className="bg-[#fafafa] shadow-lg banner overflow-hidden">
-            <div className="w-full h-44 bg-[#7c4dbe]"></div>
-            <div className="flex flex-col gap-3 px-5 pt-5 pb-6">
-                <h2 className="text-lg font-bold leading-snug text-[#171717]">
+        <div className="bg-white shadow-xl rounded-4xl squircle-border overflow-hidden border border-gray-100 flex flex-col md:flex-row">
+            <div className="w-full md:w-1/3 h-64 md:h-auto bg-linear-to-br from-[#7c4dbe] to-[#5a368f] flex items-center justify-center p-8">
+                <div className="w-full h-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20" />
+            </div>
+
+            <div className="flex flex-col justify-center gap-4 p-8 md:p-12 md:w-2/3">
+
+                <h2 className="text-2xl md:text-3xl font-black text-[#171717] leading-tight">
                     Quem comanda o laboratório?
                 </h2>
-                <p className="text-[.8rem] text-[#4a4a48] leading-relaxed">
+
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed font-medium">
                     Sou a Prof<sup>a</sup> Lua, formada em Química pela UFRN.
                     Com quase 10 anos de experiência, percebi que o problema
-                    não é a matéria — é o método.
+                    não é a matéria — é o método. Minha missão é tornar o aprendizado leve e eficaz.
                 </p>
-                <div className="flex flex-wrap gap-2 mt-1">
+
+                <div className="flex flex-wrap gap-2 mt-4">
                     {badges.map((badge) => (
-                        <span key={badge} className="bg-[#3D6B5C] text-white text-[0.7rem] font-medium px-4 py-1.5 rounded-full whitespace-nowrap">
+                        <span key={badge} className="bg-[#3D6B5C] text-white text-[10px] md:text-xs font-bold px-4 py-2 rounded-full whitespace-nowrap shadow-sm">
                             {badge}
                         </span>
                     ))}
