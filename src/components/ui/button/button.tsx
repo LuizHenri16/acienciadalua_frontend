@@ -6,7 +6,7 @@ import { HashLoader, RingLoader } from "react-spinners";
 
 export interface ButtonProps {
     name: string;
-    loadingName: string;
+    loadingName?: string;
     onClick: () => void;
     variant?: 'primary' | 'secondary';
     loading?: boolean;

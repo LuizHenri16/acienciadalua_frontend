@@ -10,3 +10,12 @@ export interface Material {
     type: MaterialType;
     imageUrl?: string;
 }
+
+
+export interface MaterialDetails {
+    id: string;
+    name: string;
+    price: number;
+    type: MaterialType;
+    imageUrl?: string;
+}

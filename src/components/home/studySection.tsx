@@ -1,6 +1,6 @@
 import { Material, MaterialType } from "@/types/material";
 import { BookOpen } from "lucide-react";
-import { ProductCard } from "../ui/card";
+import { ProductCard } from "../ui/card/card";
 
 const studyMaterials: Material[] = [
   { id: 1, name: "Caderno de Química Orgânica", price: 29.9, type: MaterialType.STUDY },

@@ -23,3 +23,27 @@ export function Header() {
         </header>
     );
 }
+
+export function DashboardHeader() {
+    const router = useRouter();
+
+    const handleExit = () => {
+        router.push("/");
+    };
+
+    return (
+        <header className="w-full flex justify-between px-6 py-1  border-custom-light-gray">
+            {/* Logo */}
+            <div className="flex flex-row items-center gap-2 p-2">
+                <Image src="/acienciadalua-logo.svg" alt="Logo" width={30} height={30} />
+                <h1 className="font-unkempt text-2xl text-yellow-light-custom">A Ciência da <span className="text-2xl text-green-dark-custom">Lua</span> </h1>
+            </div>
+
+            {/* Exit Button */}
+            <button onClick={handleExit}
+                className="rounded-lg font-light text-[#5A5A58] text-sm transition-colors hover:opacity-90 cursor-pointer">
+                Sair
+            </button>
+        </header>
+    );
+}

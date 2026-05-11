@@ -1,7 +1,7 @@
 'use client';
 import { useState } from "react";
-import { Input } from "../form/input";
-import { Button } from "../button/button";
+import { Input } from "../ui/form/input";
+import { Button } from "../ui/button/button";
 import { useRouter } from "next/navigation";
 
 export function SignInForm() {

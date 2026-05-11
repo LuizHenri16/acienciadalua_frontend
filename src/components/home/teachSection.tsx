@@ -1,5 +1,5 @@
 import { MonitorPlay } from "lucide-react";
-import { ProductCard } from "../ui/card";
+import { ProductCard } from "../ui/card/card";
 import { Material, MaterialType } from "@/types/material";
 
 
