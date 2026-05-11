@@ -13,7 +13,6 @@ export function SignInForm() {
         setLoading(true);
         try {
             setTimeout(() => {
-                // Implementar API request para login aqui
                 console.log(email);
                 router.push("/minhaconta");
                 setLoading(false);
@@ -24,7 +23,7 @@ export function SignInForm() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center mt-3 lg:max-w-[40%] mx-auto w-full">
+        <div className="flex flex-col items-center justify-center mt-3 md:max-w-[60%] lg:max-w-[40%] mx-auto w-full">
             <Input placeholder="Digite seu email" label="Email" value={email} onChange={(e) => setEmail(e.target.value)} type="email" />
             <div className="mt-2 w-full">
                 <Button loadingName="Entrando" variant="primary" name="Entrar" onClick={handleLogin} loading={loading} />
