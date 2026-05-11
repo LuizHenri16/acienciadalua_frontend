@@ -8,7 +8,7 @@ interface ProductDetailsProps {
 export function ProductDetails({ product }: ProductDetailsProps) {
     return (
         <main className="animate-in fade-in duration-700 slide-in-from-bottom-2">
-            <div className="w-full aspect-16/11 bg-[#8a44d6] flex items-center justify-center">
+            <div className="w-full h-64 md:h-96 bg-[#8a44d6] flex items-center justify-center">
                 <span className="text-white/20 text-6xl font-black">#{product.id}</span>
             </div>
 
