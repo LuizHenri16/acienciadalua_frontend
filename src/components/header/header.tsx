@@ -34,18 +34,27 @@ export function DashboardHeader() {
     };
 
     return (
-        <header className="w-full flex justify-between px-6 py-1  border-custom-light-gray">
-            {/* Logo */}
-            <div className="flex flex-row items-center gap-2 p-2">
-                <Image src="/acienciadalua-logo.svg" alt="Logo" width={30} height={30} />
-                <h1 className="font-unkempt text-2xl text-yellow-light-custom">A Ciência da <span className="text-2xl text-green-dark-custom">Lua</span> </h1>
-            </div>
+        <header className="w-full border-b border-[#E5E5E3] bg-[#FAFAFA]/80 backdrop-blur-md sticky top-0 z-50">
+            <div className="max-w-5xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 py-2">
+                {/* Logo */}
+                <div 
+                    className="flex flex-row items-center gap-2 p-2 cursor-pointer"
+                    onClick={() => router.push("/")}
+                >
+                    <Image src="/acienciadalua-logo.svg" alt="Logo" width={32} height={32} />
+                    <h1 className="font-unkempt text-2xl text-yellow-light-custom">
+                        A Ciência da <span className="text-2xl text-green-dark-custom">Lua</span>
+                    </h1>
+                </div>
 
-            {/* Exit Button */}
-            <button onClick={handleExit}
-                className="rounded-lg font-light text-[#5A5A58] text-sm transition-colors hover:opacity-90 cursor-pointer">
-                Sair
-            </button>
+                {/* Exit Button */}
+                <button 
+                    onClick={handleExit}
+                    className="text-[#5A5A58] text-sm transition-colors hover:text-[#EF4444] font-medium cursor-pointer"
+                >
+                    Sair
+                </button>
+            </div>
         </header>
     );
 }
