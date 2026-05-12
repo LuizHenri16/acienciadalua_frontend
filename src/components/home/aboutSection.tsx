@@ -6,7 +6,7 @@ export function AboutSection() {
     ];
 
     return (
-        <div className="bg-white shadow-xl rounded-4xl squircle-border overflow-hidden border border-gray-100 flex flex-col md:flex-row">
+        <article className="bg-white shadow-xl rounded-4xl squircle-border overflow-hidden border border-gray-100 flex flex-col md:flex-row">
             <div className="w-full md:w-1/3 h-64 md:h-auto bg-linear-to-br from-[#7c4dbe] to-[#5a368f] flex items-center justify-center p-8">
                 <div className="w-full h-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20" />
             </div>
@@ -31,6 +31,6 @@ export function AboutSection() {
                     ))}
                 </div>
             </div>
-        </div>
+        </article>
     );
 }
