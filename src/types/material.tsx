@@ -1,6 +1,6 @@
 export enum MaterialType {
-    TEACH = "teach",
-    STUDY = "study"
+    TEACH = "Plano de aula",
+    STUDY = "Material de estudo"
 }
 
 export interface Material {

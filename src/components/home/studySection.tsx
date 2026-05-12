@@ -2,14 +2,11 @@ import { Material, MaterialType } from "@/types/material";
 import { BookOpen } from "lucide-react";
 import { ProductCarousel } from "../ui/carousel/productCarousel";
 
-const studyMaterials: Material[] = [
-  { id: 1, name: "Caderno de Química Orgânica", price: 29.9, type: MaterialType.STUDY },
-  { id: 2, name: "Resumão de Termoquímica", price: 19.9, type: MaterialType.STUDY },
-  { id: 3, name: "Lista de Exercícios — Equilíbrio", price: 14.9, type: MaterialType.STUDY },
-  { id: 4, name: "Mapa Mental: Tabela Periódica", price: 9.9, type: MaterialType.STUDY },
-];
+// Data Mock
+import { ALL_MATERIALS } from "@/constants/materials";
 
 export function StudySection() {
+  const studyMaterials = ALL_MATERIALS.filter(m => m.type === MaterialType.STUDY);
   return (
     <section className="w-full">
       <div className="flex items-center gap-2 mb-6">
