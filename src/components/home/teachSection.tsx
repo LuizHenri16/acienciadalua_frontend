@@ -3,15 +3,10 @@ import { ProductCarousel } from "../ui/carousel/productCarousel";
 import { Material, MaterialType } from "@/types/material";
 
 
-// Placeholder for materials (will be replaced with API call)
-const teachMaterials: Material[] = [
-  { id: 1, name: "Plano de Aula — Ligações Iônicas", price: 24.9, type: MaterialType.TEACH },
-  { id: 2, name: "Slides: Reações Orgânicas", price: 34.9, type: MaterialType.TEACH },
-  { id: 3, name: "Kit Atividades — Soluções", price: 39.9, type: MaterialType.TEACH },
-  { id: 4, name: "Banco de Questões ENEM Química", price: 49.9, type: MaterialType.TEACH },
-];
+import { ALL_MATERIALS } from "@/constants/materials";
 
 export function TeachSection() {
+  const teachMaterials = ALL_MATERIALS.filter(m => m.type === MaterialType.TEACH);
   return (
     <section className="w-full">
       <div className="flex items-center gap-2 mb-6">
