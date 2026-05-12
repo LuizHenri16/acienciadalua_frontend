@@ -1,8 +1,8 @@
-import { Product } from "@/types/product";
+import { Material } from "@/types/material";
 import { ShoppingCart } from "lucide-react";
 
 interface ProductDetailsProps {
-    product: Product;
+    product: Material;
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
@@ -31,7 +31,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             </span>
                         </div>
 
-                        <button className="flex-[1.2] squircle-border flex items-center justify-center gap-2 bg-[#68B999] hover:bg-[#5aa386] text-white font-bold py-4 transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer text-lg active:scale-95">
+                        <button className="flex-[1.2] squircle-border flex items-center justify-center gap-2 bg-[#68B999] hover:bg-[#5aa386] text-white font-bold py-4 transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer text-xs  md:text-md lg:text-lg active:scale-95">
                             <ShoppingCart size={20} strokeWidth={2.5} />
                             Comprar agora
                         </button>

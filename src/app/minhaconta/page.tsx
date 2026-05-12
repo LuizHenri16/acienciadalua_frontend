@@ -2,9 +2,9 @@ import { DashboardHeader } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import { Banner } from "@/components/myaccount/banner";
 import { MaterialSection } from "@/components/myaccount/materialSection";
-import { MaterialDetails, MaterialType } from "@/types/material";
+import { Material, MaterialType } from "@/types/material";
 
-const materials: MaterialDetails[] = [
+const materials: Material[] = [
     {
         id: "1",
         name: "Material 1",

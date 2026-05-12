@@ -4,18 +4,10 @@ export enum MaterialType {
 }
 
 export interface Material {
-    id: number;
+    id: string | number;
     name: string;
     price: number;
-    type: MaterialType;
+    type: MaterialType | string;
     imageUrl?: string;
-}
-
-
-export interface MaterialDetails {
-    id: string;
-    name: string;
-    price: number;
-    type: MaterialType;
-    imageUrl?: string;
+    description?: string;
 }

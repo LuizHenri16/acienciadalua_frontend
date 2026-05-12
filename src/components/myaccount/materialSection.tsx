@@ -1,9 +1,9 @@
-import { MaterialDetails } from "@/types/material";
+import { Material } from "@/types/material";
 import { BannerNoMaterials } from "./banner";
 import { PurchasedMaterialCard } from "../ui/card/purchasedMaterialCard";
 
 interface MaterialSectionProps {
-    materials: MaterialDetails[]
+    materials: Material[]
 }
 
 export function MaterialSection({ materials }: MaterialSectionProps) {
