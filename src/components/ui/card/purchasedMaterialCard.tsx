@@ -1,8 +1,8 @@
-import { MaterialDetails } from "@/types/material";
+import { Material } from "@/types/material";
 import { ArrowDownToLine } from "lucide-react";
 
 interface PurchasedMaterialCardProps {
-    material: MaterialDetails;
+    material: Material;
     purchasedAt?: string;
     onDownload?: () => void;
 }

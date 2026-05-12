@@ -1,8 +1,8 @@
-import { Product } from "@/types/product";
+import { Material } from "@/types/material";
 import { ShoppingCart } from "lucide-react";
 
 interface ProductDetailsProps {
-    product: Product;
+    product: Material;
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
