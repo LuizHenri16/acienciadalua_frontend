@@ -10,7 +10,7 @@ export function MaterialSection({ materials }: MaterialSectionProps) {
 
     return (
         <div className="flex flex-col gap-4 mt-4">
-            <h1 className="text-sm font-semibold">Meus materiais</h1>
+            <h1 className="text-sm font-semibold text-texto-secundario">Meus materiais</h1>
             {materials.length > 0 ? (
                 <div className="flex flex-col gap-3">
                     {materials.map((material) => (

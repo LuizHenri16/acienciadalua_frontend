@@ -16,17 +16,17 @@ export function FaqCard({ question, answers }: FaqCardProps) {
     };
 
     return (
-        <div onClick={toggleOpen} className={`w-full flex flex-col items-center p-3.5 banner border border-slate-200 cursor-pointer`}>
+        <div onClick={toggleOpen} className={`w-full flex flex-col items-center p-3.5 squircle-border border border-borda hover:border-borda-med cursor-pointer`}>
             <div className="w-full flex items-center gap-3 ">
-                <h3 className="font-medium text-sm lg:text-base">{question}</h3>
+                <h3 className="font-medium text-sm lg:text-base text-texto-principal">{question}</h3>
                 <ChevronDown className={`ml-auto transition-all duration-300 ${open ? "rotate-180" : ""}`} />
             </div>
 
             {open && (
-                <div className="w-full flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-300" >
-                    <ul className="list-disc ml-6 mt-2 flex flex-col gap-1">
+                <div className="w-full flex flex-col gap-2 animate-in fade-in slide-in-from-top" >
+                    <ul className="list-disc ml-6 mt-2 flex flex-col gap-2">
                         {answers.map((answer, index) => (
-                            <li key={index} className="text-sm lg:text-base text-[#5A5A58]">{answer}</li>
+                            <li key={index} className="text-sm lg:text-base text-texto-secundario">{answer}</li>
                         ))}
                     </ul>
                 </div>
