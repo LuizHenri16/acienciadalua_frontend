@@ -10,15 +10,15 @@ interface BannerProps {
 
 export function Banner({ totalMateriais, userName }: BannerProps) {
     return (totalMateriais && totalMateriais > 0) ? (
-        <div className="banner flex flex-col gap-2 px-4">
-            <p className="text-sm">Olá, {userName}👋!</p>
+        <div className="squircle-border border-3 border-dashed border-turquesa flex flex-col gap-2 px-4">
+            <p className="text-sm text-texto-secundario">Olá, {userName}👋!</p>
             <h1 className="text-2xl font-bold">Continue de onde parou</h1>
             <p className="text-sm">Você tem {totalMateriais} materiais disponíveis. Cada página é um passo a mais no seu aprendizado</p>
         </div>
     ) : (
-        <div className="banner flex flex-col gap-2 px-4 py-6">
-            <p className="text-sm">Seja <span className="text-green-light-custom">Bem-vindo, </span> {userName}👋</p>
-            <h1 className="text-2xl font-bold">Transforme sua <span className="text-green-light-custom">forma de aprender</span></h1>
+        <div className="squircle-border border-3 border-dashed border-turquesa flex flex-col gap-2 px-4 py-6">
+            <p className="text-sm text-texto-secundario">Seja <span className="text-turquesa-dark">Bem-vindo, </span> {userName}👋</p>
+            <h1 className="text-2xl font-bold">Transforme sua <span className="text-turquesa-dark">forma de aprender</span></h1>
         </div>
     );
 }
