@@ -100,7 +100,7 @@ export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) 
                         key={index}
                         onClick={() => scrollToIndex(index)}
                         className={`h-1.5 rounded-full transition-all duration-300 ${activeIndex === index
-                            ? "bg-[#68B999] w-6"
+                            ? "bg-turquesa-dark w-6"
                             : "bg-[#E5E5E3] w-1.5 hover:bg-[#D1D1CF]"
                             }`}
                         aria-label={`Ver produto ${index + 1}`}
