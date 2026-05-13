@@ -3,12 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import { Material } from "@/types/material";
 import { ProductCard } from "../card/card";
+import { SkeletonCard } from "../card/skeletonCard";
 
 interface ProductCarouselProps {
     materials: Material[];
+    isLoading?: boolean;
 }
 
-export function ProductCarousel({ materials }: ProductCarouselProps) {
+export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -55,6 +57,25 @@ export function ProductCarousel({ materials }: ProductCarouselProps) {
         }
     }, [materials]);
 
+    if (isLoading) {
+        return (
+            <div className="relative w-full">
+                <div className="flex overflow-x-auto gap-5 pb-6 no-scrollbar px-1">
+                    {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="min-w-[240px] md:min-w-[280px]">
+                            <SkeletonCard />
+                        </div>
+                    ))}
+                </div>
+                <div className="flex justify-center gap-2 mt-2">
+                    {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="h-1.5 w-1.5 rounded-full bg-[#E5E5E3]" />
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="relative w-full">
             <div
@@ -79,8 +100,8 @@ export function ProductCarousel({ materials }: ProductCarouselProps) {
                         key={index}
                         onClick={() => scrollToIndex(index)}
                         className={`h-1.5 rounded-full transition-all duration-300 ${activeIndex === index
-                                ? "bg-[#68B999] w-6"
-                                : "bg-[#E5E5E3] w-1.5 hover:bg-[#D1D1CF]"
+                            ? "bg-[#68B999] w-6"
+                            : "bg-[#E5E5E3] w-1.5 hover:bg-[#D1D1CF]"
                             }`}
                         aria-label={`Ver produto ${index + 1}`}
                     />
