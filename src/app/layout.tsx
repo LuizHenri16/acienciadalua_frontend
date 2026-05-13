@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Unkempt } from "next/font/google";
 import "./globals.css";
+import PageTransition from "@/hooks/framerMotion/PageTransition";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -29,7 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable}  h-full antialiased`}>
-      <body className="min-h-full flex flex-col ">{children}</body>
+      <body className="min-h-full flex flex-col ">
+        <PageTransition>
+          {children}
+        </PageTransition>
+      </body>
     </html>
   );
 }
