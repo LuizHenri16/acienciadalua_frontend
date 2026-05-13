@@ -14,13 +14,13 @@ export function Header() {
                     className="flex flex-row items-center gap-2 p-2 cursor-pointer"
                     onClick={() => router.push("/")}
                 >
-                    <Image src="/acienciadalua-logo.svg" alt="Logo" width={32} height={32} />
-                    <h1 className="font-unkempt text-2xl text-yellow-light-custom">
-                        A Ciência da <span className="text-2xl text-green-dark-custom">Lua</span>
+                    <Image src="/acienciadalua-logo-var1.svg" alt="A ciência da Lua - logo" width={36} height={36} />
+                    <h1 className="font-unkempt text-2xl text-ouro">
+                        A Ciência da <span className="text-2xl text-turquesa-dark">Lua</span>
                     </h1>
                 </div>
 
-                <button onClick={() => router.push("/minhaconta/signin")} className="text-[#5A5A58] text-sm transition-colors hover:text-[#68B999] cursor-pointer active:scale-95"> Minha conta </button>
+                <button onClick={() => router.push("/minhaconta/signin")} className="text-azul-med text-sm transition-colors hover:opacity-90 cursor-pointer active:scale-95"> Minha conta </button>
             </div>
         </header>
     );
@@ -37,7 +37,7 @@ export function DashboardHeader() {
         <header className="w-full border-b border-[#E5E5E3] bg-[#FAFAFA]/80 backdrop-blur-md sticky top-0 z-50">
             <div className="max-w-5xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 py-2">
                 {/* Logo */}
-                <div 
+                <div
                     className="flex flex-row items-center gap-2 p-2 cursor-pointer"
                     onClick={() => router.push("/")}
                 >
@@ -48,7 +48,7 @@ export function DashboardHeader() {
                 </div>
 
                 {/* Exit Button */}
-                <button 
+                <button
                     onClick={handleExit}
                     className="text-[#5A5A58] text-sm transition-colors hover:text-[#EF4444] font-medium cursor-pointer"
                 >
