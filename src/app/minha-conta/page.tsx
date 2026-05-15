@@ -7,15 +7,15 @@ import { Material, MaterialType } from "@/types/material";
 const materials: Material[] = [
     {
         id: "1",
-        name: "Material 1",
+        title: "Material 1",
         price: 10,
-        type: MaterialType.STUDY,
+        category: MaterialType.STUDENT,
     },
     {
         id: "2",
-        name: "Material 2",
+        title: "Material 2",
         price: 20,
-        type: MaterialType.STUDY,
+        category: MaterialType.STUDENT,
     },
 ]
 

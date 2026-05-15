@@ -17,13 +17,13 @@ export const faqHelp = [
     {
         question: "Como faço para comprar?",
         answers: [
-            "A loja é integrada com a plataforma Hotmart, uma plataforma de pagamentos segura e confiável. Basta ir nos detalhes do produto, clicar em comprar, escolher a forma de pagamento na página de checkout da Hotmart e finalizar a compra."
+            "Basta ir nos detalhes do produto, clicar em comprar, escolher a forma de pagamento na página de checkout e finalizar a compra."
         ]
     },
     {
         question: "Como acessar o produto?",
         answers: [
-            "Após a compra, sua conta é criada automaticamente com seu email usado no checkout do hotmart, use esse email para acessar a plataforma em 'Minha Conta' no site. Um email com link de acesso será enviado para o email",
+            "Após a compra, sua conta é criada automaticamente com seu email após a compra, use esse email para acessar a plataforma em 'Minha Conta' no site. Um email com link de acesso será enviado para o email",
             "Você poderá baixar os materiais quantas vezes quiser, no seu próprio ritmo."
         ]
     },

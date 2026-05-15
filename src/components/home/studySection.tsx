@@ -14,7 +14,7 @@ export function StudySection() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const materials = ALL_MATERIALS.filter(m => m.type === MaterialType.STUDY);
+      const materials = ALL_MATERIALS.filter(m => m.category === MaterialType.STUDENT);
       setStudyMaterials(materials);
       setIsLoading(false);
     }, 500);

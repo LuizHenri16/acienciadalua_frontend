@@ -13,7 +13,7 @@ export function TeachSection() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const materials = ALL_MATERIALS.filter(m => m.type === MaterialType.TEACH);
+      const materials = ALL_MATERIALS.filter(m => m.category === MaterialType.TEACHER);
       setTeachMaterials(materials);
       setIsLoading(false);
     }, 500);

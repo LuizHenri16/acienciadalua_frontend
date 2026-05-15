@@ -1,0 +1,63 @@
+import { ProductFormData, MaterialType } from '@/types/material';
+
+interface ProductInfoProps {
+  data: ProductFormData;
+  onChange: (field: keyof ProductFormData, value: any) => void;
+}
+
+export function ProductInfo({ data, onChange }: ProductInfoProps) {
+  return (
+    <div className="flex flex-col gap-4 mt-6">
+      <h2 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase mb-2">Informações</h2>
+
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="title" className="text-xs font-bold text-texto-principal">Título</label>
+        <input
+          type="text"
+          id="title"
+          value={data.title}
+          onChange={(e) => onChange('title', e.target.value)}
+          placeholder="Digite o título do produto"
+          className="w-full border border-gray-300 squircle-border p-3 text-sm text-texto-secundario placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-marinho focus:border-marinho"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="description" className="text-xs font-bold text-texto-principal">Descrição</label>
+        <textarea
+          id="description"
+          value={data.description}
+          onChange={(e) => onChange('description', e.target.value)}
+          placeholder="Descrição completa..."
+          rows={3}
+          className="w-full border border-gray-300 squircle-border p-3 text-sm text-texto-secundario placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-marinho focus:border-marinho resize-none"
+        ></textarea>
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="price" className="text-xs font-bold text-texto-principal">Preço</label>
+        <input
+          type="text"
+          id="price"
+          value={data.price}
+          onChange={(e) => onChange('price', e.target.value)}
+          placeholder="00,00"
+          className="w-full border border-gray-300 squircle-border p-3 text-sm text-texto-secundario placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-marinho focus:border-marinho"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="category" className="text-xs font-bold text-texto-principal">Categoria</label>
+        <select
+          id="category"
+          value={data.category}
+          onChange={(e) => onChange('category', e.target.value as MaterialType)}
+          className="w-full border border-gray-300 squircle-border p-3 text-sm text-texto-secundario bg-white focus:outline-none focus:ring-1 focus:ring-marinho focus:border-marinho cursor-pointer"
+        >
+          <option value={MaterialType.STUDENT}>Para estudar ({MaterialType.STUDENT})</option>
+          <option value={MaterialType.TEACHER}>Para dar aula ({MaterialType.TEACHER})</option>
+        </select>
+      </div>
+    </div>
+  );
+}
