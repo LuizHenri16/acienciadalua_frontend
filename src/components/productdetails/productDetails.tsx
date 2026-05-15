@@ -15,10 +15,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             <div className="p-7 flex flex-col gap-8">
                 <div>
                     <h1 className="text-[1.75rem] font-bold text-[#171717] leading-tight mb-1">
-                        {product.name}
+                        {product.title}
                     </h1>
-                    <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${product.type === "Plano de aula" ? "bg-ouro-light text-[#7A5200] w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"} `}>
-                        {product.type}
+                    <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${product.category === "Plano de aula" ? "bg-ouro-light text-[#7A5200] w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"} `}>
+                        {product.category}
                     </p>
                 </div>
 

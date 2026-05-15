@@ -22,7 +22,7 @@ export function PurchasedMaterialCard({
 
             <div className="flex flex-col flex-1 min-w-0">
                 <span className="text-sm font-bold text-texto-principal truncate">
-                    {material.name}
+                    {material.title}
                 </span>
                 <span className="text-xs text-texto-terciario">
                     Comprado em: {formattedDate}

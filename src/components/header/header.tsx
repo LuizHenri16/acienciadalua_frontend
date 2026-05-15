@@ -21,7 +21,7 @@ export function Header() {
                     </h1>
                 </div>
 
-                <button onClick={() => router.push("/minhaconta/signin")} className="text-azul-med text-sm transition-colors hover:opacity-90 cursor-pointer active:scale-95"> Minha conta </button>
+                <button onClick={() => router.push("/minha-conta/signin")} className="text-azul-med text-sm transition-colors hover:opacity-90 cursor-pointer active:scale-95"> Minha conta </button>
             </div>
         </header>
     );

@@ -1,13 +1,23 @@
 export enum MaterialType {
-    TEACH = "Plano de aula",
-    STUDY = "Material de estudo"
+    TEACHER = "Plano de aula",
+    STUDENT = "Material de estudo"
 }
 
 export interface Material {
     id: string | number;
-    name: string;
-    price: number;
-    type: MaterialType | string;
-    imageUrl?: string;
+    title: string;
     description?: string;
+    price: number;
+    category: MaterialType | string;
+    imageUrl?: string;
+}
+
+export interface ProductFormData {
+    title: string;
+    description: string;
+    price: string;
+    category: MaterialType | string;
+    pdf: File | null;
+    cover: File | null;
+    isActive: boolean;
 }
