@@ -26,7 +26,6 @@ export function ProductStatus({ isActive, onToggle }: ProductStatusProps) {
           />
         </button>
       </div>
-      <Button name='Cadastrar Produto' loadingName='Cadastrando dados' variant='primary' loading={false} onClick={() => { }} />
     </div>
   );
 }
