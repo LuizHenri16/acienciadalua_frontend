@@ -8,7 +8,7 @@ import { HashLoader } from "react-spinners";
 export interface ButtonProps {
     name: string;
     loadingName?: string;
-    onClick: () => void;
+    onClick: (e: React.FormEvent) => void | void;
     variant?: 'primary' | 'secondary';
     loading?: boolean;
 }

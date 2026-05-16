@@ -30,7 +30,7 @@ export function ProductListItem({ product }: ProductListItemProps) {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${isActive ? 'text-gray-500 border-gray-300' : 'text-gray-400 border-gray-200 bg-gray-50'}`}>
+        <div className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${isActive ? 'text-green-600 border-green-600' : 'text-red-600 border-red-600'}`}>
           {isActive ? 'Ativo' : 'Inativo'}
         </div>
         <Link

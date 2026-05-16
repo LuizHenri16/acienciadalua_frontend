@@ -15,7 +15,8 @@ export interface Material {
 export interface ProductFormData {
     title: string;
     description: string;
-    price: string;
+    price: string;       // valor formatado exibido no input (ex: "R$ 49,90")
+    priceValue: number;  // valor numérico real enviado para a API (ex: 49.90)
     category: MaterialType | string;
     pdf: File | null;
     cover: File | null;

@@ -1,4 +1,6 @@
-import { useRef } from 'react';
+'use client';
+
+import { useRef, useEffect, useState } from 'react';
 import { Upload, Image as ImageIcon } from "lucide-react";
 import { ProductFormData } from '@/types/material';
 
@@ -10,6 +12,21 @@ interface ProductFilesProps {
 export function ProductFiles({ data, onChange }: ProductFilesProps) {
   const pdfInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
+  const [coverPreviewUrl, setCoverPreviewUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!data.cover) {
+      setCoverPreviewUrl(null);
+      return;
+    }
+
+    const url = URL.createObjectURL(data.cover);
+    setCoverPreviewUrl(url);
+
+    return () => {
+      URL.revokeObjectURL(url);
+    };
+  }, [data.cover]);
 
   const handlePdfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -76,8 +93,8 @@ export function ProductFiles({ data, onChange }: ProductFilesProps) {
           />
 
           <div className="w-[100px] rounded-xl bg-linear-to-br from-purple-500 to-indigo-800 flex items-center justify-center shadow-inner overflow-hidden">
-            {data.cover ? (
-              <img src={URL.createObjectURL(data.cover)} alt="Capa" className="w-full h-full object-cover" />
+            {coverPreviewUrl ? (
+              <img src={coverPreviewUrl} alt="Capa" className="w-full h-full object-cover" />
             ) : (
               <ImageIcon className="w-6 h-6 text-white/50" />
             )}
