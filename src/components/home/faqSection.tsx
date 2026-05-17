@@ -1,4 +1,4 @@
-import { faqHelp } from "@/constants/faqHelp";
+import { faqHelp } from "@/lib/constants/faqHelp";
 import { FaqCard } from "../ui/card/faqCard";
 
 export function FaqSection() {

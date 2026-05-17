@@ -1,15 +1,26 @@
 export enum MaterialType {
-    TEACHER = "Plano de aula",
-    STUDENT = "Material de estudo"
+    TEACHER = "TEACHER",
+    STUDENT = "STUDENT"
+}
+
+// Helper para exibir o nome amigável no frontend
+export function getMaterialTypeLabel(category: MaterialType | string): string {
+    if (category === MaterialType.TEACHER) return "Plano de aula";
+    if (category === MaterialType.STUDENT) return "Material de estudo";
+    return category;
 }
 
 export interface Material {
-    id: string | number;
+    id: string;
     title: string;
     description?: string;
     price: number;
     category: MaterialType | string;
-    imageUrl?: string;
+    coverUrl?: string;
+    fileUrl?: string;
+    isActive: boolean;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface ProductFormData {

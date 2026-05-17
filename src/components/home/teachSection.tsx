@@ -1,26 +1,14 @@
 "use client";
 
+import { Material } from "@/types/material";
 import { MonitorPlay } from "lucide-react";
 import { ProductCarousel } from "../ui/carousel/productCarousel";
-import { Material, MaterialType } from "@/types/material";
 
-import { ALL_MATERIALS } from "@/constants/materials";
-import { useState, useEffect } from "react";
+interface TeachSectionProps {
+  materials: Material[];
+}
 
-export function TeachSection() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [teachMaterials, setTeachMaterials] = useState<Material[]>([]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const materials = ALL_MATERIALS.filter(m => m.category === MaterialType.TEACHER);
-      setTeachMaterials(materials);
-      setIsLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+export function TeachSection({ materials }: TeachSectionProps) {
   return (
     <section className="w-full">
       <div className="flex items-center gap-2 mb-6">
@@ -29,8 +17,7 @@ export function TeachSection() {
           Para <span className="text-ouro">Dar Aula</span>
         </h2>
       </div>
-
-      <ProductCarousel materials={teachMaterials} isLoading={isLoading} />
+      <ProductCarousel materials={materials} isLoading={false} />
     </section>
   );
 }
