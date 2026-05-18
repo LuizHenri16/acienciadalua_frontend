@@ -1,57 +1,60 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DashboardHeader } from "@/components/adminPanel/dashboard/DashboardHeader";
 import { DashboardStats } from "@/components/adminPanel/dashboard/DashboardStats";
 import { ProductList } from "@/components/adminPanel/dashboard/ProductList";
-import { Material, MaterialType } from "@/types/material";
-
-// Mock Data
-const MOCK_PRODUCTS: Material[] = [
-  {
-    id: "1",
-    title: "Nome do material 1",
-    description: "Descrição do material 1",
-    price: 60.0,
-    category: MaterialType.STUDENT,
-  },
-  {
-    id: "2",
-    title: "Nome do material 2",
-    description: "Descrição do material 2",
-    price: 90.0,
-    category: MaterialType.TEACHER,
-  },
-  {
-    id: "3",
-    title: "Nome do material 3",
-    description: "Descrição do material 3",
-    price: 50.0,
-    category: MaterialType.STUDENT,
-  }
-];
-
-// O 3º item vamos simular como inativo para vermos o badge
-(MOCK_PRODUCTS[2] as any).isActive = false;
+import { Material } from "@/types/material";
+import { adminGetProducts } from "@/api/product";
+import { useRouter } from "next/navigation";
+import { LoadingPage } from "@/components/ui/loading/loadingPage";
 
 export default function Panel() {
-  // Estado para simular se temos ou não produtos
-  const [showEmptyState, setShowEmptyState] = useState(false);
+    const [products, setProducts] = useState<Material[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const products = showEmptyState ? [] : MOCK_PRODUCTS;
+    const router = useRouter();
 
-  // Calculando estatísticas baseadas no mock
-  const total = products.length;
-  const ativos = products.filter(p => (p as any).isActive !== false).length;
-  const inativos = total - ativos;
+    function checkSession() {
+        const token = document.cookie.match(/(?:^|;\s*)admin_token=([^;]*)/);
 
-  return (
-    <div className="min-h-screen w-full bg-[#fafafa]">
-      <DashboardHeader />
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 flex flex-col">
-        <DashboardStats total={total} ativos={ativos} inativos={inativos} />
-        <ProductList products={products} />
-      </div>
-    </div>
-  );
+        setTimeout(() => {
+            if (!token) {
+                router.push("/panel/signin");
+                return;
+            }
+            setIsAuthenticated(true);
+        }, 100000);
+    }
+
+    useEffect(() => {
+        checkSession();
+        adminGetProducts()
+            .then(setProducts)
+            .catch(console.error)
+            .finally(() => setLoading(false));
+    }, []);
+
+    const total = products.length;
+    const ativos = products.filter(p => p.isActive).length;
+    const inativos = total - ativos;
+
+    if (!isAuthenticated) {
+        return <LoadingPage message="Verificando sessão" />;
+    }
+
+    return (
+        <div className="min-h-screen w-full bg-[#fafafa]">
+            <DashboardHeader />
+            <div className="max-w-5xl mx-auto px-6 lg:px-8 flex flex-col">
+                <DashboardStats total={total} ativos={ativos} inativos={inativos} />
+                {loading ? (
+                    <div className="mt-8 text-center text-sm text-gray-400">Carregando produtos...</div>
+                ) : (
+                    <ProductList products={products} />
+                )}
+            </div>
+        </div>
+    );
 }
