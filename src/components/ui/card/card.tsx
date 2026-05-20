@@ -40,8 +40,8 @@ export function ProductCard({ material }: CardProps) {
                 <p className="text-sm font-medium text-texto-principal leading-snug">
                     {material.title}
                 </p>
-                <p className="text-sm font-bold text-texto-principal">
-                    {formatPrice(material.price)}
+                <p className="text-lg font-bold text-texto-principal">
+                    R$ {formatPrice(material.price)}
                 </p>
                 <Link
                     href={`/product/${material.id}`}

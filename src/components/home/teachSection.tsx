@@ -9,6 +9,7 @@ interface TeachSectionProps {
 }
 
 export function TeachSection({ materials }: TeachSectionProps) {
+
   return (
     <section className="w-full">
       <div className="flex items-center gap-2 mb-6">

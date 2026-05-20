@@ -1,5 +1,9 @@
+'use client';
+
 import { Material, MaterialType, getMaterialTypeLabel } from "@/types/material";
 import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import { createPreferences } from "@/api/payment";
 
 interface ProductDetailsProps {
     product: Material;
@@ -8,11 +12,26 @@ interface ProductDetailsProps {
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function ProductDetails({ product }: ProductDetailsProps) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
     const isTeacher = product.category === MaterialType.TEACHER;
     const label = getMaterialTypeLabel(product.category);
     const coverUrl = product.coverUrl
         ? `${API_URL}/uploads/${product.coverUrl}`
         : null;
+
+    const handleBuy = async () => {
+        setLoading(true);
+        setError('');
+        try {
+            const { init_point } = await createPreferences(product.id);
+            window.location.href = init_point;
+        } catch {
+            setError('Não foi possível iniciar o pagamento. Tente novamente.');
+            setLoading(false);
+        }
+    };
 
     return (
         <main className="animate-in fade-in duration-700 slide-in-from-bottom-2">
@@ -43,11 +62,19 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             </span>
                         </div>
 
-                        <button className="flex-[1.2] squircle-border flex items-center justify-center gap-2 bg-marinho hover:bg-[#5aa386] text-white font-bold py-4 transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer text-xs md:text-md lg:text-lg active:scale-95">
+                        <button
+                            onClick={handleBuy}
+                            disabled={loading}
+                            className="flex-[1.2] squircle-border flex items-center justify-center gap-2 bg-marinho hover:bg-[#5aa386] text-white font-bold py-4 transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer text-xs md:text-md lg:text-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
                             <ShoppingCart size={20} strokeWidth={2.5} />
-                            Comprar agora
+                            {loading ? 'Aguarde...' : 'Comprar agora'}
                         </button>
                     </div>
+
+                    {error && (
+                        <p className="text-red-500 text-xs text-center">{error}</p>
+                    )}
 
                     <p className="text-texto-terciario text-[11px] font-medium text-center sm:text-left leading-tight">
                         Pagamento via mercado pago · Acesso imediato após confirmação

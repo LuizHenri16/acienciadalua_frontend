@@ -1,6 +1,7 @@
 import { Edit } from "lucide-react";
 import Link from "next/link";
 import { Material, getMaterialTypeLabel } from "@/types/material";
+import { API_URL } from "@/lib/constants/constants";
 
 interface ProductListItemProps {
   product: Material;
@@ -14,12 +15,16 @@ export function ProductListItem({ product }: ProductListItemProps) {
 
   const label = getMaterialTypeLabel(product.category);
 
+  const coverUrl = product.coverUrl
+    ? `${API_URL}/uploads/${product.coverUrl}`
+    : null;
+
   return (
     <div className="flex items-center justify-between p-4 mb-3 border border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 rounded-lg bg-[#8b5cf6] overflow-hidden shrink-0">
-          {product.coverUrl && (
-            <img src={product.coverUrl} alt={product.title} className="w-full h-full object-cover" />
+          {coverUrl && (
+            <img src={coverUrl} alt={product.title} className="w-full h-full object-cover" />
           )}
         </div>
 

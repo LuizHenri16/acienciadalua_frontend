@@ -25,7 +25,7 @@ export default function Panel() {
                 return;
             }
             setIsAuthenticated(true);
-        }, 100000);
+        }, 300);
     }
 
     useEffect(() => {

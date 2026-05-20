@@ -9,7 +9,7 @@ interface BannerProps {
 }
 
 export function Banner({ totalMateriais, userName }: BannerProps) {
-    return (totalMateriais) ? (
+    return (totalMateriais && totalMateriais > 0) ? (
         <div className="squircle-border border-3 border-dashed border-turquesa flex flex-col gap-2 px-4">
             <p className="text-sm text-texto-secundario">Olá, {userName}👋!</p>
             <h1 className="text-2xl font-bold">Continue de onde parou</h1>
