@@ -8,6 +8,8 @@ import { FaqSection } from "@/components/home/faqSection";
 import { ChemistryBackground } from "@/components/home/chemistryBackground";
 import { getProducts } from "@/api/product";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const [studyMaterials, teachMaterials] = await Promise.all([
     getProducts('STUDENT'),

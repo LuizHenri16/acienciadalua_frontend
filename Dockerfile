@@ -1,4 +1,4 @@
-# Stage 1 -Install dependencies
+# Stage 1 - Install dependencies
 FROM node:22-alpine AS deps
 
 WORKDIR /app
@@ -14,19 +14,26 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-# Stage 3 - Production: clen, lightweight image with only standalone outoputs 
+# Stage 3 - Production: clean, lightweight image with only standalone outputs
 FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create user and group for security nextjs run isolated.
-# This prevets the app from running as root
+# This prevents the app from running as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=build /app/public ./public
-COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./.next/standalone
+
+# Set the correct permission for prerender cache
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
