@@ -3,7 +3,6 @@ export enum MaterialType {
     STUDENT = "STUDENT"
 }
 
-// Helper para exibir o nome amigável no frontend
 export function getMaterialTypeLabel(category: MaterialType | string): string {
     if (category === MaterialType.TEACHER) return "Plano de aula";
     if (category === MaterialType.STUDENT) return "Material de estudo";
@@ -19,6 +18,7 @@ export interface Material {
     coverUrl?: string;
     fileUrl?: string;
     isActive: boolean;
+    purchasedAt?: string;
     createdAt?: string;
     updatedAt?: string;
 }
@@ -26,8 +26,8 @@ export interface Material {
 export interface ProductFormData {
     title: string;
     description: string;
-    price: string;       // valor formatado exibido no input (ex: "R$ 49,90")
-    priceValue: number;  // valor numérico real enviado para a API (ex: 49.90)
+    price: string;
+    priceValue: number;
     category: MaterialType | string;
     pdf: File | null;
     cover: File | null;

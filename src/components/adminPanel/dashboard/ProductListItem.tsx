@@ -39,10 +39,7 @@ export function ProductListItem({ product }: ProductListItemProps) {
         <div className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${product.isActive ? 'text-green-600 border-green-600 bg-[#d5f4e6]' : 'text-gray-400 border-gray-200 bg-gray-50'}`}>
           {product.isActive ? 'Ativo' : 'Inativo'}
         </div>
-        <Link
-          href={`/panel/produto/${product.id}`}
-          className="flex items-center gap-1 bg-turquesa-dark hover:bg-opacity-90 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors"
-        >
+        <Link href={`/panel/produto/${product.id}`} className="flex items-center gap-1 bg-turquesa-dark hover:bg-opacity-90 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
           <Edit className="w-3 h-3" />
           Editar
         </Link>
