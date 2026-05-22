@@ -16,7 +16,7 @@ export function FaqCard({ question, answers }: FaqCardProps) {
     };
 
     return (
-        <div onClick={toggleOpen} className={`w-full flex flex-col items-center p-3.5 squircle-border border border-borda hover:border-borda-med cursor-pointer`}>
+        <div onClick={toggleOpen} className={`w-full flex flex-col items-center p-4 squircle-border border bg-[#fafafa] border-borda hover:border-borda-med cursor-pointer`}>
             <div className="w-full flex items-center gap-3 ">
                 <h3 className="font-medium text-sm lg:text-base text-texto-principal">{question}</h3>
                 <ChevronDown className={`ml-auto transition-all duration-300 ${open ? "rotate-180" : ""}`} />
