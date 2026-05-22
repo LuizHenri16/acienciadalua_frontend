@@ -1,5 +1,5 @@
 import { LoadingPage } from "@/components/ui/loading/loadingPage";
 
 export default function Loading() {
-    return <LoadingPage message="Carregando dados do produto" />;
+    return <LoadingPage message="Carregando painel" />;
 }

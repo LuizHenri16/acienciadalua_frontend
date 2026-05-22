@@ -1,21 +1,12 @@
 import { ProductDetailsFooter } from "@/components/productdetails/footer";
 import { ProductDetailsHeader } from "@/components/productdetails/header";
 import { ProductDetails } from "@/components/productdetails/productDetails";
-
-import { ALL_MATERIALS } from "@/constants/materials";
+import { getProductById } from "@/api/product";
 import { notFound } from "next/navigation";
-
-async function getProduct(id: string) {
-    // Simula delay de API
-    await new Promise(resolve => setTimeout(resolve, 900));
-
-    const product = ALL_MATERIALS.find(m => String(m.id) === id);
-    return product;
-}
 
 export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    const product = await getProduct(id);
+    const product = await getProductById(id);
 
     if (!product) {
         notFound();

@@ -1,19 +1,19 @@
 import { HashLoader } from "react-spinners"
 
-export const LoadingPage = () => {
+interface LoadingPageProps {
+    message?: string;
+}
+
+export const LoadingPage = ({ message }: LoadingPageProps) => {
+    const letters: string[] | undefined = message ? message.split("") : undefined;
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFCFB] gap-6">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFCFB] gap-8">
             <HashLoader color="#2C9E95" size={60} />
 
-            <div className="flex flex-col items-center gap-2">
-                <p className="text-turquesa-dark font-bold tracking-[0.3em] uppercase animate-pulse">
-                    Buscando produto
-                </p>
-                <div className="flex gap-1">
-                    <div className="w-1 h-1 rounded-full bg-turquesa-dark animate-bounce [animation-delay:-0.3s]" />
-                    <div className="w-1 h-1 rounded-full bg-turquesa-dark animate-bounce [animation-delay:-0.15s]" />
-                    <div className="w-1 h-1 rounded-full bg-turquesa-dark animate-bounce" />
-                </div>
+            <div className="flex items-center gap-2">
+                {letters?.map((letter, index) => (
+                    <p key={index} className="text-turquesa-dark texxt-lg font-bold tracking-normal uppercase animate-bounce">{letter}</p>
+                ))}
             </div>
         </div>
     );

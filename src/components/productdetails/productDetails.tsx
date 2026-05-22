@@ -1,15 +1,46 @@
-import { Material } from "@/types/material";
+'use client';
+
+import { Material, MaterialType, getMaterialTypeLabel } from "@/types/material";
 import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import { createPreferences } from "@/api/payment";
 
 interface ProductDetailsProps {
     product: Material;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export function ProductDetails({ product }: ProductDetailsProps) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const isTeacher = product.category === MaterialType.TEACHER;
+    const label = getMaterialTypeLabel(product.category);
+    const coverUrl = product.coverUrl
+        ? `${API_URL}/uploads/${product.coverUrl}`
+        : null;
+
+    const handleBuy = async () => {
+        setLoading(true);
+        setError('');
+        try {
+            const { init_point } = await createPreferences(product.id);
+            window.location.href = init_point;
+        } catch {
+            setError('Não foi possível iniciar o pagamento. Tente novamente.');
+            setLoading(false);
+        }
+    };
+
     return (
         <main className="animate-in fade-in duration-700 slide-in-from-bottom-2">
-            <div className="w-full h-64 md:h-96 bg-[#8a44d6] flex items-center justify-center">
-                <span className="text-white/20 text-6xl font-black">#{product.id}</span>
+            <div className="w-full h-64 md:h-96 bg-[#8a44d6] flex items-center justify-center overflow-hidden">
+                {coverUrl ? (
+                    <img src={coverUrl} alt={product.title} className="w-full h-full object-cover" />
+                ) : (
+                    <span className="text-white/20 text-6xl font-black">#{product.id}</span>
+                )}
             </div>
 
             <div className="p-7 flex flex-col gap-8">
@@ -17,8 +48,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     <h1 className="text-[1.75rem] font-bold text-[#171717] leading-tight mb-1">
                         {product.title}
                     </h1>
-                    <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${product.category === "Plano de aula" ? "bg-ouro-light text-[#7A5200] w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"} `}>
-                        {product.category}
+                    <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${isTeacher ? "bg-ouro-light text-[#7A5200] w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"}`}>
+                        {label}
                     </p>
                 </div>
 
@@ -27,15 +58,23 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         <div className="flex flex-col">
                             <span className="text-gray-400 text-xs uppercase tracking-wider mb-1">Valor</span>
                             <span className="text-4xl font-bold text-marinho">
-                                {product.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                                {Number(product.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                             </span>
                         </div>
 
-                        <button className="flex-[1.2] squircle-border flex items-center justify-center gap-2 bg-marinho hover:bg-[#5aa386] text-white font-bold py-4 transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer text-xs  md:text-md lg:text-lg active:scale-95">
+                        <button
+                            onClick={handleBuy}
+                            disabled={loading}
+                            className="flex-[1.2] squircle-border flex items-center justify-center gap-2 bg-marinho hover:bg-[#5aa386] text-white font-bold py-4 transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer text-xs md:text-md lg:text-lg active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
                             <ShoppingCart size={20} strokeWidth={2.5} />
-                            Comprar agora
+                            {loading ? 'Aguarde...' : 'Comprar agora'}
                         </button>
                     </div>
+
+                    {error && (
+                        <p className="text-red-500 text-xs text-center">{error}</p>
+                    )}
 
                     <p className="text-texto-terciario text-[11px] font-medium text-center sm:text-left leading-tight">
                         Pagamento via mercado pago · Acesso imediato após confirmação
@@ -54,5 +93,5 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 </div>
             </div>
         </main>
-    )
+    );
 }
