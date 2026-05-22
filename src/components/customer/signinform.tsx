@@ -28,7 +28,7 @@ export function SignInForm() {
 
     if (sent) {
         return (
-            <div className="flex flex-col items-center justify-center mt-3 md:max-w-[60%] lg:max-w-[40%] mx-auto w-full text-center gap-3">
+            <div className="flex flex-col items-center justify-center mt-3 gap-4 md:max-w-[60%] lg:max-w-[30%] mx-auto w-full">
                 <div className="w-12 h-12 rounded-full bg-turquesa-light flex items-center justify-center mx-auto">
                     <span className="text-2xl">📬</span>
                 </div>

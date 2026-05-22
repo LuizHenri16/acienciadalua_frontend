@@ -2,7 +2,6 @@ import { BackVitrine } from "@/components/ui/button/button";
 import { SignInForm } from "@/components/customer/signinform";
 import Image from "next/image";
 
-
 export default function SignIn() {
     return (
         <div className="p-6 flex flex-col justify-center w-full h-screen bg-[#fafafa]">
