@@ -3,18 +3,20 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 // ─── Público (vitrine) ────────────────────────────────────────────────────────
 
 export async function getProducts(category?: 'STUDENT' | 'TEACHER') {
-    const params = new URLSearchParams();
-    params.append('isActive', 'true');
-    if (category) {
-        params.append('category', category);
-    }
-    const response = await fetch(`${API_URL}/products?${params.toString()}`, {});
+    try {
+        const params = new URLSearchParams();
+        params.append('isActive', 'true');
+        if (category) {
+            params.append('category', category);
+        }
+        const response = await fetch(`${API_URL}/products?${params.toString()}`, {});
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch products');
-    }
+        if (!response.ok) return [];
 
-    return response.json();
+        return response.json();
+    } catch {
+        return [];
+    }
 }
 
 export async function getProductById(id: string) {

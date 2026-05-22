@@ -12,8 +12,8 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const [studyMaterials, teachMaterials] = await Promise.all([
-    getProducts('STUDENT'),
-    getProducts('TEACHER'),
+    getProducts('STUDENT').catch(() => []),
+    getProducts('TEACHER').catch(() => []),
   ]);
 
   return (
