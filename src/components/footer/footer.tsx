@@ -7,7 +7,7 @@ export function Footer() {
             <p className="text-texto-secundario"> · </p>
             <Link className="text-texto-secundario hover:text-texto-principal transition-colors" href="">Contato</Link>
             <p className="text-texto-secundario"> · </p>
-            <Link className="text-texto-secundario hover:text-texto-principal transition-colors" href="">instagram</Link>
+            <Link href="https://www.instagram.com/acienciadalua?igsh=bXhjd2V6Njc50Wxy" target="_blank" className="text-texto-secundario hover:text-texto-principal transition-colors" >instagram</Link>
         </footer>
     );
 }
