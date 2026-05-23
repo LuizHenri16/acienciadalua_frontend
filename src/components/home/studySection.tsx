@@ -10,7 +10,7 @@ interface StudySectionProps {
 
 export function StudySection({ materials }: StudySectionProps) {
   return (
-    <section className="w-full">
+    <section id="produtos" className="w-full">
       <div className="flex items-center gap-2 mb-6">
         <BookOpen className="w-5 h-5 text-turquesa-dark" />
         <h2 className="text-xl font-bold text-texto-principal">

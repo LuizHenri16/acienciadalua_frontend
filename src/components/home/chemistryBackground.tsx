@@ -46,30 +46,34 @@ export function ChemistryBackground() {
         { content: "🧬", top: "38%", left: "42%", size: "1.2rem", rotate: "-5deg", opacity: 0.12, delay: 2.0, y: 5, dur: 4.3 },
     ];
 
+    const bannerColor = "rgba(109,213,202,0.5)";
+    const pageColor = "#2a5c8f";
+    const getColor = (top: string) => parseFloat(top) < 35 ? bannerColor : pageColor;
+
     const bonds = [
         {
-            top: "10%", left: "12%", opacity: 0.16, rotate: "20deg", delay: 0.5, y: 7, dur: 4.4, svg: (
+            top: "10%", left: "12%", opacity: 0.22, rotate: "20deg", delay: 0.5, y: 7, dur: 4.4, svg: (
                 <svg width="70" height="40" viewBox="0 0 70 40">
-                    <circle cx="10" cy="20" r="7" fill="none" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <line x1="17" y1="20" x2="35" y2="20" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <circle cx="42" cy="20" r="7" fill="none" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <line x1="49" y1="20" x2="60" y2="20" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <circle cx="63" cy="20" r="4" fill="none" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <text x="7" y="24" fontSize="7" fill="#2a5c8f" fontFamily="monospace">O</text>
-                    <text x="39" y="24" fontSize="6" fill="#2a5c8f" fontFamily="monospace">H</text>
-                    <text x="60" y="23" fontSize="6" fill="#2a5c8f" fontFamily="monospace">H</text>
+                    <circle cx="10" cy="20" r="7" fill="none" stroke={getColor("10%")} strokeWidth="1.5" />
+                    <line x1="17" y1="20" x2="35" y2="20" stroke={getColor("10%")} strokeWidth="1.5" />
+                    <circle cx="42" cy="20" r="7" fill="none" stroke={getColor("10%")} strokeWidth="1.5" />
+                    <line x1="49" y1="20" x2="60" y2="20" stroke={getColor("10%")} strokeWidth="1.5" />
+                    <circle cx="63" cy="20" r="4" fill="none" stroke={getColor("10%")} strokeWidth="1.5" />
+                    <text x="7" y="24" fontSize="7" fill={getColor("10%")} fontFamily="monospace">O</text>
+                    <text x="39" y="24" fontSize="6" fill={getColor("10%")} fontFamily="monospace">H</text>
+                    <text x="60" y="23" fontSize="6" fill={getColor("10%")} fontFamily="monospace">H</text>
                 </svg>
             )
         },
         {
-            top: "32%", left: "89%", opacity: 0.16, rotate: "-12deg", delay: 1.3, y: 6, dur: 5.1, svg: (
+            top: "32%", left: "89%", opacity: 0.22, rotate: "-12deg", delay: 1.3, y: 6, dur: 5.1, svg: (
                 <svg width="60" height="35" viewBox="0 0 60 35">
-                    <circle cx="10" cy="18" r="7" fill="none" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <line x1="17" y1="15" x2="40" y2="15" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <line x1="17" y1="21" x2="40" y2="21" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <circle cx="47" cy="18" r="7" fill="none" stroke="#2a5c8f" strokeWidth="1.5" />
-                    <text x="7" y="22" fontSize="7" fill="#2a5c8f" fontFamily="monospace">C</text>
-                    <text x="44" y="22" fontSize="7" fill="#2a5c8f" fontFamily="monospace">O</text>
+                    <circle cx="10" cy="18" r="7" fill="none" stroke={getColor("32%")} strokeWidth="1.5" />
+                    <line x1="17" y1="15" x2="40" y2="15" stroke={getColor("32%")} strokeWidth="1.5" />
+                    <line x1="17" y1="21" x2="40" y2="21" stroke={getColor("32%")} strokeWidth="1.5" />
+                    <circle cx="47" cy="18" r="7" fill="none" stroke={getColor("32%")} strokeWidth="1.5" />
+                    <text x="7" y="22" fontSize="7" fill={getColor("32%")} fontFamily="monospace">C</text>
+                    <text x="44" y="22" fontSize="7" fill={getColor("32%")} fontFamily="monospace">O</text>
                 </svg>
             )
         },
@@ -153,11 +157,17 @@ export function ChemistryBackground() {
             )
         },
         {
-            top: "5%", left: "82%", opacity: .15, rotate: "-6deg", delay: 2, y: 7, dur: 4.5, svg: (
-                <div className="relative w-24 h-24">
-                    <div className="w-10 h-10 border border-turquesa rounded-full absolute top-2.5 right-12"></div>
-                    <div className="w-20 h-20 border border-turquesa rounded-full absolute top-[-10px] right-7"></div>
-                    <div className="w-28 h-28 border border-turquesa rounded-full absolute top-[-25px] right-3"></div>
+            top: "5%", left: "82%", opacity: 0.25, rotate: "-6deg", delay: 2, y: 7, dur: 4.5, svg: (
+                <div style={{ width: "clamp(100px, 12vw, 220px)", height: "clamp(100px, 12vw, 220px)" }}>
+                    <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none">
+                        <circle cx="50" cy="50" r="18" stroke={bannerColor} strokeWidth="1" />
+                        <circle cx="50" cy="50" r="32" stroke={bannerColor} strokeWidth="0.8" />
+                        <circle cx="50" cy="50" r="46" stroke={bannerColor} strokeWidth="0.6" />
+                        <circle cx="50" cy="4" r="3" fill={bannerColor} />
+                        <circle cx="96" cy="50" r="2.5" fill={bannerColor} />
+                        <circle cx="50" cy="96" r="3.5" fill={bannerColor} />
+                        <circle cx="4" cy="50" r="2" fill={bannerColor} />
+                    </svg>
                 </div>)
         },
         {
@@ -179,13 +189,14 @@ export function ChemistryBackground() {
             {formulas.map((el, i) => (
                 <motion.span
                     key={`formula-${i}`}
-                    className="absolute font-mono select-none text-[#2a5c8f]"
+                    className="absolute font-mono select-none"
                     style={{
                         top: el.top,
                         left: el.left,
                         fontSize: el.size,
                         rotate: el.rotate,
                         opacity: el.opacity,
+                        color: getColor(el.top),
                     }}
                     animate={{ y: [0, -el.y, 0] }}
                     transition={{ duration: el.dur, delay: el.delay, repeat: Infinity, ease: 'easeInOut' }}

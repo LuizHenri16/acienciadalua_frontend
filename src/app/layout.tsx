@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} bg-[#fafafa]  h-full antialiased`}>
+    <html lang="pt-br" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} bg-[#fafafa] h-full antialiased scroll-smooth`} style={{ scrollPaddingTop: '64px' }}>
       <body className="min-h-full flex flex-col ">
         <PageTransition>
           {children}
