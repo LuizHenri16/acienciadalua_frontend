@@ -21,8 +21,8 @@ export default async function Home() {
       <ChemistryBackground />
       <Header />
       <main className="">
-        <div className="bg-marinho w-full">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-marinho w-full min-h-[calc(100vh-64px)] flex items-center">
+          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <BannerSection />
           </div>
         </div>

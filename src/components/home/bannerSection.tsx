@@ -7,7 +7,7 @@ function scrollTo(id: string) {
 
 export function BannerSection() {
     return (
-        <section className="flex flex-col justify-center gap-8 py-14 md:py-16 lg:py-28">
+        <section className="flex flex-col justify-center gap-8 py-10 md:py-12">
             <div className="w-fit inline-flex items-center gap-2 bg-turquesa/10 border-[0.02rem] border-turquesa/30 shadow-cyan-500/20 shadow-sm rounded-2xl py-1 px-3 animate-pulse">
                 <div className="rounded-full bg-turquesa p-[0.26rem]"></div>
                 <p className="text-[.7rem] uppercase tracking-wide text-turquesa font-semibold">
