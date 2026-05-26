@@ -6,9 +6,10 @@ import { Plus } from "lucide-react";
 
 interface ProductListProps {
   products: Material[];
+  onToggle: (id: string, newState: boolean) => void;
 }
 
-export function ProductList({ products }: ProductListProps) {
+export function ProductList({ products, onToggle }: ProductListProps) {
   return (
     <div className="mt-8">
       <div className="flex items-center justify-between mb-4">
@@ -38,7 +39,7 @@ export function ProductList({ products }: ProductListProps) {
       ) : (
         <div className="flex flex-col">
           {products.map((product) => (
-            <ProductListItem key={product.id} product={product} />
+            <ProductListItem key={product.id} product={product} onToggle={onToggle} />
           ))}
         </div>
       )}

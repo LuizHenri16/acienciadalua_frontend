@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProductInfo } from './ProductInfo';
 import { ProductFiles } from './ProductFiles';
-import { ProductStatus } from './ProductStatus';
 import { ProductFormData, MaterialType, Material } from '@/types/material';
 import { Button } from '@/components/ui/button/button';
 import { adminCreateProduct, adminUpdateProduct, adminDeleteProduct } from '@/api/product';
@@ -33,7 +32,6 @@ export function ProductForm({ product }: ProductFormProps) {
     category: product?.category ?? MaterialType.STUDENT,
     pdf: null,
     cover: null,
-    isActive: product?.isActive ?? false,
   });
 
   const handleChange = (field: keyof ProductFormData, value: any) => {
@@ -57,7 +55,6 @@ export function ProductForm({ product }: ProductFormProps) {
       data.append('description', formData.description);
       data.append('price', String(formData.priceValue));
       data.append('category', formData.category as string);
-      data.append('isActive', String(formData.isActive));
       if (formData.pdf) data.append('file', formData.pdf);
       if (formData.cover) data.append('cover', formData.cover);
 
@@ -103,10 +100,6 @@ export function ProductForm({ product }: ProductFormProps) {
         onChange={handleChange}
         existingCoverUrl={product?.coverUrl}
         existingFileUrl={product?.fileUrl}
-      />
-      <ProductStatus
-        isActive={formData.isActive}
-        onToggle={() => handleChange('isActive', !formData.isActive)}
       />
 
       {error && <p className="text-red-500 text-xs text-center mt-4">{error}</p>}
