@@ -82,8 +82,8 @@ export function ProductInfo({ data, onChange }: ProductInfoProps) {
           onChange={(e) => onChange('category', e.target.value as MaterialType)}
           className="w-full border border-gray-300 squircle-border p-3 text-sm text-texto-secundario bg-white focus:outline-none focus:ring-1 focus:ring-marinho focus:border-marinho cursor-pointer"
         >
-          <option value={MaterialType.STUDENT}>Para estudar ({MaterialType.STUDENT})</option>
-          <option value={MaterialType.TEACHER}>Para dar aula ({MaterialType.TEACHER})</option>
+          <option value={MaterialType.STUDENT}>Material de estudo</option>
+          <option value={MaterialType.TEACHER}>Para professores</option>
         </select>
       </div>
     </div>

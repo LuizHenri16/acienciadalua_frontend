@@ -81,11 +81,11 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
           </button>
           <input type="file" ref={coverInputRef} onChange={handleCoverChange} accept="image/jpeg, image/png" className="hidden" />
 
-          <div className="w-[100px] rounded-xl bg-linear-to-br from-purple-500 to-indigo-800 flex items-center justify-center shadow-inner overflow-hidden">
+          <div className="w-[100px] squircle-border bg-turquesa-light flex items-center justify-center overflow-hidden">
             {coverPreviewUrl ? (
               <img src={coverPreviewUrl} alt="Capa" className="w-full h-full object-cover" />
             ) : (
-              <ImageIcon className="w-6 h-6 text-white/50" />
+              <ImageIcon className="w-6 h-6 text-turquesa-dark/40" />
             )}
           </div>
         </div>
