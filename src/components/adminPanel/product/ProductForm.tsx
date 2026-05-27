@@ -56,6 +56,8 @@ export function ProductForm({ product }: ProductFormProps) {
       data.append('description', formData.description);
       data.append('price', String(formData.priceValue));
       data.append('category', formData.category as string);
+      data.append('isActive', String(formData.isActive));
+
       if (formData.pdf) data.append('file', formData.pdf);
       if (formData.cover) data.append('cover', formData.cover);
 
