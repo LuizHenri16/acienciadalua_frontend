@@ -44,7 +44,7 @@ export function ProductCard({ material }: CardProps) {
                     R$ {formatPrice(material.price)}
                 </p>
                 <Link
-                    href={`/product/${material.id}`}
+                    href={`/produto/${material.id}`}
                     className="flex gap-0.5 mt-auto mb-1 cursor-pointer font-medium transition-colors text-azul-med hover:text-turquesa-dark text-xs"
                 >
                     ver detalhes <ArrowRightIcon size={16} />

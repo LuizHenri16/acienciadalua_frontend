@@ -34,8 +34,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     };
 
     return (
-        <main className="animate-in fade-in duration-700 slide-in-from-bottom-2">
-            <div className="w-full h-64 md:h-96 bg-[#8a44d6] flex items-center justify-center overflow-hidden">
+        <main className="animate-in fade-in duration-700 slide-in-from-bottom-2 md:grid md:grid-cols-2 md:min-h-[500px]">
+            <div className="w-full h-64 md:h-full bg-[#8a44d6] flex items-center justify-center overflow-hidden">
                 {coverUrl ? (
                     <img src={coverUrl} alt={product.title} className="w-full h-full object-cover" />
                 ) : (
@@ -43,7 +43,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 )}
             </div>
 
-            <div className="p-7 flex flex-col gap-8">
+            <div className="p-7 flex flex-col gap-8 justify-center">
                 <div>
                     <h1 className="text-[1.75rem] font-bold text-[#171717] leading-tight mb-1">
                         {product.title}

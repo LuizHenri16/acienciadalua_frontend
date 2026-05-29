@@ -21,7 +21,7 @@ export default function Panel() {
 
         setTimeout(() => {
             if (!token) {
-                router.push("/panel/signin");
+                router.push("/painel/signin");
                 return;
             }
             setIsAuthenticated(true);

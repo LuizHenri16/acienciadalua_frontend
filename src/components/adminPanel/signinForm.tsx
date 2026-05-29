@@ -27,7 +27,7 @@ export function SignInForm() {
             document.cookie = `admin_token=${access_token}; path=/; max-age=3600; SameSite=Strict`;
             document.cookie = `admin_refresh_token=${refresh_token}; path=/; max-age=604800; SameSite=Strict`;
 
-            router.push("/panel");
+            router.push("/painel");
         } catch (error: any) {
             if (error.status === 401) {
                 setError("Email ou senha inválidos.");

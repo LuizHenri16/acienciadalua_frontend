@@ -73,7 +73,7 @@ export function ProductListItem({ product, onToggle }: ProductListItemProps) {
           </span>
         </button>
 
-        <Link href={`/panel/produto/${product.id}`} className="flex items-center gap-1 border border-turquesa-dark text-turquesa-dark hover:bg-turquesa-light px-3 py-1.5 squircle-border text-xs font-bold transition-colors">
+        <Link href={`/painel/produto/${product.id}`} className="flex items-center gap-1 border border-turquesa-dark text-turquesa-dark hover:bg-turquesa-light px-3 py-1.5 squircle-border text-xs font-bold transition-colors">
           <Edit className="w-3 h-3" />
           Editar
         </Link>

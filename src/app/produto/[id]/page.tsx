@@ -14,7 +14,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
 
     return (
         <main className="min-h-screen flex justify-center items-start font-sora bg-[#fafafa] sm:py-10">
-            <div className="flex flex-col w-full max-w-2xl bg-white sm:rounded-4xl sm:shadow-xl overflow-hidden border border-gray-100 min-h-screen sm:min-h-fit">
+            <div className="flex flex-col w-full max-w-2xl md:max-w-4xl bg-white sm:rounded-4xl sm:shadow-xl overflow-hidden border border-gray-100 min-h-screen sm:min-h-fit">
                 <ProductDetailsHeader />
                 <ProductDetails product={product} />
                 <ProductDetailsFooter />
