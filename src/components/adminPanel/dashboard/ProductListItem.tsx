@@ -52,7 +52,7 @@ export function ProductListItem({ product, onToggle }: ProductListItemProps) {
 
           <div className="flex flex-col sm:flex-row gap-1 sm:gap-2 sm:items-center">
             <span className="text-xs text-gray-500 shrink-0">{formattedPrice}</span>
-            <span className={`py-0.5 text-[0.6rem] md:text-xs font-medium text-center squircle-border shrink-0 ${isTeacher ? "bg-ouro-light text-[#7A5200] w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"}`}>{label}</span>
+            <span className={`py-0.5 text-[0.6rem] md:text-xs font-medium text-center squircle-border shrink-0 ${isTeacher ? "bg-rosa-rose text-white w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"}`}>{label}</span>
           </div>
         </div>
       </div>
