@@ -11,7 +11,7 @@ interface CardProps {
 }
 
 function formatPrice(price: number) {
-    return price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    return `R$ ${Number(price).toFixed(2).replace('.', ',')}`;
 }
 
 export function ProductCard({ material }: CardProps) {
@@ -41,12 +41,9 @@ export function ProductCard({ material }: CardProps) {
                     {material.title}
                 </p>
                 <p className="text-lg font-bold text-texto-principal">
-                    R$ {formatPrice(material.price)}
+                    {formatPrice(material.price)}
                 </p>
-                <Link
-                    href={`/produto/${material.id}`}
-                    className="flex gap-0.5 mt-auto mb-1 cursor-pointer font-medium transition-colors text-azul-med hover:text-turquesa-dark text-xs"
-                >
+                <Link href={`/produto/${material.id}`} className="flex gap-0.5 mt-auto mb-1 cursor-pointer font-medium transition-colors text-azul-med hover:text-turquesa-dark text-xs md:text-base items-center" >
                     ver detalhes <ArrowRightIcon size={16} />
                 </Link>
             </div>
