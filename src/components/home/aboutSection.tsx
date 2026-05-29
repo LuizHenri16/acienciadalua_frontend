@@ -1,16 +1,17 @@
+import { WatchIcon, GraduationCap, Microscope } from "lucide-react";
+
 export function AboutSection() {
     const badges = [
-        "+9 anos de experiência",
-        "Licenciada pela UFRN",
-        "Especialista em Petroquímica",
+        { icon: WatchIcon, title: "+9 anos de experiência", iconClass: "text-turquesa-dark" },
+        { icon: GraduationCap, title: "Bacharel em Química do Petróleo", iconClass: "text-turquesa-dark" },
+        { icon: GraduationCap, title: "Licenciada em Química", iconClass: "text-turquesa-dark" },
+        { icon: Microscope, title: "Mestranda em Química", iconClass: "text-rosa-rose" },
     ];
 
     return (
         <article id="como-funciona" className="squircle-border overflow-hidden border-2 border-borda">
-
-            {/* Header navy com avatar */}
             <div className="bg-marinho flex items-center gap-4 px-8 py-6">
-                <div className="w-14 h-14 rounded-2xl bg-turquesa flex items-center justify-center flex-shrink-0">
+                <div className="w-20 h-20 rounded-2xl bg-turquesa-dark flex items-center justify-center shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0c3330" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="8" r="4" />
                         <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
@@ -18,32 +19,23 @@ export function AboutSection() {
                 </div>
                 <div>
                     <p className="text-white font-extrabold text-lg leading-tight tracking-tight">Profa. Lua</p>
-                    <p className="text-texto-terciario text-sm mt-0.5">Química · UFRN · Especialista em Petroquímica</p>
+                    <p className="text-texto-terciario text-sm mt-0.5">Química · UFRN · Mestranda</p>
                 </div>
             </div>
 
-            {/* Corpo */}
-            <div className="bg-[#f2fcfa] flex flex-col gap-5 px-8 py-7">
-
-                {/* Citação */}
-                <p className="text-sm md:text-base text-[#234a44] leading-relaxed border-l-2 border-turquesa pl-4 italic">
-                    Percebi que o problema não é a matéria — é o método.
-                    Minha missão é tornar o aprendizado leve e eficaz.
+            <div className="bg-white flex flex-col gap-8 px-8 py-7">
+                <p className="text-sm md:text-lg text-marinho leading-relaxed tracking-wider border-l-2 border-rosa-rose pl-2 italic">
+                    Percebi que a maior dificuldade dos alunos não é a matéria em si, mas a forma como ela é apresentada.
                 </p>
-
-                {/* Bio */}
                 <p className="text-sm text-texto-secundario leading-relaxed">
-                    Sou a Prof<sup>a</sup> Lua, formada em Química pela UFRN.
-                    Com quase 10 anos de experiência ensinando, desenvolvi materiais
-                    pensados para quem quer aprender de verdade — ou ensinar com mais impacto.
+                    Sou a Prof<sup>a</sup> Lua, Bacharel em Química do Petróleo e Licenciada em Química pela UFRN, atualmente Mestranda em Química. Com quase uma década de experiência em aulas particulares e atuação em laboratórios escolares do Ensino Fundamental ao Médio, percebi que quando a matéria é apresentada do jeito certo, tudo muda. Por isso desenvolvi materiais baseados em mapas conceituais — para quem quer aprender de verdade, ou ensinar com mais impacto.
                 </p>
-
-                {/* Badges */}
-                <div className="flex flex-wrap gap-2 pt-1">
+                <div className="flex flex-wrap gap-3">
                     {badges.map((badge) => (
-                        <span key={badge} className="bg-marinho-light text-white text-[10px] tracking-wider md:text-xs font-semibold px-3 py-2 rounded-full whitespace-nowrap shadow-sm">
-                            {badge}
-                        </span>
+                        <div key={badge.title} className="bg-purple-700/5 border border-purple-200 rounded-xl p-3 flex items-center gap-3">
+                            <badge.icon className={`w-5 h-5 shrink-0 ${badge.iconClass}`} />
+                            <span className="text-xs font-medium text-marinho leading-snug">{badge.title}</span>
+                        </div>
                     ))}
                 </div>
             </div>

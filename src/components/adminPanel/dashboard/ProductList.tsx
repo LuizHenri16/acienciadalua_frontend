@@ -1,12 +1,11 @@
 import Link from "next/link";
 import { ProductListItem } from "./ProductListItem";
 import { Material } from "@/types/material";
-import { Button } from "@/components/ui/button/button";
 import { Plus } from "lucide-react";
 
 interface ProductListProps {
   products: Material[];
-  onToggle: (id: string, newState: boolean) => void;
+  onToggle?: (id: string, newState: boolean) => void;
 }
 
 export function ProductList({ products, onToggle }: ProductListProps) {
@@ -39,7 +38,7 @@ export function ProductList({ products, onToggle }: ProductListProps) {
       ) : (
         <div className="flex flex-col">
           {products.map((product) => (
-            <ProductListItem key={product.id} product={product} onToggle={onToggle} />
+            <ProductListItem key={product.id} product={product} onToggle={onToggle!} />
           ))}
         </div>
       )}

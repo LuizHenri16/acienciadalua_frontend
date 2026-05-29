@@ -48,7 +48,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     <h1 className="text-[1.75rem] font-bold text-[#171717] leading-tight mb-1">
                         {product.title}
                     </h1>
-                    <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${isTeacher ? "bg-ouro-light text-[#7A5200] w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"}`}>
+                    <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${isTeacher ? "bg-rosa-rose text-white w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"}`}>
                         {label}
                     </p>
                 </div>
@@ -73,7 +73,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     </div>
 
                     {error && (
-                        <p className="text-red-500 text-xs text-center">{error}</p>
+                        <p className="text-red-700 text-xs text-center">{error}</p>
                     )}
 
                     <p className="text-texto-terciario text-[11px] font-medium text-center sm:text-left leading-tight">

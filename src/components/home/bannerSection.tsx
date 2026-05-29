@@ -8,16 +8,16 @@ function scrollTo(id: string) {
 export function BannerSection() {
     return (
         <section className="flex flex-col justify-center gap-8 py-10 md:py-12">
-            <div className="w-fit inline-flex items-center gap-2 bg-turquesa/10 border-[0.02rem] border-turquesa/30 shadow-cyan-500/20 shadow-sm rounded-2xl py-1 px-3 animate-pulse">
-                <div className="rounded-full bg-turquesa p-[0.26rem]"></div>
-                <p className="text-[.7rem] uppercase tracking-wide text-turquesa font-semibold">
+            <div className="w-fit inline-flex items-center gap-2 bg-rosa-rose/10 border-[0.02rem] border-rosa-rose/30 shadow-rosa-rose/20 shadow-sm rounded-2xl py-1 px-3 animate-pulse">
+                <div className="rounded-full bg-rosa-rose p-[0.26rem]"></div>
+                <p className="text-[.7rem] uppercase tracking-wide text-rosa-rose font-semibold">
                     materiais exclusivos
                 </p>
             </div>
 
             <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-[1.08] tracking-tight max-w-2xl">
                 Aprenda com <span className="text-turquesa">método</span> e{" "}
-                <span className="text-ouro">intenção</span>
+                <span className="text-rosa-rose">intenção</span>
             </h1>
 
             <p className="text-sm md:text-base text-texto-terciario tracking-wide leading-relaxed max-w-md">
@@ -26,7 +26,7 @@ export function BannerSection() {
             </p>
 
             <div className="flex items-center gap-4">
-                <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-2 bg-turquesa text-marinho text-sm font-bold px-6 py-3 rounded-xl hover:brightness-110 transition-all cursor-pointer">
+                <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-2 bg-turquesa-dark text-white text-sm font-bold px-6 py-3 rounded-xl hover:brightness-110 transition-all cursor-pointer">
                     Ver materiais
                     <ArrowRight size={15} />
                 </button>

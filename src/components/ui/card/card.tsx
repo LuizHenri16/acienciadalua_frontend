@@ -34,7 +34,7 @@ export function ProductCard({ material }: CardProps) {
                 )}
             </div>
             <div className="p-3 flex flex-col gap-2 flex-1">
-                <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${isTeacher ? "bg-ouro-light text-[#7A5200] w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"}`}>
+                <p className={`p-0.5 text-[0.6rem] md:text-xs font-normal text-center uppercase squircle-border ${isTeacher ? "bg-rosa-rose text-white w-24 md:w-30" : "bg-turquesa-light text-petroleo w-34 md:w-38"}`}>
                     {label}
                 </p>
                 <p className="text-sm font-medium text-texto-principal leading-snug">

@@ -17,7 +17,7 @@ export interface Material {
     category: MaterialType | string;
     coverUrl?: string;
     fileUrl?: string;
-    isActive: boolean;
+    isActive?: boolean;
     purchasedAt?: string;
     createdAt?: string;
     updatedAt?: string;

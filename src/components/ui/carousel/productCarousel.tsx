@@ -78,16 +78,10 @@ export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) 
 
     return (
         <div className="relative w-full">
-            <div
-                ref={scrollRef}
-                onScroll={handleScroll}
-                className="flex overflow-x-auto overflow-y-visible gap-5 snap-x snap-mandatory no-scrollbar scroll-smooth px-1 py-3"
-            >
+            <div ref={scrollRef} onScroll={handleScroll}
+                className="flex overflow-x-auto overflow-y-visible gap-5 snap-x snap-mandatory no-scrollbar scroll-smooth px-1 py-3">
                 {materials.map((material) => (
-                    <div
-                        key={material.id}
-                        className="min-w-[240px] md:min-w-[280px] snap-start"
-                    >
+                    <div key={material.id} className="min-w-[240px] md:min-w-[280px] snap-start">
                         <ProductCard material={material} />
                     </div>
                 ))}

@@ -25,11 +25,10 @@ export function Header() {
                 <div className="flex flex-row items-center gap-2 p-2 cursor-pointer"
                     onClick={() => router.push("/")}>
                     <Image src="/acienciadalua-logo-var1.svg" alt="A ciência da Lua - logo" width={36} height={36} />
-                    <h1 className="font-unkempt text-xl lg:text-3xl text-ouro">
+                    <h1 className="font-unkempt text-xl lg:text-4xl text-ouro">
                         A Ciência da <span className="text-xl lg:text-3xl text-turquesa-dark">Lua</span>
                     </h1>
                 </div>
-
                 <button onClick={() => router.push("/minha-conta/signin")} className="text-azul-med text-sm transition-colors hover:opacity-90 cursor-pointer active:scale-95"> Minha conta </button>
             </div>
         </header>

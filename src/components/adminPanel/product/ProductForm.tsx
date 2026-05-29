@@ -32,6 +32,7 @@ export function ProductForm({ product }: ProductFormProps) {
     category: product?.category ?? MaterialType.STUDENT,
     pdf: null,
     cover: null,
+    isActive: product?.isActive ?? true,
   });
 
   const handleChange = (field: keyof ProductFormData, value: any) => {
@@ -55,6 +56,8 @@ export function ProductForm({ product }: ProductFormProps) {
       data.append('description', formData.description);
       data.append('price', String(formData.priceValue));
       data.append('category', formData.category as string);
+      data.append('isActive', String(formData.isActive));
+
       if (formData.pdf) data.append('file', formData.pdf);
       if (formData.cover) data.append('cover', formData.cover);
 
@@ -118,11 +121,10 @@ export function ProductForm({ product }: ProductFormProps) {
             type="button"
             onClick={handleDelete}
             disabled={deleting}
-            className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold transition-colors cursor-pointer ${
-              confirmDelete
-                ? 'bg-red-600 text-white hover:bg-red-700'
-                : 'border border-red-300 text-red-500 hover:bg-red-50'
-            }`}
+            className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold transition-colors cursor-pointer ${confirmDelete
+              ? 'bg-red-600 text-white hover:bg-red-700'
+              : 'border border-red-300 text-red-500 hover:bg-red-50'
+              }`}
           >
             <Trash2 className="w-4 h-4" />
             {deleting ? 'Excluindo...' : confirmDelete ? 'Confirmar exclusão' : 'Excluir produto'}
