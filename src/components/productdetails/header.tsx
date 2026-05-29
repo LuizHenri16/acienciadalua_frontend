@@ -8,7 +8,7 @@ export function ProductDetailsHeader() {
                 <ArrowLeft size={18} strokeWidth={2.5} />
                 Vitrine
             </Link>
-            <Link href="/minhaconta/signin" className="text-sm text-azul-med opacity-80 transition-opacity">
+            <Link href="/minha-conta/signin" className="text-sm text-azul-med opacity-80 transition-opacity">
                 Minha conta
             </Link>
         </header>
