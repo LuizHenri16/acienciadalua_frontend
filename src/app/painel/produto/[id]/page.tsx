@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getProductById } from "@/api/product";
+import { adminGetProductById } from "@/api/product";
 import { ProductHeader } from "@/components/adminPanel/product/ProductHeader";
 import { ProductForm } from "@/components/adminPanel/product/ProductForm";
 
@@ -9,7 +9,7 @@ interface EditProdutoPageProps {
 
 export default async function EditProdutoPage({ params }: EditProdutoPageProps) {
   const { id } = await params;
-  const product = await getProductById(id);
+  const product = await adminGetProductById(id);
 
   if (!product) notFound();
 

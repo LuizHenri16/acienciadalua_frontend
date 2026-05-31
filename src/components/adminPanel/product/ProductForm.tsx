@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProductInfo } from './ProductInfo';
 import { ProductFiles } from './ProductFiles';
+import { ProductStatus } from './ProductStatus';
 import { ProductFormData, MaterialType, Material } from '@/types/material';
 import { Button } from '@/components/ui/button/button';
 import { adminCreateProduct, adminUpdateProduct, adminDeleteProduct } from '@/api/product';
@@ -41,6 +42,7 @@ export function ProductForm({ product }: ProductFormProps) {
 
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
+    if (loading) return;
     setError('');
 
     if (!formData.title.trim()) return setError('O título é obrigatório.');
@@ -67,7 +69,7 @@ export function ProductForm({ product }: ProductFormProps) {
         await adminCreateProduct(data);
       }
 
-      router.push('/panel');
+      router.push('/painel');
       router.refresh();
     } catch {
       setError('Ocorreu um erro ao salvar o produto. Tente novamente.');
@@ -85,7 +87,7 @@ export function ProductForm({ product }: ProductFormProps) {
     setDeleting(true);
     try {
       await adminDeleteProduct(product!.id);
-      router.push('/panel');
+      router.push('/painel');
       router.refresh();
     } catch {
       setError('Erro ao excluir o produto. Tente novamente.');
@@ -103,6 +105,10 @@ export function ProductForm({ product }: ProductFormProps) {
         onChange={handleChange}
         existingCoverUrl={product?.coverUrl}
         existingFileUrl={product?.fileUrl}
+      />
+      <ProductStatus
+        isActive={formData.isActive}
+        onToggle={() => handleChange('isActive', !formData.isActive)}
       />
 
       {error && <p className="text-red-500 text-xs text-center mt-4">{error}</p>}
