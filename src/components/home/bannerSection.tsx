@@ -7,7 +7,7 @@ function scrollTo(id: string) {
 
 export function BannerSection() {
     return (
-        <section className="flex flex-col justify-center gap-8 py-10 md:py-12">
+        <section id="banner" className="flex flex-col justify-center gap-8 py-10 md:py-12">
             <div className="w-fit inline-flex items-center gap-2 bg-rosa-rose/10 border-[0.02rem] border-rosa-rose/30 shadow-rosa-rose/20 shadow-sm rounded-2xl py-1 px-3 animate-pulse">
                 <div className="rounded-full bg-rosa-rose p-[0.26rem]"></div>
                 <p className="text-[.7rem] uppercase tracking-wide text-rosa-rose font-semibold">
@@ -26,11 +26,11 @@ export function BannerSection() {
             </p>
 
             <div className="flex items-center gap-4">
-                <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-2 bg-turquesa-dark text-white text-sm font-bold px-6 py-3 rounded-xl hover:brightness-110 transition-all cursor-pointer">
+                <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-1 bg-turquesa-dark text-white text-sm font-bold px-6 py-3 rounded-xl hover:shadow-sm hover:shadow-turquesa/30 hover:brightness-110 transition-all cursor-pointer">
                     Ver materiais
                     <ArrowRight size={15} />
                 </button>
-                <button onClick={() => scrollTo("como-funciona")} className="inline-flex items-center gap-2 text-texto-terciario text-sm hover:text-turquesa transition-colors cursor-pointer">
+                <button onClick={() => scrollTo("como-funciona")} className=" inline-flex items-center gap-1 text-texto-terciario text-sm hover:text-turquesa hover:gap-2 transition-all cursor-pointer">
                     Como funciona
                     <ArrowRight size={14} />
                 </button>
