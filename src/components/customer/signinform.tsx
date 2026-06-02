@@ -28,33 +28,35 @@ export function SignInForm() {
 
     if (sent) {
         return (
-            <div className="flex flex-col items-center justify-center mt-3 gap-4 md:max-w-[60%] lg:max-w-[30%] mx-auto w-full">
-                <div className="w-12 h-12 rounded-full bg-turquesa-light flex items-center justify-center mx-auto">
+            <div className="flex flex-col items-center justify-center gap-3 w-full text-center">
+                <div className="w-12 h-12 rounded-full bg-turquesa/20 border border-turquesa/30 flex items-center justify-center mx-auto">
                     <span className="text-2xl">📬</span>
                 </div>
-                <p className="text-texto-principal font-semibold">Link enviado!</p>
-                <p className="text-texto-secundario text-sm">
-                    Acesse o link que enviamos para <strong>{email}</strong> para entrar na sua conta.
+                <p className="text-white font-semibold">Link enviado!</p>
+                <p className="text-turquesa-light text-sm opacity-80 leading-relaxed">
+                    Acesse o link que enviamos para{" "}
+                    <strong className="text-white opacity-90">{email}</strong>{" "}
+                    para entrar na sua conta.
                 </p>
             </div>
         );
     }
 
     return (
-        <div className="flex flex-col items-center justify-center mt-3 md:max-w-[60%] lg:max-w-[40%] mx-auto w-full">
+        <div className="flex flex-col w-full gap-2">
             <Input
-                placeholder="Digite seu email"
-                label="Email"
+                placeholder="Digite seu e-mail ex: email@gmail.com"
+                label="E-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
             />
             {error && (
-                <p className="w-full p-2 border border-red-300 squircle-border bg-red-50 text-red-800 text-sm text-center font-medium mt-2">
+                <p className="w-full px-3 py-2 rounded-xl bg-coral/10 border border-coral/30 text-coral-light text-sm text-center font-medium">
                     {error}
                 </p>
             )}
-            <div className="mt-2 w-full">
+            <div className="mt-1 w-full">
                 <Button loadingName="Enviando..." variant="primary" name="Enviar link de acesso" onClick={handleLogin} loading={loading} />
             </div>
         </div>
