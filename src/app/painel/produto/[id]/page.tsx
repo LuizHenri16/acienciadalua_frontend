@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { adminGetProductById } from "@/api/product";
 import { ProductHeader } from "@/components/adminPanel/product/ProductHeader";
@@ -12,6 +12,9 @@ export default async function EditProdutoPage({ params }: EditProdutoPageProps) 
   const { id } = await params;
   const cookieStore = await cookies();
   const token = cookieStore.get('admin_token')?.value ?? '';
+
+  if (!token) redirect('/painel/signin');
+
   const product = await adminGetProductById(id, token);
 
   if (!product) notFound();
