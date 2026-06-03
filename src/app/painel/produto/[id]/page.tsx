@@ -14,12 +14,10 @@ export default async function EditProdutoPage({ params }: EditProdutoPageProps) 
   if (!product) notFound();
 
   return (
-    <div className="min-h-screen sm:px-6 lg:px-8 font-sora flex justify-center">
-      <div className="w-full max-w-[480px]">
-        <div className="bg-white rounded-md shadow-lg p-6 pb-8">
-          <ProductHeader isEditing />
-          <ProductForm product={product} />
-        </div>
+    <div className="min-h-screen font-sora flex flex-col" style={{ background: 'linear-gradient(135deg, #f9eef2 0%, #f0eefc 100%)' }}>
+      <ProductHeader isEditing />
+      <div className="flex-1 px-4 sm:px-6 lg:px-8 py-5 lg:py-6 max-w-300 w-full mx-auto">
+        <ProductForm product={product} />
       </div>
     </div>
   );
