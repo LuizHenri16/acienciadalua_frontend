@@ -48,9 +48,10 @@ export async function adminGetProducts() {
     return response.json();
 }
 
-export async function adminGetProductById(id: string) {
+export async function adminGetProductById(id: string, token?: string) {
+    const authToken = token ?? getToken();
     const response = await fetch(`${API_URL}/products/${id}`, {
-        headers: { Authorization: `Bearer ${getToken()}` },
+        headers: { Authorization: `Bearer ${authToken}` },
         cache: 'no-store',
     });
 

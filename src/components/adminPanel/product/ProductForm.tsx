@@ -4,7 +4,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProductInfo } from './ProductInfo';
 import { ProductFiles } from './ProductFiles';
+<<<<<<< HEAD
 import { ProductFormData, MaterialType, Material, getMaterialTypeLabel } from '@/types/material';
+=======
+import { ProductStatus } from './ProductStatus';
+import { ProductFormData, MaterialType, Material } from '@/types/material';
+import { Button } from '@/components/ui/button/button';
+>>>>>>> 369985fbaf31d0560945ed858953b5c57e653a67
 import { adminCreateProduct, adminUpdateProduct, adminDeleteProduct } from '@/api/product';
 import { Trash2, Send, FileText, Loader2, Eye, ImageIcon } from 'lucide-react';
 import { API_URL } from '@/lib/constants/constants';
@@ -48,7 +54,13 @@ export function ProductForm({ product }: ProductFormProps) {
     }
   };
 
+<<<<<<< HEAD
   const handleSubmitWithActive = async (isActive: boolean) => {
+=======
+  const handleSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (loading) return;
+>>>>>>> 369985fbaf31d0560945ed858953b5c57e653a67
     setError('');
 
     if (!formData.title.trim()) return setError('O título é obrigatório.');
@@ -75,7 +87,7 @@ export function ProductForm({ product }: ProductFormProps) {
         await adminCreateProduct(data);
       }
 
-      router.push('/panel');
+      router.push('/painel');
       router.refresh();
     } catch {
       setError('Ocorreu um erro ao salvar o produto. Tente novamente.');
@@ -89,7 +101,7 @@ export function ProductForm({ product }: ProductFormProps) {
     setDeleting(true);
     try {
       await adminDeleteProduct(product!.id);
-      router.push('/panel');
+      router.push('/painel');
       router.refresh();
     } catch {
       setError('Erro ao excluir o produto. Tente novamente.');
@@ -99,9 +111,25 @@ export function ProductForm({ product }: ProductFormProps) {
     }
   };
 
+<<<<<<< HEAD
   const publishLabel = formData.isActive
     ? (isEditing ? 'Salvar e manter na vitrine' : 'Publicar na vitrine')
     : (isEditing ? 'Salvar alterações' : 'Salvar rascunho');
+=======
+  return (
+    <form onSubmit={handleSubmit}>
+      <ProductInfo data={formData} onChange={handleChange} />
+      <ProductFiles
+        data={formData}
+        onChange={handleChange}
+        existingCoverUrl={product?.coverUrl}
+        existingFileUrl={product?.fileUrl}
+      />
+      <ProductStatus
+        isActive={formData.isActive}
+        onToggle={() => handleChange('isActive', !formData.isActive)}
+      />
+>>>>>>> 369985fbaf31d0560945ed858953b5c57e653a67
 
   const isTeacher = formData.category === MaterialType.TEACHER;
   const categoryLabel = getMaterialTypeLabel(formData.category as MaterialType);

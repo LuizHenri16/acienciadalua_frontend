@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { getProductById } from "@/api/product";
+import { cookies } from "next/headers";
+import { adminGetProductById } from "@/api/product";
 import { ProductHeader } from "@/components/adminPanel/product/ProductHeader";
 import { ProductForm } from "@/components/adminPanel/product/ProductForm";
 
@@ -9,7 +10,9 @@ interface EditProdutoPageProps {
 
 export default async function EditProdutoPage({ params }: EditProdutoPageProps) {
   const { id } = await params;
-  const product = await getProductById(id);
+  const cookieStore = await cookies();
+  const token = cookieStore.get('admin_token')?.value ?? '';
+  const product = await adminGetProductById(id, token);
 
   if (!product) notFound();
 

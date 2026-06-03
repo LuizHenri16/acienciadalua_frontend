@@ -14,7 +14,7 @@ export function ProductList({ products, onToggle }: ProductListProps) {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xs font-bold text-gray-600">Produtos cadastrados</h2>
         <Link
-          href="/panel/produto"
+          href="/painel/produto"
           className="bg-turquesa-dark hover:opacity-90 text-white px-3 py-1.5 squircle-border text-xs font-bold transition-colors flex items-center gap-1"
         >
           <Plus size={16} /> Novo produto
@@ -29,7 +29,7 @@ export function ProductList({ products, onToggle }: ProductListProps) {
             aparecerá na vitrine.
           </p>
           <Link
-            href="/panel/produto"
+            href="/painel/produto"
             className="bg-turquesa-dark hover:opacity-90 text-white px-6 py-2 rounded-lg text-xs font-bold transition-colors"
           >
             Cadastrar material

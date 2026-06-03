@@ -36,6 +36,12 @@ export default function Panel() {
             .finally(() => setLoading(false));
     }, []);
 
+    function handleToggle(id: string, newState: boolean) {
+        setProducts(prev =>
+            prev.map(p => p.id === id ? { ...p, isActive: newState } : p)
+        );
+    }
+
     const total = products.length;
     const ativos = products.filter(p => p.isActive).length;
     const inativos = total - ativos;
@@ -53,7 +59,7 @@ export default function Panel() {
                 {loading ? (
                     <div className="mt-8 text-center text-sm text-gray-400">Carregando produtos...</div>
                 ) : (
-                    <ProductList products={products} />
+                    <ProductList products={products} onToggle={handleToggle} />
                 )}
             </div>
         </div>
