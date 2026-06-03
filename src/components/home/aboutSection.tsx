@@ -23,8 +23,8 @@ export function AboutSection() {
         >
             <div className="flex flex-col md:flex-row">
                 <div className="relative w-full h-80 md:w-48 md:h-auto md:min-h-full shrink-0">
-                    <Image quality={100} src="/foto.png" alt="Profa. Lua" fill className="object-cover object-top" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-marinho/80 to-transparent md:hidden flex items-end px-5 py-4">
+                    <Image quality={100} src="/foto.png" alt="Profa. Lua" loading="eager" fill className="object-cover object-top" />
+                    <div className="absolute inset-0 bg-linear-to-t from-marinho/80 to-transparent md:hidden flex items-end px-5 py-4">
                         <div>
                             <p className="text-white font-extrabold text-lg leading-tight tracking-tight">Profa. Lua</p>
                             <p className="text-texto-terciario text-sm mt-0.5">Química · UFRN · Mestranda</p>

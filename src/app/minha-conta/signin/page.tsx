@@ -1,18 +1,14 @@
 import { BackVitrine } from "@/components/ui/button/button";
 import { SignInForm } from "@/components/customer/signinform";
 import Image from "next/image";
+import { BackgroundLights } from "@/components/ui/decor/BackgroundLights";
 
 export default function SignIn() {
     return (
         <div className="relative flex flex-col justify-center items-center w-full min-h-screen bg-marinho overflow-hidden px-6 py-10">
 
             {/* Decorações de fundo com luzes*/}
-            <div className="pointer-events-none select-none">
-                <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-turquesa opacity-10 blur-3xl" />
-                <div className="absolute -bottom-24 -left-16 w-64 h-64 rounded-full bg-rosa-rose opacity-10 blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-turquesa opacity-5" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full border border-turquesa opacity-[0.03]" />
-            </div>
+            <BackgroundLights />
             <div className="relative z-10 flex flex-col items-center w-full">
                 <div className="flex flex-row items-center gap-3 mb-2">
                     <Image src="/acienciadalua-logo-var1.svg" alt="Logo" width={52} height={52} />
