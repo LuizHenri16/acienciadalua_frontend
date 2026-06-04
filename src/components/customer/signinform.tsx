@@ -49,6 +49,7 @@ export function SignInForm() {
                 label="E-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                 type="email"
             />
             {error && (

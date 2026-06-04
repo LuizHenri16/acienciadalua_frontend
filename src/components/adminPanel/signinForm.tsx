@@ -41,8 +41,8 @@ export function SignInForm() {
 
     return (
         <div className="flex flex-col gap-4 w-full">
-            <Input type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} label="E-mail" placeholder="admin@exemplo.com" />
-            <Input type="password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} label="Senha" placeholder="••••••••" />
+            <Input type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} onKeyDown={(e) => e.key === "Enter" && handleSubmit()} label="E-mail" placeholder="admin@exemplo.com" />
+            <Input type="password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} onKeyDown={(e) => e.key === "Enter" && handleSubmit()} label="Senha" placeholder="••••••••" />
             {error && (
                 <p className="w-full px-3 py-2 rounded-xl bg-coral/10 border border-coral/30 text-coral-dark text-sm text-center font-medium">
                     {error}
