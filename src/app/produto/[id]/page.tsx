@@ -13,12 +13,12 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     }
 
     return (
-        <main className="min-h-screen flex justify-center items-start font-sora bg-[#fafafa] sm:py-10">
-            <div className="flex flex-col w-full max-w-2xl md:max-w-4xl bg-white sm:rounded-4xl sm:shadow-xl overflow-hidden border border-gray-100 min-h-screen sm:min-h-fit">
-                <ProductDetailsHeader />
+        <div className="min-h-screen flex flex-col font-sora bg-white">
+            <ProductDetailsHeader />
+            <div className="flex flex-col flex-1 pt-[65px] lg:h-screen lg:overflow-hidden">
                 <ProductDetails product={product} />
                 <ProductDetailsFooter />
             </div>
-        </main>
+        </div>
     );
 }

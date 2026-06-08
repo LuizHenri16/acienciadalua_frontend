@@ -11,7 +11,7 @@ export function DashboardHeader() {
   function handleExit() {
     document.cookie = 'admin_token=; path=/; max-age=0';
     document.cookie = 'admin_refresh_token=; path=/; max-age=0';
-    router.push("/panel/signin");
+    router.push("/painel/signin");
   }
 
   return (
