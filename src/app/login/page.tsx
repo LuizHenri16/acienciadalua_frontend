@@ -19,7 +19,7 @@ function LoginHandler() {
 
         document.cookie = `customer_token=${token}; path=/; max-age=3600; SameSite=Strict`;
         router.replace("/minha-conta");
-    }, []);
+    }, [router, searchParams]);
 
     return <LoadingPage message="Verificando acesso" />;
 }

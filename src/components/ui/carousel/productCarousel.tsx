@@ -12,7 +12,13 @@ interface ProductCarouselProps {
 
 export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [prevMaterials, setPrevMaterials] = useState(materials);
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    if (materials !== prevMaterials) {
+        setPrevMaterials(materials);
+        setActiveIndex(0);
+    }
 
     const handleScroll = () => {
         if (!scrollRef.current) return;
@@ -51,7 +57,6 @@ export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) 
     };
 
     useEffect(() => {
-        setActiveIndex(0);
         if (scrollRef.current) {
             scrollRef.current.scrollTo({ left: 0 });
         }

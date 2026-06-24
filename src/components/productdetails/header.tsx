@@ -4,15 +4,8 @@ import Link from "next/link";
 export function ProductDetailsHeader() {
     return (
         <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 lg:px-16 py-4 bg-white/80 backdrop-blur-md border-b border-gray-100">
-            <Link
-                href="/"
-                className="flex items-center gap-2 text-texto-principal text-sm font-semibold hover:opacity-70 transition-opacity group"
-            >
-                <ArrowLeft
-                    size={16}
-                    strokeWidth={2.5}
-                    className="group-hover:-translate-x-0.5 transition-transform"
-                />
+            <Link href="/" className="flex items-center gap-2 text-texto-principal text-sm font-semibold hover:opacity-70 transition-opacity group">
+                <ArrowLeft size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
                 Vitrine
             </Link>
 
@@ -22,10 +15,7 @@ export function ProductDetailsHeader() {
                 <span>Produto</span>
             </div>
 
-            <Link
-                href="/minha-conta/signin"
-                className="text-sm text-azul-med font-semibold opacity-80 hover:opacity-100 transition-opacity"
-            >
+            <Link href="/minha-conta/signin" className="text-sm text-azul-med font-semibold opacity-80 hover:opacity-100 transition-opacity">
                 Minha conta
             </Link>
         </header>

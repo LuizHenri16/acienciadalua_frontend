@@ -13,7 +13,6 @@ import { LoadingPage } from "@/components/ui/loading/loadingPage";
 export default function Conta() {
     const [userName, setUserName] = useState("");
     const [materials, setMaterials] = useState<Material[]>([]);
-    const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const router = useRouter();
 
@@ -33,11 +32,9 @@ export default function Conta() {
                 setIsAuthenticated(true);
             } catch {
                 router.push("/minha-conta/signin");
-            } finally {
-                setLoading(false);
             }
         }, 300);
-    }, []);
+    }, [router]);
 
     if (!isAuthenticated) {
         return <LoadingPage message="Verificando sessão" />;

@@ -2,7 +2,7 @@ import { ProductFormData, MaterialType } from '@/types/material';
 
 interface ProductInfoProps {
   data: ProductFormData;
-  onChange: (field: keyof ProductFormData, value: any) => void;
+  onChange: <K extends keyof ProductFormData>(field: K, value: ProductFormData[K]) => void;
 }
 
 function formatBRL(value: string): string {

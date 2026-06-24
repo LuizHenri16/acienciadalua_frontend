@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "../ui/button/button";
 import { useState } from "react";
 import { Input } from "../ui/form/input";
-import { adminSignIn } from "@/api/auth";
+import { adminSignIn, HttpError } from "@/api/auth";
 
 export function SignInForm() {
     const [loading, setLoading] = useState(false);
@@ -28,8 +28,8 @@ export function SignInForm() {
             document.cookie = `admin_refresh_token=${refresh_token}; path=/; max-age=604800; SameSite=Strict`;
 
             router.push("/painel");
-        } catch (error: any) {
-            if (error.status === 401) {
+        } catch (error) {
+            if (error instanceof HttpError && error.status === 401) {
                 setError("Email ou senha inválidos.");
             } else {
                 setError("Erro ao fazer login. Tente novamente.");

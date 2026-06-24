@@ -4,10 +4,11 @@ import { useRef, useEffect, useState } from 'react';
 import { Upload, Image as ImageIcon, FileCheck } from "lucide-react";
 import { ProductFormData } from '@/types/material';
 import { API_URL } from '@/lib/constants/constants';
+import Image from 'next/image';
 
 interface ProductFilesProps {
   data: ProductFormData;
-  onChange: (field: keyof ProductFormData, value: File | null) => void;
+  onChange: <K extends keyof ProductFormData>(field: K, value: ProductFormData[K]) => void;
   existingCoverUrl?: string;
   existingFileUrl?: string;
 }
@@ -20,11 +21,32 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
   );
 
   useEffect(() => {
-    if (!data.cover) return;
-    const url = URL.createObjectURL(data.cover);
-    setCoverPreviewUrl(url);
-    return () => URL.revokeObjectURL(url);
-  }, [data.cover]);
+    let active = true;
+    let url: string | null = null;
+
+    if (!data.cover) {
+      Promise.resolve().then(() => {
+        if (active) {
+          setCoverPreviewUrl(existingCoverUrl ? `${API_URL}/uploads/${existingCoverUrl}` : null);
+        }
+      });
+    } else {
+      url = URL.createObjectURL(data.cover);
+      const currentUrl = url;
+      Promise.resolve().then(() => {
+        if (active) {
+          setCoverPreviewUrl(currentUrl);
+        }
+      });
+    }
+
+    return () => {
+      active = false;
+      if (url) {
+        URL.revokeObjectURL(url);
+      }
+    };
+  }, [data.cover, existingCoverUrl]);
 
   const handlePdfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) onChange('pdf', e.target.files[0]);
@@ -48,15 +70,13 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
         <button
           type="button"
           onClick={() => pdfInputRef.current?.click()}
-          className={`w-full flex items-center gap-3 border-2 border-dashed squircle-border px-4 py-4 transition-all cursor-pointer group ${
-            hasPdf
+          className={`w-full flex items-center gap-3 border-2 border-dashed squircle-border px-4 py-4 transition-all cursor-pointer group ${hasPdf
               ? 'border-turquesa-dark bg-turquesa-light/30 hover:bg-turquesa-light/50'
               : 'border-gray-200 bg-gray-50/50 hover:border-turquesa-dark hover:bg-turquesa-light/20'
-          }`}
+            }`}
         >
-          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-            hasPdf ? 'bg-turquesa-dark' : 'bg-white border border-gray-200 shadow-sm group-hover:border-turquesa-dark'
-          }`}>
+          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${hasPdf ? 'bg-turquesa-dark' : 'bg-white border border-gray-200 shadow-sm group-hover:border-turquesa-dark'
+            }`}>
             {hasPdf
               ? <FileCheck className="w-4 h-4 text-white" />
               : <Upload className="w-4 h-4 text-turquesa-dark" />
@@ -98,9 +118,9 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
           </button>
           <input type="file" ref={coverInputRef} onChange={handleCoverChange} accept="image/jpeg, image/png" className="hidden" />
 
-          <div className="w-[90px] squircle-border overflow-hidden border border-borda bg-gradient-to-br from-turquesa-light to-menta flex items-center justify-center shrink-0">
+          <div className="w-[90px] squircle-border overflow-hidden border border-borda bg-linear-to-br from-turquesa-light to-menta flex items-center justify-center shrink-0 relative">
             {coverPreviewUrl ? (
-              <img src={coverPreviewUrl} alt="Capa" className="w-full h-full object-cover" />
+              <Image src={coverPreviewUrl} alt="Capa" fill className="object-cover" unoptimized />
             ) : (
               <ImageIcon className="w-6 h-6 text-turquesa-dark/40" />
             )}

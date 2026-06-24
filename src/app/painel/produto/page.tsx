@@ -10,7 +10,7 @@ export default function ProdutoPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
-  function checkSession() {
+  useEffect(() => {
     const token = document.cookie.match(/(?:^|;\s*)admin_token=([^;]*)/);
 
     setTimeout(() => {
@@ -20,11 +20,7 @@ export default function ProdutoPage() {
       }
       setIsAuthenticated(true);
     }, 300);
-  }
-
-  useEffect(() => {
-    checkSession();
-  }, []);
+  }, [router]);
 
   if (!isAuthenticated) {
     return <LoadingPage message="Verificando sessão" />;

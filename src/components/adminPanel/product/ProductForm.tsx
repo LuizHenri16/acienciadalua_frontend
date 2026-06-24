@@ -8,6 +8,7 @@ import { ProductFormData, MaterialType, Material, getMaterialTypeLabel } from '@
 import { adminCreateProduct, adminUpdateProduct, adminDeleteProduct } from '@/api/product';
 import { Trash2, Send, FileText, Loader2, Eye, ImageIcon } from 'lucide-react';
 import { API_URL } from '@/lib/constants/constants';
+import Image from 'next/image';
 
 interface ProductFormProps {
   product?: Material;
@@ -38,7 +39,7 @@ export function ProductForm({ product }: ProductFormProps) {
     isActive: product?.isActive ?? true,
   });
 
-  const handleChange = (field: keyof ProductFormData, value: any) => {
+  const handleChange = <K extends keyof ProductFormData>(field: K, value: ProductFormData[K]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
 
     // Atualiza preview da capa ao selecionar nova imagem
@@ -117,9 +118,9 @@ export function ProductForm({ product }: ProductFormProps) {
 
       <div className="p-4">
         {/* Capa */}
-        <div className="w-full aspect-[3/4] squircle-border overflow-hidden bg-gradient-to-br from-turquesa-light to-menta flex items-center justify-center mb-4 border border-borda">
+        <div className="w-full aspect-[3/4] squircle-border overflow-hidden bg-gradient-to-br from-turquesa-light to-menta flex items-center justify-center mb-4 border border-borda relative">
           {coverPreviewUrl ? (
-            <img src={coverPreviewUrl} alt="Capa" className="w-full h-full object-cover" />
+            <Image src={coverPreviewUrl} alt="Capa" fill className="object-cover" unoptimized />
           ) : (
             <ImageIcon className="w-10 h-10 text-turquesa-dark/30" />
           )}

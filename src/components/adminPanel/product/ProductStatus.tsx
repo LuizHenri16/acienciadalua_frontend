@@ -1,7 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button/button';
-
 interface ProductStatusProps {
   isActive: boolean;
   onToggle: () => void;

@@ -16,7 +16,7 @@ export default function Panel() {
 
     const router = useRouter();
 
-    function checkSession() {
+    useEffect(() => {
         const token = document.cookie.match(/(?:^|;\s*)admin_token=([^;]*)/);
 
         setTimeout(() => {
@@ -26,15 +26,12 @@ export default function Panel() {
             }
             setIsAuthenticated(true);
         }, 300);
-    }
 
-    useEffect(() => {
-        checkSession();
         adminGetProducts()
             .then(setProducts)
             .catch(console.error)
             .finally(() => setLoading(false));
-    }, []);
+    }, [router]);
 
     function handleToggle(id: string, newState: boolean) {
         setProducts(prev =>
@@ -54,7 +51,6 @@ export default function Panel() {
         <div className="min-h-screen w-full bg-[#fafafa]">
             <DashboardHeader />
             <div className="max-w-5xl mx-auto px-6 lg:px-8 flex flex-col">
-
                 <DashboardStats total={total} ativos={ativos} inativos={inativos} />
                 {loading ? (
                     <div className="mt-8 text-center text-sm text-gray-400">Carregando produtos...</div>

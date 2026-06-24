@@ -1,3 +1,5 @@
+import { Material } from "@/types/material";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 function getCustomerToken(): string {
@@ -27,7 +29,7 @@ export async function getMe() {
     return response.json();
 }
 
-export async function getMyPurchases(): Promise<{ student: any[]; teacher: any[] }> {
+export async function getMyPurchases(): Promise<{ student: Material[]; teacher: Material[] }> {
     const response = await fetch(`${API_URL}/customers/me/purchases`, {
         headers: { Authorization: `Bearer ${getCustomerToken()}` },
         cache: 'no-store',
