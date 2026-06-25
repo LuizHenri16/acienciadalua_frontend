@@ -33,7 +33,7 @@ export function SignInForm() {
                     <span className="text-2xl">📬</span>
                 </div>
                 <p className="text-white font-semibold">Link enviado!</p>
-                <p className="text-turquesa-light text-sm opacity-80 leading-relaxed">
+                <p className="text-turquesa-light text-sm md:text-base lg:text-lg opacity-80 leading-relaxed">
                     Acesse o link que enviamos para{" "}
                     <strong className="text-white opacity-90">{email}</strong>{" "}
                     para entrar na sua conta.
@@ -45,8 +45,8 @@ export function SignInForm() {
     return (
         <div className="flex flex-col w-full gap-2">
             <Input
-                placeholder="Digite seu e-mail ex: email@gmail.com"
-                label="E-mail"
+                placeholder="Digite seu e-mail"
+                label=""
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleLogin()}

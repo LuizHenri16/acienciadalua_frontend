@@ -36,7 +36,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
     return (
         <main className="flex-1 flex flex-col lg:flex-row animate-in fade-in duration-700">
-            <div className="relative lg:w-1/2 xl:w-[35%] h-82 sm:h-96 lg:h-full bg-[#1a0a2e] rounded-r-lg shrink-0 overflow-hidden hover:scale-[1.01] hover:shadow-lg transition-transform cursor-pointer">
+            <div className="relative lg:w-1/2 xl:w-[35%] h-82 sm:h-96 lg:h-[650px] bg-[#1a0a2e] rounded-r-lg shrink-0 overflow-hidden hover:scale-[1.01] hover:shadow-lg transition-transform cursor-pointer">
                 {coverUrl ? (
                     <Image
                         src={coverUrl}
