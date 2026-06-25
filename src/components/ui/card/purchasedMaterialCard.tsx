@@ -1,5 +1,6 @@
 import { Material } from "@/types/material";
 import { ArrowDownToLine } from "lucide-react";
+import Image from "next/image";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -22,9 +23,9 @@ export function PurchasedMaterialCard({ material }: PurchasedMaterialCardProps) 
 
     return (
         <div className="flex items-center justify-between gap-3 bg-white border border-borda-med rounded-2xl p-3 shadow-sm">
-            <div className="w-11 h-11 shrink-0 squircle-border bg-[#7c4dbe] overflow-hidden">
+            <div className="w-11 h-11 shrink-0 squircle-border bg-[#7c4dbe] overflow-hidden relative">
                 {coverUrl && (
-                    <img src={coverUrl} alt={material.title} className="w-full h-full object-cover" />
+                    <Image src={coverUrl} alt={material.title} fill className="object-cover" unoptimized />
                 )}
             </div>
 

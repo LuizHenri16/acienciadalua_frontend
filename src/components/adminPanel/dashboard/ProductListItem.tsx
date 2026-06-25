@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Material, MaterialType, getMaterialTypeLabel } from "@/types/material";
 import { API_URL } from "@/lib/constants/constants";
 import { adminToggleProduct } from "@/api/product";
+import Image from "next/image";
 
 interface ProductListItemProps {
   product: Material;
@@ -41,9 +42,9 @@ export function ProductListItem({ product, onToggle }: ProductListItemProps) {
   return (
     <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 mb-3 border border-gray-200 squircle-border bg-white shadow-sm hover:shadow-md transition-shadow ${!product.isActive ? 'opacity-60' : ''}`}>
       <div className="flex items-center gap-4 min-w-0 flex-1">
-        <div className="w-12 h-12 rounded-lg bg-[#8b5cf6] overflow-hidden shrink-0">
+        <div className="w-12 h-12 rounded-lg bg-[#8b5cf6] overflow-hidden shrink-0 relative">
           {coverUrl && (
-            <img src={coverUrl} alt={product.title} className="w-full h-full object-cover" />
+            <Image src={coverUrl} alt={product.title} fill className="object-cover" unoptimized />
           )}
         </div>
 
@@ -73,7 +74,7 @@ export function ProductListItem({ product, onToggle }: ProductListItemProps) {
           </span>
         </button>
 
-        <Link href={`/panel/produto/${product.id}`} className="flex items-center gap-1 border border-turquesa-dark text-turquesa-dark hover:bg-turquesa-light px-3 py-1.5 squircle-border text-xs font-bold transition-colors">
+        <Link href={`/painel/produto/${product.id}`} className="flex items-center gap-1 border border-turquesa-dark text-turquesa-dark hover:bg-turquesa-light px-3 py-1.5 squircle-border text-xs font-bold transition-colors">
           <Edit className="w-3 h-3" />
           Editar
         </Link>

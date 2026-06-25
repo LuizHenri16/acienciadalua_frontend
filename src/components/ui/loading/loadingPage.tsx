@@ -12,7 +12,7 @@ export const LoadingPage = ({ message }: LoadingPageProps) => {
 
             <div className="flex items-center gap-2">
                 {letters?.map((letter, index) => (
-                    <p key={index} className="text-turquesa-dark texxt-lg font-bold tracking-normal uppercase animate-bounce">{letter}</p>
+                    <p key={index} className="text-turquesa-dark text-sm lg:text-lg font-bold tracking-normal uppercase animate-bounce">{letter}</p>
                 ))}
             </div>
         </div>

@@ -2,18 +2,6 @@
 
 import { motion } from 'framer-motion';
 
-const floatVariants = (delay: number, yRange: number, duration: number) => ({
-    animate: {
-        y: [0, -yRange, 0],
-        transition: {
-            duration,
-            delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
-        },
-    },
-});
-
 export function ChemistryBackground() {
     const formulas = [
         // Bordas

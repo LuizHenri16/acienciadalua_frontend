@@ -1,4 +1,4 @@
-import { BoxIcon, EyeIcon, EyeOffIcon, XIcon } from "lucide-react";
+import { BoxIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 
 interface DashboardStatsProps {
   total: number;
