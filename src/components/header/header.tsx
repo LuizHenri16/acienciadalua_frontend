@@ -55,7 +55,7 @@ export function DashboardHeader() {
                     </h1>
                 </div>
 
-                <button onClick={handleExit} className="flex items-center gap-1 hover:gap-2 text-azul-med text-sm lg:text-base transition-all hover:text-red-900 cursor-pointer active:scale-95">
+                <button onClick={handleExit} className="flex items-center gap-1 text-azul-med text-sm transition-colors hover:opacity-90 cursor-pointer active:scale-95">
                     Sair <LogOutIcon size={14} />
                 </button>
             </div>

@@ -26,7 +26,7 @@ export default async function Home() {
             <BannerSection />
           </div>
         </div>
-        <div className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-10 mb-20 flex flex-col gap-10 md:gap-16 relative z-10">
+        <div className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-10 mb-4 flex flex-col gap-10 md:gap-16 relative z-10">
           <div id="produtos" className="flex flex-col gap-12 md:gap-20">
             <StudySection materials={studyMaterials} />
             <Divider />
