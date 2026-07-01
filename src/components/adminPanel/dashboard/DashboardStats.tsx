@@ -8,7 +8,7 @@ interface DashboardStatsProps {
 
 export function DashboardStats({ total, ativos, inativos }: DashboardStatsProps) {
   return (
-    <div className="grid grid-cols-3 gap-3 mt-5">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
       <p className="col-span-3 text-xs font-semibold text-texto-secundario uppercase tracking-wider">Visão geral</p>
 
       <div className="squircle-border border border-borda-med p-3 gap-2 flex flex-col">

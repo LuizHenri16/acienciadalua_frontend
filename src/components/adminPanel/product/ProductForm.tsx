@@ -109,7 +109,7 @@ export function ProductForm({ product }: ProductFormProps) {
 
   const previewCard = (
     <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-      <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-gradient-to-r from-white to-gray-50/60">
+      <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
         <div className="w-7 h-7 rounded-lg bg-rosa-rose/20 flex items-center justify-center shrink-0">
           <Eye className="w-3.5 h-3.5 text-rosa-rose" />
         </div>
@@ -118,7 +118,7 @@ export function ProductForm({ product }: ProductFormProps) {
 
       <div className="p-4">
         {/* Capa */}
-        <div className="w-full aspect-[3/4] squircle-border overflow-hidden bg-gradient-to-br from-turquesa-light to-menta flex items-center justify-center mb-4 border border-borda relative">
+        <div className="w-full aspect-[3/4] squircle-border overflow-hidden bg-linear-to-br from-turquesa-light to-menta flex items-center justify-center mb-4 border border-borda relative">
           {coverPreviewUrl ? (
             <Image src={coverPreviewUrl} alt="Capa" fill className="object-cover" unoptimized />
           ) : (
@@ -224,7 +224,7 @@ export function ProductForm({ product }: ProductFormProps) {
     <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-5 lg:items-start flex flex-col gap-4">
       <div className="flex flex-col gap-4">
         <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-gradient-to-r from-white to-gray-50/60">
+          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
             <div className="w-7 h-7 rounded-lg bg-turquesa-light flex items-center justify-center shrink-0">
               <FileText className="w-3.5 h-3.5 text-turquesa-dark" />
             </div>
@@ -235,7 +235,7 @@ export function ProductForm({ product }: ProductFormProps) {
           </div>
         </div>
         <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-gradient-to-r from-white to-gray-50/60">
+          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
             <div className="w-7 h-7 rounded-lg bg-ouro-light flex items-center justify-center shrink-0">
               <svg className="w-3.5 h-3.5 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             </div>
@@ -251,7 +251,7 @@ export function ProductForm({ product }: ProductFormProps) {
           </div>
         </div>
         <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-gradient-to-r from-white to-gray-50/60">
+          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
             <div className="w-7 h-7 rounded-lg bg-marinho/10 flex items-center justify-center shrink-0">
               <svg className="w-3.5 h-3.5 text-marinho" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
             </div>
@@ -277,7 +277,7 @@ export function ProductForm({ product }: ProductFormProps) {
         </div>
 
         <div className="lg:hidden bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-gradient-to-r from-white to-gray-50/60">
+          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
             <div className="w-7 h-7 rounded-lg bg-turquesa-light flex items-center justify-center shrink-0">
               <Send className="w-3.5 h-3.5 text-turquesa-dark" />
             </div>
@@ -291,7 +291,7 @@ export function ProductForm({ product }: ProductFormProps) {
       <div className="hidden lg:flex flex-col gap-4">
         {previewCard}
         <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-gradient-to-r from-white to-gray-50/60">
+          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
             <div className="w-7 h-7 rounded-lg bg-turquesa-light flex items-center justify-center shrink-0">
               <Send className="w-3.5 h-3.5 text-turquesa-dark" />
             </div>

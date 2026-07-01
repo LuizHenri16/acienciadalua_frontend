@@ -19,13 +19,11 @@ export default function Panel() {
     useEffect(() => {
         const token = document.cookie.match(/(?:^|;\s*)admin_token=([^;]*)/);
 
-        setTimeout(() => {
-            if (!token) {
-                router.push("/painel/signin");
-                return;
-            }
-            setIsAuthenticated(true);
-        }, 300);
+        if (!token) {
+            router.push("/painel/signin");
+            return;
+        }
+        setIsAuthenticated(true);
 
         adminGetProducts()
             .then(setProducts)

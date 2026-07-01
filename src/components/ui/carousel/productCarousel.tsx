@@ -12,13 +12,11 @@ interface ProductCarouselProps {
 
 export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [prevMaterials, setPrevMaterials] = useState(materials);
     const scrollRef = useRef<HTMLDivElement>(null);
 
-    if (materials !== prevMaterials) {
-        setPrevMaterials(materials);
+    useEffect(() => {
         setActiveIndex(0);
-    }
+    }, [materials]);
 
     const handleScroll = () => {
         if (!scrollRef.current) return;
