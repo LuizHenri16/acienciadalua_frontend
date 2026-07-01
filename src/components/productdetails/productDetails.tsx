@@ -1,7 +1,7 @@
 'use client';
 
 import { Material, MaterialType, getMaterialTypeLabel } from "@/types/material";
-import { ShoppingCart, Shield, Zap } from "lucide-react";
+import { CreditCard, Shield, Zap } from "lucide-react";
 import { useState } from "react";
 import { createPreferences } from "@/api/payment";
 import Image from "next/image";
@@ -74,7 +74,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             disabled={loading}
                             className="w-full squircle-border flex items-center justify-center gap-3 bg-marinho hover:opacity-80 text-white font-bold py-5 text-base transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                         >
-                            <ShoppingCart size={22} strokeWidth={2.5} />
+                            <CreditCard size={22} strokeWidth={2.5} />
                             {loading ? 'Aguarde...' : 'Comprar agora'}
                         </button>
 

@@ -14,13 +14,34 @@ const unkempt = Unkempt({
   weight: "400"
 });
 
+const siteUrl = "https://acienciadalua.com.br";
+
 export const metadata: Metadata = {
-  title: "A Ciência da Lua - Materiais de Estudos",
-  description: "E-commerce de materiais de estudos para o Ensino Fundamental e Médio para alunos e professores. ",
-  keywords: ["ciências", "ensino fundamental", "ensino médio", "materiais de estudos", "vestibulares", "enem", "estudos"],
+  title: {
+    default: "A Ciência da Lua - Materiais de Estudos",
+    template: "%s | A Ciência da Lua",
+  },
+  description: "Materiais didáticos de Ciências para Ensino Fundamental e Médio. Mapas conceituais, resumos e exercícios para alunos e professores. Aprovação garantida!",
+  keywords: ["ciências", "ensino fundamental", "ensino médio", "materiais de estudos", "vestibulares", "enem", "estudos", "química", "professora luana"],
   icons: {
     icon: '/acienciadalua-logo-var1.svg',
   },
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "A Ciência da Lua - Materiais de Estudos",
+    description: "Materiais didáticos de Ciências para Ensino Fundamental e Médio. Mapas conceituais, resumos e exercícios.",
+    url: siteUrl,
+    siteName: "A Ciência da Lua",
+    locale: "pt_BR",
+    type: "website",
+    images: [{ url: "/acienciadalua-logo-var1.svg", width: 256, height: 256 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "A Ciência da Lua - Materiais de Estudos",
+    description: "Materiais didáticos de Ciências para Ensino Fundamental e Médio.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

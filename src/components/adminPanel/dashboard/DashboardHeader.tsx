@@ -17,7 +17,7 @@ export function DashboardHeader() {
   return (
     <header className="w-full border-b border-[#E5E5E3] bg-[#FAFAFA]/80 backdrop-blur-md sticky px-6 py-4">
       <div className="max-w-5xl mx-auto flex justify-between items-center px-2 lg:px-8">
-        <Link href="/panel" className="flex flex-row items-center cursor-pointer">
+        <Link href="/painel" className="flex flex-row items-center cursor-pointer">
           <Image src="/acienciadalua-logo-var1.svg" alt="Logo" width={32} height={32} />
           <h1 className="font-unkempt text-2xl text-ouro">
             A Ciência da <span className="text-2xl text-turquesa-dark">Lua</span>

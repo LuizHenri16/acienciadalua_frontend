@@ -22,7 +22,6 @@ export function ProductCard({ material }: CardProps) {
         ? `${API_URL}/uploads/${material.coverUrl}`
         : null;
 
-    const headerBg = isTeacher ? "#8c3a52" : "#2C9E95";
     const headerGradient = isTeacher
         ? "from-[#D4728A] via-[#b85c75] to-[#8c3a52]"
         : "from-[#2C9E95] via-[#249188] to-[#1a6e67]";
@@ -31,7 +30,7 @@ export function ProductCard({ material }: CardProps) {
         <div
             className="bg-white squircle-border overflow-visible flex flex-col cursor-pointer shadow-md transition-shadow duration-300 w-full"
         >
-            <div className={`relative w-full rounded-t-4xl bg-linear-to-br ${headerGradient} overflow-hidden h-50 md:h-60 lg:h-68`}>
+            <div className={`relative w-full rounded-t-4xl bg-linear-to-br ${headerGradient} overflow-hidden h-[12.5rem] md:h-[15rem] lg:h-[17rem]`}>
                 <span className={`squircle-border backdrop-blur-sm absolute border border-white/40 top-4 left-4 z-10 text-white text-[0.6rem] font-black uppercase tracking-widest px-3 py-1.5 rounded-full ${isTeacher ? 'bg-rosa-rose/50' : 'bg-turquesa-light/60'}`}>
                     {label}
                 </span>

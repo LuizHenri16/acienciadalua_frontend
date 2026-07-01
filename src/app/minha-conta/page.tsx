@@ -22,23 +22,23 @@ export default function Conta() {
     useEffect(() => {
         const token = document.cookie.match(/(?:^|;\s*)customer_token=([^;]*)/);
 
-        setTimeout(async () => {
-            if (!token) {
-                router.push("/minha-conta/signin");
-                return;
-            }
+        if (!token) {
+            router.push("/minha-conta/signin");
+            return;
+        }
 
-            try {
-                const [me, purchases] = await Promise.all([getMe(), getMyPurchases()]);
+        Promise.all([getMe(), getMyPurchases()])
+            .then(([me, purchases]) => {
                 setUserName(me.name ?? me.email);
                 setMaterials([...purchases.student, ...purchases.teacher]);
                 setIsAuthenticated(true);
-            } catch {
+            })
+            .catch(() => {
                 router.push("/minha-conta/signin");
-            } finally {
+            })
+            .finally(() => {
                 setMaterialsLoading(false);
-            }
-        }, 300);
+            });
     }, [router]);
 
     if (!isAuthenticated) {

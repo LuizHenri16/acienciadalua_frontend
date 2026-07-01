@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "../ui/form/input";
 import { Button } from "../ui/button/button";
 import { customerRequestMagicLink } from "@/api/customer";
+import { Mail } from "lucide-react";
 
 export function SignInForm() {
     const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ export function SignInForm() {
         return (
             <div className="flex flex-col items-center justify-center gap-3 w-full text-center">
                 <div className="w-12 h-12 rounded-full bg-turquesa/20 border border-turquesa/30 flex items-center justify-center mx-auto">
-                    <span className="text-2xl">📬</span>
+                    <Mail className="w-6 h-6 text-turquesa-light" />
                 </div>
                 <p className="text-white font-semibold">Link enviado!</p>
                 <p className="text-turquesa-light text-sm md:text-base lg:text-lg opacity-80 leading-relaxed">
