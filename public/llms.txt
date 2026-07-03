@@ -1,0 +1,29 @@
+# A Ciência da Lua
+
+> Plataforma de materiais didáticos de Ciências para Ensino Fundamental e Médio, criada pela Professora Lua.
+
+A Ciência da Lua é uma plataforma educacional brasileira que oferece materiais didáticos de alta qualidade
+para estudantes e professores de Ciências (Química, Biologia e Física) do Ensino Fundamental e Médio.
+
+## Sobre a Professora Lua
+
+- Nome: Professora Lua
+- Formação: Bacharel em Química do Petróleo e Licenciada em Química (UFRN)
+- Pós-graduação: Mestranda em Química
+- Experiência: +9 anos em aulas particulares e laboratórios escolares
+
+## Produtos
+
+- Materiais de estudo (mapas conceituais, resumos, exercícios) para alunos do Ensino Fundamental e Médio
+- Planos de aula e recursos pedagógicos para professores
+- Conteúdo focado em ENEM e vestibulares
+
+## Contato e Links
+
+- Site: https://acienciadalua.com.br
+- Sitemap: https://acienciadalua.com.br/sitemap.xml
+
+## Uso por Modelos de Linguagem (LLMs)
+
+Este conteúdo é disponibilizado para fins informativos e de indexação.
+Não reproduza materiais pagos sem autorização. Para dúvidas de licenciamento, entre em contato pelo site.
