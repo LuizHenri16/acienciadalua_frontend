@@ -36,14 +36,14 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
     return (
         <main className="flex-1 flex flex-col lg:flex-row animate-in fade-in duration-700">
-            <div className="relative lg:w-1/2 xl:w-[35%] h-82 sm:h-96 lg:h-[650px] bg-[#1a0a2e] rounded-r-lg shrink-0 overflow-hidden hover:scale-[1.01] hover:shadow-lg transition-transform cursor-pointer">
+            <div className="relative lg:w-1/2 xl:w-[35%] h-82 sm:h-96 lg:h-[650px] bg-marinho rounded-r-lg shrink-0 overflow-hidden hover:scale-[1.01] hover:shadow-lg transition-transform cursor-pointer">
                 {coverUrl ? (
                     <Image
                         src={coverUrl}
                         alt={product.title}
                         fill
                         className="object-cover"
-                        unoptimized
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center">
@@ -58,13 +58,13 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         <p className={`inline-block px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-widest squircle-border ${isTeacher ? "bg-rosa-rose text-white" : "bg-turquesa-light text-petroleo"}`}>
                             {label}
                         </p>
-                        <h1 className="text-3xl xl:text-4xl font-bold text-[#171717] leading-tight">
+                        <h1 className="text-3xl xl:text-4xl font-bold text-texto-principal leading-tight">
                             {product.title}
                         </h1>
                     </div>
                     <div className="space-y-4">
                         <div>
-                            <span className="text-xs text-gray-400 uppercase tracking-widest">Valor</span>
+                            <span className="text-xs text-texto-terciario uppercase tracking-widest">Valor</span>
                             <p className="text-5xl font-bold mt-1 bg-linear-to-r from-turquesa-dark to-turquesa bg-clip-text text-transparent">
                                 {Number(product.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                             </p>
@@ -79,21 +79,21 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                         </button>
 
                         {error && (
-                            <p className="text-red-600 text-xs text-center">{error}</p>
+                            <p className="text-coral-dark text-xs text-center">{error}</p>
                         )}
                         <div className="flex items-center justify-center gap-6 pt-1">
                             <div className="flex items-center gap-1.5 text-texto-terciario hover:text-turquesa-dark cursor-pointer transition-colors text-[12px]">
                                 <Shield size={13} className="opacity-60" />
                                 <span>Pagamento seguro</span>
                             </div>
-                            <div className="h-3 w-px bg-gray-200" />
+                            <div className="h-3 w-px bg-borda" />
                             <div className="flex items-center gap-1.5 text-texto-terciario hover:text-ouro cursor-pointer transition-colors text-[12px]">
                                 <Zap size={13} className="opacity-60" />
                                 <span>Acesso imediato</span>
                             </div>
                         </div>
                     </div>
-                    <div className="h-px bg-gray-100 w-full" />
+                    <div className="h-px bg-borda w-full" />
                     <div className="space-y-3">
                         <h2 className="text-[0.7rem] font-semibold text-texto-terciario uppercase tracking-[0.15em]">
                             Sobre este material

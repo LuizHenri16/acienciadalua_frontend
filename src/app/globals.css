@@ -1,19 +1,8 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-
-  --yellow-custom: #EDBA83;
-  --green-light-custom: #68B999;
-  --green-dark-custom: #3D6B5C;
-  --custom-light-gray: #E5E5E3;
-
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #ffffff;
+  --color-foreground: #171717;
   --font-sora: var(--font-sora);
   --font-unkempt: var(--font-unkempt);
 
@@ -41,31 +30,24 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-background);
+  color: var(--color-foreground);
   font-family: var(--font-sora);
   scroll-behavior: smooth;
 }
 
-.text-yellow-light-custom {
-  color: var(--yellow-custom);
-}
-
-.text-green-light-custom {
-  color: var(--green-light-custom);
-}
-
-.text-green-dark-custom {
-  color: var(--green-dark-custom);
-}
-
-.border-custom-light-gray {
-  border-bottom: .05rem solid var(--custom-light-gray);
-}
-
-
 .squircle-border {
   border-radius: 2rem;
+  corner-shape: squircle;
+}
+
+.squircle-border-t {
+  border-radius: 2rem 2rem 0 0;
+  corner-shape: squircle;
+}
+
+.squircle-border-sm {
+  border-radius: 1rem;
   corner-shape: squircle;
 }
 

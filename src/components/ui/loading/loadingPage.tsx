@@ -7,7 +7,7 @@ interface LoadingPageProps {
 export const LoadingPage = ({ message }: LoadingPageProps) => {
     const letters: string[] | undefined = message ? message.split("") : undefined;
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-[#FDFCFB] gap-8">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-off-white gap-8" role="status" aria-live="polite">
             <HashLoader color="#2C9E95" size={60} />
 
             <div className="flex items-center gap-2">

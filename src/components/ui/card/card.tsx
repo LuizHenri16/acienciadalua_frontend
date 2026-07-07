@@ -30,7 +30,7 @@ export function ProductCard({ material }: CardProps) {
         <div
             className="bg-white squircle-border overflow-visible flex flex-col cursor-pointer shadow-md transition-shadow duration-300 w-full"
         >
-            <div className={`relative w-full rounded-t-4xl bg-linear-to-br ${headerGradient} overflow-hidden h-[12.5rem] md:h-[15rem] lg:h-[17rem]`}>
+            <div className={`relative w-full squircle-border-t bg-linear-to-br ${headerGradient} overflow-hidden h-[12.5rem] md:h-[15rem] lg:h-[17rem]`}>
                 <span className={`squircle-border backdrop-blur-sm absolute border border-white/40 top-4 left-4 z-10 text-white text-[0.6rem] font-black uppercase tracking-widest px-3 py-1.5 rounded-full ${isTeacher ? 'bg-rosa-rose/50' : 'bg-turquesa-light/60'}`}>
                     {label}
                 </span>
@@ -40,7 +40,7 @@ export function ProductCard({ material }: CardProps) {
                         alt={material.title}
                         fill
                         className="object-cover"
-                        unoptimized
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-30">

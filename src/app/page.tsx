@@ -17,7 +17,7 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="w-full min-h-screen bg-[#fafafa] flex flex-col font-sora relative">
+    <div className="w-full min-h-screen bg-off-white flex flex-col font-sora relative">
       <ChemistryBackground />
       <Header />
       <main>
@@ -44,9 +44,9 @@ export default async function Home() {
 function Divider() {
   return (
     <div className="flex items-center gap-4 px-4 md:px-0">
-      <hr className="flex-1 border-[#E5E5E3]" />
-      <span className="text-[10px] md:text-xs text-[#5A5A58] font-black uppercase tracking-[0.3em]">ou</span>
-      <hr className="flex-1 border-[#E5E5E3]" />
+      <hr className="flex-1 border-borda" />
+      <span className="text-[10px] md:text-xs text-texto-secundario font-black uppercase tracking-[0.3em]">ou</span>
+      <hr className="flex-1 border-borda" />
     </div>
   )
 }

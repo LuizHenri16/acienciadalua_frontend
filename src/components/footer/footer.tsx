@@ -22,7 +22,7 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row gap-10 md:gap-20">
                     <div className="flex flex-col gap-3 max-w-xs">
                         <div className="flex items-center gap-2">
-                            <Image src="/acienciadalua-logo-var1.svg" alt="Logo" width={32} height={32} />
+                            <Image src="/acienciadalua-logo-var1.svg" alt="Logotipo A Ciência da Lua" width={32} height={32} />
                             <span className="font-unkempt text-xl text-ouro">
                                 A Ciência da{" "}
                                 <span className="text-turquesa-dark">Lua</span>

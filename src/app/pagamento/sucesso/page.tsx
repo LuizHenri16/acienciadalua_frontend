@@ -22,7 +22,7 @@ export default function PagamentoSucesso() {
                     Acessar minha conta
                 </Link>
 
-                <Link href="/" className="text-xs md:text-sm lg:text-md text-gray-400 hover:text-gray-300 transition-colors">
+                <Link href="/" className="text-xs md:text-sm lg:text-md text-texto-terciario hover:text-white/60 transition-colors">
                     Voltar à vitrine
                 </Link>
             </div>

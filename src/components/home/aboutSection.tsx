@@ -44,13 +44,13 @@ export function AboutSection() {
                             Percebi que a maior dificuldade dos alunos não é a matéria em si, mas a forma como ela é apresentada.
                         </p>
                         <p className="text-sm text-texto-secundario leading-relaxed">
-                            Sou a Prof<sup>a</sup> Lua, Bacharel em Química do Petróleo e Licenciada em Química pela UFRN, atualmente Mestranda em Química. Com quase uma década de experiência em aulas particulares e atuação em laboratórios escolares do Ensino Fundamental ao Médio, percebi que quando a matéria é apresentada do jeito certo, tudo muda. Por isso desenvolvi materiais baseados em mapas conceituais — para quem quer aprender de verdade, ou ensinar com mais impacto.
+                            Sou a Prof<sup>a</sup> Lua, Bacharel em Química do Petróleo e Licenciada em Química pela UFRN, atualmente Mestranda em Química. Com quase uma década de experiência em aulas particulares e atuação em laboratórios escolares do Ensino Fundamental ao Médio, percebi que quando a matéria é apresentada do jeito certo, tudo muda. Por isso desenvolvi materiais baseados em mapas conceituais para quem quer aprender de verdade, ou ensinar com mais impacto.
                         </p>
                         <div className="flex flex-wrap gap-3">
                             {badges.map((badge, index) => (
                                 <motion.div
                                     key={badge.title}
-                                    className="bg-purple-700/5 border border-purple-200 rounded-xl p-3 flex items-center gap-3"
+                                    className="bg-rosa-rose/10 border border-rosa-rose/20 rounded-xl p-3 flex items-center gap-3"
                                     initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}

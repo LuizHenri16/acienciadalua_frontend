@@ -16,9 +16,11 @@ export function Button({ name, loadingName, onClick, variant = 'primary', loadin
     return (
         <button
             type="button"
-            className={`w-full py-4 mt-5 cursor-pointer squircle-border shadow-md font-bold transition-colors ${variant === 'primary' ? 'bg-turquesa-dark hover:opacity-90 text-white' : 'bg-azul-med hover:opacity-90 text-[#E5E5E3]'}`}
+            className={`w-full py-4 mt-5 cursor-pointer squircle-border shadow-md font-bold transition-colors ${variant === 'primary' ? 'bg-turquesa-dark hover:opacity-90 text-white' : 'bg-azul-med hover:opacity-90 text-white/80'}`}
             onClick={onClick}
             disabled={loading}
+            aria-busy={loading}
+            aria-label={loading ? (loadingName || 'Carregando...') : name}
         >
             {loading ? <span className="w-full flex justify-center items-center gap-2 animate-pulse">{loadingName} <HashLoader size={20} color="white" /></span> : <span className="font-medium">{name}</span>}
         </button>
