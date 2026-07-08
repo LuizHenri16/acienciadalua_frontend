@@ -34,7 +34,7 @@ export function PurchasedMaterialCard({ material }: PurchasedMaterialCardProps) 
             <div className="flex items-center gap-4 flex-1 p-4">
                 <div className={`w-14 h-14 shrink-0 squircle-border overflow-hidden relative flex items-center justify-center ${thumbBg}`}>
                     {coverUrl ? (
-                        <Image src={coverUrl} alt={material.title} fill className="object-cover" unoptimized />
+                        <Image src={coverUrl} alt={material.title} fill className="object-cover" sizes="56px" />
                     ) : (
                         isTeacher ? (
                             <MonitorPlay className="w-6 h-6 text-rosa-rose" />

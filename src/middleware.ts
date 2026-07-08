@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
 
   for (const route of protectedRoutes) {
     if (pathname === route.path || pathname.startsWith(`${route.path}/`)) {
-      const skipPaths = [`${route.path}/signin`];
+      const skipPaths = [`${route.path}/signin`, `${route.path}/esqueci-senha`, `${route.path}/redefinir-senha`];
       if (skipPaths.some((sp) => pathname === sp || pathname.startsWith(sp))) {
         continue;
       }

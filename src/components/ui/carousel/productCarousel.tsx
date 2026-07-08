@@ -8,9 +8,10 @@ import { SkeletonCard } from "../card/skeletonCard";
 interface ProductCarouselProps {
     materials: Material[];
     isLoading?: boolean;
+    error?: string | null;
 }
 
-export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) {
+export function ProductCarousel({ materials, isLoading, error }: ProductCarouselProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -60,6 +61,14 @@ export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) 
         }
     }, [materials]);
 
+    if (error) {
+        return (
+            <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
+                <p className="text-sm text-texto-secundario">{error}</p>
+            </div>
+        );
+    }
+
     if (isLoading) {
         return (
             <div className="relative w-full">
@@ -100,7 +109,7 @@ export function ProductCarousel({ materials, isLoading }: ProductCarouselProps) 
                             ? "bg-turquesa-dark w-6"
                             : "bg-[#E5E5E3] w-1.5 hover:bg-[#D1D1CF]"
                             }`}
-                        aria-label={`Ver produto ${index + 1}`}
+                        aria-label={`Ir para o slide ${index + 1}`}
                     />
                 ))}
             </div>

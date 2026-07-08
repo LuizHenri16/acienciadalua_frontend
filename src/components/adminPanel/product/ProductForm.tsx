@@ -120,7 +120,7 @@ export function ProductForm({ product }: ProductFormProps) {
         {/* Capa */}
         <div className="w-full aspect-[3/4] squircle-border overflow-hidden bg-linear-to-br from-turquesa-light to-menta flex items-center justify-center mb-4 border border-borda relative">
           {coverPreviewUrl ? (
-            <Image src={coverPreviewUrl} alt="Capa" fill className="object-cover" unoptimized />
+            <Image src={coverPreviewUrl} alt={formData.title || "Preview da capa do produto"} fill className="object-cover" sizes="300px" />
           ) : (
             <ImageIcon className="w-10 h-10 text-turquesa-dark/30" />
           )}

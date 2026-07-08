@@ -120,7 +120,7 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
 
           <div className="w-[90px] squircle-border overflow-hidden border border-borda bg-linear-to-br from-turquesa-light to-menta flex items-center justify-center shrink-0 relative">
             {coverPreviewUrl ? (
-              <Image src={coverPreviewUrl} alt="Capa" fill className="object-cover" unoptimized />
+              <Image src={coverPreviewUrl} alt="Preview da capa do produto" fill className="object-cover" sizes="90px" />
             ) : (
               <ImageIcon className="w-6 h-6 text-turquesa-dark/40" />
             )}

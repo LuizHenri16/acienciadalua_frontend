@@ -7,8 +7,8 @@ export default function PagamentoErro() {
         <main className="min-h-screen flex items-center justify-center font-sora bg-marinho px-6">
             <BackgroundLights />
             <div className="flex flex-col items-center text-center gap-6 max-w-sm w-full squircle-border px-6 py-8 bg-white/5 border border-white/10 backdrop-blur-sm">
-                <div className="w-16 h-16 rounded-full bg-red-600/10 border-red-400/20 border backdrop-blur-md flex items-center justify-center">
-                    <XCircle size={42} className="text-red-500" strokeWidth={2} />
+                <div className="w-16 h-16 rounded-full bg-coral/10 border-coral/30 border backdrop-blur-md flex items-center justify-center">
+                    <XCircle size={42} className="text-coral" strokeWidth={2} />
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -22,7 +22,7 @@ export default function PagamentoErro() {
                     Tentar novamente
                 </Link>
 
-                <Link href="/" className="text-xs md:text-sm lg:text-md text-gray-400 hover:text-gray-300 transition-colors">
+                <Link href="/" className="text-xs md:text-sm lg:text-md text-texto-terciario hover:text-white/60 transition-colors">
                     Voltar à vitrine
                 </Link>
             </div>

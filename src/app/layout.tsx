@@ -63,13 +63,13 @@ const personSchema = {
     "@type": "CollegeOrUniversity",
     name: "Universidade Federal do Rio Grande do Norte (UFRN)",
   },
-  knowsAbout: ["Química", "Ciências", "Ensino Fundamental", "Ensino Médio", "Mapas Conceituais", "ENEM"],
+  knowsAbout: ["Química", "Ciências", "Ensino Fundamental", "Ensino Médio", "Mapas Conceituais", "ENEM", "Estudos"],
   url: siteUrl,
 };
 
 export const metadata: Metadata = {
   title: {
-    default: "A Ciência da Lua - Materiais Didáticos de Ciências para Ensino Fundamental e Médio",
+    default: "A Ciência da Lua - Materiais Didáticos",
     template: "%s | A Ciência da Lua",
   },
   description:
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "A Ciência da Lua - Materiais Didáticos de Ciências",
+    title: "A Ciência da Lua - Materiais Didáticos",
     description:
       "Materiais didáticos de Ciências para Ensino Fundamental e Médio. Mapas conceituais, resumos e exercícios criados pela Profa. Lua (UFRN).",
     url: siteUrl,
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "A Ciência da Lua - Materiais Didáticos de Ciências",
+    title: "A Ciência da Lua - Materiais Didáticos",
     description:
       "Materiais didáticos de Ciências para Ensino Fundamental e Médio. Mapas conceituais, resumos e exercícios.",
   },
@@ -114,6 +114,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} bg-marinho h-full antialiased scroll-smooth`} style={{ scrollPaddingTop: '64px' }}>
       <head>
+        <meta name="google-site-verification" content="YD35zo8xwFGcpXW6MNdRzOYPzlGGDpUbze6VeUahDPg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -128,10 +129,16 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col ">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-turquesa-dark focus:text-white focus:rounded-xl focus:font-bold focus:text-sm">
+          Pular para o conteúdo principal
+        </a>
         <PageTransition>
           {children}
         </PageTransition>
-      </body>
+      {/* impeccable-live-start */}
+<script src="http://localhost:8400/live.js"></script>
+{/* impeccable-live-end */}
+</body>
     </html>
   );
 }

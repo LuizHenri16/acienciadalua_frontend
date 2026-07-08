@@ -21,7 +21,16 @@ const nextConfig: NextConfig = {
   output: "standalone",
   turbopack: {
     root: "."
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.acienciadalua.com.br",
+        pathname: "/uploads/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

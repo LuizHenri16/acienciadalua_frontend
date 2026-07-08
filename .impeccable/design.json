@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-07T16:22:00.000Z",
+  "title": "Design System: A Ciência da Lua",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Turquesa Escuro", "canonical": "oklch(60% 0.12 185)", "tonalRamp": ["oklch(25% 0.12 185)", "oklch(35% 0.12 185)", "oklch(45% 0.12 185)", "oklch(55% 0.12 185)", "oklch(65% 0.12 185)", "oklch(75% 0.12 185)", "oklch(85% 0.10 185)", "oklch(95% 0.05 185)"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Off White", "canonical": "oklch(96% 0.015 80)", "tonalRamp": ["oklch(20% 0.015 80)", "oklch(35% 0.015 80)", "oklch(50% 0.015 80)", "oklch(65% 0.015 80)", "oklch(78% 0.015 80)", "oklch(86% 0.015 80)", "oklch(92% 0.015 80)", "oklch(96% 0.015 80)"] },
+      "neutral-ink": { "role": "neutral", "displayName": "Texto Principal", "canonical": "oklch(18% 0.02 260)", "tonalRamp": ["oklch(10% 0.02 260)", "oklch(18% 0.02 260)", "oklch(30% 0.02 260)", "oklch(45% 0.02 260)", "oklch(60% 0.02 260)", "oklch(75% 0.02 260)", "oklch(88% 0.01 260)", "oklch(96% 0.005 260)"] },
+      "brand-gold": { "role": "accent", "displayName": "Ouro", "canonical": "oklch(70% 0.15 85)", "tonalRamp": ["oklch(25% 0.15 85)", "oklch(38% 0.15 85)", "oklch(50% 0.15 85)", "oklch(60% 0.15 85)", "oklch(70% 0.15 85)", "oklch(80% 0.12 85)", "oklch(90% 0.08 85)", "oklch(97% 0.03 85)"] },
+      "accent-rose": { "role": "accent", "displayName": "Rosa Rose", "canonical": "oklch(62% 0.14 5)", "tonalRamp": ["oklch(22% 0.14 5)", "oklch(35% 0.14 5)", "oklch(47% 0.14 5)", "oklch(55% 0.14 5)", "oklch(62% 0.14 5)", "oklch(72% 0.12 5)", "oklch(85% 0.08 5)", "oklch(95% 0.03 5)"] },
+      "surface-dark": { "role": "neutral", "displayName": "Marinho", "canonical": "oklch(18% 0.06 270)", "tonalRamp": ["oklch(10% 0.06 270)", "oklch(18% 0.06 270)", "oklch(28% 0.06 270)", "oklch(38% 0.06 270)", "oklch(48% 0.06 270)", "oklch(58% 0.05 270)", "oklch(72% 0.04 270)", "oklch(88% 0.02 270)"] },
+      "coral-error": { "role": "error", "displayName": "Coral", "canonical": "oklch(58% 0.18 25)", "tonalRamp": ["oklch(20% 0.18 25)", "oklch(33% 0.18 25)", "oklch(45% 0.18 25)", "oklch(52% 0.18 25)", "oklch(58% 0.18 25)", "oklch(68% 0.16 25)", "oklch(82% 0.10 25)", "oklch(94% 0.04 25)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headings no banner da home. Frases curtas de alto impacto." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de seção (Para Estudar, Perguntas Frequentes)." },
+      "title": { "displayName": "Title", "purpose": "Títulos de card, nomes de produto." },
+      "body": { "displayName": "Body", "purpose": "Texto corrido, descrições. Máx 70ch." },
+      "label": { "displayName": "Label", "purpose": "Badges, tags, metadados. Sempre uppercase." },
+      "brand": { "displayName": "Brand", "purpose": "Exclusivo para o nome A Ciência da Lua no header e footer." }
+    },
+    "shadows": [
+      { "name": "card-rest", "value": "0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1)", "purpose": "Cards em repouso. Sombra suave padrão." },
+      { "name": "card-hover", "value": "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)", "purpose": "Cards ao hover. Elevação sutil." },
+      { "name": "header-blur", "value": "backdrop-blur(48px)", "purpose": "Backdrop blur do header sticky após scroll." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Easing padrão para transições de estado (hover, foco)." },
+      { "name": "ease-out", "value": "cubic-bezier(0, 0, 0.2, 1)", "purpose": "Easing para revelações de entrada (fade-up)." },
+      { "name": "duration-state", "value": "200ms", "purpose": "Duração de transições de estado (cor, opacidade, transform)." },
+      { "name": "duration-reveal", "value": "500ms", "purpose": "Duração de animações de entrada em viewport." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary CTA button. Full-width, turquesa escuro background, squircle corners.",
+      "html": "<button class=\"ds-btn-primary\">Comprar agora</button>",
+      "css": ".ds-btn-primary { display: flex; align-items: center; justify-content: center; gap: 0.75rem; width: 100%; padding: 1rem 3rem; margin-top: 1.25rem; background: #2C9E95; color: #fff; font-family: Sora, sans-serif; font-size: 1rem; font-weight: 700; border: none; border-radius: 2rem; corner-shape: squircle; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); transition: background 0.2s, opacity 0.2s, transform 0.2s; } .ds-btn-primary:hover { opacity: 0.9; } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary action button. Azul-med background, white text.",
+      "html": "<button class=\"ds-btn-secondary\">Minha conta</button>",
+      "css": ".ds-btn-secondary { display: flex; align-items: center; justify-content: center; gap: 0.75rem; width: 100%; padding: 1rem 3rem; margin-top: 1.25rem; background: #2D7D8A; color: rgba(255,255,255,0.8); font-family: Sora, sans-serif; font-size: 1rem; font-weight: 700; border: none; border-radius: 2rem; corner-shape: squircle; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); transition: background 0.2s, opacity 0.2s; } .ds-btn-secondary:hover { opacity: 0.9; } .ds-btn-secondary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-text",
+      "description": "Default text input field. Squircle corners, white background, subtle border.",
+      "html": "<div style=\"display:flex;flex-direction:column;gap:0.25rem;width:100%\"><label class=\"ds-input-label\" for=\"demo-input\">E-mail</label><input id=\"demo-input\" class=\"ds-input\" type=\"email\" placeholder=\"Digite seu e-mail\"></div>",
+      "css": ".ds-input-label { font-family: Sora, sans-serif; font-size: 0.875rem; color: #4A4A6A; } .ds-input { width: 100%; padding: 1rem; background: #fff; color: #1C1C2E; font-family: Sora, sans-serif; font-size: 0.875rem; border: 1px solid rgba(43,45,91,0.2); border-radius: 2rem; corner-shape: squircle; outline: none; transition: border-color 0.2s; box-sizing: border-box; } .ds-input:focus { border-color: #2C9E95; box-shadow: 0 0 0 2px rgba(44,158,149,0.2); } .ds-input::placeholder { color: #6868A0; }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "card-product",
+      "description": "Product vitrine card. Gradient header with category badge, white content area, price pill, CTA button.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-header ds-card-header-student\"><span class=\"ds-card-badge ds-card-badge-student\">MATERIAL DE ESTUDO</span></div><div class=\"ds-card-price\"><span class=\"ds-card-price-text\">R$ 19,90</span></div><div class=\"ds-card-body\"><p class=\"ds-card-title\">Mapa Conceitual: Ligações Químicas</p><p class=\"ds-card-desc\">Mapa completo sobre ligações iônicas, covalentes e metálicas.</p><button class=\"ds-card-cta\">Ver detalhes <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"margin-left:0.25rem\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button></div></div>",
+      "css": ".ds-card { display: flex; flex-direction: column; background: #fff; border-radius: 2rem; corner-shape: squircle; overflow: visible; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); transition: box-shadow 0.3s, transform 0.3s; width: 100%; } .ds-card:hover { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); } .ds-card-header { position: relative; width: 100%; height: 12rem; border-radius: 2rem 2rem 0 0; corner-shape: squircle; overflow: hidden; display: flex; align-items: flex-start; justify-content: flex-start; padding: 1rem; box-sizing: border-box; } .ds-card-header-student { background: linear-gradient(135deg, #2C9E95, #249188, #1a6e67); } .ds-card-header-teacher { background: linear-gradient(135deg, #D4728A, #b85c75, #8c3a52); } .ds-card-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 1rem; corner-shape: squircle; font-family: Sora, sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #fff; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.4); } .ds-card-badge-student { background: rgba(182,235,229,0.6); } .ds-card-badge-teacher { background: rgba(212,114,138,0.5); } .ds-card-price { position: relative; margin-top: 0; display: flex; } .ds-card-price-text { display: inline-block; background: #2C9E95; color: #fff; font-family: Sora, sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; padding: 0.625rem 2rem; border-radius: 0 9999px 9999px 0; } .ds-card-body { display: flex; flex-direction: column; gap: 0.75rem; padding: 1rem 1.25rem 1.25rem; flex: 1; } .ds-card-title { font-family: Sora, sans-serif; font-size: 1rem; font-weight: 700; color: #1C1C2E; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } .ds-card-desc { font-family: Sora, sans-serif; font-size: 0.75rem; color: #6868A0; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } .ds-card-cta { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.875rem; margin-top: auto; background: #2C9E95; color: #fff; font-family: Sora, sans-serif; font-weight: 700; font-size: 0.875rem; border: none; border-radius: 2rem; corner-shape: squircle; cursor: pointer; transition: opacity 0.3s, gap 0.3s; } .ds-card-cta:hover { opacity: 0.9; } .ds-card-cta:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Category Badge",
+      "kind": "chip",
+      "refersTo": "badge-chip",
+      "description": "Inline category badge. Used on product detail page and banners. Squircle with subtle border.",
+      "html": "<span class=\"ds-badge ds-badge-student\">MATERIAL DE ESTUDO</span>",
+      "css": ".ds-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 2rem; corner-shape: squircle; font-family: Sora, sans-serif; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; } .ds-badge-student { background: #B6EBE5; color: #1F5C5C; } .ds-badge-teacher { background: #D4728A; color: #fff; } .ds-badge-banner { background: rgba(232,82,74,0.1); color: #D4728A; border: 1px solid rgba(212,114,138,0.3); animation: pulse 2s infinite; } @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }"
+    },
+    {
+      "name": "FAQ Accordion Item",
+      "kind": "custom",
+      "refersTo": "faq-card",
+      "description": "FAQ accordion item. Clickable question with expand animation.",
+      "html": "<div class=\"ds-faq\"><button class=\"ds-faq-trigger\" onclick=\"this.parentElement.classList.toggle('ds-faq--open')\"><span class=\"ds-faq-question\">Como acesso meu material após a compra?</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" class=\"ds-faq-icon\"><path d=\"m6 9 6 6 6-6\"/></svg></button><div class=\"ds-faq-content\"><p class=\"ds-faq-answer\">Após a confirmação do pagamento, você recebe um e-mail com o link para download. Também pode acessar seus materiais na área \"Minha Conta\" do site.</p></div></div>",
+      "css": ".ds-faq { display: flex; flex-direction: column; background: #fff; border-radius: 1rem; corner-shape: squircle; overflow: hidden; border: 1px solid rgba(43,45,91,0.12); } .ds-faq-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1rem 1.25rem; background: #fff; border: none; cursor: pointer; font-family: Sora, sans-serif; font-size: 0.875rem; font-weight: 600; color: #1C1C2E; text-align: left; transition: background 0.2s; } .ds-faq-trigger:hover { background: #F7F5F0; } .ds-faq-icon { transition: transform 0.3s; color: #2C9E95; flex-shrink: 0; } .ds-faq--open .ds-faq-icon { transform: rotate(180deg); } .ds-faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1); padding: 0 1.25rem; box-sizing: border-box; } .ds-faq--open .ds-faq-content { max-height: 200px; padding: 0 1.25rem 1rem; } .ds-faq-answer { font-family: Sora, sans-serif; font-size: 0.8rem; color: #4A4A6A; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Hero Banner",
+      "kind": "custom",
+      "refersTo": "hero-banner",
+      "description": "Hero section on dark background. Large display heading, subtitle, CTA button.",
+      "html": "<div class=\"ds-hero\"><div class=\"ds-hero-badge\"><div class=\"ds-hero-badge-dot\"></div>MATERIAIS EXCLUSIVOS</div><h1 class=\"ds-hero-heading\">Aprenda com <span class=\"ds-hero-span-teal\">método</span> e <span class=\"ds-hero-span-rose\">intenção</span></h1><p class=\"ds-hero-subtitle\">Materiais de estudo exclusivos para você aprender de um jeito leve e eficaz.</p><div class=\"ds-hero-actions\"><button class=\"ds-hero-cta\">Ver materiais <svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"margin-left:0.25rem\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button><button class=\"ds-hero-link\">Como funciona <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"margin-left:0.25rem\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button></div></div>",
+      "css": ".ds-hero { display: flex; flex-direction: column; justify-content: center; gap: 2rem; padding: 2.5rem 0; } .ds-hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content; background: rgba(212,114,138,0.1); border: 1px solid rgba(212,114,138,0.3); border-radius: 1rem; corner-shape: squircle; padding: 0.25rem 0.75rem; box-shadow: 0 1px 3px rgba(212,114,138,0.2); font-family: Sora, sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #D4728A; font-weight: 600; } .ds-hero-badge-dot { width: 0.4rem; height: 0.4rem; border-radius: 9999px; background: #D4728A; } .ds-hero-heading { font-family: Sora, sans-serif; font-size: clamp(2.25rem, 6vw, 4rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; color: #fff; max-width: 32rem; text-wrap: balance; } .ds-hero-span-teal { color: #6DD5CA; } .ds-hero-span-rose { color: #D4728A; } .ds-hero-subtitle { font-family: Sora, sans-serif; font-size: 0.875rem; color: #6868A0; line-height: 1.6; letter-spacing: 0.02em; max-width: 28rem; } .ds-hero-actions { display: flex; align-items: center; gap: 1rem; } .ds-hero-cta { display: inline-flex; align-items: center; gap: 0.25rem; background: #2C9E95; color: #fff; font-family: Sora, sans-serif; font-size: 0.875rem; font-weight: 700; padding: 0.75rem 1.5rem; border: none; border-radius: 2rem; corner-shape: squircle; cursor: pointer; transition: opacity 0.2s, box-shadow 0.2s; } .ds-hero-cta:hover { opacity: 0.9; box-shadow: 0 2px 8px rgba(109,213,202,0.3); } .ds-hero-link { display: inline-flex; align-items: center; gap: 0.25rem; background: none; border: none; color: #6868A0; font-family: Sora, sans-serif; font-size: 0.875rem; cursor: pointer; transition: color 0.2s, gap 0.2s; } .ds-hero-link:hover { color: #6DD5CA; gap: 0.5rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Mapa Conceitual",
+    "overview": "Um sistema visual que conecta ideias com clareza, como um mapa conceitual bem desenhado. A paleta escura e profunda (marinho) funciona como a lousa de um laboratório à noite; os acentos em turquesa, rosa-rose e ouro são os marcadores que destacam o que importa. Cada elemento tem seu lugar, cada cor carrega significado, e a hierarquia visual guia o olhar sem esforço — exatamente como um bom material didático. Este sistema rejeita explicitamente o visual genérico de marketplaces de infoprodutos (Hotmart, Kiwify) e o formalismo de sites institucionais. A personalidade é de uma professora que explica com clareza e acolhe quem quer aprender — científica no rigor, não na formalidade.",
+    "keyCharacteristics": [
+      "Atmosfera lunar e científica — fundo marinho como céu noturno, cores que brilham contra o escuro",
+      "Curvas generosas e consistentes (squircle de 1–2rem) que amaciam a precisão científica",
+      "Tipografia limpa (Sora) com toque autoral (Unkempt no nome da marca)",
+      "Movimento suave e intencional — revelações em fade-up, transições de estado sem exagero",
+      "Cards como vitrine de produtos, cada um com identidade de categoria (teal para estudante, rosa para professor)"
+    ],
+    "rules": [
+      { "name": "A Regra do Realce", "body": "Acentos turquesa, rosa e ouro ocupam ≤15% de qualquer tela. Sua raridade é o que os faz destacar.", "section": "colors" },
+      { "name": "A Regra da Lousa", "body": "Fundo marinho não é \"dark mode\" — é intencional. Conteúdo sobre marinho usa branco e turquesa claro; conteúdo sobre off-white usa texto principal escuro.", "section": "colors" },
+      { "name": "A Regra da Assinatura", "body": "Unkempt é o equivalente tipográfico da caligrafia da Profa. Lua. Usada apenas no nome da marca. Nunca em headings funcionais, corpo de texto ou botões.", "section": "typography" },
+      { "name": "A Regra Plana-por-Padrão", "body": "Superfícies são planas em repouso. Sombras aparecem apenas como resposta a estado (hover, foco). Nenhum elemento tem sombra decorativa em repouso.", "section": "elevation" }
+    ],
+    "dos": [
+      "Usar turquesa escuro como cor de ação principal (botões, links, CTAs).",
+      "Usar marinho como fundo de seções de destaque (hero, footer).",
+      "Limitar Unkempt ao nome da marca — nunca em texto funcional.",
+      "Preferir superfícies planas com sombras sutis de hover sobre bordas decorativas.",
+      "Usar squircle (2rem) consistentemente em cards, botões e inputs.",
+      "Usar gradientes diagonais nos cabeçalhos de cards para diferenciar categorias."
+    ],
+    "donts": [
+      "Usar bordas laterais coloridas como decoração (side-stripe borders).",
+      "Usar gradient text (background-clip: text com gradiente) — exceção no preço do produto detalhe.",
+      "Parecer com Hotmart, Kiwify ou qualquer marketplace genérico de infoprodutos.",
+      "Parecer um site institucional sério, formal ou cinzento.",
+      "Usar sombras decorativas em elementos que não são interativos.",
+      "Usar Unkempt em placeholders, labels, descrições ou botões.",
+      "Animar propriedades de layout (height, width, position). Prefira transform e opacity."
+    ]
+  }
+}

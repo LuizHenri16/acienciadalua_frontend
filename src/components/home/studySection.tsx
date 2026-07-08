@@ -7,9 +7,10 @@ import { motion } from "framer-motion";
 
 interface StudySectionProps {
   materials: Material[];
+  error?: string | null;
 }
 
-export function StudySection({ materials }: StudySectionProps) {
+export function StudySection({ materials, error }: StudySectionProps) {
   return (
     <motion.section
       id="produtos"
@@ -25,7 +26,7 @@ export function StudySection({ materials }: StudySectionProps) {
           Para <span className="text-turquesa-dark">Estudar</span>
         </h2>
       </div>
-      <ProductCarousel materials={materials} isLoading={false} />
+      <ProductCarousel materials={materials} isLoading={false} error={error} />
     </motion.section>
   );
 }

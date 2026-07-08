@@ -15,10 +15,10 @@ export function DashboardHeader() {
   }
 
   return (
-    <header className="w-full border-b border-[#E5E5E3] bg-[#FAFAFA]/80 backdrop-blur-md sticky px-6 py-4">
-      <div className="max-w-5xl mx-auto flex justify-between items-center px-2 lg:px-8">
+    <header className="w-full border-b border-borda bg-off-white/80 backdrop-blur-md sticky px-6 py-4">
+      <div className="max-w-5xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
         <Link href="/painel" className="flex flex-row items-center cursor-pointer">
-          <Image src="/acienciadalua-logo-var1.svg" alt="Logo" width={32} height={32} />
+          <Image src="/acienciadalua-logo-var1.svg" alt="Logotipo A Ciência da Lua" width={32} height={32} />
           <h1 className="font-unkempt text-2xl text-ouro">
             A Ciência da <span className="text-2xl text-turquesa-dark">Lua</span>
           </h1>
