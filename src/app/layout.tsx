@@ -129,10 +129,16 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col ">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-turquesa-dark focus:text-white focus:rounded-xl focus:font-bold focus:text-sm">
+          Pular para o conteúdo principal
+        </a>
         <PageTransition>
           {children}
         </PageTransition>
-      </body>
+      {/* impeccable-live-start */}
+<script src="http://localhost:8400/live.js"></script>
+{/* impeccable-live-end */}
+</body>
     </html>
   );
 }

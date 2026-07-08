@@ -14,7 +14,7 @@ export function AboutSection() {
 
     return (
         <motion.article
-            id="como-funciona"
+            id="sobre"
             className="squircle-border overflow-hidden border-2 border-borda"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

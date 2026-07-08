@@ -74,7 +74,7 @@ export function BannerSection() {
                     Ver materiais
                     <ArrowRight size={15} />
                 </button>
-                <button onClick={() => scrollTo("como-funciona")} className=" inline-flex items-center gap-1 text-texto-terciario text-sm hover:text-turquesa hover:gap-2 transition-all cursor-pointer">
+                <button onClick={() => scrollTo("faq")} className=" inline-flex items-center gap-1 text-texto-terciario text-sm hover:text-turquesa hover:gap-2 transition-all cursor-pointer">
                     Como funciona
                     <ArrowRight size={14} />
                 </button>

@@ -5,8 +5,8 @@ const sections = [
     { label: "Início", href: "/#banner" },
     { label: "Para Estudar", href: "/#produtos" },
     { label: "Para Dar Aula", href: "/#produtos" },
-    { label: "Sobre", href: "/#como-funciona" },
-    { label: "FAQ", href: "/#como-funciona" },
+    { label: "Sobre", href: "/#sobre" },
+    { label: "FAQ", href: "/#faq" },
 ];
 
 const links = [
