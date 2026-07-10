@@ -36,7 +36,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
     return (
         <main className="flex-1 flex flex-col lg:flex-row animate-in fade-in duration-700">
-            <div className="relative lg:w-1/2 xl:w-[35%] h-82 sm:h-96 lg:h-[650px] bg-marinho rounded-r-lg shrink-0 overflow-hidden hover:scale-[1.01] hover:shadow-lg transition-transform cursor-pointer">
+            <div className="relative lg:w-1/2 xl:w-[35%] h-82 sm:h-96 lg:h-[650px] bg-marinho rounded-r-[2rem] shrink-0 overflow-hidden hover:scale-[1.01] hover:shadow-lg transition-transform">
                 {coverUrl ? (
                     <Image
                         src={coverUrl}
@@ -64,30 +64,38 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     </div>
                     <div className="space-y-4">
                         <div>
-                            <span className="text-xs text-texto-terciario uppercase tracking-widest">Valor</span>
-                            <p className="text-5xl font-bold mt-1 bg-linear-to-r from-turquesa-dark to-turquesa bg-clip-text text-transparent">
+                            <span className="text-xs text-texto-terciario uppercase tracking-widest">Preço</span>
+                            <p className="text-5xl font-bold mt-1 text-turquesa-dark">
                                 {Number(product.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                             </p>
                         </div>
                         <button
                             onClick={handleBuy}
                             disabled={loading}
-                            className="w-full squircle-border flex items-center justify-center gap-3 bg-marinho hover:opacity-80 text-white font-bold py-5 text-base transition-all shadow-lg shadow-[#68B999]/20 cursor-pointer active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full squircle-border flex items-center justify-center gap-3 bg-turquesa-dark hover:opacity-90 text-white font-bold py-5 text-base transition-all shadow-md cursor-pointer active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             <CreditCard size={22} strokeWidth={2.5} />
                             {loading ? 'Aguarde...' : 'Comprar agora'}
                         </button>
 
                         {error && (
-                            <p className="text-coral-dark text-xs text-center">{error}</p>
+                            <div className="flex items-center gap-2 bg-coral-light/30 text-coral-dark text-sm squircle-border-sm px-4 py-3">
+                                <span className="text-lg shrink-0">!</span>
+                                <div className="flex flex-col gap-1">
+                                    <span>{error}</span>
+                                    <button onClick={() => setError('')} className="underline text-left text-xs opacity-70 hover:opacity-100">
+                                        Tentar novamente
+                                    </button>
+                                </div>
+                            </div>
                         )}
                         <div className="flex items-center justify-center gap-6 pt-1">
-                            <div className="flex items-center gap-1.5 text-texto-terciario hover:text-turquesa-dark cursor-pointer transition-colors text-[12px]">
+                            <div className="flex items-center gap-1.5 text-texto-terciario text-[12px]">
                                 <Shield size={13} className="opacity-60" />
                                 <span>Pagamento seguro</span>
                             </div>
                             <div className="h-3 w-px bg-borda" />
-                            <div className="flex items-center gap-1.5 text-texto-terciario hover:text-ouro cursor-pointer transition-colors text-[12px]">
+                            <div className="flex items-center gap-1.5 text-texto-terciario text-[12px]">
                                 <Zap size={13} className="opacity-60" />
                                 <span>Acesso imediato</span>
                             </div>
@@ -95,10 +103,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     </div>
                     <div className="h-px bg-borda w-full" />
                     <div className="space-y-3">
-                        <h2 className="text-[0.7rem] font-semibold text-texto-terciario uppercase tracking-[0.15em]">
+                        <h2 className="text-base font-bold text-texto-principal">
                             Sobre este material
                         </h2>
-                        <p className="text-texto-principal text-[0.95rem] leading-relaxed opacity-75">
+                        <p className="text-texto-secundario text-[0.95rem] leading-relaxed">
                             {product.description}
                         </p>
                     </div>

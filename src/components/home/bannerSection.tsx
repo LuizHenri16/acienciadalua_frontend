@@ -72,7 +72,6 @@ export function BannerSection() {
             <div className="flex items-center gap-4">
                 <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-1 bg-turquesa-dark text-white text-sm font-bold px-6 py-3 squircle-border hover:shadow-sm hover:shadow-turquesa/30 hover:brightness-110 transition-all cursor-pointer">
                     Ver materiais
-                    <ArrowRight size={15} />
                 </button>
                 <button onClick={() => scrollTo("faq")} className=" inline-flex items-center gap-1 text-texto-terciario text-sm hover:text-turquesa hover:gap-2 transition-all cursor-pointer">
                     Como funciona

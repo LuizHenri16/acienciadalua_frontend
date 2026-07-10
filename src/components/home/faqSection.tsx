@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { faqHelp } from "@/lib/constants/faqHelp";
 import { FaqCard } from "../ui/card/faqCard";
 import { motion } from "framer-motion";
@@ -7,6 +8,11 @@ import { motion } from "framer-motion";
 export function FaqSection() {
 
     const faqContent = faqHelp;
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+    function handleToggle(index: number) {
+        setOpenIndex((prev) => prev === index ? null : index);
+    }
 
     return (
         <motion.section
@@ -23,7 +29,13 @@ export function FaqSection() {
             </div>
 
             {faqContent.map((faq, index) => (
-                <FaqCard key={index} question={faq.question} answers={faq.answers} />
+                <FaqCard
+                    key={index}
+                    question={faq.question}
+                    answers={faq.answers}
+                    isOpen={openIndex === index}
+                    onToggle={() => handleToggle(index)}
+                />
             ))}
         </motion.section>
     );

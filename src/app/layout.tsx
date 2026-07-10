@@ -135,9 +135,9 @@ export default function RootLayout({
         <PageTransition>
           {children}
         </PageTransition>
-      {/* impeccable-live-start */}
-<script src="http://localhost:8400/live.js"></script>
-{/* impeccable-live-end */}
+      {process.env.NODE_ENV === 'development' && (
+        <script src="http://localhost:8400/live.js" />
+      )}
 </body>
     </html>
   );
