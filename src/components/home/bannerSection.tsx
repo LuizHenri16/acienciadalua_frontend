@@ -59,14 +59,14 @@ export function BannerSection() {
                 </p>
             </div>
 
-            <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-[1.08] tracking-tight max-w-2xl">
-                Aprenda com <span className="text-turquesa">método</span> e{" "}
+            <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-[1.08] tracking-tight max-w-3xl">
+                Aprenda e ensine Química com <span className="text-turquesa">método</span><span> e </span> 
                 <span className="text-rosa-rose">intenção</span>
             </h1>
 
             <p className="text-sm md:text-base text-texto-terciario tracking-wide leading-relaxed max-w-md">
-                Materiais de estudo exclusivos para você <span className="font-bold text-turquesa">aprender</span> de um jeito leve e eficaz,{" "}
-                ou dar uma aula inesquecível para seus alunos.
+                Materiais exclusivos criados para estudantes <span className="font-bold text-rosa-rose">dominarem</span> a matéria e {" "}
+                professores preparem aulas inesquecíveis com total leveza e <span className="font-bold text-turquesa">eficácia</span>.
             </p>
 
             <div className="flex items-center gap-4">
