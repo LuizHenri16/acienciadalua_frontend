@@ -20,11 +20,14 @@ export function StudySection({ materials, error }: StudySectionProps) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="flex items-center gap-2 mb-6">
-        <BookOpen className="w-5 h-5 text-turquesa-dark" />
-        <h2 className="text-xl font-bold text-texto-principal">
-          Para <span className="text-turquesa-dark">Estudar</span>
+      <div className="flex flex-col gap-2 mb-6">
+        <div className="flex gap-2 items-center">
+        <BookOpen className="w-5 h-5 lg:w-8 lg:h-8 text-turquesa-dark" />
+        <h2 className="text-xl lg:text-2xl font-bold text-texto-principal">
+          Materiais para <span className="text-turquesa-dark">Alunos</span>
         </h2>
+        </div>
+        <p className="text-md text-texto-secundario">Chega de decoreba. Encontre resumos visuais e guias práticos para dominar a Química, salvar sua nota e vencer os vestibulares no seu próprio ritmo</p>
       </div>
       <ProductCarousel materials={materials} isLoading={false} error={error} />
     </motion.section>
