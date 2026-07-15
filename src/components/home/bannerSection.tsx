@@ -66,7 +66,7 @@ export function BannerSection() {
 
             <p className="text-sm md:text-base text-texto-terciario tracking-wide leading-relaxed max-w-md">
                 Materiais exclusivos criados para estudantes <span className="font-bold text-rosa-rose">dominarem</span> a matéria e {" "}
-                professores preparem aulas inesquecíveis com total leveza e <span className="font-bold text-turquesa">eficácia</span>.
+                professores prepararem aulas inesquecíveis com total leveza e <span className="font-bold text-turquesa">eficácia</span>.
             </p>
 
             <div className="flex items-center gap-4">
