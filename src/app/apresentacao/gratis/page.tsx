@@ -50,20 +50,20 @@ export default function CapturePage() {
             </h1>
 
             <p className="text-sm md:text-base text-texto-terciario leading-relaxed max-w-md">
-              Baixe gratuitamente o nosso <strong className="text-white">Kit Essencial de Química Geral</strong>. Um pacote completo com mapas mentais, slides prontos e atividades alinhadas à BNCC para poupar horas do seu planejamento de aula.
+              Baixe gratuitamente o nosso <strong className="text-white">Material gratuito de Química Geral</strong>. Que tem mapas mentais, slides prontos e jogos para poupar horas do seu planejamento de aula.
             </p>
 
             <ul className="space-y-3 pt-2">
               <li className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-turquesa flex-shrink-0" />
-                <span className="text-sm text-texto-terciario">100% alinhado às diretrizes da BNCC</span>
+                <Check className="w-5 h-5 text-turquesa shrink-0" />
+                <span className="text-sm text-texto-terciario">Materiais Exclusivos</span>
               </li>
               <li className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-turquesa flex-shrink-0" />
+                <Check className="w-5 h-5 text-turquesa shrink-0" />
                 <span className="text-sm text-texto-terciario">Arquivos em PDF de alta qualidade e prontos para imprimir</span>
               </li>
               <li className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-turquesa flex-shrink-0" />
+                <Check className="w-5 h-5 text-turquesa shrink-0" />
                 <span className="text-sm text-texto-terciario">Mais dinamismo para prender a atenção dos seus alunos</span>
               </li>
             </ul>

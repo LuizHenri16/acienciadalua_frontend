@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/home/aboutSection";
 import { StudySection } from "@/components/home/studySection";
 import { TeachSection } from "@/components/home/teachSection";
 import { FaqSection } from "@/components/home/faqSection";
+import { ContactSection } from "@/components/home/contactSection";
 import { ChemistryBackground } from "@/components/home/chemistryBackground";
 import { getProducts } from "@/api/product";
 import type { Material } from "@/types/material";
@@ -42,6 +43,7 @@ export default async function Home() {
             <TeachSection materials={teachResult.materials} error={teachResult.error} />
             <AboutSection />
             <FaqSection />
+            <ContactSection />
           </div>
         </div>
       </main>

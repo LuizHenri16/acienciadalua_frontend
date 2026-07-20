@@ -10,7 +10,7 @@ const sections = [
 ];
 
 const links = [
-    { label: "Contato", href: "mailto:contato@acienciadalua.com.br" },
+    { label: "Contato", href: "/#contato" },
     { label: "Instagram", href: "https://www.instagram.com/acienciadalua?igsh=bXhjd2V6Njc50Wxy", target: "_blank" as const },
     { label: "Minha Conta", href: "/minha-conta/signin" },
 ];
