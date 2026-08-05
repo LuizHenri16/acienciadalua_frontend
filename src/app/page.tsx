@@ -7,6 +7,7 @@ import { TeachSection } from "@/components/home/teachSection";
 import { FaqSection } from "@/components/home/faqSection";
 import { ContactSection } from "@/components/home/contactSection";
 import { ChemistryBackground } from "@/components/home/chemistryBackground";
+import { CatalogIntro } from "@/components/home/catalogIntro";
 import { getProducts } from "@/api/product";
 import type { Material } from "@/types/material";
 
@@ -27,23 +28,22 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="w-full min-h-screen bg-off-white flex flex-col font-sora relative">
-      <ChemistryBackground />
+    <div className="w-full min-h-screen flex flex-col font-sora relative">
       <Header />
       <main id="main-content">
-        <div className="bg-marinho w-full min-h-[calc(100vh-64px)] flex items-center">
-          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full min-h-screen flex items-stretch bg-hero">
+          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col pt-16 md:pt-20">
             <BannerSection />
           </div>
         </div>
         <div className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-10 mb-20 flex flex-col gap-10 md:gap-16 relative z-10">
+          <CatalogIntro />
           <div id="produtos" className="flex flex-col gap-12 md:gap-20">
             <StudySection materials={studyResult.materials} error={studyResult.error} />
             <Divider />
             <TeachSection materials={teachResult.materials} error={teachResult.error} />
             <AboutSection />
             <FaqSection />
-            <ContactSection />
           </div>
         </div>
       </main>

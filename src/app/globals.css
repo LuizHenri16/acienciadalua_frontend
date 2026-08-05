@@ -5,6 +5,10 @@
   --color-foreground: #171717;
   --font-sora: var(--font-sora);
   --font-unkempt: var(--font-unkempt);
+  --font-poppins: var(--font-poppins);
+  --font-poppins: var(--font-poppins);
+  --font-caveat: var(--font-caveat);
+  --font-jakarta: var(--font-plus-jakarta), sans-serif;
 
   --color-turquesa: #6DD5CA;
   --color-turquesa-light: #B6EBE5;
@@ -34,6 +38,31 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-sora);
   scroll-behavior: smooth;
+}
+
+.bg-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.bg-hero::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  background-image:
+    linear-gradient(
+      100deg,
+      rgba(13, 15, 44, 0.9) 0%,
+      rgba(13, 15, 44, 0.6) 45%,
+      rgba(13, 15, 44, 0.25) 100%
+    ),
+    url("/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(4px);
 }
 
 .squircle-border {

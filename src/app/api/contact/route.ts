@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function POST(request: Request) {
   try {
@@ -21,7 +21,10 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      throw new Error(data.error || "Erro no backend");
+      return NextResponse.json(
+        { error: data.message || data.error || "Erro no backend" },
+        { status: res.status }
+      );
     }
 
     return NextResponse.json({ success: true });

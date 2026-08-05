@@ -9,6 +9,13 @@ export function getMaterialTypeLabel(category: MaterialType | string): string {
     return category;
 }
 
+export function getMaterialFormat(material: Pick<Material, "category" | "fileUrl">): string {
+    const fileUrl = material.fileUrl?.toLowerCase() ?? "";
+    const extension = fileUrl.split("?")[0].split(".").pop();
+    if (extension === "pdf") return "PDF";
+    return getMaterialTypeLabel(material.category);
+}
+
 export interface Material {
     id: string;
     title: string;
