@@ -13,6 +13,7 @@ export function getMaterialFormat(material: Pick<Material, "category" | "fileUrl
     const fileUrl = material.fileUrl?.toLowerCase() ?? "";
     const extension = fileUrl.split("?")[0].split(".").pop();
     if (extension === "pdf") return "PDF";
+    if (extension === "zip") return "ZIP";
     return getMaterialTypeLabel(material.category);
 }
 
@@ -36,7 +37,7 @@ export interface ProductFormData {
     price: string;
     priceValue: number;
     category: MaterialType | string;
-    pdf: File | null;
+    file: File | null;
     cover: File | null;
     isActive: boolean;
 }

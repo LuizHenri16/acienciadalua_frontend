@@ -20,7 +20,7 @@ export function Header() {
     }, []);
 
     return (
-        <header className={`w-full fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${isScrolled ? "bg-marinho/80 backdrop-blur-md" : "bg-transparent"}`}>
+        <header className={`w-full fixed top-0 left-0 right-0 z-50 px-2 transition-colors duration-300 ${isScrolled ? "bg-marinho/80 backdrop-blur-md" : "bg-transparent"}`}>
             <div className="max-w-5xl mx-auto flex justify-between items-center py-2">
                 <div
                     className="flex flex-row items-center gap-2 p-2 cursor-pointer"
@@ -32,7 +32,7 @@ export function Header() {
                 >
                     <Image src="/acienciadalua-logo-var1.svg" alt="A ciência da Lua - logo" width={36} height={36} />
                     <p className="font-unkempt text-xl lg:text-4xl text-ouro">
-                        A Ciência da <span className="text-xl lg:text-3xl text-turquesa-dark">Lua</span>
+                        A Ciência da <span className="text-xl lg:text-4xl text-turquesa-dark">Lua</span>
                     </p>
                 </div>
                 <button onClick={() => router.push("/minha-conta/signin")} className="text-white/90 text-sm md:text-md font-semibold transition-colors hover:opacity-90 cursor-pointer active:scale-95"> Minha conta </button>

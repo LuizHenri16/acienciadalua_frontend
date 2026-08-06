@@ -96,13 +96,13 @@ export function BannerSection() {
                     </div>
                 </div>
             </div>
-            <div className="hidden md:block relative w-full h-56 md:h-auto md:w-80 lg:w-120 md:flex-none">
+            <div className="hidden md:block relative -bottom-5.5 w-full h-56 md:h-auto md:w-80 lg:w-126 md:flex-none">
                 <Image
                     fill
                     src="/lua-person.png"
                     alt=""
                     sizes="(min-width: 1024px) 480px, (min-width: 768px) 320px, 100vw"
-                    className="object-contain object-bottom [mask-image:linear-gradient(to_top,transparent_0%,black_5%)] gradient(to_top) [webkit-mask-image:linear-gradient(to_top,transparent_0%,black_35%)]"
+                    className="object-contain object-bottom [mask-image:linear-gradient(to_top,transparent_0%,black_3%)] gradient(to_top) [webkit-mask-image:linear-gradient(to_top,transparent_0%,black_35%)]"
                 />
             </div>
         </section>
