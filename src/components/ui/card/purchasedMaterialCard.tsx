@@ -1,4 +1,4 @@
-import { Material, MaterialType, getMaterialTypeLabel } from "@/types/material";
+import { Material, MaterialType, getMaterialTypeLabel, getMaterialFormat } from "@/types/material";
 import { ArrowDownToLine, BookOpen, MonitorPlay } from "lucide-react";
 import Image from "next/image";
 
@@ -67,7 +67,7 @@ export function PurchasedMaterialCard({ material }: PurchasedMaterialCardProps) 
                         className="flex items-center gap-1.5 squircle-border bg-turquesa-dark hover:bg-turquesa-dark/90 text-white text-xs shadow-sm font-semibold px-3 py-2.5 cursor-pointer transition-all active:scale-95 shrink-0"
                     >
                         <ArrowDownToLine size={14} />
-                        PDF
+                        {getMaterialFormat(material)}
                     </a>
                 )}
             </div>

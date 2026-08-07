@@ -34,7 +34,7 @@ export function ProductForm({ product }: ProductFormProps) {
       : '',
     priceValue: product?.price ?? 0,
     category: product?.category ?? MaterialType.STUDENT,
-    pdf: null,
+    file: null,
     cover: null,
     isActive: product?.isActive ?? true,
   });
@@ -54,7 +54,7 @@ export function ProductForm({ product }: ProductFormProps) {
 
     if (!formData.title.trim()) return setError('O título é obrigatório.');
     if (formData.priceValue <= 0) return setError('Informe um preço válido.');
-    if (!isEditing && !formData.pdf) return setError('O arquivo PDF é obrigatório.');
+    if (!isEditing && !formData.file) return setError('O arquivo do produto é obrigatório.');
     if (!isEditing && !formData.cover) return setError('A capa é obrigatória.');
 
     setLoading(true);
@@ -67,7 +67,7 @@ export function ProductForm({ product }: ProductFormProps) {
       data.append('category', formData.category as string);
       data.append('isActive', String(isActive));
 
-      if (formData.pdf) data.append('file', formData.pdf);
+      if (formData.file) data.append('file', formData.file);
       if (formData.cover) data.append('cover', formData.cover);
 
       if (isEditing) {

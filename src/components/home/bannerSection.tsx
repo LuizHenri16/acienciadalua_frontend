@@ -1,5 +1,6 @@
 "use client";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 function scrollTo(id: string) {
@@ -51,54 +52,58 @@ export function BannerSection() {
     }, []);
 
     return (
-        <section id="banner" className="flex flex-col justify-center gap-8 py-10 md:py-12">
-            <div className="w-fit inline-flex items-center gap-2 bg-rosa-rose/10 border-[0.02rem] border-rosa-rose/30 shadow-rosa-rose/20 shadow-sm rounded-2xl py-1 px-3 animate-pulse">
-                <div className="rounded-full bg-rosa-rose p-[0.26rem]"></div>
-                <p className="text-[.7rem] uppercase tracking-wide text-rosa-rose font-semibold">
-                    materiais exclusivos
+        <section id="banner" className="relative flex-1 flex flex-col md:flex-row gap-10 md:gap-12">
+            <div className="flex flex-col flex-1 gap-4 justify-center">
+                <h1 className="text-white/80 font-sora text-4xl md:text-5xl font-extrabold leading-[1.08] tracking-wide max-w-3xl [text-shadow:0_1px_2px_rgba(0,0,0,0.6),0_4px_24px_rgba(0,0,0,0.55)]">
+                    Aprenda e ensine Química com <span className="text-turquesa font-caveat text-6xl">método</span><span> e </span> 
+                    <span className="text-rosa-rose font-caveat text-6xl">intenção</span>
+                </h1>
+
+                <p className="text-sm md:text-base text-cinza-azul tracking-wide leading-relaxed max-w-md [text-shadow:0_1px_2px_rgba(0,0,0,0.55),0_2px_12px_rgba(0,0,0,0.4)]">
+                    Materiais exclusivos criados para estudantes <span className="font-bold text-white">dominarem</span> a matéria e {" "}
+                    professores prepararem aulas inesquecíveis com total leveza e <span className="font-bold text-turquesa-light">eficácia</span>.
                 </p>
-            </div>
 
-            <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-[1.08] tracking-tight max-w-3xl">
-                Aprenda e ensine Química com <span className="text-turquesa">método</span><span> e </span> 
-                <span className="text-rosa-rose">intenção</span>
-            </h1>
-
-            <p className="text-sm md:text-base text-texto-terciario tracking-wide leading-relaxed max-w-md">
-                Materiais exclusivos criados para estudantes <span className="font-bold text-rosa-rose">dominarem</span> a matéria e {" "}
-                professores prepararem aulas inesquecíveis com total leveza e <span className="font-bold text-turquesa">eficácia</span>.
-            </p>
-
-            <div className="flex items-center gap-4">
-                <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-1 bg-turquesa-dark text-white text-sm font-bold px-6 py-3 squircle-border hover:shadow-sm hover:shadow-turquesa/30 hover:brightness-110 transition-all cursor-pointer">
-                    Ver materiais
-                </button>
-                <button onClick={() => scrollTo("faq")} className=" inline-flex items-center gap-1 text-texto-terciario text-sm hover:text-turquesa hover:gap-2 transition-all cursor-pointer">
-                    Como funciona
-                    <ArrowRight size={14} />
-                </button>
-            </div>
-
-            <div ref={ufrnRef} className="flex items-stretch gap-0 border-t border-white/[0.07] pt-6 mt-2">
-                <div className="flex flex-col gap-1 px-6">
-                    <span className="text-2xl font-extrabold text-white tracking-tight">
-                        <span ref={ref}>{count}</span> <span className="text-turquesa">anos</span>
-                    </span>
-                    <span className="text-[0.7rem] text-texto-terciario leading-snug">
-                        de<br />experiência
-                    </span>
+                <div className="flex flex-wrap items-center gap-4">
+                    <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-1 bg-turquesa-dark text-white text-sm font-bold px-6 py-3 squircle-border hover:shadow-sm hover:shadow-turquesa/30 hover:brightness-110 transition-all cursor-pointer">
+                        Ver materiais
+                    </button>
+                    <button onClick={() => scrollTo("faq")} className=" inline-flex items-center gap-1 text-cinza-azul text-sm hover:text-white hover:gap-2 transition-all cursor-pointer">
+                        Como funciona
+                        <ArrowRight size={14} />
+                    </button>
                 </div>
-                <div className="flex flex-col gap-1 pl-6 border-l border-white/[0.07]">
-                    <span
-                        className="text-2xl font-extrabold text-turquesa tracking-tight transition-opacity duration-700"
-                        style={{ opacity: ufrnVisible ? 1 : 0 }}
-                    >
-                        UFRN
-                    </span>
-                    <span className="text-[0.7rem] text-texto-terciario leading-snug">
-                        Licenciada<br />em Química
-                    </span>
+
+                <div ref={ufrnRef} className="flex items-stretch gap-0 border-t border-white/[0.07] pt-6 mt-2">
+                    <div className="flex flex-col gap-1 px-6">
+                        <span className="text-2xl font-extrabold text-rosa-rose tracking-tight">
+                            <span ref={ref}>{count}</span> <span className="text-rosa-rose">anos</span>
+                        </span>
+                        <span className="text-xs text-white/70 leading-snug">
+                            de<br />experiência
+                        </span>
+                    </div>
+                    <div className="flex flex-col gap-1 pl-6 border-l border-white/[0.07]">
+                        <span
+                            className="text-2xl font-extrabold text-rosa-rose tracking-tight transition-opacity duration-700"
+                            style={{ opacity: ufrnVisible ? 1 : 0 }}
+                        >
+                            UFRN
+                        </span>
+                        <span className="text-xs text-white/70 leading-snug">
+                            Licenciada<br />em Química
+                        </span>
+                    </div>
                 </div>
+            </div>
+            <div className="hidden md:block relative -bottom-5.5 w-full h-56 md:h-auto md:w-80 lg:w-126 md:flex-none">
+                <Image
+                    fill
+                    src="/lua-person.png"
+                    alt=""
+                    sizes="(min-width: 1024px) 480px, (min-width: 768px) 320px, 100vw"
+                    className="object-contain object-bottom [mask-image:linear-gradient(to_top,transparent_0%,black_3%)] gradient(to_top) [webkit-mask-image:linear-gradient(to_top,transparent_0%,black_35%)]"
+                />
             </div>
         </section>
     );

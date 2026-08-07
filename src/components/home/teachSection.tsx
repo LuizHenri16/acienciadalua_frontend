@@ -1,8 +1,9 @@
 "use client";
 
 import { Material } from "@/types/material";
-import { MonitorPlay } from "lucide-react";
-import { ProductCarousel } from "../ui/carousel/productCarousel";
+import { MonitorPlay, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ProductGrid } from "../ui/grid/productGrid";
 import { motion } from "framer-motion";
 
 interface TeachSectionProps {
@@ -28,7 +29,16 @@ export function TeachSection({ materials, error }: TeachSectionProps) {
         </div>
         <p className="text-md text-texto-secundario">Economize horas de planejamento. Encontre jogos didáticos, slides dinâmicos e planos de aula prontos para encantar seus alunos e transformar o ensino de Química.</p>
       </div>
-      <ProductCarousel materials={materials} isLoading={false} error={error} />
+      <ProductGrid materials={materials.slice(0, 3)} error={error} />
+      <div className="mt-8 flex justify-center">
+        <Link
+          href="/produtos?categoria=professores"
+          className="inline-flex items-center gap-2 border-2 border-rosa-rose text-rosa-rose font-bold text-sm px-6 py-3 squircle-border transition-all duration-300 hover:bg-rosa-rose hover:text-white group"
+        >
+          Ver todos os materiais para Professores
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
     </motion.section>
   );
 }

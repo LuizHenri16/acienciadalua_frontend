@@ -1,11 +1,24 @@
 import type { Metadata } from "next";
-import { Sora, Unkempt } from "next/font/google";
+import { Bricolage_Grotesque, Caveat, Plus_Jakarta_Sans, Poppins, Sora, Space_Grotesk, Unbounded, Unkempt } from "next/font/google";
 import "./globals.css";
 import PageTransition from "@/hooks/framerMotion/PageTransition";
 
 const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: "800"
+})
+
+const plusJakarta = Caveat ({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+  variable: '--font-caveat',
+  display: 'swap',
 });
 
 const unkempt = Unkempt({
@@ -112,7 +125,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} bg-marinho h-full antialiased scroll-smooth`} style={{ scrollPaddingTop: '64px' }}>
+    <html lang="pt-br" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} ${poppins.variable} ${plusJakarta.variable} bg-marinho h-full antialiased scroll-smooth`} style={{ scrollPaddingTop: '64px' }}>
       <head>
         <meta name="google-site-verification" content="YD35zo8xwFGcpXW6MNdRzOYPzlGGDpUbze6VeUahDPg" />
         <script

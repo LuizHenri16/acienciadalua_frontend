@@ -14,7 +14,7 @@ interface ProductFilesProps {
 }
 
 export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl }: ProductFilesProps) {
-  const pdfInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
   const [coverPreviewUrl, setCoverPreviewUrl] = useState<string | null>(
     existingCoverUrl ? `${API_URL}/uploads/${existingCoverUrl}` : null
@@ -48,48 +48,48 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
     };
   }, [data.cover, existingCoverUrl]);
 
-  const handlePdfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) onChange('pdf', e.target.files[0]);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.[0]) onChange('file', e.target.files[0]);
   };
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) onChange('cover', e.target.files[0]);
   };
 
-  const hasPdf = !!data.pdf || !!existingFileUrl;
+  const hasFile = !!data.file || !!existingFileUrl;
 
   return (
     <div className="flex flex-col gap-5">
 
-      {/* PDF */}
+      {/* Arquivo do produto */}
       <div className="flex flex-col gap-1.5">
         <label className="text-xs font-bold text-texto-secundario">
-          Arquivo PDF
+          Arquivo do produto
           {existingFileUrl && <span className="text-gray-300 font-normal ml-1">(deixe vazio para manter o atual)</span>}
         </label>
         <button
           type="button"
-          onClick={() => pdfInputRef.current?.click()}
-          className={`w-full flex items-center gap-3 border-2 border-dashed squircle-border px-4 py-4 transition-all cursor-pointer group ${hasPdf
+          onClick={() => fileInputRef.current?.click()}
+          className={`w-full flex items-center gap-3 border-2 border-dashed squircle-border px-4 py-4 transition-all cursor-pointer group ${hasFile
               ? 'border-turquesa-dark bg-turquesa-light/30 hover:bg-turquesa-light/50'
               : 'border-gray-200 bg-gray-50/50 hover:border-turquesa-dark hover:bg-turquesa-light/20'
             }`}
         >
-          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${hasPdf ? 'bg-turquesa-dark' : 'bg-white border border-gray-200 shadow-sm group-hover:border-turquesa-dark'
+          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${hasFile ? 'bg-turquesa-dark' : 'bg-white border border-gray-200 shadow-sm group-hover:border-turquesa-dark'
             }`}>
-            {hasPdf
+            {hasFile
               ? <FileCheck className="w-4 h-4 text-white" />
               : <Upload className="w-4 h-4 text-turquesa-dark" />
             }
           </div>
           <div className="flex flex-col items-start text-left">
-            <span className={`text-sm font-semibold ${hasPdf ? 'text-turquesa-dark' : 'text-texto-secundario'}`}>
-              {data.pdf ? data.pdf.name : existingFileUrl ? 'PDF carregado — clique para substituir' : 'Selecionar arquivo PDF'}
+            <span className={`text-sm font-semibold ${hasFile ? 'text-turquesa-dark' : 'text-texto-secundario'}`}>
+              {data.file ? data.file.name : existingFileUrl ? 'Arquivo carregado — clique para substituir' : 'Selecionar arquivo'}
             </span>
-            {!hasPdf && <span className="text-xs text-gray-400">Formato .pdf</span>}
+            {!hasFile && <span className="text-xs text-gray-400">Formato .pdf ou .zip</span>}
           </div>
         </button>
-        <input type="file" ref={pdfInputRef} onChange={handlePdfChange} accept="application/pdf" className="hidden" />
+        <input type="file" ref={fileInputRef} onChange={handleFileChange} accept=".pdf,.zip,application/pdf,application/zip,application/x-zip-compressed" className="hidden" />
       </div>
 
       {/* Capa */}

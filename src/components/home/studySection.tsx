@@ -1,8 +1,9 @@
 "use client";
 
 import { Material } from "@/types/material";
-import { BookOpen } from "lucide-react";
-import { ProductCarousel } from "../ui/carousel/productCarousel";
+import { BookOpen, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ProductGrid } from "../ui/grid/productGrid";
 import { motion } from "framer-motion";
 
 interface StudySectionProps {
@@ -29,7 +30,16 @@ export function StudySection({ materials, error }: StudySectionProps) {
         </div>
         <p className="text-md text-texto-secundario">Chega de decoreba. Encontre resumos visuais e guias práticos para dominar a Química, salvar sua nota e vencer os vestibulares no seu próprio ritmo</p>
       </div>
-      <ProductCarousel materials={materials} isLoading={false} error={error} />
+      <ProductGrid materials={materials.slice(0, 3)} error={error} />
+      <div className="mt-8 flex justify-center">
+        <Link
+          href="/produtos?categoria=alunos"
+          className="inline-flex items-center gap-2 border-2 border-turquesa-dark text-turquesa-dark font-bold text-sm px-6 py-3 squircle-border transition-all duration-300 hover:bg-turquesa-dark hover:text-white group"
+        >
+          Ver todos os materiais para Alunos
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
     </motion.section>
   );
 }
