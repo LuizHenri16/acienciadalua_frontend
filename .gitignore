@@ -13,6 +13,7 @@
 # ia agents
 /.agents/
 /.impeccable/
+/PROCUCT.md
 
 # testing
 /coverage
