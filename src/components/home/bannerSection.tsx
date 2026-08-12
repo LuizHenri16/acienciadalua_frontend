@@ -54,12 +54,12 @@ export function BannerSection() {
     return (
         <section id="banner" className="relative flex-1 flex flex-col md:flex-row gap-10 md:gap-12">
             <div className="flex flex-col flex-1 gap-4 justify-center">
-                <h1 className="text-white/80 font-sora text-4xl md:text-5xl font-extrabold leading-[1.08] tracking-wide max-w-3xl [text-shadow:0_1px_2px_rgba(0,0,0,0.6),0_4px_24px_rgba(0,0,0,0.55)]">
-                    Aprenda e ensine Química com <span className="text-turquesa font-caveat text-6xl">método</span><span> e </span> 
-                    <span className="text-rosa-rose font-caveat text-6xl">intenção</span>
+                <h1 className="text-slate-100 font-sora text-4xl md:text-5xl xl:text-6xl font-extrabold leading-[1.08] tracking-tight max-w-4xl">
+                    Aprenda e ensine Química com <span className="text-turquesa font-caveat text-5xl md:text-6xl xl:text-7xl">método</span><span> e </span> 
+                    <span className="text-rosa-rose font-caveat text-5xl md:text-6xl xl:text-7xl">intenção</span>
                 </h1>
 
-                <p className="text-sm md:text-base text-cinza-azul tracking-wide leading-relaxed max-w-md [text-shadow:0_1px_2px_rgba(0,0,0,0.55),0_2px_12px_rgba(0,0,0,0.4)]">
+                <p className="text-sm md:text-base text-slate-300 tracking-wide leading-relaxed max-w-xl">
                     Materiais exclusivos criados para estudantes <span className="font-bold text-white">dominarem</span> a matéria e {" "}
                     professores prepararem aulas inesquecíveis com total leveza e <span className="font-bold text-turquesa-light">eficácia</span>.
                 </p>

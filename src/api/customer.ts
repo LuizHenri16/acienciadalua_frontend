@@ -81,3 +81,13 @@ export async function getMyPurchases(): Promise<{ student: Material[]; teacher: 
     if (!response.ok) throw new Error('Erro ao buscar compras');
     return response.json();
 }
+
+export async function downloadPurchase(productId: string): Promise<Blob> {
+    const response = await fetch(`${API_URL}/customers/me/downloads/${productId}`, {
+        headers: { Authorization: `Bearer ${getCustomerToken()}` },
+        cache: 'no-store',
+    });
+
+    if (!response.ok) throw new Error('Erro ao baixar arquivo');
+    return response.blob();
+}

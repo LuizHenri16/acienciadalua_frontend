@@ -28,7 +28,7 @@ export function StudySection({ materials, error }: StudySectionProps) {
           Materiais para <span className="text-turquesa-dark">Alunos</span>
         </h2>
         </div>
-        <p className="text-md text-texto-secundario">Chega de decoreba. Encontre resumos visuais e guias práticos para dominar a Química, salvar sua nota e vencer os vestibulares no seu próprio ritmo</p>
+        <p className="text-base text-texto-secundario lg:max-w-3xl">Chega de decoreba. Encontre resumos visuais e guias práticos para dominar a Química, salvar sua nota e vencer os vestibulares no seu próprio ritmo</p>
       </div>
       <ProductGrid materials={materials.slice(0, 3)} error={error} />
       <div className="mt-8 flex justify-center">

@@ -27,7 +27,7 @@ export function TeachSection({ materials, error }: TeachSectionProps) {
           Materiais para <span className="text-rosa-rose">Professores</span>
         </h2>
         </div>
-        <p className="text-md text-texto-secundario">Economize horas de planejamento. Encontre jogos didáticos, slides dinâmicos e planos de aula prontos para encantar seus alunos e transformar o ensino de Química.</p>
+        <p className="text-base text-texto-secundario lg:max-w-3xl">Economize horas de planejamento. Encontre jogos didáticos, slides dinâmicos e planos de aula prontos para encantar seus alunos e transformar o ensino de Química.</p>
       </div>
       <ProductGrid materials={materials.slice(0, 3)} error={error} />
       <div className="mt-8 flex justify-center">

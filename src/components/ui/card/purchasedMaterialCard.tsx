@@ -1,6 +1,10 @@
+'use client';
+
+import { useState } from "react";
 import { Material, MaterialType, getMaterialTypeLabel, getMaterialFormat } from "@/types/material";
 import { ArrowDownToLine, BookOpen, MonitorPlay } from "lucide-react";
 import Image from "next/image";
+import { downloadPurchase } from "@/api/customer";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,6 +14,30 @@ interface PurchasedMaterialCardProps {
 
 export function PurchasedMaterialCard({ material }: PurchasedMaterialCardProps) {
     const isTeacher = material.category === MaterialType.TEACHER;
+    const [downloading, setDownloading] = useState(false);
+    const [downloadError, setDownloadError] = useState(false);
+
+    async function handleDownload() {
+        if (downloading) return;
+        setDownloading(true);
+        setDownloadError(false);
+        try {
+            const blob = await downloadPurchase(material.id);
+            const ext = material.fileUrl?.split(".").pop() ?? "";
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = ext ? `${material.title}.${ext}` : material.title;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        } catch {
+            setDownloadError(true);
+        } finally {
+            setDownloading(false);
+        }
+    }
 
     const accentColor = isTeacher ? "bg-rosa-rose" : "bg-turquesa-dark";
     const badgeBg = isTeacher ? "bg-rosa-rose/10 text-rosa-rose" : "bg-turquesa-dark/10 text-turquesa-dark";
@@ -59,16 +87,19 @@ export function PurchasedMaterialCard({ material }: PurchasedMaterialCardProps) 
                 </div>
 
                 {fileUrl && (
-                    <a
-                        href={fileUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        download
-                        className="flex items-center gap-1.5 squircle-border bg-turquesa-dark hover:bg-turquesa-dark/90 text-white text-xs shadow-sm font-semibold px-3 py-2.5 cursor-pointer transition-all active:scale-95 shrink-0"
+                    <button
+                        onClick={handleDownload}
+                        disabled={downloading}
+                        className="flex items-center gap-1.5 squircle-border bg-turquesa-dark hover:bg-turquesa-dark/90 text-white text-xs shadow-sm font-semibold px-3 py-2.5 cursor-pointer transition-all active:scale-95 shrink-0 disabled:opacity-60 disabled:cursor-wait"
                     >
                         <ArrowDownToLine size={14} />
-                        {getMaterialFormat(material)}
-                    </a>
+                        {downloading ? "Baixando..." : getMaterialFormat(material)}
+                    </button>
+                )}
+                {downloadError && (
+                    <span className="text-[0.6rem] text-coral-light font-medium text-right shrink-0">
+                        Erro ao baixar. Tente novamente.
+                    </span>
                 )}
             </div>
         </div>
