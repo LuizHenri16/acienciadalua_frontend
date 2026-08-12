@@ -13,12 +13,13 @@ const links = [
     { label: "Contato", href: "/#contato" },
     { label: "Instagram", href: "https://www.instagram.com/acienciadalua?igsh=bXhjd2V6Njc50Wxy", target: "_blank" as const },
     { label: "Minha Conta", href: "/minha-conta/signin" },
+    {label: "Feito por", href: "https://page-luiz-henrique.vercel.app/"}
 ];
 
 export function Footer() {
     return (
         <footer className="mt-10 border-t border-borda bg-white">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+            <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-10 md:py-12">
                 <div className="flex flex-col md:flex-row gap-10 md:gap-20">
                     <div className="flex flex-col gap-3 max-w-xs">
                         <div className="flex items-center gap-2">
@@ -69,7 +70,7 @@ export function Footer() {
             </div>
 
             <div className="border-t border-borda">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-center gap-2">
+                <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-4 flex flex-col sm:flex-row items-center justify-center gap-2">
                     <p className="text-xs text-texto-terciario">
                         © 2026 A Ciência da Lua. Todos os direitos reservados.
                     </p>

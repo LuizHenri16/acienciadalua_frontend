@@ -32,11 +32,11 @@ export default async function Home() {
       <Header />
       <main id="main-content">
         <div className="w-full min-h-screen flex items-stretch bg-hero">
-          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col pt-16 md:pt-20">
+          <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col pt-16 md:pt-20">
             <BannerSection />
           </div>
         </div>
-        <div className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-10 mb-20 flex flex-col gap-10 md:gap-16 relative z-10">
+        <div className="flex-1 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 mt-4 md:mt-10 mb-20 flex flex-col gap-10 md:gap-16 relative z-10">
           <CatalogIntro />
           <div id="produtos" className="flex flex-col gap-12 md:gap-20">
             <StudySection materials={studyResult.materials} error={studyResult.error} />

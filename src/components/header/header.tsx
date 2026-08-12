@@ -21,9 +21,9 @@ export function Header() {
 
     return (
         <header className={`w-full fixed top-0 left-0 right-0 z-50 px-2 transition-colors duration-300 ${isScrolled ? "bg-marinho/80 backdrop-blur-md" : "bg-transparent"}`}>
-            <div className="max-w-5xl mx-auto flex justify-between items-center py-2">
+            <div className="max-w-7xl mx-auto flex justify-between items-center py-2 px-6 sm:px-10 lg:px-14">
                 <div
-                    className="flex flex-row items-center gap-2 p-2 cursor-pointer"
+                    className="flex flex-row items-center gap-2 py-2 cursor-pointer"
                     onClick={() => document.getElementById("banner")?.scrollIntoView({ behavior: "smooth" })}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); document.getElementById("banner")?.scrollIntoView({ behavior: "smooth" }); } }}
                     tabIndex={0}

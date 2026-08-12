@@ -147,22 +147,22 @@ export function CatalogIntro() {
     return (
         <motion.section
             className="w-full py-10 md:py-14"
-            initial={{ opacity: 0, y: 30 }}t-10
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
         >
             <div className="flex flex-col items-center text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-3xl leading-tight">
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-4xl leading-tight">
                     Sua jornada na Química sem decoreba e sem perda de tempo
                 </h2>
-                <p className="text-slate-500 max-w-xl mx-auto text-base text-center mt-3 mb-12">
+                <p className="text-slate-500 max-w-2xl mx-auto text-base text-center mt-3 mb-12">
                     Conteúdos autorais desenvolvidos para simplificar o estudo dos alunos e transformar a rotina dos professores.
                 </p>
             </div>
 
-            <div className="max-w-6xl mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div className="w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                     <div className="lg:col-span-4 lg:order-2 flex justify-center items-center py-8 lg:py-0">
                         <CentralAnchor />
                     </div>
