@@ -32,13 +32,15 @@ O desenvolvimento do projeto está dividido em fases claras. Atualmente, o estad
 - [x] **Prototipagem com Figma**: Criação do protótipo do site.
 - [x] **Interface do Cliente (Storefront)**: Toda a parte visual e de navegação para o usuário final já foi concluída.
 - [x] **Manutenção e Integração**: No momento, o foco está na manutenção preventiva e na integração completa com as APIs do backend.
-- [ ] **Painel Administrativo (Admin)**: Desenvolvimento do módulo administrativo para gestão de produtos.
+- [x] **Painel Administrativo (Admin)**: Desenvolvimento do módulo administrativo para gestão de produtos.
+- [x] **Manutenção e Integração**: No momento, o foco está na manutenção preventiva e na integração completa com as APIs do backend.
+- [x] **Painel Administrativo (Admin)**: Desenvolvimento do módulo administrativo para gestão de produtos.
 - [x] **Deploy do Projeto Protótipo**: Deploy do projeto protótipo no Vercel.
 - [x] **Teste de UX/UI do projeto protótipo**: Teste de UX/UI do projeto protótipo. (Receber feedbacks para melhorias)
 - [x] SEO Otimização do site com melhores praticas de SEO.
 - [x] **Deploy do Projeto Final**: Deploy do projeto final na VPS linux com nginx e SSL.
 - [x] Produto final rodando com necessidade de pequenas alterações.
----
+
 
 Desenvolvido com ❤️ por [Luiz Henrique](https://github.com/LuizHenri16).
 
