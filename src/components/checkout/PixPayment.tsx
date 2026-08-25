@@ -2,7 +2,7 @@
 
 import { createPixPayment, PixPaymentResponse } from '@/api/payment';
 import { Material } from '@/types/material';
-import { CheckCircle, Copy, Loader2, QrCode, ArrowLeft } from 'lucide-react';
+import { CheckCircle, Copy, Loader2, QrCode } from 'lucide-react';
 import { useCallback, useState } from 'react';
 
 interface PixPaymentProps {
@@ -130,14 +130,6 @@ export function PixPayment({ product, onBack }: PixPaymentProps) {
                         <strong>Atenção:</strong> O pagamento será confirmado automaticamente após o PIX ser processado. Enquanto isso, você pode fechar esta janela.
                     </p>
                 </div>
-
-                <button
-                    onClick={onBack}
-                    className="w-full flex items-center justify-center gap-2 text-sm text-texto-terciario hover:text-texto-principal transition-colors py-2"
-                >
-                    <ArrowLeft size={16} />
-                    Escolher outro método de pagamento
-                </button>
             </div>
         );
     }
@@ -221,15 +213,6 @@ export function PixPayment({ product, onBack }: PixPaymentProps) {
                         Gerar QR Code PIX
                     </>
                 )}
-            </button>
-
-            <button
-                type="button"
-                onClick={onBack}
-                className="w-full flex items-center justify-center gap-2 text-sm text-texto-terciario hover:text-texto-principal transition-colors py-2"
-            >
-                <ArrowLeft size={16} />
-                Escolher outro método
             </button>
         </form>
     );
