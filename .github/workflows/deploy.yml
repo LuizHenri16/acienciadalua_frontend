@@ -26,6 +26,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/acienciadalua-frontend:latest
           build-args: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_MP_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_MP_PUBLIC_KEY }}
 
       - name: Deploy na VPS via SSH
         uses: appleboy/ssh-action@v1.0.3
