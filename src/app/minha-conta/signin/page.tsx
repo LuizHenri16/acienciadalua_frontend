@@ -3,7 +3,8 @@ import { SignInForm } from "@/components/customer/signinform";
 import Image from "next/image";
 import { BackgroundLights } from "@/components/ui/decor/BackgroundLights";
 
-export default function SignIn() {
+export default async function SignIn({ searchParams }: { searchParams: Promise<{ email?: string }> }) {
+    const params = await searchParams;
     return (
         <div className="relative flex flex-col justify-center items-center w-full min-h-screen bg-marinho overflow-hidden px-6 py-10">
             <BackgroundLights />
@@ -23,7 +24,7 @@ export default function SignIn() {
                     <p className="text-turquesa-light text-xs md:text-sm text-center mb-4 opacity-70 leading-relaxed">
                         Entre com seu e-mail e senha para acessar seus materiais.
                     </p>
-                    <SignInForm />
+                    <SignInForm initialEmail={params.email} />
                 </div>
                 <div className="mt-6 flex flex-col items-center gap-3">
                     <p className="text-white/30 text-xs md:text-sm text-center max-w-xs leading-relaxed">

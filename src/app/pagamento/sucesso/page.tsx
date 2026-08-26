@@ -2,7 +2,8 @@ import { BackgroundLights } from "@/components/ui/decor/BackgroundLights";
 import { CheckCircle, KeyRound } from "lucide-react";
 import Link from "next/link";
 
-export default function PagamentoSucesso() {
+export default async function PagamentoSucesso({ searchParams }: { searchParams: Promise<{ email?: string }> }) {
+    const params = await searchParams;
     return (
         <main className="min-h-screen flex items-center justify-center font-sora bg-marinho px-6">
             <BackgroundLights />
@@ -18,7 +19,10 @@ export default function PagamentoSucesso() {
                     </p>
                 </div>
 
-                <Link href="/minha-conta/signin" className="w-full squircle-border bg-turquesa-dark text-white font-bold py-4 text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">
+                <Link
+                    href={params.email ? `/minha-conta/signin?email=${encodeURIComponent(params.email)}` : "/minha-conta/signin"}
+                    className="w-full squircle-border bg-turquesa-dark text-white font-bold py-4 text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95"
+                >
                     <KeyRound size={18} />
                     Criar senha e acessar
                 </Link>
