@@ -7,9 +7,13 @@ import { customerSignIn, customerSetPassword } from "@/api/customer";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export function SignInForm() {
+interface SignInFormProps {
+    initialEmail?: string;
+}
+
+export function SignInForm({ initialEmail }: SignInFormProps) {
     const router = useRouter();
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(initialEmail ?? "");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -32,6 +36,7 @@ export function SignInForm() {
         } catch (err: any) {
             if (err.status === 401 && err.message === "NO_PASSWORD_SET") {
                 setNeedsPasswordSetup(true);
+                setPassword("");
                 setError("");
             } else {
                 setError("Email ou senha incorretos.");
@@ -100,6 +105,12 @@ export function SignInForm() {
                 >
                     Esqueci minha senha
                 </Link>
+            )}
+
+            {needsPasswordSetup && (
+                <p className="w-full px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs text-center leading-relaxed">
+                    Sua conta foi criada! Defina uma senha de acesso para continuar.
+                </p>
             )}
 
             {error && (

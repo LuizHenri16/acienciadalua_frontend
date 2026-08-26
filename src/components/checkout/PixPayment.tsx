@@ -2,7 +2,8 @@
 
 import { createPixPayment, PixPaymentResponse } from '@/api/payment';
 import { Material } from '@/types/material';
-import { CheckCircle, Copy, Loader2, QrCode } from 'lucide-react';
+import { CheckCircle, Copy, Loader2, QrCode, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import { useCallback, useState } from 'react';
 
 interface PixPaymentProps {
@@ -130,6 +131,14 @@ export function PixPayment({ product, onBack }: PixPaymentProps) {
                         <strong>Atenção:</strong> O pagamento será confirmado automaticamente após o PIX ser processado. Enquanto isso, você pode fechar esta janela.
                     </p>
                 </div>
+
+                <Link
+                    href={`/pagamento/sucesso?email=${encodeURIComponent(email)}`}
+                    className="w-full squircle-border bg-turquesa-dark text-white font-bold py-4 text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95"
+                >
+                    Já paguei
+                    <ArrowRight size={16} />
+                </Link>
             </div>
         );
     }
