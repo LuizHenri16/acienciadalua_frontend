@@ -1,5 +1,3 @@
-'use client';
-
 import Link from "next/link";
 import { Material, MaterialType, getMaterialFormat } from "@/types/material";
 import { ArrowRightIcon } from "lucide-react";

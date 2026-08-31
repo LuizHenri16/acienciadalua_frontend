@@ -8,7 +8,9 @@ export async function getProducts(category?: 'STUDENT' | 'TEACHER') {
     if (category) {
         params.append('category', category);
     }
-    const response = await fetch(`${API_URL}/products?${params.toString()}`, {});
+    const response = await fetch(`${API_URL}/products?${params.toString()}`, {
+        next: { revalidate: 3600 }
+    });
     if (!response.ok) return [];
     return response.json();
 }

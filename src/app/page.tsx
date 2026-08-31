@@ -5,13 +5,9 @@ import { AboutSection } from "@/components/home/aboutSection";
 import { StudySection } from "@/components/home/studySection";
 import { TeachSection } from "@/components/home/teachSection";
 import { FaqSection } from "@/components/home/faqSection";
-import { ContactSection } from "@/components/home/contactSection";
-import { ChemistryBackground } from "@/components/home/chemistryBackground";
 import { CatalogIntro } from "@/components/home/catalogIntro";
 import { getProducts } from "@/api/product";
 import type { Material } from "@/types/material";
-
-export const dynamic = 'force-dynamic';
 
 async function fetchCategory(category: 'STUDENT' | 'TEACHER') {
   try {
