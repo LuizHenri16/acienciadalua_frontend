@@ -1,8 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { AnimatedSection } from "../ui/animated/AnimatedSection";
 import {
-    Atom,
     Clock,
     FileText,
     Gamepad2,
@@ -82,13 +79,10 @@ function FeatureColumn({ block }: { block: Block }) {
     return (
         <div className="flex flex-col space-y-4">
             {block.cards.map((card, index) => (
-                <motion.div
+                <div
                     key={card.title}
                     className={MINI_CARD_BASE}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.4, delay: index * 0.08, ease: "easeOut" }}
+                    style={{ animationDelay: `${index * 0.08}s` }}
                 >
                     <span className={`flex items-center justify-center p-2 rounded-xl shrink-0 ${iconBox}`}>
                         <card.icon className="w-5 h-5" />
@@ -101,7 +95,7 @@ function FeatureColumn({ block }: { block: Block }) {
                             {card.text}
                         </p>
                     </div>
-                </motion.div>
+                </div>
             ))}
         </div>
     );
@@ -145,13 +139,7 @@ function CentralAnchor() {
 
 export function CatalogIntro() {
     return (
-        <motion.section
-            className="w-full py-10 md:py-14"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-        >
+        <AnimatedSection className="w-full py-10 md:py-14">
             <div className="flex flex-col items-center text-center mb-12">
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-4xl leading-tight">
                     Sua jornada na Química sem decoreba e sem perda de tempo
@@ -176,6 +164,6 @@ export function CatalogIntro() {
                     </div>
                 </div>
             </div>
-        </motion.section>
+        </AnimatedSection>
     );
 }

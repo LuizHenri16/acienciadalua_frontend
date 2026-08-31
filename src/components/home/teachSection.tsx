@@ -1,10 +1,8 @@
-"use client";
-
 import { Material } from "@/types/material";
 import { MonitorPlay, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { ProductGrid } from "../ui/grid/productGrid";
-import { motion } from "framer-motion";
+import { AnimatedSection } from "../ui/animated/AnimatedSection";
 
 interface TeachSectionProps {
   materials: Material[];
@@ -13,13 +11,7 @@ interface TeachSectionProps {
 
 export function TeachSection({ materials, error }: TeachSectionProps) {
   return (
-    <motion.section
-      className="w-full"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
+    <AnimatedSection className="w-full">
       <div className="flex flex-col gap-2 mb-6">
         <div className="flex flex-row gap-2 items-center">
         <MonitorPlay className="w-5 h-5 lg:w-8 lg:h-8 text-rosa-rose" />
@@ -39,6 +31,6 @@ export function TeachSection({ materials, error }: TeachSectionProps) {
           <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-    </motion.section>
+    </AnimatedSection>
   );
 }
