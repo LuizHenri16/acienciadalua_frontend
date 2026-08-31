@@ -1,10 +1,8 @@
-"use client";
-
 import { Material } from "@/types/material";
 import { BookOpen, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { ProductGrid } from "../ui/grid/productGrid";
-import { motion } from "framer-motion";
+import { AnimatedSection } from "../ui/animated/AnimatedSection";
 
 interface StudySectionProps {
   materials: Material[];
@@ -13,14 +11,7 @@ interface StudySectionProps {
 
 export function StudySection({ materials, error }: StudySectionProps) {
   return (
-    <motion.section
-      id="produtos"
-      className="w-full"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
+    <AnimatedSection id="produtos" className="w-full">
       <div className="flex flex-col gap-2 mb-6">
         <div className="flex gap-2 items-center">
         <BookOpen className="w-5 h-5 lg:w-8 lg:h-8 text-turquesa-dark" />
@@ -40,6 +31,6 @@ export function StudySection({ materials, error }: StudySectionProps) {
           <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-    </motion.section>
+    </AnimatedSection>
   );
 }

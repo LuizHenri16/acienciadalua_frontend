@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Mail, Check } from "lucide-react";
+import { AnimatedSection } from "../ui/animated/AnimatedSection";
 
 export function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -40,13 +40,10 @@ export function ContactSection() {
   }
 
   return (
-    <motion.section
+    <AnimatedSection
       id="contato"
       className="flex flex-col gap-4"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      amount={0.1}
     >
       <div className="flex flex-col gap-1">
         <h2 className="text-xl lg:text-2xl text-texto-principal font-bold">
@@ -158,6 +155,6 @@ export function ContactSection() {
           </div>
         )}
       </div>
-    </motion.section>
+    </AnimatedSection>
   );
 }

@@ -1,8 +1,6 @@
-"use client";
-
 import { WatchIcon, GraduationCap, Microscope } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatedSection } from "../ui/animated/AnimatedSection";
 
 export function AboutSection() {
     const badges = [
@@ -13,13 +11,10 @@ export function AboutSection() {
     ];
 
     return (
-        <motion.article
+        <AnimatedSection
             id="sobre"
             className="squircle-border overflow-hidden border-2 border-borda"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            amount={0.1}
         >
             <div className="flex flex-col md:flex-row">
                 <div className="relative w-full h-80 md:w-48 md:h-auto md:min-h-full shrink-0">
@@ -48,22 +43,19 @@ export function AboutSection() {
                         </p>
                         <div className="flex flex-wrap gap-3">
                             {badges.map((badge, index) => (
-                                <motion.div
+                                <div
                                     key={badge.title}
                                     className="bg-rosa-rose/10 border border-rosa-rose/20 rounded-xl p-3 flex items-center gap-3"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                                    style={{ animationDelay: `${index * 0.1}s` }}
                                 >
                                     <badge.icon className={`w-5 h-5 shrink-0 ${badge.iconClass}`} />
                                     <span className="text-xs font-medium text-marinho leading-snug">{badge.title}</span>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
-        </motion.article>
+        </AnimatedSection>
     );
 }
