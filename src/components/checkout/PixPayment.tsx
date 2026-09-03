@@ -209,7 +209,7 @@ export function PixPayment({ product, onBack }: PixPaymentProps) {
             <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 text-sm rounded-xl transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center cursor-pointer gap-2 bg-turquesa-dark hover:opacity-90 text-white font-bold py-4 text-sm squircle-border transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
             >
                 {loading ? (
                     <>

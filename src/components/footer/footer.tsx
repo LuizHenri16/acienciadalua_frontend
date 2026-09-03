@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { QrCode, ShieldCheck, RefreshCw } from "lucide-react";
 
 const sections = [
     { label: "Início", href: "/#banner" },
@@ -16,11 +17,48 @@ const links = [
     {label: "Feito por", href: "https://page-luiz-henrique.vercel.app/"}
 ];
 
+const trustBadges = [
+    {
+        icon: QrCode,
+        title: "Pagamento via PIX",
+        text: "Aprovação imediata e QR Code na hora",
+    },
+    {
+        icon: ShieldCheck,
+        title: "Conexão segura (SSL)",
+        text: "Seus dados protegidos por criptografia",
+    },
+    {
+        icon: RefreshCw,
+        title: "Compra garantida",
+        text: "Acesso vitalício aos materiais adquiridos",
+    },
+];
+
 export function Footer() {
     return (
         <footer className="mt-10 border-t border-borda bg-white">
+
             <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-10 md:py-12">
-                <div className="flex flex-col md:flex-row gap-10 md:gap-20">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+                    {trustBadges.map((badge) => (
+                        <div key={badge.title} className="flex items-start gap-3">
+                            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-turquesa-dark/10 text-turquesa-dark shrink-0">
+                                <badge.icon size={20} strokeWidth={2} />
+                            </span>
+                            <div className="flex flex-col gap-0.5">
+                                <span className="text-sm font-bold text-texto-secundario">
+                                    {badge.title}
+                                </span>
+                                <span className="text-xs text-texto-terciario leading-snug">
+                                    {badge.text}
+                                </span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="flex flex-col md:flex-row gap-10 md:gap-20 mt-10 pt-15">
                     <div className="flex flex-col gap-3 max-w-xs">
                         <div className="flex items-center gap-2">
                             <Image src="/acienciadalua-logo-var1.svg" alt="Logotipo A Ciência da Lua" width={32} height={32} />

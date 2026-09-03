@@ -15,10 +15,8 @@ export function PaymentForm({ product, onClose }: PaymentFormProps) {
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
             <div className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
-                <button
-                    onClick={onClose}
-                    className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
-                >
+                <button onClick={onClose}
+                    className="absolute top-4 right-4 z-10 p-2 cursor-pointer rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
                     <X size={18} className="text-gray-600" />
                 </button>
 

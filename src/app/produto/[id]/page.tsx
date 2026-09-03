@@ -4,10 +4,9 @@ import { ProductDetails } from "@/components/productdetails/productDetails";
 import { getProductById } from "@/api/product";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { Footer } from "@/components/footer/footer";
 
 const siteUrl = "https://acienciadalua.com.br";
-
-// ─── Dynamic Metadata ─────────────────────────────────────────────────────────
 
 export async function generateMetadata(
     { params }: { params: Promise<{ id: string }> }
@@ -63,8 +62,6 @@ export async function generateMetadata(
     };
 }
 
-// ─── Product Schema (JSON-LD) ─────────────────────────────────────────────────
-
 function buildProductSchema(product: {
     id: string;
     title: string;
@@ -104,8 +101,6 @@ function buildProductSchema(product: {
     };
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const product = await getProductById(id);
@@ -123,9 +118,9 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
             />
             <ProductDetailsHeader />
-            <div className="flex flex-col flex-1 pt-[65px] lg:h-screen lg:overflow-hidden">
+            <div className="flex flex-col flex-1 pt-16 lg:h-screen lg:overflow-hidden">
                 <ProductDetails product={product} />
-                <ProductDetailsFooter />
+                <Footer/>
             </div>
         </div>
     );
