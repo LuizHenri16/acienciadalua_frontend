@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Material, MaterialType } from "@/types/material";
 import { ProductCard } from "@/components/ui/card/card";
-import { PackageSearch, RotateCcw, Search } from "lucide-react";
+import { PackageSearch, Rotate3DIcon, RotateCcw, RotateCw, Search } from "lucide-react";
+import { RotateLoader } from "react-spinners";
 
 type CategoryTab = "todos" | "alunos" | "professores";
 
@@ -133,24 +134,24 @@ export function CatalogContent({ materials, error }: CatalogContentProps) {
                     </div>
                 </>
             ) : (
-                <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
+                <div className="flex flex-col items-center justify-center gap-4 py-16 text-center border border-borda squircle-border bg-turquesa/5">
                     <div className="w-14 h-14 rounded-full bg-turquesa-dark/10 flex items-center justify-center">
                         <PackageSearch className="w-6 h-6 text-turquesa-dark" />
                     </div>
                     <div className="flex flex-col gap-1">
-                        <p className="text-base font-bold text-texto-principal">Nenhum material encontrado</p>
+                        <p className="text-base font-bold text-texto-principal">Nenhum material disponível ainda</p>
                         <p className="text-sm text-texto-secundario max-w-sm">
                             {query
                                 ? "Não achamos resultados para essa busca. Tente outra palavra-chave."
-                                : "Ainda não há materiais nesta categoria. Volte em breve!"}
+                                : "Estamos preparando novos materiais para você. Volte em breve!"}
                         </p>
                     </div>
                     <button
                         type="button"
                         onClick={handleClear}
-                        className="inline-flex items-center gap-2 border-2 border-turquesa-dark text-turquesa-dark font-bold text-sm px-5 py-2.5 squircle-border transition-all duration-300 hover:bg-turquesa-dark hover:text-white cursor-pointer"
+                        className="group inline-flex items-center gap-2 border-2 border-turquesa-dark text-turquesa-dark font-bold text-sm px-5 py-2.5 squircle-border transition-all duration-300 bg-white hover:bg-turquesa-dark hover:text-white cursor-pointer"
                     >
-                        <RotateCcw size={14} />
+                        <RotateCw size={16}/>
                         Limpar filtros
                     </button>
                 </div>
