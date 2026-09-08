@@ -5,6 +5,7 @@ import type { Material } from "@/types/material";
 import { CatalogContent } from "@/components/catalog/catalogContent";
 import { ProductDetailsHeader } from "@/components/productdetails/header";
 import { ProductDetailsFooter } from "@/components/productdetails/footer";
+import { Footer } from "@/components/footer/footer";
 
 export const dynamic = "force-dynamic";
 
@@ -44,7 +45,7 @@ function CatalogLoading() {
             <div className="h-12 w-full bg-gray-200/70 rounded-2xl animate-pulse" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div key={i} className="aspect-[4/3] bg-gray-200/70 rounded-2xl animate-pulse" />
+                    <div key={i} className="aspect-4/3 bg-gray-200/70 rounded-2xl animate-pulse" />
                 ))}
             </div>
         </div>
@@ -55,16 +56,16 @@ export default async function ProdutosPage() {
     const { materials, error } = await fetchAllProducts();
 
     return (
-        <div className="min-h-screen flex flex-col font-sora bg-off-white">
+        <div className="min-h-screen flex flex-col font-sora bg-white">
             <ProductDetailsHeader />
-            <main id="main-content" className="flex-1 pt-[65px]">
+            <main id="main-content" className="flex-1 pt-16">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
                     <Suspense fallback={<CatalogLoading />}>
                         <CatalogContent materials={materials} error={error} />
                     </Suspense>
                 </div>
             </main>
-            <ProductDetailsFooter />
+            <Footer />
         </div>
     );
 }

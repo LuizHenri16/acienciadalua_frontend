@@ -12,7 +12,7 @@ export function ProductDetailsHeader() {
             <div className="hidden md:flex items-center gap-1 text-xs text-texto-terciario font-medium">
                 <span className="opacity-50" style={{ fontFamily: "var(--font-unkempt)", fontSize: "1rem" }}>A Ciência da Lua</span>
                 <span className="mx-2 opacity-30">/</span>
-                <span>Produto</span>
+                <span className="text-turquesa-dark">Catálogo</span>
             </div>
 
             <Link href="/minha-conta/signin" className="text-azul-med flex gap-1 items-center opacity-80 hover:opacity-100 transition-opacity">
