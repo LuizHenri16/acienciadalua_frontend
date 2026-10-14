@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { QrCode, ShieldCheck, RefreshCw } from "lucide-react";
+import { QrCode, ShieldCheck, RefreshCw, Link as LinkIcon } from "lucide-react";
+import { FaInstagram } from "react-icons/fa6";
+import { SiDevelopmentcontainers } from "react-icons/si";
 
 const sections = [
     { label: "Início", href: "/#banner" },
@@ -11,10 +13,8 @@ const sections = [
 ];
 
 const links = [
-    { label: "Contato", href: "/#contato" },
-    { label: "Instagram", href: "https://www.instagram.com/acienciadalua?igsh=bXhjd2V6Njc50Wxy", target: "_blank" as const },
-    { label: "Minha Conta", href: "/minha-conta/signin" },
-    {label: "Feito por", href: "https://page-luiz-henrique.vercel.app/"}
+    { label: "Instagram", icon: FaInstagram, href: "https://www.instagram.com/acienciadalua?igsh=bXhjd2V6Njc50Wxy", target: "_blank" as const },
+    { label: "Feito por", icon: SiDevelopmentcontainers, href: "https://page-luiz-henrique.vercel.app/" }
 ];
 
 const trustBadges = [
@@ -90,17 +90,26 @@ export function Footer() {
 
                         <div className="flex flex-col gap-3">
                             <span className="text-xs font-bold text-texto-secundario uppercase tracking-wider">Links</span>
-                            <nav className="flex flex-col gap-2">
-                                {links.map((link) => (
-                                    <Link
-                                        key={link.label}
-                                        href={link.href}
-                                        target={link.target}
-                                        className="text-sm text-texto-terciario hover:text-turquesa-dark transition-colors"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                ))}
+                            <nav className="flex flex-col md:flex-row justify-end gap-2">
+                                {links.map((link) => {
+                                    const IconComponent = link.icon;
+                                    return (
+                                        <Link
+                                            key={link.label}
+                                            href={link.href}
+                                            target={link.target}
+                                            className="text-sm text-texto-terciario hover:text-turquesa-dark transition-colors"
+                                        >
+                                            {IconComponent ? (
+                                                <span className="flex items-center justify-center w-8 h-8 rounded-md">
+                                                    <IconComponent size={18} strokeWidth={1.5} />
+                                                </span>
+                                            ) : (
+                                                link.label
+                                            )}
+                                        </Link>
+                                    )
+                                })}
                             </nav>
                         </div>
                     </div>
