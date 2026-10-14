@@ -55,7 +55,7 @@ export function BannerSection() {
         <section id="banner" className="relative flex-1 flex flex-col md:flex-row gap-10 md:gap-12">
             <div className="flex flex-col flex-1 gap-4 justify-center">
                 <h1 className="text-slate-100 font-sora text-4xl md:text-5xl xl:text-6xl font-extrabold leading-[1.08] tracking-tight max-w-4xl">
-                    Aprenda e ensine Química com <span className="text-turquesa font-caveat text-5xl md:text-6xl xl:text-7xl">método</span><span> e </span> 
+                    Aprenda e ensine Química com <span className="text-turquesa font-caveat text-5xl md:text-6xl xl:text-7xl">método</span><span> e </span>
                     <span className="text-rosa-rose font-caveat text-5xl md:text-6xl xl:text-7xl">intenção</span>
                 </h1>
 
@@ -99,10 +99,10 @@ export function BannerSection() {
             <div className="hidden md:block relative -bottom-5.5 w-full h-56 md:h-auto md:w-80 lg:w-126 md:flex-none">
                 <Image
                     fill
-                    src="/lua-person.png"
+                    src="/lua-person.webp"
                     alt=""
                     sizes="(min-width: 1024px) 480px, (min-width: 768px) 320px, 100vw"
-                    className="object-contain object-bottom [mask-image:linear-gradient(to_top,transparent_0%,black_3%)] gradient(to_top) [webkit-mask-image:linear-gradient(to_top,transparent_0%,black_35%)]"
+                    className="object-contain object-bottom mask-[linear-gradient(to_top,transparent_0%,black_3%)] gradient(to_top) [webkit-mask-image:linear-gradient(to_top,transparent_0%,black_35%)]"
                 />
             </div>
         </section>
