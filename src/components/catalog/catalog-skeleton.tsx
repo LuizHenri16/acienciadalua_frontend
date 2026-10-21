@@ -1,10 +1,11 @@
 export function CatalogSkeleton() {
   return (
-    <div className="flex flex-col gap-8">
+    <div role="status" aria-live="polite" className="flex flex-col gap-8">
+      <span className="sr-only">Carregando materiais…</span>
       <div className="h-9 w-56 bg-gray-200/70 rounded-xl animate-pulse" />
-      <div className="flex gap-2">
+      <div className="flex gap-2 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-11 w-40 bg-gray-200/70 rounded-2xl animate-pulse" />
+          <div key={i} className="h-11 w-40 shrink-0 bg-gray-200/70 rounded-2xl animate-pulse" />
         ))}
       </div>
       <div className="h-12 w-full bg-gray-200/70 rounded-2xl animate-pulse" />

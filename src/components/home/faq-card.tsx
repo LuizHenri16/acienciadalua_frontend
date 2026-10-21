@@ -15,6 +15,7 @@ export function FaqCard({ question, answers, isOpen, onToggle }: FaqCardProps) {
     const [height, setHeight] = useState("0px");
     const contentRef = useRef<HTMLDivElement>(null);
     const contentId = useId();
+    const questionId = useId();
 
     useEffect(() => {
         if (!contentRef.current) return;
@@ -22,23 +23,27 @@ export function FaqCard({ question, answers, isOpen, onToggle }: FaqCardProps) {
     }, [isOpen, answers]);
 
     return (
-        <div
-            onClick={onToggle}
-            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } }}
-            role="button"
-            tabIndex={0}
-            aria-expanded={isOpen}
-            aria-controls={contentId}
-            className={`w-full flex flex-col items-center p-4 squircle-border border bg-[#fafafa] cursor-pointer transition-all ${isOpen ? "border-rosa-rose bg-rosa-rose/[0.04]" : "border-borda hover:border-borda-med"}`}>
-            <div className="w-full flex items-center gap-3">
-                <h3 className="font-medium text-sm lg:text-base text-texto-principal">{question}</h3>
-                <ChevronDown className={`ml-auto shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-rosa-rose" : "text-texto-terciario"}`} />
-            </div>
+        <div className={`w-full flex flex-col items-center p-4 squircle-border border bg-[#fafafa] transition-all ${isOpen ? "border-rosa-rose bg-rosa-rose/[0.04]" : "border-borda hover:border-borda-med"}`}>
+            <h3 id={questionId} className="w-full">
+                <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={contentId}
+                    onClick={onToggle}
+                    className="-my-3 flex w-full cursor-pointer items-center gap-3 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-turquesa-dark"
+                >
+                    <span className="font-medium text-sm text-texto-principal lg:text-base">{question}</span>
+                    <ChevronDown className={`ml-auto shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-rosa-rose" : "text-texto-terciario"}`} />
+                </button>
+            </h3>
 
             <div
                 ref={contentRef}
                 id={contentId}
                 role="region"
+                aria-labelledby={questionId}
+                aria-hidden={!isOpen}
+                inert={!isOpen}
                 style={{
                     maxHeight: height,
                     overflow: "hidden",

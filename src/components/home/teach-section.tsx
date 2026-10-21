@@ -25,7 +25,7 @@ export function TeachSection({ materials, error }: TeachSectionProps) {
       <div className="mt-8 flex justify-center">
         <Link
           href="/produtos?categoria=professores"
-          className="inline-flex items-center gap-2 border-2 border-rosa-rose text-rosa-rose font-bold text-sm px-6 py-3 squircle-border transition-all duration-300 hover:bg-rosa-rose hover:text-white group"
+          className="inline-flex items-center gap-2 border-2 border-rosa-rose text-rosa-deep font-bold text-sm px-6 py-3 squircle-border transition-all duration-300 hover:bg-rosa-deep hover:text-white group"
         >
           Ver todos os materiais para Professores
           <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />

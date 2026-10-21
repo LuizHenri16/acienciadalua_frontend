@@ -70,7 +70,9 @@ export function ContactSection() {
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Seu nome"
-                  className="w-full bg-white text-sm squircle-border border border-borda-med p-4 outline-none focus:border-turquesa-dark/40 transition-colors"
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby={error ? "contact-form-error" : undefined}
+                  className="w-full bg-white text-sm squircle-border border border-borda-forte p-4 focus:border-turquesa-dark/40 transition-colors"
                 />
               </div>
 
@@ -86,7 +88,9 @@ export function ContactSection() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="seuemail@exemplo.com"
-                  className="w-full bg-white text-sm squircle-border border border-borda-med p-4 outline-none focus:border-turquesa-dark/40 transition-colors"
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby={error ? "contact-form-error" : undefined}
+                  className="w-full bg-white text-sm squircle-border border border-borda-forte p-4 focus:border-turquesa-dark/40 transition-colors"
                 />
               </div>
             </div>
@@ -102,7 +106,9 @@ export function ContactSection() {
                 value={form.subject}
                 onChange={handleChange}
                 placeholder="Ex: Dúvida sobre o material"
-                className="w-full bg-white text-sm squircle-border border border-borda-med p-4 outline-none focus:border-turquesa-dark/40 transition-colors"
+                aria-invalid={error ? true : undefined}
+                aria-describedby={error ? "contact-form-error" : undefined}
+                className="w-full bg-white text-sm squircle-border border border-borda-forte p-4 focus:border-turquesa-dark/40 transition-colors"
               />
             </div>
 
@@ -118,12 +124,14 @@ export function ContactSection() {
                 onChange={handleChange}
                 placeholder="Escreva sua dúvida aqui..."
                 rows={5}
-                className="w-full bg-white text-sm squircle-border border border-borda-med p-4 outline-none focus:border-turquesa-dark/40 transition-colors resize-y min-h-[120px]"
+                aria-invalid={error ? true : undefined}
+                aria-describedby={error ? "contact-form-error" : undefined}
+                className="w-full bg-white text-sm squircle-border border border-borda-forte p-4 focus:border-turquesa-dark/40 transition-colors resize-y min-h-[120px]"
               />
             </div>
 
             {error && (
-              <p className="text-sm text-red-500 bg-red-50 squircle-border-sm p-3 border border-red-200">
+              <p id="contact-form-error" role="alert" className="text-sm text-red-700 bg-red-50 squircle-border-sm p-3 border border-red-200">
                 {error}
               </p>
             )}
@@ -131,7 +139,7 @@ export function ContactSection() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-turquesa-dark hover:opacity-90 text-white font-bold py-4 px-8 squircle-border transition-all duration-200 active:scale-[0.98] disabled:opacity-70 cursor-pointer flex items-center justify-center gap-2"
+              className="w-full bg-turquesa-deep hover:opacity-90 text-white font-bold py-4 px-8 squircle-border transition-all duration-200 active:scale-[0.98] disabled:opacity-70 cursor-pointer flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>Enviando...</>

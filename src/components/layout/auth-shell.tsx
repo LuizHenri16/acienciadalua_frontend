@@ -11,12 +11,12 @@ interface AuthShellProps {
 
 export function AuthShell({ subtitle, logoMargin = "mb-2", children, footer }: AuthShellProps) {
   return (
-    <div className="relative flex flex-col justify-center items-center w-full min-h-screen bg-marinho overflow-hidden px-6 py-10">
+    <main id="main-content" tabIndex={-1} className="relative flex flex-col justify-center items-center w-full min-h-dvh bg-marinho overflow-x-clip px-4 sm:px-6 py-14 sm:py-10">
       <BackgroundLights />
       <div className="relative z-10 flex flex-col items-center w-full">
         <div className={`flex flex-row items-center gap-3 ${logoMargin}`}>
           <Image src="/acienciadalua-logo-var1.svg" alt="Logo" width={52} height={52} />
-          <h1 className="font-unkempt text-3xl text-ouro">
+          <h1 className="font-unkempt text-2xl sm:text-3xl text-ouro">
             A Ciência da{" "}
             <span className="text-turquesa">Lua</span>
           </h1>
@@ -29,6 +29,6 @@ export function AuthShell({ subtitle, logoMargin = "mb-2", children, footer }: A
         {children}
         {footer}
       </div>
-    </div>
+    </main>
   );
 }

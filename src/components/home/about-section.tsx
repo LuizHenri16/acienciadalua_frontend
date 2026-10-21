@@ -18,11 +18,11 @@ export function AboutSection() {
         >
             <div className="flex flex-col md:flex-row">
                 <div className="relative w-full h-80 md:w-48 md:h-auto md:min-h-full shrink-0">
-                    <Image quality={100} src="/professor-foto.webp" alt="Profa. Lua" loading="eager" fill className="object-cover object-top" />
+                    <Image quality={100} src="/professor-foto.webp" alt="Profa. Lua" loading="eager" fill sizes="(max-width: 768px) 100vw, 192px" className="object-cover object-top" />
                     <div className="absolute inset-0 bg-linear-to-t from-marinho/80 to-transparent md:hidden flex items-end px-5 py-4">
                         <div>
                             <p className="text-white font-extrabold text-lg leading-tight tracking-tight">Profa. Lua</p>
-                            <p className="text-texto-terciario text-sm mt-0.5">Química · UFRN · Mestranda</p>
+                            <p className="text-texto-sobre-escuro text-sm mt-0.5">Química · UFRN · Mestranda</p>
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@ export function AboutSection() {
                     <div className="hidden md:flex bg-marinho px-8 py-6">
                         <div className="flex flex-col justify-center gap-1">
                             <p className="text-white font-extrabold text-lg leading-tight tracking-tight">Profa. Lua</p>
-                            <p className="text-texto-terciario text-sm mt-0.5">Química · UFRN · Mestranda</p>
+                            <p className="text-texto-sobre-escuro text-sm mt-0.5">Química · UFRN · Mestranda</p>
                         </div>
                     </div>
 

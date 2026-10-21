@@ -103,14 +103,14 @@ function FeatureColumn({ block }: { block: Block }) {
 
 function CentralAnchor() {
     return (
-        <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-full bg-linear-to-tr from-teal-100/50 via-purple-100/30 to-rose-100/50 flex items-center justify-center p-6 border border-white/80 shadow-inner group cursor-pointer">
+        <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-linear-to-tr from-teal-100/50 via-purple-100/30 to-rose-100/50 flex items-center justify-center p-4 sm:p-6 border border-white/80 shadow-inner group cursor-pointer">
   
-  <div className="absolute z-10 w-48 sm:w-52 h-60 bg-linear-to-br from-rose-500 to-rose-700 text-white p-5 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-rose-500/30 transform rotate-8 translate-x-7 -translate-y-6 group-hover:rotate-12 group-hover:translate-x-10 group-hover:-translate-y-8 transition-all duration-300 select-none flex flex-col justify-between">
+  <div className="absolute z-10 w-48 sm:w-52 h-60 bg-linear-to-br from-rose-600 to-rose-800 text-white p-5 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-rose-500/30 transform rotate-8 translate-x-7 -translate-y-6 group-hover:rotate-12 group-hover:translate-x-10 group-hover:-translate-y-8 transition-all duration-300 select-none flex flex-col justify-between">
     <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
       <Presentation className="w-4.5 h-4.5" />
     </div>
     <div>
-      <span className="text-[10px] uppercase font-bold tracking-widest text-rose-200 block mb-1">
+      <span className="text-legenda uppercase font-bold tracking-widest text-white block mb-1">
         Para Aulas
       </span>
       <h4 className="text-sm font-extrabold leading-snug">
@@ -124,7 +124,7 @@ function CentralAnchor() {
       <FileText className="w-4.5 h-4.5" />
     </div>
     <div>
-      <span className="text-[10px] uppercase font-bold tracking-widest text-teal-600 block mb-1">
+      <span className="text-legenda uppercase font-bold tracking-widest text-teal-800 block mb-1">
         Para Estudos
       </span>
       <h4 className="text-sm font-extrabold text-slate-900 leading-snug">

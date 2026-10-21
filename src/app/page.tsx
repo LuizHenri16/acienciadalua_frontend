@@ -25,11 +25,11 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col font-sora relative">
+    <div className="w-full min-h-dvh flex flex-col font-sora relative">
       <SiteHeader />
-      <main id="main-content">
-        <div className="w-full min-h-screen flex items-stretch bg-hero">
-          <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col pt-16 md:pt-20">
+      <main id="main-content" tabIndex={-1}>
+        <div className="w-full min-h-dvh flex items-stretch bg-hero">
+          <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col pt-[var(--header-h)] md:pt-24">
             <BannerSection />
           </div>
         </div>

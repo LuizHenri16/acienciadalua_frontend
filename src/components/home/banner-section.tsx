@@ -2,6 +2,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import { useCountUp } from "@/hooks/use-count-up";
 
 function scrollTo(id: string) {
@@ -9,18 +10,24 @@ function scrollTo(id: string) {
 }
 
 export function BannerSection() {
+    const reduceMotion = useReducedMotion();
     const { count, ref } = useCountUp(9, 1200);
-    const [ufrnVisible, setUfrnVisible] = useState(false);
+    const [ufrnInView, setUfrnInView] = useState(false);
     const ufrnRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Reduced motion: keep the label always visible (see `ufrnVisible` below).
+        if (reduceMotion) return;
+
         const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) setTimeout(() => setUfrnVisible(true), 600); },
+            ([entry]) => { if (entry.isIntersecting) setTimeout(() => setUfrnInView(true), 600); },
             { threshold: 0.5 }
         );
         if (ufrnRef.current) observer.observe(ufrnRef.current);
         return () => observer.disconnect();
-    }, []);
+    }, [reduceMotion]);
+
+    const ufrnVisible = !!reduceMotion || ufrnInView;
 
     return (
         <section id="banner" className="relative flex-1 flex flex-col md:flex-row gap-10 md:gap-12">
@@ -35,11 +42,11 @@ export function BannerSection() {
                     professores prepararem aulas inesquecíveis com total leveza e <span className="font-bold text-turquesa-light">eficácia</span>.
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4">
-                    <button onClick={() => scrollTo("produtos")} className="inline-flex items-center gap-1 bg-turquesa-dark text-white text-sm font-bold px-6 py-3 squircle-border hover:shadow-sm hover:shadow-turquesa/30 hover:brightness-110 transition-all cursor-pointer">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4">
+                    <button onClick={() => scrollTo("produtos")} className="inline-flex items-center justify-center gap-1 w-full sm:w-auto bg-turquesa-deep text-white text-sm font-bold px-6 py-3 squircle-border hover:shadow-sm hover:shadow-turquesa/30 hover:brightness-110 transition-all cursor-pointer">
                         Ver materiais
                     </button>
-                    <button onClick={() => scrollTo("faq")} className=" inline-flex items-center gap-1 text-cinza-azul text-sm hover:text-white hover:gap-2 transition-all cursor-pointer">
+                    <button onClick={() => scrollTo("faq")} className=" inline-flex items-center justify-center gap-1 w-full sm:w-auto text-cinza-azul text-sm hover:text-white hover:gap-2 transition-all cursor-pointer">
                         Como funciona
                         <ArrowRight size={14} />
                     </button>
@@ -56,6 +63,7 @@ export function BannerSection() {
                     </div>
                     <div className="flex flex-col gap-1 pl-6 border-l border-white/[0.07]">
                         <span
+                            data-motion-reveal
                             className="text-2xl font-extrabold text-rosa-rose tracking-tight transition-opacity duration-700"
                             style={{ opacity: ufrnVisible ? 1 : 0 }}
                         >

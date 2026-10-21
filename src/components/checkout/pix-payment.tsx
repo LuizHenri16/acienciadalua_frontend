@@ -88,12 +88,12 @@ export function PixPayment({ product }: PixPaymentProps) {
                 </div>
 
                 <div className="flex justify-center">
-                    <div className="bg-white p-3 rounded-2xl shadow-sm border border-borda">
+                    <div className="bg-white p-2 sm:p-3 rounded-2xl shadow-sm border border-borda w-full max-w-56">
                         {/* eslint-disable-next-line @next/next/no-img-element -- data URI base64 */}
                         <img
                             src={`data:image/png;base64,${pixData.qr_code_base64}`}
                             alt="QR Code PIX"
-                            className="w-56 h-56"
+                            className="w-full h-auto aspect-square"
                         />
                     </div>
                 </div>
@@ -109,8 +109,9 @@ export function PixPayment({ product }: PixPaymentProps) {
                             </code>
                         </div>
                         <button
+                            type="button"
                             onClick={handleCopy}
-                            className="absolute top-2 right-2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-turquesa-dark text-white text-xs font-medium hover:opacity-90 transition-all active:scale-95"
+                            className="absolute top-2 right-2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-turquesa-deep text-white text-xs font-medium hover:opacity-90 transition-all active:scale-95 after:absolute after:-inset-2 after:content-['']"
                         >
                             {copied ? (
                                 <>
@@ -124,6 +125,9 @@ export function PixPayment({ product }: PixPaymentProps) {
                                 </>
                             )}
                         </button>
+                        <span className="sr-only" aria-live="polite">
+                            {copied ? 'Copiado!' : ''}
+                        </span>
                     </div>
                 </div>
 
@@ -135,7 +139,7 @@ export function PixPayment({ product }: PixPaymentProps) {
 
                 <Link
                     href={`/pagamento/sucesso?email=${encodeURIComponent(email)}`}
-                    className="w-full squircle-border bg-turquesa-dark text-white font-bold py-4 text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95"
+                    className="w-full squircle-border bg-turquesa-deep text-white font-bold py-4 text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95"
                 >
                     Já paguei
                     <ArrowRight size={16} />
@@ -164,10 +168,13 @@ export function PixPayment({ product }: PixPaymentProps) {
                     id="pix-email"
                     type="email"
                     required
+                    autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="seu@email.com"
-                    className="w-full px-4 py-3 rounded-xl border border-borda bg-gray-50 text-sm text-texto-principal placeholder:text-texto-terciario/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
+                    aria-invalid={error ? true : undefined}
+                    aria-describedby={error ? "pix-form-error" : undefined}
+                    className="w-full px-4 py-3 rounded-xl border border-borda-forte bg-gray-50 text-sm text-texto-principal placeholder:text-texto-terciario focus:border-emerald-500 transition-all"
                 />
             </div>
 
@@ -178,10 +185,13 @@ export function PixPayment({ product }: PixPaymentProps) {
                 <input
                     id="pix-name"
                     type="text"
+                    autoComplete="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Como você se chama"
-                    className="w-full px-4 py-3 rounded-xl border border-borda bg-gray-50 text-sm text-texto-principal placeholder:text-texto-terciario/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
+                    aria-invalid={error ? true : undefined}
+                    aria-describedby={error ? "pix-form-error" : undefined}
+                    className="w-full px-4 py-3 rounded-xl border border-borda-forte bg-gray-50 text-sm text-texto-principal placeholder:text-texto-terciario focus:border-emerald-500 transition-all"
                 />
             </div>
 
@@ -192,16 +202,20 @@ export function PixPayment({ product }: PixPaymentProps) {
                 <input
                     id="pix-cpf"
                     type="text"
+                    inputMode="numeric"
+                    autoComplete="off"
                     value={cpf}
                     onChange={(e) => setCpf(formatCpf(e.target.value))}
                     placeholder="000.000.000-00"
                     maxLength={14}
-                    className="w-full px-4 py-3 rounded-xl border border-borda bg-gray-50 text-sm text-texto-principal placeholder:text-texto-terciario/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
+                    aria-invalid={error ? true : undefined}
+                    aria-describedby={error ? "pix-form-error" : undefined}
+                    className="w-full px-4 py-3 rounded-xl border border-borda-forte bg-gray-50 text-sm text-texto-principal placeholder:text-texto-terciario focus:border-emerald-500 transition-all"
                 />
             </div>
 
             {error && (
-                <div className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
+                <div id="pix-form-error" role="alert" className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
                     <span className="text-base leading-none mt-0.5">!</span>
                     <span>{error}</span>
                 </div>
@@ -210,7 +224,8 @@ export function PixPayment({ product }: PixPaymentProps) {
             <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center cursor-pointer gap-2 bg-turquesa-dark hover:opacity-90 text-white font-bold py-4 text-sm squircle-border transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+                aria-busy={loading}
+                className="w-full flex items-center justify-center cursor-pointer gap-2 bg-turquesa-deep hover:opacity-90 text-white font-bold py-4 text-sm squircle-border transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
             >
                 {loading ? (
                     <>

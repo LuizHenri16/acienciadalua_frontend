@@ -38,8 +38,8 @@ export default async function ProdutosPage() {
 
     return (
         <CatalogShell>
-            <main id="main-content" className="flex-1 pt-16">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+            <main id="main-content" tabIndex={-1} className="flex-1 pt-[var(--header-h)]">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14">
                     <Suspense fallback={<CatalogSkeleton />}>
                         <CatalogContent materials={materials} error={error} />
                     </Suspense>

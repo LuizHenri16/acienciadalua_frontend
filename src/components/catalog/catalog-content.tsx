@@ -83,7 +83,7 @@ export function CatalogContent({ materials, error }: CatalogContentProps) {
             </div>
 
             <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex gap-2 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 pb-1">
                     {TABS.map((item) => {
                         const active = tab === item.id;
                         return (
@@ -92,10 +92,10 @@ export function CatalogContent({ materials, error }: CatalogContentProps) {
                                 type="button"
                                 onClick={() => handleTabChange(item.id)}
                                 aria-pressed={active}
-                                className={`px-5 py-2.5 squircle-border text-sm font-bold transition-all duration-300 cursor-pointer active:scale-95 ${
+                                className={`px-5 py-2.5 shrink-0 squircle-border text-sm font-bold transition-all duration-300 cursor-pointer active:scale-95 ${
                                     active
-                                        ? "bg-turquesa-dark text-white shadow-sm"
-                                        : "bg-white border border-borda text-texto-secundario hover:border-turquesa-dark/50 hover:text-turquesa-dark"
+                                        ? "bg-turquesa-deep text-white shadow-sm"
+                                        : "bg-white border border-borda text-texto-secundario hover:border-turquesa-dark/50 hover:text-turquesa-deep"
                                 }`}
                             >
                                 {item.label}
@@ -104,7 +104,7 @@ export function CatalogContent({ materials, error }: CatalogContentProps) {
                     })}
                 </div>
 
-                <div className="relative">
+                <div className="relative w-full sm:max-w-sm">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-texto-terciario pointer-events-none" />
                     <input
                         type="search"
@@ -112,18 +112,18 @@ export function CatalogContent({ materials, error }: CatalogContentProps) {
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Buscar por título ou palavra-chave..."
                         aria-label="Buscar materiais"
-                        className="w-full pl-11 pr-4 py-3 squircle-border border border-borda bg-white text-sm text-texto-principal placeholder:text-texto-terciario/60 focus:outline-none focus:ring-2 focus:ring-turquesa-dark/40 transition-shadow"
+                        className="w-full pl-11 pr-4 py-3 squircle-border border border-borda-forte bg-white text-sm text-texto-principal placeholder:text-texto-terciario transition-shadow"
                     />
                 </div>
             </div>
 
             {error ? (
-                <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
+                <div role="alert" className="flex flex-col items-center justify-center gap-3 py-16 text-center">
                     <p className="text-sm text-texto-secundario">{error}</p>
                 </div>
             ) : filtered.length > 0 ? (
                 <>
-                    <p className="text-xs text-texto-terciario">
+                    <p role="status" aria-live="polite" aria-atomic="true" className="text-xs text-texto-terciario">
                         {filtered.length} {filtered.length === 1 ? "material encontrado" : "materiais encontrados"}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -133,7 +133,7 @@ export function CatalogContent({ materials, error }: CatalogContentProps) {
                     </div>
                 </>
             ) : (
-                <div className="flex flex-col items-center justify-center gap-4 py-16 text-center border border-borda squircle-border bg-turquesa/5">
+                <div role="status" className="flex flex-col items-center justify-center gap-4 py-16 text-center border border-borda squircle-border bg-turquesa/5">
                     <div className="w-14 h-14 rounded-full bg-turquesa-dark/10 flex items-center justify-center">
                         <PackageSearch className="w-6 h-6 text-turquesa-dark" />
                     </div>
@@ -148,7 +148,7 @@ export function CatalogContent({ materials, error }: CatalogContentProps) {
                     <button
                         type="button"
                         onClick={handleClear}
-                        className="group inline-flex items-center gap-2 border-2 border-turquesa-dark text-turquesa-dark font-bold text-sm px-5 py-2.5 squircle-border transition-all duration-300 bg-white hover:bg-turquesa-dark hover:text-white cursor-pointer"
+                        className="group inline-flex items-center gap-2 border-2 border-turquesa-dark text-turquesa-deep font-bold text-sm px-5 py-2.5 squircle-border transition-all duration-300 bg-white hover:bg-turquesa-deep hover:text-white cursor-pointer"
                     >
                         <RotateCw size={16}/>
                         Limpar filtros

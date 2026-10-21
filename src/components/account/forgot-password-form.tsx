@@ -32,6 +32,12 @@ export function ForgotPasswordForm({ onSentChange }: ForgotPasswordFormProps) {
         }
     }
 
+    function handleFormSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        if (loading) return;
+        handleSubmit();
+    }
+
     if (sent) {
         return (
             <div className="w-full max-w-sm bg-white/5 border border-white/10 backdrop-blur-sm squircle-border px-6 py-8 flex flex-col items-center gap-3 text-center">
@@ -47,35 +53,34 @@ export function ForgotPasswordForm({ onSentChange }: ForgotPasswordFormProps) {
     }
 
     return (
-        <div className="w-full max-w-sm bg-white/5 border border-white/10 backdrop-blur-sm squircle-border px-6 py-8 flex flex-col gap-2">
+        <form onSubmit={handleFormSubmit} noValidate className="w-full max-w-sm bg-white/5 border border-white/10 backdrop-blur-sm squircle-border px-6 py-8 flex flex-col gap-2">
             <h2 className="text-white text-lg md:text-xl font-semibold text-center mb-1">Redefinir senha</h2>
             <p className="text-turquesa-light text-xs md:text-sm text-center mb-4 opacity-70 leading-relaxed">
                 Informe seu email e enviaremos um link de redefinição.
             </p>
             <div className="flex flex-col w-full gap-2">
                 <Input
+                    id="email"
+                    name="email"
                     placeholder="Seu e-mail"
-                    label=""
+                    ariaLabel="E-mail"
+                    autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                     type="email"
+                    error={error || undefined}
                 />
-                {error && (
-                    <p className="w-full px-3 py-2 rounded-xl bg-coral/10 border border-coral/30 text-coral-light text-sm text-center font-medium">
-                        {error}
-                    </p>
-                )}
                 <div className="mt-1 w-full">
                     <Button
+                        type="submit"
                         loadingName="Enviando..."
                         variant="primary"
+                        size="lg"
                         name="Enviar link de redefinição"
-                        onClick={handleSubmit}
                         loading={loading}
                     />
                 </div>
             </div>
-        </div>
+        </form>
     );
 }

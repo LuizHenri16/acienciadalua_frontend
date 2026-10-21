@@ -50,7 +50,7 @@ export function AdminSignInForm() {
                 </p>
             )}
             <div className="mt-1">
-                <Button name="Entrar" loadingName="Entrando" loading={loading} onClick={handleSubmit} />
+                <Button name="Entrar" loadingName="Entrando" variant="primary" size="lg" loading={loading} onClick={handleSubmit} />
             </div>
         </div>
     );

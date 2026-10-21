@@ -77,15 +77,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} ${caveat.variable} bg-marinho h-full antialiased scroll-smooth`} style={{ scrollPaddingTop: '64px' }}>
+    <html lang="pt-BR" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} ${caveat.variable} bg-marinho h-full antialiased scroll-smooth`}>
       <head>
         <meta name="google-site-verification" content="YD35zo8xwFGcpXW6MNdRzOYPzlGGDpUbze6VeUahDPg" />
+        {/*
+          Without JavaScript the reveal animations never run, so their inline
+          "opacity: 0" would hide the whole page. React does not hydrate the
+          children of <noscript>, hence the raw HTML injection.
+        */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: "<style>[data-motion-reveal]{opacity:1!important;transform:none!important}</style>",
+          }}
+        />
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
         <JsonLd data={personSchema} />
       </head>
       <body className="min-h-full flex flex-col ">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-turquesa-dark focus:text-white focus:rounded-xl focus:font-bold focus:text-sm">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-turquesa-deep focus:text-white focus:rounded-xl focus:font-bold focus:text-sm">
           Pular para o conteúdo principal
         </a>
         <PageTransition>

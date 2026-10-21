@@ -1,17 +1,21 @@
 "use client"
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const reduceMotion = useReducedMotion();
 
     return (
         <motion.div
             key={pathname}
-            initial={{ opacity: 0 }}
+            // Without JS this wrapper never animates, so the <noscript> fallback
+            // in the root layout forces [data-motion-reveal] elements to be visible.
+            data-motion-reveal
+            initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2, ease: [0.0, 0.0, 0.2, 1] }}
+            transition={{ duration: reduceMotion ? 0 : 0.2, ease: [0.0, 0.0, 0.2, 1] }}
         >
             {children}
         </motion.div>

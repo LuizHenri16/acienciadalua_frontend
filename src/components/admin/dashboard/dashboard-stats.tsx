@@ -9,14 +9,14 @@ interface DashboardStatsProps {
 export function DashboardStats({ total, ativos, inativos }: DashboardStatsProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
-      <p className="col-span-3 text-xs font-semibold text-texto-secundario uppercase tracking-wider">Visão geral</p>
+      <h1 className="col-span-3 text-xs font-semibold text-texto-secundario uppercase tracking-wider">Visão geral</h1>
 
       <div className="squircle-border border border-borda-med p-3 gap-2 flex flex-col">
         <div className="bg-turquesa-light rounded-lg p-1.5 w-fit">
           <BoxIcon size={16} className="text-turquesa-dark" />
         </div>
         <span className="text-xs text-texto-secundario mt-1">Produtos no total</span>
-        <span className="text-2xl font-bold text-texto-principal">{total}</span>
+        <span className="text-2xl sm:text-3xl font-bold text-texto-principal break-words">{total}</span>
       </div>
 
       <div className="squircle-border border border-turquesa-dark p-3 gap-2 flex flex-col">
@@ -24,15 +24,15 @@ export function DashboardStats({ total, ativos, inativos }: DashboardStatsProps)
           <EyeIcon size={16} className="text-turquesa-dark" />
         </div>
         <span className="text-xs text-texto-secundario mt-1">Ativos na vitrine</span>
-        <span className="text-2xl font-bold text-turquesa-dark">{ativos}</span>
+        <span className="text-2xl sm:text-3xl font-bold text-turquesa-dark break-words">{ativos}</span>
       </div>
 
       <div className="squircle-border border border-borda-med p-3 gap-2 flex flex-col">
         <div className="bg-gray-100 rounded-lg p-1.5 w-fit">
-          <EyeOffIcon size={16} className="text-gray-400" />
+          <EyeOffIcon size={16} className="text-texto-terciario" />
         </div>
         <span className="text-xs text-texto-secundario mt-1">Inativos</span>
-        <span className="text-2xl font-bold text-texto-terciario">{inativos}</span>
+        <span className="text-2xl sm:text-3xl font-bold text-texto-terciario break-words">{inativos}</span>
       </div>
     </div>
   );

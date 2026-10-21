@@ -62,9 +62,9 @@ export function SiteFooter() {
                     <div className="flex flex-col gap-3 max-w-xs">
                         <div className="flex items-center gap-2">
                             <Image src="/acienciadalua-logo-var1.svg" alt="Logotipo A Ciência da Lua" width={32} height={32} />
-                            <span className="font-unkempt text-xl text-ouro">
+                            <span className="font-unkempt text-xl text-ouro-ink">
                                 A Ciência da{" "}
-                                <span className="text-turquesa-dark">Lua</span>
+                                <span className="text-turquesa-deep">Lua</span>
                             </span>
                         </div>
                         <p className="text-xs text-texto-terciario leading-relaxed">
@@ -75,12 +75,12 @@ export function SiteFooter() {
                     <div className="flex flex-1 gap-10 md:gap-20">
                         <div className="flex flex-col gap-3">
                             <span className="text-xs font-bold text-texto-secundario uppercase tracking-wider">Seções</span>
-                            <nav className="flex flex-col gap-2">
+                            <nav aria-label="Navegação do rodapé" className="flex flex-col gap-2">
                                 {sections.map((section) => (
                                     <a
                                         key={section.label}
                                         href={section.href}
-                                        className="text-sm text-texto-terciario hover:text-turquesa-dark transition-colors"
+                                        className="text-sm text-texto-terciario hover:text-turquesa-deep transition-colors"
                                     >
                                         {section.label}
                                     </a>
@@ -90,7 +90,7 @@ export function SiteFooter() {
 
                         <div className="flex flex-col gap-3">
                             <span className="text-xs font-bold text-texto-secundario uppercase tracking-wider">Links</span>
-                            <nav className="flex flex-col md:flex-row justify-end gap-2">
+                            <nav aria-label="Redes sociais" className="flex flex-col md:flex-row justify-end gap-2">
                                 {links.map((link) => {
                                     const IconComponent = link.icon;
                                     return (
@@ -98,7 +98,9 @@ export function SiteFooter() {
                                             key={link.label}
                                             href={link.href}
                                             target={link.target}
-                                            className="text-sm text-texto-terciario hover:text-turquesa-dark transition-colors"
+                                            aria-label={link.label}
+                                            rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+                                            className="inline-flex items-center justify-center min-h-11 min-w-11 text-sm text-texto-terciario hover:text-turquesa-deep transition-colors"
                                         >
                                             {IconComponent ? (
                                                 <span className="flex items-center justify-center w-8 h-8 rounded-md">

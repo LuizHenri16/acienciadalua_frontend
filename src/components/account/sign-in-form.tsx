@@ -61,41 +61,53 @@ export function SignInForm({ initialEmail }: SignInFormProps) {
         }
     }
 
+    function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        if (loading) return;
+        if (needsPasswordSetup) {
+            handleSetPassword();
+        } else {
+            handleSignIn();
+        }
+    }
+
     return (
-        <div className="flex flex-col w-full gap-2">
+        <form onSubmit={handleSubmit} noValidate className="flex flex-col w-full gap-2">
             <Input
+                id="email"
+                name="email"
                 placeholder="Seu e-mail"
-                label=""
+                ariaLabel="E-mail"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
+                ariaDescribedBy={error ? "signin-form-error" : undefined}
             />
 
             <div className="flex flex-col gap-1">
                 <Input
+                    id="password"
+                    name="password"
                     placeholder={needsPasswordSetup ? "Crie sua senha" : "Sua senha"}
-                    label=""
+                    ariaLabel={needsPasswordSetup ? "Crie sua senha" : "Senha"}
+                    autoComplete={needsPasswordSetup ? "new-password" : "current-password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                            if (needsPasswordSetup) {
-                                handleSetPassword();
-                            } else {
-                                handleSignIn();
-                            }
-                        }
-                    }}
                     type="password"
+                    ariaDescribedBy={error ? "signin-form-error" : undefined}
                 />
                 {needsPasswordSetup && (
                     <Input
+                        id="password-confirm"
+                        name="password-confirm"
                         placeholder="Confirme sua senha"
-                        label=""
+                        ariaLabel="Confirme sua senha"
+                        autoComplete="new-password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        onKeyDown={(e) => e.key === "Enter" && handleSetPassword()}
                         type="password"
+                        ariaDescribedBy={error ? "signin-form-error" : undefined}
                     />
                 )}
             </div>
@@ -116,7 +128,7 @@ export function SignInForm({ initialEmail }: SignInFormProps) {
             )}
 
             {error && (
-                <p className="w-full px-3 py-2 rounded-xl bg-coral/10 border border-coral/30 text-coral-light text-sm text-center font-medium">
+                <p id="signin-form-error" role="alert" className="w-full px-3 py-2 rounded-xl bg-coral/10 border border-coral/30 text-coral-light text-sm text-center font-medium">
                     {error}
                 </p>
             )}
@@ -124,22 +136,24 @@ export function SignInForm({ initialEmail }: SignInFormProps) {
             <div className="mt-1 w-full">
                 {needsPasswordSetup ? (
                     <Button
+                        type="submit"
                         loadingName="Criando..."
                         variant="primary"
+                        size="lg"
                         name="Criar senha e entrar"
-                        onClick={handleSetPassword}
                         loading={loading}
                     />
                 ) : (
                     <Button
+                        type="submit"
                         loadingName="Entrando..."
                         variant="primary"
+                        size="lg"
                         name="Entrar"
-                        onClick={handleSignIn}
                         loading={loading}
                     />
                 )}
             </div>
-        </div>
+        </form>
     );
 }

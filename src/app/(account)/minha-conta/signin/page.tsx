@@ -9,7 +9,7 @@ export default async function SignIn({ searchParams }: { searchParams: Promise<{
             subtitle="Acesse sua área de materiais"
             footer={
                 <div className="mt-6 flex flex-col items-center gap-3">
-                    <p className="text-white/30 text-xs md:text-sm text-center max-w-xs leading-relaxed">
+                    <p className="text-white/70 text-xs md:text-sm text-center max-w-xs leading-relaxed">
                         Sua conta é criada automaticamente após a confirmação da compra.
                     </p>
                     <BackVitrine />

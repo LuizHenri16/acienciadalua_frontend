@@ -13,6 +13,7 @@ interface AccountWelcomeProps {
 export function AccountWelcome({ totalMateriais, userName }: AccountWelcomeProps) {
     return (
         <motion.div
+            data-motion-reveal
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -25,13 +26,13 @@ export function AccountWelcome({ totalMateriais, userName }: AccountWelcomeProps
                     </div>
                     <div className="flex flex-col gap-1.5">
                         <p className="text-sm text-texto-secundario">
-                            Olá, <span className="font-semibold text-turquesa-dark">{userName}</span> 👋
+                            Olá, <span className="font-semibold text-turquesa-deep">{userName}</span> 👋
                         </p>
                         {totalMateriais && totalMateriais > 0 ? (
                             <>
                                 <h1 className="text-xl md:text-2xl font-bold text-texto-principal">Continue de onde parou</h1>
                                 <p className="text-sm text-texto-terciario leading-relaxed">
-                                    Você tem <span className="font-semibold text-turquesa-dark">{totalMateriais} {totalMateriais === 1 ? 'material disponível' : 'materiais disponíveis'}</span>.
+                                    Você tem <span className="font-semibold text-turquesa-deep">{totalMateriais} {totalMateriais === 1 ? 'material disponível' : 'materiais disponíveis'}</span>.
                                     Cada página é um passo a mais no seu aprendizado.
                                 </p>
                             </>
@@ -59,6 +60,7 @@ export function BannerNoMaterials() {
 
     return (
         <motion.div
+            data-motion-reveal
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -74,7 +76,7 @@ export function BannerNoMaterials() {
                 </p>
             </div>
             <div className="w-full sm:w-72">
-                <Button name="Ir para a vitrine" loadingName="Indo para a vitrine..." onClick={handleGoToVitrine} />
+                <Button name="Ir para a vitrine" loadingName="Indo para a vitrine..." variant="primary" size="lg" onClick={handleGoToVitrine} />
             </div>
         </motion.div>
     );
