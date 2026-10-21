@@ -10,7 +10,8 @@ export function AdminProductHeader({ isEditing = false }: ProductHeaderProps) {
     <div className="w-full bg-white border-b border-borda px-4 sm:px-6 lg:px-8 h-14 flex items-center gap-4">
       <Link
         href="/painel/"
-        className="flex items-center justify-center w-8 h-8 squircle-border border border-borda-med text-texto-principal hover:bg-gray-50 transition-colors"
+        aria-label="Voltar ao painel"
+        className="relative flex items-center justify-center w-8 h-8 min-h-11 squircle-border border border-borda-med text-texto-principal hover:bg-gray-50 transition-colors after:absolute after:-inset-1.5 after:content-['']"
       >
         <ArrowLeft className="w-4 h-4" />
       </Link>

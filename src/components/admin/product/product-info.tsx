@@ -5,16 +5,18 @@ import { formatCurrencyInput, parseCurrencyInput } from '@/lib/format/currency';
 interface ProductInfoProps {
   data: ProductFormData;
   onChange: <K extends keyof ProductFormData>(field: K, value: ProductFormData[K]) => void;
+  /** The form level error lives in the publishing card: link it to these fields. */
+  hasError?: boolean;
 }
 
-export function ProductInfo({ data, onChange }: ProductInfoProps) {
+export function ProductInfo({ data, onChange, hasError = false }: ProductInfoProps) {
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCurrencyInput(e.target.value);
     onChange('price', formatted);
     onChange('priceValue', parseCurrencyInput(formatted));
   };
 
-  const inputClass = "w-full border border-gray-200 squircle-border px-3.5 py-2.5 text-sm text-texto-principal placeholder-gray-300 bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-turquesa-dark/20 focus:border-turquesa-dark focus:bg-white transition-all";
+  const inputClass = "w-full border border-borda-forte squircle-border px-3.5 py-2.5 text-sm text-texto-principal placeholder-gray-500 bg-gray-50/50 focus:border-turquesa-dark focus:bg-white transition-all";
 
   return (
     <div className="flex flex-col gap-4">
@@ -27,6 +29,8 @@ export function ProductInfo({ data, onChange }: ProductInfoProps) {
           value={data.title}
           onChange={(e) => onChange('title', e.target.value)}
           placeholder="Digite o título do produto"
+          aria-invalid={hasError || undefined}
+          aria-describedby={hasError ? "product-form-error" : undefined}
           className={inputClass}
         />
       </div>
@@ -39,6 +43,8 @@ export function ProductInfo({ data, onChange }: ProductInfoProps) {
           onChange={(e) => onChange('description', e.target.value)}
           placeholder="Descrição completa do material..."
           rows={4}
+          aria-invalid={hasError || undefined}
+          aria-describedby={hasError ? "product-form-error" : undefined}
           className={`${inputClass} resize-none`}
         />
       </div>
@@ -53,6 +59,8 @@ export function ProductInfo({ data, onChange }: ProductInfoProps) {
             value={data.price}
             onChange={handlePriceChange}
             placeholder="R$ 0,00"
+            aria-invalid={hasError || undefined}
+            aria-describedby={hasError ? "product-form-error" : undefined}
             className={inputClass}
           />
         </div>
@@ -63,6 +71,8 @@ export function ProductInfo({ data, onChange }: ProductInfoProps) {
             id="category"
             value={data.category}
             onChange={(e) => onChange('category', e.target.value as MaterialType)}
+            aria-invalid={hasError || undefined}
+            aria-describedby={hasError ? "product-form-error" : undefined}
             className={`${inputClass} cursor-pointer`}
           >
             <option value={MaterialType.STUDENT}>Material de estudo</option>

@@ -1,14 +1,16 @@
-'use client'
-
 import { ArrowLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export function BackVitrine() {
-    const router = useRouter();
+interface BackVitrineProps {
+    tone?: "dark" | "light";
+}
+
+export function BackVitrine({ tone = "dark" }: BackVitrineProps) {
+    const color = tone === "light" ? "text-azul-deep" : "text-azul-claro";
 
     return (
-        <button className="flex items-center gap-1 cursor-pointer hover:gap-2 transition-all" onClick={() => router.push("/")}>
-            <ArrowLeft size={16} className="text-azul-med" /> <p className="font-medium text-sm text-azul-med"> Voltar à vitrine</p>
-        </button>
+        <Link href="/" className={`flex items-center gap-1 cursor-pointer hover:gap-2 transition-all ${color}`}>
+            <ArrowLeft size={16} /> <span className="font-medium text-sm"> Voltar à vitrine</span>
+        </Link>
     );
 }

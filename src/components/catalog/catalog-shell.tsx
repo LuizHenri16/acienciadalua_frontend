@@ -7,7 +7,7 @@ interface CatalogShellProps {
 
 export function CatalogShell({ children }: CatalogShellProps) {
   return (
-    <div className="min-h-screen flex flex-col font-sora bg-white">
+    <div className="min-h-dvh flex flex-col font-sora bg-white">
       <CatalogHeader />
       {children}
     </div>

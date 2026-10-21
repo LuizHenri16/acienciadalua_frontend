@@ -19,13 +19,13 @@ export function ErrorState({
   showBackVitrine = false,
 }: ErrorStateProps) {
   return (
-    <main className="h-screen bg-marinho flex flex-col justify-center items-center relative">
+    <main id="main-content" tabIndex={-1} className="min-h-dvh bg-marinho flex flex-col justify-center items-center relative">
       <BackgroundLights />
-      <div className="z-10 flex flex-col items-center w-full gap-6 px-6">
+      <div className="z-10 flex flex-col items-center w-full gap-6 px-4 sm:px-6">
         <div className="text-center">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold font-sora text-white">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-sora text-white">
             {title}
-          </h2>
+          </h1>
           <p className="text-base md:text-lg font-sora text-rosa-rose mt-1">
             {message}
           </p>
@@ -38,7 +38,7 @@ export function ErrorState({
         <div className="flex gap-3">
           <button
             onClick={onReset}
-            className="px-6 py-3 squircle-border bg-turquesa-dark text-white text-sm font-bold hover:opacity-90 transition-all cursor-pointer active:scale-[0.98]"
+            className="px-6 py-3 squircle-border bg-turquesa-deep text-white text-sm font-bold hover:opacity-90 transition-all cursor-pointer active:scale-[0.98]"
           >
             Tentar novamente
           </button>

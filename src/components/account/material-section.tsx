@@ -38,7 +38,8 @@ export function MaterialSection({ materials, loading = false }: MaterialSectionP
                 </h2>
             </div>
             {loading ? (
-                <div className="flex flex-col gap-3">
+                <div role="status" aria-live="polite" aria-busy="true" className="flex flex-col gap-3">
+                    <span className="sr-only">Carregando materiais…</span>
                     {[1, 2, 3].map((i) => (
                         <SkeletonPurchasedCard key={i} />
                     ))}

@@ -18,8 +18,8 @@ export function ProductCard({ material }: CardProps) {
     const coverUrl = uploadUrl(material.coverUrl);
 
     const badgeBg = isTeacher
-        ? "bg-rosa-rose/90 hover:bg-rosa-rose"
-        : "bg-turquesa-dark/90 hover:bg-turquesa-dark";
+        ? "bg-rosa-deep"
+        : "bg-turquesa-deep";
 
     return (
         <div className="group bg-white border border-borda rounded-2xl overflow-hidden flex flex-col shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 w-full">
@@ -44,18 +44,18 @@ export function ProductCard({ material }: CardProps) {
                         </div>
                     )}
                 </Link>
-                <span className={`absolute top-3 left-3 z-10 text-white text-[0.6rem] font-black uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-sm transition-colors ${badgeBg}`}>
+                <span className={`absolute top-3 left-3 z-10 text-white text-legenda font-black uppercase tracking-widest px-2.5 py-1 rounded-full backdrop-blur-sm transition-colors ${badgeBg}`}>
                     {format}
                 </span>
                 {isFree && (
-                    <span className="absolute top-3 right-3 z-10 bg-ouro text-marinho text-[0.6rem] font-black uppercase tracking-widest px-3 py-1.5 rounded-full">
+                    <span className="absolute top-3 right-3 z-10 bg-ouro text-marinho text-legenda font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
                         Gratuito
                     </span>
                 )}
             </div>
 
             <div className="flex flex-col gap-2.5 p-5 flex-1">
-                <span className="text-lg font-extrabold text-turquesa-dark tracking-tight">
+                <span className="text-lg font-extrabold text-turquesa-deep tracking-tight">
                     {formatCurrency(material.price)}
                 </span>
 
@@ -71,7 +71,7 @@ export function ProductCard({ material }: CardProps) {
 
                 <Link
                     href={`/produto/${material.id}`}
-                    className="bg-turquesa-dark text-white mt-auto flex items-center justify-center gap-2 hover:gap-3 w-full py-3.5 squircle-border font-bold text-sm transition-all duration-300 hover:opacity-90 active:scale-[0.97]"
+                    className="bg-turquesa-deep text-white mt-auto flex items-center justify-center gap-2 hover:gap-3 w-full py-3.5 squircle-border font-bold text-sm transition-all duration-300 hover:opacity-90 active:scale-[0.97]"
                 >
                     Ver Detalhes
                     <ArrowRightIcon size={14} />

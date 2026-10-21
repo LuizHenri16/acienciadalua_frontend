@@ -21,7 +21,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
     return (
         <>
-            <main className="flex-1 flex flex-col lg:flex-row animate-in fade-in duration-700 mb-10 py-6 ">
+            <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col lg:flex-row animate-in fade-in duration-700 mb-10 py-6 ">
                 <div className="relative lg:w-1/2 xl:w-[35%] h-82 sm:h-96 lg:h-140 bg-marinho rounded-r-4xl shrink-0 overflow-hidden">
                     {coverUrl ? (
                         <Image
@@ -41,7 +41,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 <div className="flex-1 flex flex-col justify-center px-8 lg:px-14 xl:px-20 overflow-y-auto">
                     <div className="max-w-xl w-full mx-auto lg:mx-0 space-y-10">
                         <div className="space-y-4 border-b border-borda py-5">
-                            <p className={`inline-block px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-widest squircle-border ${isTeacher ? "bg-rosa-rose text-white" : "bg-turquesa-light text-petroleo"}`}>
+                            <p className={`inline-block px-3 py-0 text-legenda font-semibold uppercase tracking-widest squircle-border ${isTeacher ? "bg-rosa-deep text-white" : "bg-turquesa-light text-petroleo"}`}>
                                 {label}
                             </p>
                             <h1 className="text-3xl xl:text-4xl font-bold text-texto-principal leading-tight">
@@ -49,21 +49,21 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             </h1>
                         </div>
                         <div className="space-y-4">
-                            <p className="text-5xl font-bold mt-1 text-turquesa-dark">
+                            <p className="text-4xl sm:text-5xl font-bold mt-1 text-turquesa-dark">
                                 {Number(product.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                             </p>
                             <button onClick={() => setShowPaymentForm(true)}
-                                    className="w-full squircle-border flex items-center justify-center gap-3 bg-turquesa-dark hover:opacity-90 text-white font-semibold py-4 text-md transition-all shadow-md cursor-pointer active:scale-[0.98]">
+                                    className="w-full squircle-border flex items-center justify-center gap-3 bg-turquesa-deep hover:opacity-90 text-white font-semibold py-4 text-base transition-all shadow-md cursor-pointer active:scale-[0.98]">
                                 <CreditCard size={26} strokeWidth={2.5} />
                                 Comprar agora
                             </button>
 
-                            <div className="flex items-center justify-center gap-8 p-4 mt-10 border-t border-borda text-xs md:text-md ">
+                            <div className="flex items-center justify-center gap-8 p-4 mt-10 border-t border-borda text-xs md:text-sm ">
                                 <div className="flex items-center gap-1.5 text-texto-terciario">
                                     <Shield size={18} className="opacity-60" />
                                     Pagamento seguro
                                 </div>
-                                <div className="flex items-center gap-1.5 text-texto-terciario text-xs md:text-md">
+                                <div className="flex items-center gap-1.5 text-texto-terciario text-xs md:text-sm">
                                     <Zap size={18} className="opacity-60" />
                                     Acesso imediato
                                 </div>

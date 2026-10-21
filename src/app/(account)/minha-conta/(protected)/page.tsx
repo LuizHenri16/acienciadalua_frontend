@@ -41,15 +41,15 @@ export default function Conta() {
     }
 
     return (
-        <div className="w-full min-h-screen flex flex-col bg-[#fafafa] font-sora relative">
+        <div className="w-full min-h-dvh flex flex-col bg-[#fafafa] font-sora relative">
             <BackgroundLights />
             <AccountHeader />
-            <main className="relative z-10 flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-20 flex flex-col gap-6">
+            <main id="main-content" tabIndex={-1} className="relative z-10 flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-20 flex flex-col gap-6">
                 <AccountWelcome totalMateriais={materials.length} userName={userName} />
                 <MaterialSection materials={materials} loading={materialsLoading} />
 
                 <div className="flex justify-center border-t border-borda pt-6">
-                    <BackVitrine />
+                    <BackVitrine tone="light" />
                 </div>
             </main>
             <SiteFooter />

@@ -21,11 +21,11 @@ export default async function EditProdutoPage({ params }: EditProdutoPageProps) 
   if (!product) notFound();
 
   return (
-    <div className="min-h-screen font-sora flex flex-col" style={{ background: 'linear-gradient(135deg, #f9eef2 0%, #f0eefc 100%)' }}>
+    <div className="min-h-dvh font-sora flex flex-col" style={{ background: 'linear-gradient(135deg, #f9eef2 0%, #f0eefc 100%)' }}>
       <AdminProductHeader isEditing />
-      <div className="flex-1 px-4 sm:px-6 lg:px-8 py-5 lg:py-6 max-w-[75rem] w-full mx-auto">
+      <main id="main-content" tabIndex={-1} className="flex-1 px-4 sm:px-6 lg:px-8 py-5 lg:py-6 max-w-[75rem] w-full mx-auto">
         <ProductForm product={product} />
-      </div>
+      </main>
     </div>
   );
 }

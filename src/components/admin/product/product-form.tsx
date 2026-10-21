@@ -128,9 +128,9 @@ export function ProductForm({ product }: ProductFormProps) {
             <ImageIcon className="w-10 h-10 text-turquesa-dark/30" />
           )}
         </div>
-        <span className={`inline-flex items-center px-2.5 py-0.5 squircle-border text-[10px] font-bold mb-2 ${
+        <span className={`inline-flex items-center px-2 py-0 squircle-border text-legenda font-bold mb-2 ${
           isTeacher
-            ? 'bg-rosa-rose/15 text-rosa-rose'
+            ? 'bg-rosa-rose/15 text-rosa-deep'
             : 'bg-turquesa-light text-petroleo'
         }`}>
           {categoryLabel}
@@ -144,13 +144,13 @@ export function ProductForm({ product }: ProductFormProps) {
         </p>
 
         <div className="border-t border-borda pt-3 flex items-center justify-between">
-          <span className="text-base font-bold text-turquesa-dark">
+          <span className="text-base font-bold text-turquesa-deep">
             {formData.price || 'R$ 0,00'}
           </span>
-          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+          <span className={`text-legenda font-semibold px-2 py-0 rounded-full ${
             formData.isActive
               ? 'bg-turquesa-light text-petroleo'
-              : 'bg-gray-100 text-gray-400'
+              : 'bg-gray-100 text-texto-terciario'
           }`}>
             {formData.isActive ? 'Ativo' : 'Rascunho'}
           </span>
@@ -159,11 +159,11 @@ export function ProductForm({ product }: ProductFormProps) {
     </div>
   );
 
-  const actionButtons = (
+  const renderActionButtons = (errorId?: string) => (
     <div className="flex flex-col gap-3">
       {error && (
-        <div className="flex items-center gap-2 bg-red-50 border border-red-200 squircle-border px-3 py-2">
-          <span className="text-red-500 text-xs">{error}</span>
+        <div id={errorId} role="alert" className="flex items-center gap-2 bg-red-50 border border-red-200 squircle-border px-3 py-2">
+          <span className="text-red-700 text-xs">{error}</span>
         </div>
       )}
 
@@ -171,7 +171,7 @@ export function ProductForm({ product }: ProductFormProps) {
         type="button"
         disabled={loading}
         onClick={() => handleSubmitWithActive(formData.isActive)}
-        className="w-full flex items-center justify-center gap-2 py-3 squircle-border bg-turquesa-dark hover:opacity-90 active:scale-[0.98] text-white text-sm font-bold transition-all shadow-md disabled:opacity-60 cursor-pointer"
+        className="w-full flex items-center justify-center gap-2 py-3 squircle-border bg-turquesa-deep hover:opacity-90 active:scale-[0.98] text-white text-sm font-bold transition-all shadow-md disabled:opacity-60 cursor-pointer"
       >
         {loading
           ? <><Loader2 className="w-4 h-4 animate-spin" /> Salvando...</>
@@ -188,7 +188,7 @@ export function ProductForm({ product }: ProductFormProps) {
         Salvar como rascunho
       </button>
 
-      <p className="text-[11px] text-gray-400 leading-relaxed text-center">
+      <p className="text-legenda text-texto-terciario leading-relaxed text-center">
         {formData.isActive
           ? 'O produto ficará visível na vitrine para os alunos.'
           : 'O produto ficará oculto até ser ativado na vitrine.'}
@@ -202,10 +202,10 @@ export function ProductForm({ product }: ProductFormProps) {
         type="button"
         onClick={handleDelete}
         disabled={deleting}
-        className={`flex items-center justify-center gap-2 w-full py-2.5 squircle-border text-sm font-bold transition-all active:scale-[0.98] cursor-pointer ${
+        className={`flex items-center justify-center gap-2 w-full min-h-11 py-2.5 squircle-border text-sm font-bold transition-all active:scale-[0.98] cursor-pointer ${
           confirmDelete
             ? 'bg-red-600 text-white hover:bg-red-700'
-            : 'border border-red-300 text-red-500 hover:bg-red-50'
+            : 'border border-red-300 text-red-700 hover:bg-red-50'
         }`}
       >
         <Trash2 className="w-4 h-4" />
@@ -215,7 +215,7 @@ export function ProductForm({ product }: ProductFormProps) {
         <button
           type="button"
           onClick={() => setConfirmDelete(false)}
-          className="text-xs text-gray-400 hover:text-gray-600 text-center cursor-pointer"
+          className="text-xs text-texto-terciario hover:text-gray-600 text-center cursor-pointer"
         >
           Cancelar
         </button>
@@ -234,7 +234,7 @@ export function ProductForm({ product }: ProductFormProps) {
             <p className="text-xs font-bold text-texto-principal tracking-wide">Informações</p>
           </div>
           <div className="px-5 py-5">
-            <ProductInfo data={formData} onChange={handleChange} />
+            <ProductInfo data={formData} onChange={handleChange} hasError={!!error} />
           </div>
         </div>
         <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
@@ -250,6 +250,7 @@ export function ProductForm({ product }: ProductFormProps) {
               onChange={handleChange}
               existingCoverUrl={product?.coverUrl}
               existingFileUrl={product?.fileUrl}
+              hasError={!!error}
             />
           </div>
         </div>
@@ -262,13 +263,16 @@ export function ProductForm({ product }: ProductFormProps) {
           </div>
           <div className="flex items-center justify-between px-5 py-4">
             <div className="flex flex-col gap-0.5">
-              <span className="text-sm font-bold text-texto-principal">Ativo na vitrine</span>
-              <span className="text-xs text-gray-400">Visível para os alunos</span>
+              <span id="product-active-label" className="text-sm font-bold text-texto-principal">Ativo na vitrine</span>
+              <span className="text-xs text-texto-terciario">Visível para os alunos</span>
             </div>
             <button
               type="button"
+              role="switch"
+              aria-checked={formData.isActive}
+              aria-labelledby="product-active-label"
               onClick={() => handleChange('isActive', !formData.isActive)}
-              className={`relative w-12 h-6 rounded-full transition-all duration-300 cursor-pointer focus:outline-none ${
+              className={`relative w-12 h-6 rounded-full transition-all duration-300 cursor-pointer after:absolute after:inset-x-0 after:-inset-y-2.5 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-turquesa-dark ${
                 formData.isActive ? 'bg-turquesa-dark shadow-md shadow-turquesa-dark/30' : 'bg-gray-200'
               }`}
             >
@@ -286,7 +290,7 @@ export function ProductForm({ product }: ProductFormProps) {
             </div>
             <p className="text-xs font-bold text-texto-principal tracking-wide">Publicação</p>
           </div>
-          <div className="px-5 py-5">{actionButtons}</div>
+          <div className="px-5 py-5">{renderActionButtons()}</div>
         </div>
 
         {isEditing && <div className="lg:hidden">{deleteButton}</div>}
@@ -300,7 +304,7 @@ export function ProductForm({ product }: ProductFormProps) {
             </div>
             <p className="text-xs font-bold text-texto-principal tracking-wide">Publicação</p>
           </div>
-          <div className="px-5 py-5">{actionButtons}</div>
+          <div className="px-5 py-5">{renderActionButtons("product-form-error")}</div>
         </div>
 
         {isEditing && deleteButton}

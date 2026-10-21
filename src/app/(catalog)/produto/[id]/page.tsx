@@ -73,7 +73,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
         <>
             <JsonLd data={buildProductSchema(product)} />
             <CatalogShell>
-                <div className="flex flex-col flex-1 pt-16 lg:h-screen lg:overflow-hidden">
+                <div className="flex flex-col flex-1 pt-[var(--header-h)]">
                     <ProductDetails product={product} />
                     <SiteFooter/>
                 </div>
