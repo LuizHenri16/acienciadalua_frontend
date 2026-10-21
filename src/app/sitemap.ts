@@ -1,20 +1,10 @@
 import { MetadataRoute } from "next";
+import { getProducts } from "@/lib/api/products";
+import { SITE_URL as BASE_URL } from "@/lib/config/site";
 
-const BASE_URL = "https://acienciadalua.com.br";
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-interface Product {
-  id: string;
-  updatedAt?: string;
-}
-
-async function getActiveProducts(): Promise<Product[]> {
+async function getActiveProducts() {
   try {
-    const response = await fetch(`${API_URL}/products?isActive=true`, {
-      next: { revalidate: 3600 },
-    });
-    if (!response.ok) return [];
-    return response.json();
+    return await getProducts();
   } catch {
     return [];
   }

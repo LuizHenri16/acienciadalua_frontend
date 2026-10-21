@@ -1,12 +1,13 @@
-import { Header } from "@/components/header/header";
-import { BannerSection } from "@/components/home/bannerSection";
-import { Footer } from "@/components/footer/footer";
-import { AboutSection } from "@/components/home/aboutSection";
-import { StudySection } from "@/components/home/studySection";
-import { TeachSection } from "@/components/home/teachSection";
-import { FaqSection } from "@/components/home/faqSection";
-import { CatalogIntro } from "@/components/home/catalogIntro";
-import { getProducts } from "@/api/product";
+import { SiteHeader } from "@/components/layout/site-header";
+import { BannerSection } from "@/components/home/banner-section";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { AboutSection } from "@/components/home/about-section";
+import { StudySection } from "@/components/home/study-section";
+import { TeachSection } from "@/components/home/teach-section";
+import { FaqSection } from "@/components/home/faq-section";
+import { CatalogIntro } from "@/components/home/catalog-intro";
+import { SectionDivider } from "@/components/home/section-divider";
+import { getProducts } from "@/lib/api/products";
 import type { Material } from "@/types/material";
 
 async function fetchCategory(category: 'STUDENT' | 'TEACHER') {
@@ -25,7 +26,7 @@ export default async function Home() {
 
   return (
     <div className="w-full min-h-screen flex flex-col font-sora relative">
-      <Header />
+      <SiteHeader />
       <main id="main-content">
         <div className="w-full min-h-screen flex items-stretch bg-hero">
           <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col pt-16 md:pt-20">
@@ -36,24 +37,14 @@ export default async function Home() {
           <CatalogIntro />
           <div id="produtos" className="flex flex-col gap-12 md:gap-20">
             <StudySection materials={studyResult.materials} error={studyResult.error} />
-            <Divider />
+            <SectionDivider />
             <TeachSection materials={teachResult.materials} error={teachResult.error} />
             <AboutSection />
             <FaqSection />
           </div>
         </div>
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
-}
-
-function Divider() {
-  return (
-    <div className="flex items-center gap-4 px-4 md:px-0">
-      <hr className="flex-1 border-borda" />
-      <span className="text-[10px] md:text-xs text-texto-secundario font-black uppercase tracking-[0.3em]">ou</span>
-      <hr className="flex-1 border-borda" />
-    </div>
-  )
 }

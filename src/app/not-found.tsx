@@ -1,6 +1,6 @@
-import { BackVitrine } from "@/components/ui/button/button";
-import { BackgroundLights } from "@/components/ui/decor/BackgroundLights";
-import { NotFoundStory } from "@/components/ui/decor/NotFoundStory";
+import { BackVitrine } from "@/components/ui/back-vitrine";
+import { BackgroundLights } from "@/components/ui/background-lights";
+import { NotFoundStory } from "@/components/ui/not-found-story";
 
 export default function NotFound() {
     return (

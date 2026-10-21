@@ -19,9 +19,6 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   output: "standalone",
-  turbopack: {
-    root: "."
-  },
   images: {
     remotePatterns: [
       {
