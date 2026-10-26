@@ -60,81 +60,105 @@ export function usePaymentStatus({
     onApprovedRef.current = onApproved;
   }, [onApproved]);
 
-  const check = useCallback(async () => {
-    if (!paymentId) {
-      setChecking(false);
-      setView({ state: "unauthorized" });
-      return;
-    }
-    if (approvedRef.current || controllerRef.current) return;
-
-    const stored = readPaymentSession(paymentId);
-    const statusToken = token || stored?.token;
-    if (!statusToken) {
-      setChecking(false);
-      setView({ state: "unauthorized" });
-      return;
-    }
-
-    setView({ state: "checking" });
-    const controller = new AbortController();
-    controllerRef.current = controller;
-    setChecking(true);
-
-    let timedOut = false;
-    const timeout = setTimeout(() => {
-      timedOut = true;
-      controller.abort();
-    }, 12_000);
-
-    try {
-      const status = await getPaymentStatus(
-        { paymentId, token: statusToken },
-        controller.signal,
-      );
-      if (!mountedRef.current || controller.signal.aborted) return;
-
-      setView({ state: "result", status });
-      if (status.status === "approved" && status.accessGranted) {
-        approvedRef.current = true;
-        onApprovedRef.current?.(status);
-      }
-    } catch (error) {
-      if (!mountedRef.current) return;
-      if (timedOut) {
-        setView({
-          state: "unavailable",
-          message: "A verificação demorou mais que o esperado. Tente novamente.",
-        });
+  /**
+   * Queries the backend. `silent` is used by the automatic polling: it must
+   * never replace the current UI with a spinner or an error, so the status
+   * only changes when something new is actually known (for example, the
+   * payment was approved). Explicit checks (initial load and the "verify"
+   * button) are not silent and can show progress/errors.
+   */
+  const check = useCallback(
+    async (silent = false) => {
+      if (!paymentId) {
+        if (silent) return;
+        setChecking(false);
+        setView({ state: "unauthorized" });
         return;
       }
-      if (controller.signal.aborted) return;
+      if (approvedRef.current) return;
+      if (controllerRef.current) {
+        if (silent) return;
+        // A manual check takes precedence over an in-flight background poll.
+        controllerRef.current.abort();
+        controllerRef.current = null;
+      }
 
-      if (error instanceof PaymentApiError) {
-        if (error.status === 401 || error.status === 403) {
-          setView({ state: "unauthorized" });
-        } else if (error.status === 404) {
-          setView({ state: "not_found" });
+      const stored = readPaymentSession(paymentId);
+      const statusToken = token || stored?.token;
+      if (!statusToken) {
+        if (silent) return;
+        setChecking(false);
+        setView({ state: "unauthorized" });
+        return;
+      }
+
+      const controller = new AbortController();
+      controllerRef.current = controller;
+      if (!silent) {
+        setChecking(true);
+        setView({ state: "checking" });
+      }
+
+      let timedOut = false;
+      const timeout = setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, 12_000);
+
+      try {
+        const status = await getPaymentStatus(
+          { paymentId, token: statusToken },
+          controller.signal,
+        );
+        if (!mountedRef.current || controller.signal.aborted) return;
+
+        setView({ state: "result", status });
+        if (status.status === "approved" && status.accessGranted) {
+          approvedRef.current = true;
+          onApprovedRef.current?.(status);
+        }
+      } catch (error) {
+        if (!mountedRef.current) return;
+        // Background polls stay quiet: the previous state remains visible and
+        // the next poll retries instead of turning a transient failure into a
+        // permanent "unavailable" screen.
+        if (silent) return;
+        if (timedOut) {
+          setView({
+            state: "unavailable",
+            message: "A verificação demorou mais que o esperado. Tente novamente.",
+          });
+          return;
+        }
+        if (controller.signal.aborted) return;
+
+        if (error instanceof PaymentApiError) {
+          if (error.status === 401 || error.status === 403) {
+            setView({ state: "unauthorized" });
+          } else if (error.status === 404) {
+            setView({ state: "not_found" });
+          } else {
+            setView({
+              state: "unavailable",
+              message: error.message || "Não foi possível verificar o pagamento.",
+            });
+          }
         } else {
           setView({
             state: "unavailable",
-            message: error.message || "Não foi possível verificar o pagamento.",
+            message: "Não foi possível verificar o pagamento. Tente novamente.",
           });
         }
-      } else {
-        setView({
-          state: "unavailable",
-          message: "Não foi possível verificar o pagamento. Tente novamente.",
-        });
+      } finally {
+        clearTimeout(timeout);
+        if (controllerRef.current === controller) {
+          controllerRef.current = null;
+          if (mountedRef.current && !silent) setChecking(false);
+        }
       }
-    } finally {
-      clearTimeout(timeout);
-      if (controllerRef.current === controller) {
-        controllerRef.current = null;
-        if (mountedRef.current) setChecking(false);
-      }
-    }
-  }, [paymentId, token]);
+    },
+    [paymentId, token],
+  );
 
   // Initial check whenever the payment changes. Aborts on unmount.
   useEffect(() => {
@@ -171,7 +195,7 @@ export function usePaymentStatus({
       if (typeof document !== "undefined" && document.visibilityState === "hidden") {
         return;
       }
-      void check();
+      void check(true);
     }, delay);
 
     return () => {
@@ -189,7 +213,7 @@ export function usePaymentStatus({
     function handleVisibility() {
       if (document.visibilityState !== "visible") return;
       if (view.state !== "result" || view.status.status !== "pending") return;
-      void check();
+      void check(true);
     }
 
     document.addEventListener("visibilitychange", handleVisibility);
@@ -198,7 +222,7 @@ export function usePaymentStatus({
 
   const refresh = useCallback(() => {
     startedAtRef.current = Date.now();
-    void check();
+    void check(false);
   }, [check]);
 
   return { view, checking, refresh };
