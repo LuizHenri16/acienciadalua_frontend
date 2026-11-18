@@ -15,7 +15,7 @@ export default function SignIn() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-turquesa/10 border border-turquesa/20 flex items-center justify-center">
+                    <div className="w-10 h-10 squircle-border-sm bg-turquesa/10 border border-turquesa/20 flex items-center justify-center">
                         <Shield className="w-5 h-5 text-turquesa" />
                     </div>
                     <h2 className="text-white text-2xl font-semibold leading-snug">
@@ -40,7 +40,7 @@ export default function SignIn() {
                 </div>
 
                 <div className="w-full max-w-sm mb-8">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rosa-rose/10 border border-rosa-rose/20 mb-5">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 squircle-border-sm bg-rosa-rose/10 border border-rosa-rose/20 mb-5">
                         <Shield className="w-3 h-3 text-rosa-rose" />
                         <span className="text-rosa-deep text-xs font-medium">Área Restrita</span>
                     </div>

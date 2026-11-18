@@ -25,7 +25,7 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="w-full min-h-dvh flex flex-col font-sora relative">
+    <div className="w-full min-h-dvh flex flex-col font-sora relative overflow-x-clip">
       <SiteHeader />
       <main id="main-content" tabIndex={-1}>
         <div className="w-full min-h-dvh flex items-stretch bg-hero">
@@ -33,18 +33,18 @@ export default async function Home() {
             <BannerSection />
           </div>
         </div>
-        <div className="flex-1 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 mt-4 md:mt-10 mb-20 flex flex-col gap-10 md:gap-16 relative z-10">
+        <div className="flex-1 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 mt-4 md:mt-10 mb-12 md:mb-16 flex flex-col gap-10 md:gap-16 relative z-10">
           <CatalogIntro />
           <div id="produtos" className="flex flex-col gap-12 md:gap-20">
             <StudySection materials={studyResult.materials} error={studyResult.error} />
             <SectionDivider />
             <TeachSection materials={teachResult.materials} error={teachResult.error} />
             <AboutSection />
-            <FaqSection />
           </div>
         </div>
+        <FaqSection />
       </main>
-      <SiteFooter />
+      <SiteFooter className="mt-0" />
     </div>
   );
 }

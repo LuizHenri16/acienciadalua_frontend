@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Sora, Unkempt } from "next/font/google";
+import { Caveat, Lora, Sora, Unkempt } from "next/font/google";
 import "./globals.css";
 import PageTransition from "@/components/layout/page-transition";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -31,6 +31,13 @@ const unkempt = Unkempt({
   variable: "--font-unkempt",
   subsets: ["latin"],
   weight: "400"
+});
+
+const lora = Lora({
+  variable: "--font-lora",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -77,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} ${caveat.variable} bg-marinho h-full antialiased scroll-smooth`}>
+    <html lang="pt-BR" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} ${caveat.variable} ${lora.variable} bg-marinho h-full antialiased scroll-smooth`}>
       <head>
         <meta name="google-site-verification" content="YD35zo8xwFGcpXW6MNdRzOYPzlGGDpUbze6VeUahDPg" />
         {/*

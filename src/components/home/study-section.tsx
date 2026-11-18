@@ -11,7 +11,7 @@ interface StudySectionProps {
 
 export function StudySection({ materials, error }: StudySectionProps) {
   return (
-    <AnimatedSection className="w-full">
+    <AnimatedSection id="para-estudar" className="w-full">
       <div className="flex flex-col gap-2 mb-6">
         <div className="flex gap-2 items-center">
         <BookOpen className="w-5 h-5 lg:w-8 lg:h-8 text-turquesa-dark" />

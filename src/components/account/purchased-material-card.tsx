@@ -53,7 +53,7 @@ export function PurchasedMaterialCard({ material }: PurchasedMaterialCardProps) 
     const fileUrl = uploadUrl(material.fileUrl);
 
     return (
-        <div className="group flex items-stretch bg-white border border-borda-med rounded-2xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:border-turquesa-dark/20">
+        <div className="group flex items-stretch bg-white border border-borda-med squircle-border shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:border-turquesa-dark/20">
             <div className={`w-1.5 shrink-0 ${accentColor}`} />
 
             <div className="flex items-center gap-4 flex-1 p-3 sm:p-4">

@@ -17,9 +17,14 @@ const nextConfig: NextConfig = {
     ];
   },
   /* config options here */
+  allowedDevOrigins: [
+    "*.us-east1.run.app",
+    "**.run.app",
+  ],
   reactCompiler: true,
   output: "standalone",
   images: {
+    qualities: [75, 100],
     remotePatterns: [
       {
         protocol: "https",

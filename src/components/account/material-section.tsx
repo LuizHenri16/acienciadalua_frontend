@@ -10,7 +10,7 @@ interface MaterialSectionProps {
 
 function SkeletonPurchasedCard() {
     return (
-        <div className="flex items-stretch bg-white border border-borda-med rounded-2xl shadow-sm overflow-hidden animate-pulse">
+        <div className="flex items-stretch bg-white border border-borda-med squircle-border shadow-sm overflow-hidden animate-pulse">
             <div className="w-1.5 shrink-0 bg-gray-200" />
             <div className="flex items-center gap-4 flex-1 p-4">
                 <div className="w-14 h-14 shrink-0 squircle-border bg-gray-200" />

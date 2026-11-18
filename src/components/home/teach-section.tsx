@@ -11,7 +11,7 @@ interface TeachSectionProps {
 
 export function TeachSection({ materials, error }: TeachSectionProps) {
   return (
-    <AnimatedSection className="w-full">
+    <AnimatedSection id="para-dar-aula" className="w-full">
       <div className="flex flex-col gap-2 mb-6">
         <div className="flex flex-row gap-2 items-center">
         <MonitorPlay className="w-5 h-5 lg:w-8 lg:h-8 text-rosa-rose" />

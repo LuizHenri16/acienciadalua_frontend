@@ -84,7 +84,7 @@ function FeatureColumn({ block }: { block: Block }) {
                     className={MINI_CARD_BASE}
                     style={{ animationDelay: `${index * 0.08}s` }}
                 >
-                    <span className={`flex items-center justify-center p-2 rounded-xl shrink-0 ${iconBox}`}>
+                    <span className={`flex items-center justify-center p-2 squircle-border-sm shrink-0 ${iconBox}`}>
                         <card.icon className="w-5 h-5" />
                     </span>
                     <div>
@@ -103,24 +103,24 @@ function FeatureColumn({ block }: { block: Block }) {
 
 function CentralAnchor() {
     return (
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-linear-to-tr from-teal-100/50 via-purple-100/30 to-rose-100/50 flex items-center justify-center p-4 sm:p-6 border border-white/80 shadow-inner group cursor-pointer">
+        <div className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-64 lg:h-64 xl:w-80 xl:h-80 rounded-full bg-linear-to-tr from-teal-100/50 via-purple-100/30 to-rose-100/50 flex items-center justify-center p-4 sm:p-6 border border-white/80 shadow-inner group cursor-pointer">
   
-  <div className="absolute z-10 w-48 sm:w-52 h-60 bg-linear-to-br from-rose-600 to-rose-800 text-white p-5 rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-rose-500/30 transform rotate-8 translate-x-7 -translate-y-6 group-hover:rotate-12 group-hover:translate-x-10 group-hover:-translate-y-8 transition-all duration-300 select-none flex flex-col justify-between">
-    <div className="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+  <div className="absolute z-10 w-40 sm:w-48 lg:w-44 xl:w-52 h-52 sm:h-56 lg:h-52 xl:h-60 bg-linear-to-br from-rose-600 to-rose-800 text-white p-4 sm:p-5 squircle-border shadow-xl hover:shadow-2xl hover:shadow-rose-500/30 transform rotate-8 translate-x-5 sm:translate-x-7 -translate-y-5 sm:-translate-y-6 group-hover:rotate-12 group-hover:translate-x-8 sm:group-hover:translate-x-10 group-hover:-translate-y-7 sm:group-hover:-translate-y-8 transition-all duration-300 select-none flex flex-col justify-between">
+    <div className="w-8 h-8 squircle-border-sm bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
       <Presentation className="w-4.5 h-4.5" />
     </div>
     <div>
       <span className="text-legenda uppercase font-bold tracking-widest text-white block mb-1">
         Para Aulas
       </span>
-      <h4 className="text-sm font-extrabold leading-snug">
+      <h4 className="text-xs sm:text-sm font-extrabold leading-snug">
         Kit Didático do Professor
       </h4>
     </div>
   </div>
 
-  <div className="absolute z-20 w-48 sm:w-52 h-60 bg-white p-5 rounded-2xl border border-slate-200 shadow-xl hover:shadow-2xl hover:shadow-teal-500/25 transform -rotate-6 -translate-x-6 translate-y-4 group-hover:-rotate-12 group-hover:-translate-x-10 group-hover:translate-y-6 transition-all duration-300 select-none flex flex-col justify-between">
-    <div className="w-8 h-8 rounded-xl bg-teal-50 border border-teal-100 text-teal-700 flex items-center justify-center">
+  <div className="absolute z-20 w-40 sm:w-48 lg:w-44 xl:w-52 h-52 sm:h-56 lg:h-52 xl:h-60 bg-white p-4 sm:p-5 squircle-border border border-slate-200 shadow-xl hover:shadow-2xl hover:shadow-teal-500/25 transform -rotate-6 -translate-x-5 sm:-translate-x-6 translate-y-4 group-hover:-rotate-12 group-hover:-translate-x-8 sm:group-hover:-translate-x-10 group-hover:translate-y-6 transition-all duration-300 select-none flex flex-col justify-between">
+    <div className="w-8 h-8 squircle-border-sm bg-teal-50 border border-teal-100 text-teal-700 flex items-center justify-center">
       <FileText className="w-4.5 h-4.5" />
     </div>
     <div>
@@ -139,7 +139,7 @@ function CentralAnchor() {
 
 export function CatalogIntro() {
     return (
-        <AnimatedSection className="w-full py-10 md:py-14">
+        <AnimatedSection className="w-full py-10 md:py-14 overflow-x-clip">
             <div className="flex flex-col items-center text-center mb-12">
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight max-w-4xl leading-tight">
                     Sua jornada na Química sem decoreba e sem perda de tempo

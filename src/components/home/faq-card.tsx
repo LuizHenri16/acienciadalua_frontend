@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronDown } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useState, useRef, useEffect, useId } from "react";
 
 export interface FaqCardProps {
@@ -23,17 +23,24 @@ export function FaqCard({ question, answers, isOpen, onToggle }: FaqCardProps) {
     }, [isOpen, answers]);
 
     return (
-        <div className={`w-full flex flex-col items-center p-4 squircle-border border bg-[#fafafa] transition-all ${isOpen ? "border-rosa-rose bg-rosa-rose/[0.04]" : "border-borda hover:border-borda-med"}`}>
+        <div
+            className="w-full flex flex-col squircle-border bg-white px-4 sm:px-6 py-4 transition-all shadow-[0_2px_10px_rgba(30,27,75,0.03)]"
+        >
             <h3 id={questionId} className="w-full">
                 <button
                     type="button"
                     aria-expanded={isOpen}
                     aria-controls={contentId}
                     onClick={onToggle}
-                    className="-my-3 flex w-full cursor-pointer items-center gap-3 py-3 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-turquesa-dark"
+                    className="-my-2 flex w-full cursor-pointer items-center justify-between gap-4 py-2 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-turquesa-dark"
                 >
-                    <span className="font-medium text-sm text-texto-principal lg:text-base">{question}</span>
-                    <ChevronDown className={`ml-auto shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-rosa-rose" : "text-texto-terciario"}`} />
+                    <span className="font-semibold text-sm sm:text-[15px] text-marinho">{question}</span>
+                    <span
+                        aria-hidden="true"
+                        className="w-7 h-7 rounded-full bg-[#F4F3FA] text-marinho flex items-center justify-center shrink-0 transition-colors"
+                    >
+                        {isOpen ? <X size={14} strokeWidth={2.2} /> : <Plus size={14} strokeWidth={2.2} />}
+                    </span>
                 </button>
             </h3>
 
@@ -51,11 +58,13 @@ export function FaqCard({ question, answers, isOpen, onToggle }: FaqCardProps) {
                 }}
                 className="w-full"
             >
-                <ul className="list-disc ml-6 mt-2 mb-1 flex flex-col gap-2">
+                <div className="pt-3 pb-1 flex flex-col gap-2">
                     {answers.map((answer, index) => (
-                        <li key={index} className="text-sm lg:text-base text-texto-secundario">{answer}</li>
+                        <p key={index} className="text-xs sm:text-sm text-texto-secundario leading-relaxed">
+                            {answer}
+                        </p>
                     ))}
-                </ul>
+                </div>
             </div>
         </div>
     )

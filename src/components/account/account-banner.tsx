@@ -21,7 +21,7 @@ export function AccountWelcome({ totalMateriais, userName }: AccountWelcomeProps
         >
             <div className="bg-linear-to-br from-turquesa/5 to-turquesa-dark/10 px-6 py-6 md:px-8 md:py-7">
                 <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-turquesa-dark/10 border border-turquesa-dark/20 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 squircle-border-sm bg-turquesa-dark/10 border border-turquesa-dark/20 flex items-center justify-center shrink-0">
                         <BookOpen className="w-6 h-6 text-turquesa-dark" />
                     </div>
                     <div className="flex flex-col gap-1.5">
@@ -64,9 +64,9 @@ export function BannerNoMaterials() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center text-center gap-4 bg-white border border-borda-med rounded-2xl squircle-border p-8 shadow-sm"
+            className="flex flex-col items-center text-center gap-4 bg-white border border-borda-med squircle-border p-8 shadow-sm"
         >
-            <div className="w-14 h-14 rounded-xl bg-rosa-rose/10 border border-rosa-rose/20 flex items-center justify-center">
+            <div className="w-14 h-14 squircle-border-sm bg-rosa-rose/10 border border-rosa-rose/20 flex items-center justify-center">
                 <Sparkles className="w-7 h-7 text-rosa-rose" />
             </div>
             <div className="flex flex-col gap-1">

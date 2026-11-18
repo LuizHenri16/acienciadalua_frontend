@@ -1,58 +1,87 @@
-import { WatchIcon, GraduationCap, Microscope } from "lucide-react";
+import { Award, FlaskConical, GraduationCap, Microscope } from "lucide-react";
 import Image from "next/image";
 import { AnimatedSection } from "@/components/ui/animated-section";
 
-export function AboutSection() {
-    const badges = [
-        { icon: WatchIcon, title: "+9 anos de experiência", iconClass: "text-turquesa-dark" },
-        { icon: GraduationCap, title: "Bacharel em Química do Petróleo", iconClass: "text-turquesa-dark" },
-        { icon: GraduationCap, title: "Licenciada em Química", iconClass: "text-turquesa-dark" },
-        { icon: Microscope, title: "Mestranda em Química", iconClass: "text-rosa-rose" },
-    ];
+const badges = [
+    {
+        icon: Award,
+        title: "+9 anos de experiência",
+        boxClass: "bg-turquesa/15 text-turquesa-dark",
+    },
+    {
+        icon: FlaskConical,
+        title: "Bacharel em Química do Petróleo",
+        boxClass: "bg-rosa-rose/12 text-rosa-deep",
+    },
+    {
+        icon: GraduationCap,
+        title: "Licenciada em Química",
+        boxClass: "bg-turquesa/15 text-turquesa-dark",
+    },
+    {
+        icon: Microscope,
+        title: "Mestranda em Química",
+        boxClass: "bg-rosa-rose/12 text-rosa-deep",
+    },
+];
 
+export function AboutSection() {
     return (
         <AnimatedSection
             id="sobre"
-            className="squircle-border overflow-hidden border-2 border-borda"
+            className="w-full py-6 md:py-12 overflow-x-clip"
             amount={0.1}
         >
-            <div className="flex flex-col md:flex-row">
-                <div className="relative w-full h-80 md:w-48 md:h-auto md:min-h-full shrink-0">
-                    <Image quality={100} src="/professor-foto.webp" alt="Profa. Lua" loading="eager" fill sizes="(max-width: 768px) 100vw, 192px" className="object-cover object-top" />
-                    <div className="absolute inset-0 bg-linear-to-t from-marinho/80 to-transparent md:hidden flex items-end px-5 py-4">
-                        <div>
-                            <p className="text-white font-extrabold text-lg leading-tight tracking-tight">Profa. Lua</p>
-                            <p className="text-texto-sobre-escuro text-sm mt-0.5">Química · UFRN · Mestranda</p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                <div className="lg:col-span-5 flex justify-center">
+                    <div className="relative w-full max-w-[340px] sm:max-w-[370px]">
+                        <div
+                            aria-hidden="true"
+                            className="absolute inset-0 -rotate-3 squircle-border bg-linear-to-br from-turquesa-light/40 via-[#F4F6FB] to-rosa-light/30"
+                        />
+
+                        <div className="relative aspect-[4/4.3] w-full squircle-border overflow-hidden shadow-lg">
+                            <Image
+                                quality={100}
+                                src="/professor-foto.webp"
+                                alt="Profa. Lua"
+                                loading="eager"
+                                fill
+                                sizes="(max-width: 640px) 340px, 370px"
+                                className="object-cover object-top"
+                            />
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col bg-marinho md:bg-transparent">
-                    <div className="hidden md:flex bg-marinho px-8 py-6">
-                        <div className="flex flex-col justify-center gap-1">
-                            <p className="text-white font-extrabold text-lg leading-tight tracking-tight">Profa. Lua</p>
-                            <p className="text-texto-sobre-escuro text-sm mt-0.5">Química · UFRN · Mestranda</p>
-                        </div>
-                    </div>
 
-                    <div className="bg-white flex flex-col gap-8 px-8 py-7">
-                        <p className="text-sm md:text-lg text-marinho leading-relaxed tracking-wider border-l-2 border-rosa-rose pl-2 italic">
-                            Percebi que a maior dificuldade dos alunos não é a matéria em si, mas a forma como ela é apresentada.
-                        </p>
-                        <p className="text-sm text-texto-secundario leading-relaxed">
-                            Sou a Prof<sup>a</sup> Lua, Bacharel em Química do Petróleo e Licenciada em Química pela UFRN, atualmente Mestranda em Química. Com quase uma década de experiência em aulas particulares e atuação em laboratórios escolares do Ensino Fundamental ao Médio, percebi que quando a matéria é apresentada do jeito certo, tudo muda. Por isso desenvolvi materiais baseados em mapas conceituais para quem quer aprender de verdade, ou ensinar com mais impacto.
-                        </p>
-                        <div className="flex flex-wrap gap-3">
-                            {badges.map((badge, index) => (
-                                <div
-                                    key={badge.title}
-                                    className="bg-rosa-rose/10 border border-rosa-rose/20 rounded-xl p-3 flex items-center gap-3"
-                                    style={{ animationDelay: `${index * 0.1}s` }}
-                                >
-                                    <badge.icon className={`w-5 h-5 shrink-0 ${badge.iconClass}`} />
-                                    <span className="text-xs font-medium text-marinho leading-snug">{badge.title}</span>
-                                </div>
-                            ))}
-                        </div>
+                <div className="lg:col-span-7 flex flex-col gap-5">
+                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-rosa-deep">
+                        Quem está por trás
+                    </span>
+
+                    <blockquote className="font-serif italic text-2xl sm:text-3xl lg:text-[2rem] text-marinho leading-[1.25] tracking-tight">
+                        “Percebi que a maior dificuldade dos alunos não é a matéria em si, mas a{" "}
+                        <span className="text-turquesa-dark">forma como ela é apresentada.</span>”
+                    </blockquote>
+
+                    <p className="text-sm sm:text-[15px] text-texto-secundario leading-relaxed">
+                        Sou a Prof<sup>a</sup> Lua, Bacharel em Química do Petróleo e Licenciada em Química pela UFRN, atualmente Mestranda em Química. Com quase uma década de experiência em aulas particulares e atuação em laboratórios escolares do Ensino Fundamental ao Médio, percebi que quando a matéria é apresentada do jeito certo, tudo muda. Por isso desenvolvi materiais baseados em mapas conceituais para quem quer aprender de verdade, ou ensinar com mais impacto.
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                        {badges.map((badge) => (
+                            <div
+                                key={badge.title}
+                                className="bg-[#F9F9FC] border border-borda/80 squircle-border px-4 py-3.5 flex items-center gap-3.5 shadow-[0_2px_10px_rgba(30,27,75,0.03)]"
+                            >
+                                <span className={`w-9 h-9 squircle-border-sm flex items-center justify-center shrink-0 ${badge.boxClass}`}>
+                                    <badge.icon className="w-4.5 h-4.5" strokeWidth={2} />
+                                </span>
+                                <span className="text-xs font-semibold text-texto-principal leading-snug">
+                                    {badge.title}
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

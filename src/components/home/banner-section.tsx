@@ -30,8 +30,8 @@ export function BannerSection() {
     const ufrnVisible = !!reduceMotion || ufrnInView;
 
     return (
-        <section id="banner" className="relative flex-1 flex flex-col md:flex-row gap-10 md:gap-12">
-            <div className="flex flex-col flex-1 gap-4 justify-center">
+        <section id="banner" className="relative flex-1 flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-12 pt-4 pb-16 md:pt-0 md:pb-0">
+            <div className="flex flex-col flex-1 gap-4 justify-center md:pb-14">
                 <h1 className="text-slate-100 font-sora text-4xl md:text-5xl xl:text-6xl font-extrabold leading-[1.08] tracking-tight max-w-4xl">
                     Aprenda e ensine Química com <span className="text-turquesa font-caveat text-5xl md:text-6xl xl:text-7xl">método</span><span> e </span>
                     <span className="text-rosa-rose font-caveat text-5xl md:text-6xl xl:text-7xl">intenção</span>
@@ -53,7 +53,7 @@ export function BannerSection() {
                 </div>
 
                 <div ref={ufrnRef} className="flex items-stretch gap-0 border-t border-white/[0.07] pt-6 mt-2">
-                    <div className="flex flex-col gap-1 px-6">
+                    <div className="flex flex-col gap-1 pr-6">
                         <span className="text-2xl font-extrabold text-rosa-rose tracking-tight">
                             <span ref={ref}>{count}</span> <span className="text-rosa-rose">anos</span>
                         </span>
@@ -75,7 +75,7 @@ export function BannerSection() {
                     </div>
                 </div>
             </div>
-            <div className="hidden md:block relative -bottom-5.5 w-full h-56 md:h-auto md:w-80 lg:w-126 md:flex-none">
+            <div className="hidden md:block relative -bottom-5.5 w-full h-56 md:h-auto md:w-72 lg:w-[24rem] xl:w-[30rem] md:flex-none">
                 <Image
                     fill
                     src="/lua-person.webp"

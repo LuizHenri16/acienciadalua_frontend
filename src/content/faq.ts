@@ -2,9 +2,7 @@ export const faqItems = [
     {
         question: "Para quem é esse produto?",
         answers: [
-            "Estudantes do Ensino Fundamental que querem construir uma base sólida em Ciências.",
-            "Alunos do Ensino Médio que precisam dominar a Química e a Bioquímica para o ENEM e vestibulares.",
-            "Qualquer pessoa que queira entender o mundo através da ciência de forma leve e visual."
+            "Para estudantes do Ensino Médio e vestibulandos que querem dominar a Química sem decoreba, e para professores que buscam materiais prontos e engajadores para suas aulas."
         ]
     },
     {
@@ -23,7 +21,7 @@ export const faqItems = [
     {
         question: "Como acessar o produto?",
         answers: [
-            "Após a compra, sua conta é criada automaticamente com seu email após a compra, use esse email para acessar a plataforma em 'Minha Conta' no site. Um email com link de acesso será enviado para o email",
+            "Após a compra, sua conta é criada automaticamente com seu email. Use esse email para acessar a plataforma em 'Minha Conta' no site — um email com link de acesso também será enviado para você.",
             "Você poderá baixar os materiais quantas vezes quiser, no seu próprio ritmo."
         ]
     },

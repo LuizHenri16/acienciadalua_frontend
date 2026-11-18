@@ -22,7 +22,7 @@ export function ProductCard({ material }: CardProps) {
         : "bg-turquesa-deep";
 
     return (
-        <div className="group bg-white border border-borda rounded-2xl overflow-hidden flex flex-col shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 w-full">
+        <div className="group bg-white border border-borda squircle-border overflow-hidden flex flex-col shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 w-full">
             <div className="relative aspect-[4/3] overflow-hidden bg-off-white">
                 <Link
                     href={`/produto/${material.id}`}
@@ -44,11 +44,11 @@ export function ProductCard({ material }: CardProps) {
                         </div>
                     )}
                 </Link>
-                <span className={`absolute top-3 left-3 z-10 text-white text-legenda font-black uppercase tracking-widest px-2.5 py-1 rounded-full backdrop-blur-sm transition-colors ${badgeBg}`}>
+                <span className={`absolute top-3 left-3 z-10 text-white text-legenda font-black uppercase tracking-widest px-2.5 py-1 squircle-border-sm backdrop-blur-sm transition-colors ${badgeBg}`}>
                     {format}
                 </span>
                 {isFree && (
-                    <span className="absolute top-3 right-3 z-10 bg-ouro text-marinho text-legenda font-black uppercase tracking-widest px-2.5 py-1 rounded-full">
+                    <span className="absolute top-3 right-3 z-10 bg-ouro text-marinho text-legenda font-black uppercase tracking-widest px-2.5 py-1 squircle-border-sm">
                         Gratuito
                     </span>
                 )}

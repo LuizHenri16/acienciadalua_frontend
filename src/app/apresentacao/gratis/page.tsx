@@ -70,7 +70,7 @@ export default function CapturePage() {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-marinho-light/10 rounded-2xl p-6 md:p-8 border border-white/[0.07] relative overflow-hidden">
+            <div className="bg-marinho-light/10 squircle-border p-6 md:p-8 border border-white/[0.07] relative overflow-hidden">
               <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
               <div className="relative z-10 text-center mb-6">
