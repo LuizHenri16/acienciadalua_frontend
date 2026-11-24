@@ -307,7 +307,7 @@ O repositório inclui um `Dockerfile` multi-stage baseado em `node:22-alpine`:
 
 ### CI/CD
 
-O workflow `.github/workflows/deploy.yml` roda **em push para a branch `main`**:
+O workflow `.github/workflows/deploy.yml` roda **em push para a branch `production`**:
 
 1. builda a imagem e faz *push* para o Docker Hub (`<usuario>/acienciadalua-frontend:latest`), passando `NEXT_PUBLIC_API_URL` e `NEXT_PUBLIC_MP_PUBLIC_KEY` como *build args*;
 2. conecta na **VPS via SSH** e atualiza o container com `docker compose pull/up`.
