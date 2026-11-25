@@ -7,7 +7,7 @@ export default function SignIn() {
         <div className="flex flex-col lg:flex-row w-full min-h-dvh bg-off-white">
             <div className="hidden lg:flex flex-col justify-between w-[380px] min-h-dvh bg-marinho px-10 py-12 shrink-0">
                 <div className="flex flex-row items-center gap-3">
-                    <Image className="lg:w-16" src="/acienciadalua-logo-var1.svg" alt="Logo" width={40} height={40} />
+                    <Image className="lg:w-16" src="/logo.webp" alt="Logo" width={40} height={40} />
                     <span className="font-unkempt text-xl lg:text-3xl text-ouro">
                         A Ciência da{" "}
                         <span className="text-turquesa">Lua</span>
@@ -32,7 +32,7 @@ export default function SignIn() {
 
             <main id="main-content" tabIndex={-1} className="flex flex-col justify-center items-center flex-1 px-4 sm:px-6 py-12">
                 <div className="flex lg:hidden flex-row items-center gap-3 mb-8">
-                    <Image src="/acienciadalua-logo-var1.svg" alt="Logo" width={40} height={40} />
+                    <Image src="/logo.webp" alt="Logo" width={40} height={40} />
                     <span className="font-unkempt text-xl text-ouro-ink">
                         A Ciência da{" "}
                         <span className="text-turquesa-deep">Lua</span>

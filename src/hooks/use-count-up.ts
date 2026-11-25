@@ -1,39 +1,52 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 
+/**
+ * Counts up by writing the text straight to the DOM. A React state update per
+ * frame would re-render the whole banner ~70 times on every mobile visit.
+ */
 export function useCountUp(target: number, duration: number = 1200) {
   const reduceMotion = useReducedMotion();
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Users who asked for reduced motion get the final value (see the return
-    // below), so neither the observer nor the animation is needed.
-    if (reduceMotion) return;
+    const node = ref.current;
+    if (!node) return;
+
+    if (reduceMotion) {
+      node.textContent = String(target);
+      return;
+    }
+
+    let frame = 0;
+    let startTime: number | null = null;
+
+    const step = (ts: number) => {
+      if (startTime === null) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      node.textContent = String(Math.round(eased * target));
+      if (progress < 1) frame = requestAnimationFrame(step);
+    };
 
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        node.textContent = "0";
+        frame = requestAnimationFrame(step);
+      },
       { threshold: 0.5 }
     );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [reduceMotion]);
 
-  useEffect(() => {
-    if (reduceMotion || !started) return;
-    let startTime: number | null = null;
-    const step = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(ease * target));
-      if (progress < 1) requestAnimationFrame(step);
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
     };
-    requestAnimationFrame(step);
-  }, [started, target, duration, reduceMotion]);
+  }, [target, duration, reduceMotion]);
 
-  return { count: reduceMotion ? target : count, ref };
+  return ref;
 }

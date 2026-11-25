@@ -15,7 +15,7 @@ export function AuthShell({ subtitle, logoMargin = "mb-2", children, footer }: A
       <BackgroundLights />
       <div className="relative z-10 flex flex-col items-center w-full">
         <div className={`flex flex-row items-center gap-3 ${logoMargin}`}>
-          <Image src="/acienciadalua-logo-var1.svg" alt="Logo" width={52} height={52} />
+          <Image src="/logo.webp" alt="Logo" width={52} height={52} />
           <h1 className="font-unkempt text-2xl sm:text-3xl text-ouro">
             A Ciência da{" "}
             <span className="text-turquesa">Lua</span>

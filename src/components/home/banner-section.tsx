@@ -11,7 +11,7 @@ function scrollTo(id: string) {
 
 export function BannerSection() {
     const reduceMotion = useReducedMotion();
-    const { count, ref } = useCountUp(9, 1200);
+    const countRef = useCountUp(9, 1200);
     const [ufrnInView, setUfrnInView] = useState(false);
     const ufrnRef = useRef<HTMLDivElement>(null);
 
@@ -19,12 +19,18 @@ export function BannerSection() {
         // Reduced motion: keep the label always visible (see `ufrnVisible` below).
         if (reduceMotion) return;
 
+        let timer: ReturnType<typeof setTimeout> | undefined;
         const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) setTimeout(() => setUfrnInView(true), 600); },
+            ([entry]) => {
+                if (entry.isIntersecting) timer = setTimeout(() => setUfrnInView(true), 600);
+            },
             { threshold: 0.5 }
         );
         if (ufrnRef.current) observer.observe(ufrnRef.current);
-        return () => observer.disconnect();
+        return () => {
+            observer.disconnect();
+            if (timer) clearTimeout(timer);
+        };
     }, [reduceMotion]);
 
     const ufrnVisible = !!reduceMotion || ufrnInView;
@@ -55,7 +61,7 @@ export function BannerSection() {
                 <div ref={ufrnRef} className="flex items-stretch gap-0 border-t border-white/[0.07] pt-6 mt-2">
                     <div className="flex flex-col gap-1 pr-6">
                         <span className="text-2xl font-extrabold text-rosa-rose tracking-tight">
-                            <span ref={ref}>{count}</span> <span className="text-rosa-rose">anos</span>
+                            <span ref={countRef}>9</span> <span className="text-rosa-rose">anos</span>
                         </span>
                         <span className="text-xs text-white/70 leading-snug">
                             de<br />experiência

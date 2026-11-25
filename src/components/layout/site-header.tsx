@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, User, X } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
@@ -23,50 +23,67 @@ export function SiteHeader() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState<SectionId>("banner");
     const [mobileOpen, setMobileOpen] = useState(false);
+    const scrolledRef = useRef(false);
+    const activeRef = useRef<SectionId>("banner");
+    const offsetsRef = useRef<{ id: SectionId; top: number }[]>([]);
 
     useEffect(() => {
-        let ticking = false;
+        let frame = 0;
 
-        const updateOnScroll = () => {
+        // Section offsets are measured only on mount/resize, not on every
+        // scroll frame. That avoids five layout reads per frame on mobile.
+        const measure = () => {
+            offsetsRef.current = navSections.map((section) => {
+                const el = document.getElementById(section.id);
+                return {
+                    id: section.id,
+                    top: el ? el.getBoundingClientRect().top + window.scrollY : Number.POSITIVE_INFINITY,
+                };
+            });
+        };
+
+        const update = () => {
+            frame = 0;
             const scrollY = window.scrollY;
-            setIsScrolled(scrollY > 40);
+            const scrolled = scrollY > 40;
+            if (scrolled !== scrolledRef.current) {
+                scrolledRef.current = scrolled;
+                setIsScrolled(scrolled);
+            }
 
             const nearBottom =
                 window.innerHeight + scrollY >= document.documentElement.scrollHeight - 80;
-            if (nearBottom) {
-                setActiveSection("faq");
-                ticking = false;
-                return;
-            }
-
-            const marker = scrollY + 160;
-            let current: SectionId = "banner";
-
-            for (const section of navSections) {
-                const el = document.getElementById(section.id);
-                if (!el) continue;
-                const top = el.getBoundingClientRect().top + scrollY;
-                if (marker >= top) {
-                    current = section.id;
+            let current: SectionId = nearBottom ? "faq" : "banner";
+            if (!nearBottom) {
+                const marker = scrollY + 160;
+                for (const section of offsetsRef.current) {
+                    if (marker >= section.top) current = section.id;
                 }
             }
 
-            setActiveSection(current);
-            ticking = false;
+            if (current !== activeRef.current) {
+                activeRef.current = current;
+                setActiveSection(current);
+            }
         };
 
-        const handleScroll = () => {
-            if (ticking) return;
-            ticking = true;
-            window.requestAnimationFrame(updateOnScroll);
+        const schedule = () => {
+            if (!frame) frame = window.requestAnimationFrame(update);
         };
 
-        updateOnScroll();
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        window.addEventListener("resize", handleScroll, { passive: true });
+        const remeasure = () => {
+            measure();
+            schedule();
+        };
+
+        measure();
+        update();
+        window.addEventListener("scroll", schedule, { passive: true });
+        window.addEventListener("resize", remeasure, { passive: true });
         return () => {
-            window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("resize", handleScroll);
+            window.cancelAnimationFrame(frame);
+            window.removeEventListener("scroll", schedule);
+            window.removeEventListener("resize", remeasure);
         };
     }, []);
 
@@ -91,7 +108,7 @@ export function SiteHeader() {
                 aria-label="Navegação principal"
                 className={`mx-auto flex items-center justify-between gap-2 sm:gap-4 transition-all duration-300 ease-out ${
                     isScrolled
-                        ? "max-w-6xl px-3 sm:px-6 py-2 squircle-border bg-marinho/90 backdrop-blur-md border border-white/12 shadow-[0_8px_32px_rgba(10,8,35,0.35)]"
+                        ? "max-w-6xl px-3 sm:px-6 py-2 squircle-border bg-marinho/90 backdrop-blur-md mobile-no-blur border border-white/12 shadow-[0_8px_32px_rgba(10,8,35,0.35)]"
                         : "max-w-7xl px-4 sm:px-10 lg:px-14 py-3 squircle-border-sm border border-transparent bg-transparent"
                 }`}
             >
@@ -107,7 +124,7 @@ export function SiteHeader() {
                     aria-label="Ir para o início da página"
                 >
                     <Image
-                        src="/acienciadalua-logo-var1.svg"
+                        src="/logo.webp"
                         alt="A ciência da Lua - logo"
                         width={36}
                         height={36}
