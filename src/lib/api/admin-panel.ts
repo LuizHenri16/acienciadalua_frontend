@@ -22,6 +22,57 @@ export interface AdminResult<T> {
   isDemo: boolean;
 }
 
+// Go serializes decimal values as strings; the panel works with numbers.
+function decimalToNumber(value: unknown, fallback = 0): number {
+  if (typeof value === "number") return Number.isFinite(value) ? value : fallback;
+  if (typeof value === "string") {
+    const parsed = Number(value);
+    return value.trim() !== "" && Number.isFinite(parsed) ? parsed : fallback;
+  }
+  return fallback;
+}
+
+function normalizeProduct(product: Material): Material {
+  return { ...product, price: decimalToNumber(product.price) };
+}
+
+async function fetchProducts(token: string): Promise<Material[]> {
+  const products = await adminGetProducts(token);
+  return products.map(normalizeProduct);
+}
+
+type RawDashboard = Omit<AdminDashboardPayload, "isDemo" | "productsLive">;
+
+function normalizeDashboard(data: RawDashboard): RawDashboard {
+  return {
+    ...data,
+    kpis: {
+      ...data.kpis,
+      monthlyRevenue: decimalToNumber(data.kpis.monthlyRevenue),
+      previousMonthlyRevenue: decimalToNumber(data.kpis.previousMonthlyRevenue),
+    },
+    periodSummary: {
+      ...data.periodSummary,
+      totalRevenue: decimalToNumber(data.periodSummary.totalRevenue),
+      averageTicket: decimalToNumber(data.periodSummary.averageTicket),
+    },
+    revenueSeries: (data.revenueSeries ?? []).map((point) => ({
+      ...point,
+      revenue: decimalToNumber(point.revenue),
+    })),
+    topProducts: (data.topProducts ?? []).map((product) => ({
+      ...product,
+      revenue: decimalToNumber(product.revenue),
+      price: decimalToNumber(product.price),
+    })),
+    recentSales: (data.recentSales ?? []).map((sale) => ({
+      ...sale,
+      amount: decimalToNumber(sale.amount),
+    })),
+    recentActivity: data.recentActivity ?? [],
+  };
+}
+
 async function fetchJsonWithAuth<T>(path: string, token: string): Promise<T | null> {
   if (!token) return null;
   try {
@@ -40,7 +91,7 @@ export async function getAdminProductsWithFallback(
   token: string
 ): Promise<AdminResult<{ products: Material[]; salesByProduct: Record<string, number> }>> {
   try {
-    const products = await adminGetProducts(token);
+    const products = await fetchProducts(token);
     const salesMap = await fetchJsonWithAuth<Record<string, number>>(
       "/admin/products/sales-count",
       token
@@ -68,16 +119,16 @@ export async function getAdminDashboardData(
   period: DashboardPeriod
 ): Promise<AdminDashboardPayload> {
   const [liveDashboard, liveProducts] = await Promise.all([
-    fetchJsonWithAuth<Omit<AdminDashboardPayload, "isDemo" | "productsLive">>(
+    fetchJsonWithAuth<RawDashboard>(
       `/admin/dashboard?period=${encodeURIComponent(period)}`,
       token
     ),
-    adminGetProducts(token).catch(() => null),
+    fetchProducts(token).catch(() => null),
   ]);
 
   if (liveDashboard) {
     return {
-      ...liveDashboard,
+      ...normalizeDashboard(liveDashboard),
       isDemo: false,
       productsLive: true,
     };
@@ -91,7 +142,10 @@ export async function getAdminSalesData(
 ): Promise<AdminResult<AdminSale[]>> {
   const liveSales = await fetchJsonWithAuth<AdminSale[]>("/admin/sales", token);
   if (liveSales) {
-    return { data: liveSales, isDemo: false };
+    return {
+      data: liveSales.map((sale) => ({ ...sale, amount: decimalToNumber(sale.amount) })),
+      isDemo: false,
+    };
   }
   return { data: DEMO_SALES, isDemo: true };
 }
@@ -104,7 +158,17 @@ export async function getAdminCustomersData(
     token
   );
   if (liveCustomers) {
-    return { data: liveCustomers, isDemo: false };
+    return {
+      data: liveCustomers.map((customer) => ({
+        ...customer,
+        totalSpent: decimalToNumber(customer.totalSpent),
+        purchases: (customer.purchases ?? []).map((purchase) => ({
+          ...purchase,
+          amount: decimalToNumber(purchase.amount),
+        })),
+      })),
+      isDemo: false,
+    };
   }
   return { data: DEMO_CUSTOMERS, isDemo: true };
 }

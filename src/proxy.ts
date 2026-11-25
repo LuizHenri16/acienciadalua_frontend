@@ -6,11 +6,6 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   for (const route of PROTECTED_ROUTES) {
-    // TEMPORARY: Allow access to /painel without login (revert on request)
-    if (route.path === "/painel") {
-      continue;
-    }
-
     if (pathname === route.path || pathname.startsWith(`${route.path}/`)) {
       const skipPaths = [`${route.path}/signin`, `${route.path}/esqueci-senha`, `${route.path}/redefinir-senha`];
       if (skipPaths.some((sp) => pathname === sp || pathname.startsWith(sp))) {
