@@ -20,24 +20,28 @@ const sora = Sora({
   subsets: ["latin"],
 });
 
-const caveat = Caveat ({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-caveat',
-  display: 'swap',
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-caveat",
+  display: "swap",
 });
 
+// Only used in small accents / below-the-fold copy: loading them eagerly
+// competes with the hero font on slow mobile connections.
 const unkempt = Unkempt({
   variable: "--font-unkempt",
   subsets: ["latin"],
-  weight: "400"
+  weight: "400",
+  preload: false,
 });
 
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   style: ["normal", "italic"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -53,7 +57,8 @@ export const metadata: Metadata = {
     "exercícios de ciências", "material didático",
   ],
   icons: {
-    icon: DEFAULT_OG_IMAGE,
+    // The SVG kept for social crawlers is ~950 KB; browsers get a tiny ICO.
+    icon: "/favicon.ico",
   },
   metadataBase: new URL(SITE_URL),
   alternates: {
@@ -88,9 +93,9 @@ export default function RootLayout({
       <head>
         <meta name="google-site-verification" content="YD35zo8xwFGcpXW6MNdRzOYPzlGGDpUbze6VeUahDPg" />
         {/*
-          Without JavaScript the reveal animations never run, so their inline
-          "opacity: 0" would hide the whole page. React does not hydrate the
-          children of <noscript>, hence the raw HTML injection.
+          Without JavaScript the IntersectionObserver reveals never run, so
+          their inline "opacity: 0" would hide whole sections. React does not
+          hydrate <noscript> children, hence the raw HTML injection.
         */}
         <noscript
           dangerouslySetInnerHTML={{

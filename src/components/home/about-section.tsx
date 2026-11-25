@@ -42,10 +42,8 @@ export function AboutSection() {
 
                         <div className="relative aspect-[4/4.3] w-full squircle-border overflow-hidden shadow-lg">
                             <Image
-                                quality={100}
                                 src="/professor-foto.webp"
                                 alt="Profa. Lua"
-                                loading="eager"
                                 fill
                                 sizes="(max-width: 640px) 340px, 370px"
                                 className="object-cover object-top"

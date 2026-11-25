@@ -77,7 +77,7 @@ export function SiteFooter({ className = "mt-10" }: { className?: string } = {})
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
                         <div className="md:col-span-5 flex flex-col gap-4 max-w-sm">
                             <Link href="/#banner" className="flex items-center gap-2 w-fit">
-                                <Image src="/acienciadalua-logo-var1.svg" alt="A ciência da Lua - logo" width={36} height={36} />
+                                <Image src="/logo.webp" alt="A ciência da Lua - logo" width={36} height={36} />
                                 <span className="font-unkempt text-xl sm:text-2xl text-ouro">
                                     A Ciência da{" "}
                                     <span className="text-turquesa-dark">

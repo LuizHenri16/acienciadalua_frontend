@@ -16,8 +16,8 @@ export function AnimatedSection({
     children,
     className,
     delay = 0,
-    y = 30,
-    amount = 0.2,
+    y = 24,
+    amount = 0.12,
     id,
 }: AnimatedSectionProps) {
     const reduceMotion = useReducedMotion();
@@ -26,8 +26,9 @@ export function AnimatedSection({
     return (
         <motion.section
             id={id}
-            // Without JS the reveal animation never runs, so the <noscript>
-            // fallback in the root layout forces [data-motion-reveal] visible.
+            // Mobile browsers get an opacity-only reveal via the CSS override
+            // for [data-motion-reveal]; without JS the <noscript> rule in the
+            // root layout forces these sections visible.
             data-motion-reveal
             className={className}
             initial={reduceMotion ? false : { opacity: 0, y }}

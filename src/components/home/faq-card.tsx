@@ -24,7 +24,7 @@ export function FaqCard({ question, answers, isOpen, onToggle }: FaqCardProps) {
 
     return (
         <div
-            className={`relative overflow-hidden w-full flex flex-col squircle-border backdrop-blur-xl backdrop-saturate-150 border px-4 sm:px-6 py-4 transition-all duration-200 ${
+            className={`relative overflow-hidden w-full flex flex-col squircle-border backdrop-blur-xl backdrop-saturate-150 mobile-no-blur border px-4 sm:px-6 py-4 transition-all duration-200 ${
                 isOpen
                     ? "bg-linear-to-b from-white/[0.19] via-white/[0.10] to-turquesa/[0.08] border-turquesa/45 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.45),inset_0_-2px_4px_rgba(109,213,202,0.24),0_10px_28px_rgba(8,6,28,0.36)]"
                     : "bg-linear-to-b from-white/[0.14] via-white/[0.07] to-white/[0.04] border-white/[0.22] shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.34),inset_0_-1px_2px_rgba(109,213,202,0.12),0_6px_20px_rgba(8,6,28,0.28)] hover:from-white/[0.18] hover:via-white/[0.09] hover:to-white/[0.05] hover:border-white/[0.32]"
@@ -45,7 +45,7 @@ export function FaqCard({ question, answers, isOpen, onToggle }: FaqCardProps) {
                     <span className="font-semibold text-base sm:text-[17px] text-white">{question}</span>
                     <span
                         aria-hidden="true"
-                        className={`w-7 h-7 rounded-full backdrop-blur-md border flex items-center justify-center shrink-0 transition-colors shadow-[inset_0_1px_1px_rgba(255,255,255,0.42)] ${
+                        className={`w-7 h-7 rounded-full backdrop-blur-md mobile-no-blur border flex items-center justify-center shrink-0 transition-colors shadow-[inset_0_1px_1px_rgba(255,255,255,0.42)] ${
                             isOpen
                                 ? "bg-turquesa/25 border-turquesa/45 text-turquesa"
                                 : "bg-white/[0.12] border-white/25 text-white/90"
