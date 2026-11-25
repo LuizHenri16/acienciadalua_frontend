@@ -15,10 +15,12 @@ import Image from 'next/image';
 
 interface ProductFormProps {
   product?: Material;
+  duplicateFrom?: Material;
 }
 
-export function ProductForm({ product }: ProductFormProps) {
+export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
   const isEditing = !!product;
+  const seed = product ?? duplicateFrom;
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -30,16 +32,16 @@ export function ProductForm({ product }: ProductFormProps) {
   );
 
   const [formData, setFormData] = useState<ProductFormData>({
-    title: product?.title ?? '',
-    description: product?.description ?? '',
-    price: product
-      ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price)
+    title: product ? product.title : duplicateFrom ? `${duplicateFrom.title} (Cópia)` : '',
+    description: seed?.description ?? '',
+    price: seed
+      ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(seed.price)
       : '',
-    priceValue: product?.price ?? 0,
-    category: product?.category ?? MaterialType.STUDENT,
+    priceValue: seed?.price ?? 0,
+    category: seed?.category ?? MaterialType.STUDENT,
     file: null,
     cover: null,
-    isActive: product?.isActive ?? true,
+    isActive: product ? (product.isActive ?? true) : !duplicateFrom,
   });
 
   const handleChange = <K extends keyof ProductFormData>(field: K, value: ProductFormData[K]) => {
@@ -79,7 +81,7 @@ export function ProductForm({ product }: ProductFormProps) {
         await adminCreateProduct(data, getAdminToken());
       }
 
-      router.push('/painel');
+      router.push('/painel/produtos');
       router.refresh();
     } catch {
       setError('Ocorreu um erro ao salvar o produto. Tente novamente.');
@@ -93,7 +95,7 @@ export function ProductForm({ product }: ProductFormProps) {
     setDeleting(true);
     try {
       await adminDeleteProduct(product!.id, getAdminToken());
-      router.push('/painel');
+      router.push('/painel/produtos');
       router.refresh();
     } catch {
       setError('Erro ao excluir o produto. Tente novamente.');

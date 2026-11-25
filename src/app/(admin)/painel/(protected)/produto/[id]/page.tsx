@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { ArrowLeft } from "lucide-react";
 import { adminGetProductById } from "@/lib/api/admin-products";
 import { ADMIN_TOKEN_COOKIE } from "@/lib/auth/constants";
-import { AdminProductHeader } from "@/components/layout/admin-product-header";
 import { ProductForm } from "@/components/admin/product/product-form";
 
 interface EditProdutoPageProps {
@@ -12,20 +13,33 @@ interface EditProdutoPageProps {
 export default async function EditProdutoPage({ params }: EditProdutoPageProps) {
   const { id } = await params;
   const cookieStore = await cookies();
-  const token = cookieStore.get(ADMIN_TOKEN_COOKIE)?.value ?? '';
+  const token = cookieStore.get(ADMIN_TOKEN_COOKIE)?.value ?? "";
 
-  if (!token) redirect('/painel/signin');
+  if (!token) redirect("/painel/signin");
 
   const product = await adminGetProductById(id, token);
 
   if (!product) notFound();
 
   return (
-    <div className="min-h-dvh font-sora flex flex-col" style={{ background: 'linear-gradient(135deg, #f9eef2 0%, #f0eefc 100%)' }}>
-      <AdminProductHeader isEditing />
-      <main id="main-content" tabIndex={-1} className="flex-1 px-4 sm:px-6 lg:px-8 py-5 lg:py-6 max-w-[75rem] w-full mx-auto">
-        <ProductForm product={product} />
-      </main>
+    <div className="flex flex-col gap-6">
+      <div className="flex items-center gap-3">
+        <Link
+          href="/painel/produtos"
+          aria-label="Voltar para produtos"
+          className="flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-borda text-texto-principal hover:bg-off-white transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+        </Link>
+        <div>
+          <h1 className="text-xl font-bold text-texto-principal">Editar produto</h1>
+          <p className="text-xs text-texto-secundario mt-0.5">
+            Atualize informações, preço, arquivos ou visibilidade na vitrine.
+          </p>
+        </div>
+      </div>
+
+      <ProductForm product={product} />
     </div>
   );
 }

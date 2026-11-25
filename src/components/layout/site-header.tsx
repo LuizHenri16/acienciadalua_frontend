@@ -101,7 +101,9 @@ export function SiteHeader() {
                         e.preventDefault();
                         handleNavigate("banner");
                     }}
-                    className="flex flex-row items-center gap-1.5 sm:gap-2 py-1 cursor-pointer shrink-0"
+                    className={`flex flex-row items-center py-1 cursor-pointer shrink-0 ${
+                        reduceMotion ? "" : "transition-all duration-300 ease-out"
+                    } ${isScrolled ? "gap-0 sm:gap-2" : "gap-1.5 sm:gap-2"}`}
                     aria-label="Ir para o início da página"
                 >
                     <Image
@@ -109,9 +111,17 @@ export function SiteHeader() {
                         alt="A ciência da Lua - logo"
                         width={36}
                         height={36}
-                        className="w-7 h-7 sm:w-9 sm:h-9"
+                        className="w-7 h-7 sm:w-9 sm:h-9 shrink-0"
                     />
-                    <span className="font-unkempt text-[15px] min-[380px]:text-lg sm:text-2xl lg:text-[1.65rem] text-ouro whitespace-nowrap">
+                    <span
+                        className={`font-unkempt text-[15px] min-[380px]:text-lg sm:text-2xl lg:text-[1.65rem] text-ouro whitespace-nowrap overflow-hidden inline-block ${
+                            reduceMotion ? "" : "transition-all duration-300 ease-out"
+                        } ${
+                            isScrolled
+                                ? "max-w-0 opacity-0 sm:max-w-[280px] sm:opacity-100"
+                                : "max-w-[280px] opacity-100"
+                        }`}
+                    >
                         A Ciência da <span className="text-turquesa-dark">Lua</span>
                     </span>
                 </a>
