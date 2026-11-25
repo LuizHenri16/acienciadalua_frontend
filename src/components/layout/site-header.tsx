@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, User, X } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
 
 const navSections = [
     { id: "banner", label: "Início" },
@@ -18,7 +17,6 @@ type SectionId = (typeof navSections)[number]["id"];
 
 export function SiteHeader() {
     const router = useRouter();
-    const reduceMotion = useReducedMotion();
 
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState<SectionId>("banner");
@@ -92,7 +90,7 @@ export function SiteHeader() {
         setMobileOpen(false);
         const el = document.getElementById(id);
         if (el) {
-            el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+            el.scrollIntoView({ behavior: "auto", block: "start" });
         }
     }
 
@@ -118,9 +116,7 @@ export function SiteHeader() {
                         e.preventDefault();
                         handleNavigate("banner");
                     }}
-                    className={`flex flex-row items-center py-1 cursor-pointer shrink-0 ${
-                        reduceMotion ? "" : "transition-all duration-300 ease-out"
-                    } ${isScrolled ? "gap-0 sm:gap-2" : "gap-1.5 sm:gap-2"}`}
+                    className={`flex flex-row items-center py-1 cursor-pointer shrink-0 transition-all duration-300 ease-out ${isScrolled ? "gap-0 sm:gap-2" : "gap-1.5 sm:gap-2"}`}
                     aria-label="Ir para o início da página"
                 >
                     <Image
@@ -130,17 +126,19 @@ export function SiteHeader() {
                         height={36}
                         className="w-7 h-7 sm:w-9 sm:h-9 shrink-0"
                     />
-                    <span
-                        className={`font-unkempt text-[15px] min-[380px]:text-lg sm:text-2xl lg:text-[1.65rem] text-ouro whitespace-nowrap overflow-hidden inline-block ${
-                            reduceMotion ? "" : "transition-all duration-300 ease-out"
-                        } ${
+                    <Image
+                        src="/wordmark.webp"
+                        alt=""
+                        aria-hidden="true"
+                        width={575}
+                        height={62}
+                        sizes="(min-width: 1024px) 250px, (min-width: 640px) 210px, 155px"
+                        className={`w-[130px] min-[380px]:w-[155px] sm:w-[210px] lg:w-[250px] h-auto overflow-hidden inline-block transition-all duration-300 ease-out ${
                             isScrolled
-                                ? "max-w-0 opacity-0 sm:max-w-[280px] sm:opacity-100"
-                                : "max-w-[280px] opacity-100"
+                                ? "max-w-0 opacity-0 sm:max-w-[250px] sm:opacity-100"
+                                : "max-w-[250px] opacity-100"
                         }`}
-                    >
-                        A Ciência da <span className="text-turquesa-dark">Lua</span>
-                    </span>
+                    />
                 </a>
 
                 <div className="hidden lg:flex items-center gap-1">
@@ -162,15 +160,7 @@ export function SiteHeader() {
                                 }`}
                             >
                                 {isActive && (
-                                    <motion.span
-                                        layoutId="header-active-pill"
-                                        transition={
-                                            reduceMotion
-                                                ? { duration: 0 }
-                                                : { type: "spring", stiffness: 380, damping: 32 }
-                                        }
-                                        className="absolute inset-0 squircle-border bg-linear-to-b from-white/28 via-white/12 to-white/8 backdrop-blur-md backdrop-saturate-150 border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.55),inset_0_-1px_2px_rgba(109,213,202,0.18),0_4px_14px_rgba(10,8,35,0.3)]"
-                                    />
+                                    <span aria-hidden="true" className="nav-pill-enter absolute inset-0 squircle-border bg-linear-to-b from-white/28 via-white/12 to-white/8 backdrop-blur-md backdrop-saturate-150 border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.55),inset_0_-1px_2px_rgba(109,213,202,0.18),0_4px_14px_rgba(10,8,35,0.3)]" />
                                 )}
                                 <span className="relative z-10">{section.label}</span>
                             </a>

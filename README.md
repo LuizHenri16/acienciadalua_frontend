@@ -43,7 +43,6 @@ O frontend consome a API do projeto (repositório `acienciadalua_backend` — Ne
 | [React](https://react.dev) / React DOM | `^19.2.7` | Biblioteca de UI |
 | [TypeScript](https://www.typescriptlang.org) | `^5` | Tipagem estática |
 | [Tailwind CSS](https://tailwindcss.com) | `^4.3.1` | Estilização utilitária (v4, via `@tailwindcss/postcss` `^4`) |
-| [framer-motion](https://motion.dev) | `^12.38.0` | Animações e transições de página |
 | [lucide-react](https://lucide.dev) | `^1.14.0` | Ícones |
 | [react-icons](https://react-icons.github.io/react-icons/) | `^5.7.0` | Ícones adicionais |
 | [react-spinners](https://www.davidhu.io/react-spinners/) | `^0.17.0` | Indicadores de carregamento |
@@ -148,6 +147,7 @@ NEXT_PUBLIC_MP_PUBLIC_KEY=sua-chave-publica-do-mercado-pago
 | `dev` | `next dev` | Servidor de desenvolvimento (porta 3000 por padrão). |
 | `build` | `next build` | Build de produção (gera `.next/standalone`). |
 | `start` | `next start` | Serve o build de produção. |
+| `preview` | `next build && next start -p 3100 -H 0.0.0.0` | Build + servidor de produção na porta 3100, acessível pelo celular na rede. |
 | `lint` | `eslint src` | Lint do código em `src/`. |
 | `typecheck` | `tsc --noEmit` | Verificação de tipos sem emitir arquivos. |
 
@@ -156,6 +156,8 @@ npm run lint
 npm run typecheck
 npm run build
 ```
+
+> **Atenção ao medir performance no celular:** `npm run dev` entrega ~2 MB de JS (React em modo dev, source maps e HMR) contra ~215 KB do build de produção. Use `npm run preview` e acesse `http://<ip-da-maquina>:3100` pelo celular. Em uma medição com CPU 4× mais lenta e rede 3G, o carregamento cai de ~13,4 s no dev para ~6,2 s em produção.
 
 ---
 

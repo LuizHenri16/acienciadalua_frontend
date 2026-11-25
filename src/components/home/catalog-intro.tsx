@@ -14,7 +14,6 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import studyDeskImg from "@/assets/images/estudar_objetos_quimica_1795571144140.webp";
 import teachDeskImg from "@/assets/images/dar_aula_objetos_quimica_1795571144885.webp";
@@ -140,7 +139,6 @@ const WORKBENCH_TRACKS: Record<TrackMode, WorkbenchTrack> = {
 };
 
 export function CatalogIntro() {
-  const reduceMotion = useReducedMotion();
   const [mode, setMode] = useState<TrackMode>("student");
   const [activeFeatureIdx, setActiveFeatureIdx] = useState<number>(0);
 
@@ -155,7 +153,7 @@ export function CatalogIntro() {
   function scrollToSection(targetId: string) {
     document
       .getElementById(targetId)
-      ?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      ?.scrollIntoView({ behavior: "auto", block: "start" });
   }
 
   return (
@@ -215,22 +213,16 @@ export function CatalogIntro() {
                             : "bg-linear-to-b from-turquesa-deep/90 via-turquesa-deep/95 to-[#165C56]/95"
                         }`}
                       />
-                      <motion.span
-                        layoutId="workbench-tab-liquid-glass"
-                        transition={
-                          reduceMotion
-                            ? { duration: 0 }
-                            : { type: "spring", stiffness: 380, damping: 32 }
-                        }
+                      <span
                         aria-hidden="true"
-                        className={`hidden sm:block absolute inset-0 squircle-border backdrop-blur-md backdrop-saturate-150 border border-white/40 overflow-hidden ${
+                        className={`nav-pill-enter hidden sm:block absolute inset-0 squircle-border backdrop-blur-md backdrop-saturate-150 border border-white/40 overflow-hidden ${
                           key === "teacher"
                             ? "bg-linear-to-b from-rosa-deep/90 via-rosa-deep/95 to-[#8F354A]/95 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.55),inset_0_-2px_4px_rgba(242,184,198,0.32)]"
                             : "bg-linear-to-b from-turquesa-deep/90 via-turquesa-deep/95 to-[#165C56]/95 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.55),inset_0_-2px_4px_rgba(109,213,202,0.3)]"
                         }`}
                       >
                         <span className="pointer-events-none absolute inset-x-2 top-0.5 h-1/2 squircle-border bg-linear-to-b from-white/28 to-transparent" />
-                      </motion.span>
+                      </span>
                     </>
                   )}
                   <Icon className="relative z-10 w-4 h-4 shrink-0" aria-hidden="true" />
@@ -245,14 +237,9 @@ export function CatalogIntro() {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Zone: Seamless Borderless Watercolor Workbench Composition (div:nth-of-type(1)) */}
           <div className="lg:col-span-7 relative flex flex-col gap-4">
-            <AnimatePresence mode="wait">
-              <motion.div
+            <div
                 key={track.mode}
-                initial={reduceMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0 }}
-                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                className="relative"
+                className="track-art-enter relative"
               >
                 {/* Borderless Artwork dissolving cleanly into white page canvas */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden">
@@ -306,8 +293,7 @@ export function CatalogIntro() {
                     );
                   })}
                 </div>
-              </motion.div>
-            </AnimatePresence>
+            </div>
 
             {/* Mobile interactive selector chips (borderless pills without gray borders) */}
             <div className="flex sm:hidden items-center justify-center flex-wrap gap-2">
@@ -336,14 +322,9 @@ export function CatalogIntro() {
 
           {/* Right Zone: Editorial Serif Presentation & Clean Method List (div:nth-of-type(2)) */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-7">
-            <AnimatePresence mode="wait">
-              <motion.div
+            <div
                 key={track.mode}
-                initial={reduceMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0 }}
-                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col gap-5"
+                className="track-copy-enter flex flex-col gap-5"
               >
                 {/* Editorial Serif Main Headline */}
                 <div>
@@ -411,7 +392,7 @@ export function CatalogIntro() {
                             </span>
                           </div>
                           {active && (
-                            <p className="text-xs text-texto-secundario leading-relaxed mt-1">
+                            <p className="content-fade-in text-xs text-texto-secundario leading-relaxed mt-1">
                               {feat.description}
                             </p>
                           )}
@@ -420,8 +401,7 @@ export function CatalogIntro() {
                     );
                   })}
                 </div>
-              </motion.div>
-            </AnimatePresence>
+            </div>
 
             {/* Primary CTA */}
             <div>

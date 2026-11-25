@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface AccountWelcomeProps {
     totalMateriais?: number;
@@ -12,13 +11,7 @@ interface AccountWelcomeProps {
 
 export function AccountWelcome({ totalMateriais, userName }: AccountWelcomeProps) {
     return (
-        <motion.div
-            data-motion-reveal
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="squircle-border bg-white border border-borda overflow-hidden"
-        >
+        <div className="content-enter squircle-border bg-white border border-borda overflow-hidden">
             <div className="bg-linear-to-br from-turquesa/5 to-turquesa-dark/10 px-6 py-6 md:px-8 md:py-7">
                 <div className="flex items-start gap-4">
                     <div className="w-12 h-12 squircle-border-sm bg-turquesa-dark/10 border border-turquesa-dark/20 flex items-center justify-center shrink-0">
@@ -47,7 +40,7 @@ export function AccountWelcome({ totalMateriais, userName }: AccountWelcomeProps
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 }
 
@@ -59,13 +52,7 @@ export function BannerNoMaterials() {
     }
 
     return (
-        <motion.div
-            data-motion-reveal
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center text-center gap-4 bg-white border border-borda-med squircle-border p-8 shadow-sm"
-        >
+        <div className="content-enter-delayed flex flex-col items-center text-center gap-4 bg-white border border-borda-med squircle-border p-8 shadow-sm">
             <div className="w-14 h-14 squircle-border-sm bg-rosa-rose/10 border border-rosa-rose/20 flex items-center justify-center">
                 <Sparkles className="w-7 h-7 text-rosa-rose" />
             </div>
@@ -78,6 +65,6 @@ export function BannerNoMaterials() {
             <div className="w-full sm:w-72">
                 <Button name="Ir para a vitrine" loadingName="Indo para a vitrine..." variant="primary" size="lg" onClick={handleGoToVitrine} />
             </div>
-        </motion.div>
+        </div>
     );
 }

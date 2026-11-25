@@ -1,40 +1,12 @@
 "use client";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
-import { useCountUp } from "@/hooks/use-count-up";
 
 function scrollTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "auto", block: "start" });
 }
 
 export function BannerSection() {
-    const reduceMotion = useReducedMotion();
-    const countRef = useCountUp(9, 1200);
-    const [ufrnInView, setUfrnInView] = useState(false);
-    const ufrnRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        // Reduced motion: keep the label always visible (see `ufrnVisible` below).
-        if (reduceMotion) return;
-
-        let timer: ReturnType<typeof setTimeout> | undefined;
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) timer = setTimeout(() => setUfrnInView(true), 600);
-            },
-            { threshold: 0.5 }
-        );
-        if (ufrnRef.current) observer.observe(ufrnRef.current);
-        return () => {
-            observer.disconnect();
-            if (timer) clearTimeout(timer);
-        };
-    }, [reduceMotion]);
-
-    const ufrnVisible = !!reduceMotion || ufrnInView;
-
     return (
         <section id="banner" className="relative flex-1 flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-12 pt-4 pb-16 md:pt-0 md:pb-0">
             <div className="flex flex-col flex-1 gap-4 justify-center md:pb-14">
@@ -58,21 +30,19 @@ export function BannerSection() {
                     </button>
                 </div>
 
-                <div ref={ufrnRef} className="flex items-stretch gap-0 border-t border-white/[0.07] pt-6 mt-2">
+                <div className="flex items-stretch gap-0 border-t border-white/[0.07] pt-6 mt-2">
                     <div className="flex flex-col gap-1 pr-6">
                         <span className="text-2xl font-extrabold text-rosa-rose tracking-tight">
-                            <span ref={countRef}>9</span> <span className="text-rosa-rose">anos</span>
+                            <span className="stat-count" aria-hidden="true" />{" "}
+                            <span className="text-rosa-rose" aria-hidden="true">anos</span>
+                            <span className="sr-only">9 anos</span>
                         </span>
                         <span className="text-xs text-white/70 leading-snug">
                             de<br />experiência
                         </span>
                     </div>
                     <div className="flex flex-col gap-1 pl-6 border-l border-white/[0.07]">
-                        <span
-                            data-motion-reveal
-                            className="text-2xl font-extrabold text-rosa-rose tracking-tight transition-opacity duration-700"
-                            style={{ opacity: ufrnVisible ? 1 : 0 }}
-                        >
+                        <span className="stat-reveal text-2xl font-extrabold text-rosa-rose tracking-tight">
                             UFRN
                         </span>
                         <span className="text-xs text-white/70 leading-snug">
