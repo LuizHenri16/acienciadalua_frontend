@@ -78,12 +78,15 @@ export function SiteFooter({ className = "mt-10" }: { className?: string } = {})
                         <div className="md:col-span-5 flex flex-col gap-4 max-w-sm">
                             <Link href="/#banner" className="flex items-center gap-2 w-fit">
                                 <Image src="/logo.webp" alt="A ciência da Lua - logo" width={36} height={36} />
-                                <span className="font-unkempt text-xl sm:text-2xl text-ouro">
-                                    A Ciência da{" "}
-                                    <span className="text-turquesa-dark">
-                                        Lua
-                                    </span>
-                                </span>
+                                <Image
+                                    src="/wordmark.webp"
+                                    alt=""
+                                    aria-hidden="true"
+                                    width={575}
+                                    height={62}
+                                    sizes="(min-width: 640px) 190px, 150px"
+                                    className="w-[150px] sm:w-[190px] h-auto"
+                                />
                             </Link>
                             <p className="text-sm text-white/65 leading-relaxed">
                                 Materiais de ensino e aprendizagem para estudantes e professores.

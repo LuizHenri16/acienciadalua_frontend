@@ -30,7 +30,6 @@ export function AboutSection() {
         <AnimatedSection
             id="sobre"
             className="w-full py-6 md:py-12 overflow-x-clip"
-            amount={0.1}
         >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div className="lg:col-span-5 flex justify-center">

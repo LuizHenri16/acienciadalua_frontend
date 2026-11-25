@@ -43,7 +43,6 @@ export function ContactSection() {
     <AnimatedSection
       id="contato"
       className="flex flex-col gap-4"
-      amount={0.1}
     >
       <div className="flex flex-col gap-1">
         <h2 className="text-xl lg:text-2xl text-texto-principal font-bold">
