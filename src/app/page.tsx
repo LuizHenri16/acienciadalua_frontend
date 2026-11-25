@@ -27,7 +27,7 @@ export default async function Home() {
   return (
     <div className="w-full min-h-dvh flex flex-col font-sora relative overflow-x-clip">
       <SiteHeader />
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content" tabIndex={-1} className="bg-paper-texture">
         <div className="w-full min-h-dvh flex items-stretch bg-hero">
           <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 flex flex-col pt-[var(--header-h)] md:pt-24">
             <BannerSection />

@@ -43,8 +43,8 @@ const trustBadges = [
 
 export function SiteFooter({ className = "mt-10" }: { className?: string } = {}) {
     return (
-        <footer className={`${className} bg-white`}>
-            <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-8 md:py-10">
+        <footer className={`${className} bg-paper-texture`}>
+            <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-12 md:py-16">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                     {trustBadges.map((badge) => (
                         <div key={badge.title} className="flex items-center gap-3.5">
@@ -73,7 +73,7 @@ export function SiteFooter({ className = "mt-10" }: { className?: string } = {})
             </div>
 
             <div className="relative overflow-hidden bg-[#15123B] text-white footer-torn-top">
-                <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pt-16 pb-12 md:pt-24 md:pb-16">
+                <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pt-20 pb-12 md:pt-28 md:pb-16">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
                         <div className="md:col-span-5 flex flex-col gap-4 max-w-sm">
                             <Link href="/#banner" className="flex items-center gap-2 w-fit">
