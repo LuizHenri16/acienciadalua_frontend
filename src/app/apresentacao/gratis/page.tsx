@@ -175,7 +175,7 @@ export default function CapturePage() {
         </div>
       </main>
 
-      <footer className="bg-white border-t border-borda py-8 text-center">
+      <footer className="bg-paper-texture border-t border-borda py-8 text-center">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-1.5">
           <p className="text-xs text-texto-terciario">
             &copy; {new Date().getFullYear()} A Ciência da Lua. Todos os direitos reservados.
