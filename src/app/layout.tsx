@@ -92,16 +92,6 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning className={`${sora.variable} ${unkempt.variable} ${caveat.variable} ${lora.variable} bg-marinho h-full antialiased scroll-smooth`}>
       <head>
         <meta name="google-site-verification" content="YD35zo8xwFGcpXW6MNdRzOYPzlGGDpUbze6VeUahDPg" />
-        {/*
-          Without JavaScript the IntersectionObserver reveals never run, so
-          their inline "opacity: 0" would hide whole sections. React does not
-          hydrate <noscript> children, hence the raw HTML injection.
-        */}
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: "<style>[data-motion-reveal]{opacity:1!important;transform:none!important}</style>",
-          }}
-        />
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
         <JsonLd data={personSchema} />

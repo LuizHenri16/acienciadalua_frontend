@@ -4,7 +4,6 @@ import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Home,
   Package,
@@ -63,7 +62,6 @@ const NAV_ITEMS: NavItem[] = [
 export function AdminShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const reduceMotion = useReducedMotion();
   const [drawerPathname, setDrawerPathname] = useState<string | null>(null);
   const mobileOpen = drawerPathname === pathname;
   const [pendingSalesCount, setPendingSalesCount] = useState<number>(0);
@@ -261,39 +259,32 @@ export function AdminShell({ children }: { children: ReactNode }) {
         </header>
 
         {/* Mobile Slide-Over Drawer */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <div className="lg:hidden fixed inset-0 z-40 flex">
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0 }}
-                transition={{ duration: 0.18 }}
-                onClick={() => setDrawerPathname(null)}
-                className="fixed inset-0 bg-texto-principal/40 backdrop-blur-[2px]"
-                aria-hidden="true"
-              />
-              <motion.aside
-                initial={reduceMotion ? false : { x: "-100%" }}
-                animate={{ x: 0 }}
-                exit={reduceMotion ? undefined : { x: "-100%" }}
-                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                aria-label="Menu lateral"
-                className="relative z-10 w-[272px] max-w-[85vw] h-full bg-white border-r border-borda shadow-xl"
-              >
-                <button
-                  type="button"
-                  onClick={() => setDrawerPathname(null)}
-                  aria-label="Fechar menu"
-                  className="absolute top-4 right-3 w-9 h-9 rounded-xl flex items-center justify-center text-texto-terciario hover:text-texto-principal hover:bg-off-white transition-colors cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-                {sidebarContent}
-              </motion.aside>
-            </div>
-          )}
-        </AnimatePresence>
+        <div
+          className="admin-drawer-layer lg:hidden fixed inset-0 z-40 flex"
+          data-open={mobileOpen}
+          aria-hidden={!mobileOpen}
+          inert={!mobileOpen}
+        >
+          <div
+            onClick={() => setDrawerPathname(null)}
+            className="admin-drawer-backdrop fixed inset-0 bg-texto-principal/40 backdrop-blur-[2px]"
+            aria-hidden="true"
+          />
+          <aside
+            aria-label="Menu lateral"
+            className="admin-drawer-panel relative z-10 w-[272px] max-w-[85vw] h-full bg-white border-r border-borda shadow-xl"
+          >
+            <button
+              type="button"
+              onClick={() => setDrawerPathname(null)}
+              aria-label="Fechar menu"
+              className="absolute top-4 right-3 w-9 h-9 rounded-xl flex items-center justify-center text-texto-terciario hover:text-texto-principal hover:bg-off-white transition-colors cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            {sidebarContent}
+          </aside>
+        </div>
 
         {/* Main Content Viewport */}
         <div className="flex-1 min-w-0 flex flex-col min-h-dvh">

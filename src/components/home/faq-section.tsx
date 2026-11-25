@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FaInstagram } from "react-icons/fa6";
@@ -9,18 +6,10 @@ import { FaqCard } from "@/components/home/faq-card";
 import { AnimatedSection } from "@/components/ui/animated-section";
 
 export function FaqSection() {
-    const faqContent = faqItems;
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-    function handleToggle(index: number) {
-        setOpenIndex((prev) => prev === index ? null : index);
-    }
-
     return (
         <AnimatedSection
             id="faq"
             className="w-full relative overflow-hidden bg-[#15123B] text-white section-torn-both pt-24 pb-24 md:pt-32 md:pb-32"
-            amount={0.1}
         >
             <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -53,13 +42,12 @@ export function FaqSection() {
                     </div>
 
                     <div className="lg:col-span-8 flex flex-col gap-3">
-                        {faqContent.map((faq, index) => (
+                        {faqItems.map((faq, index) => (
                             <FaqCard
                                 key={faq.question}
                                 question={faq.question}
                                 answers={faq.answers}
-                                isOpen={openIndex === index}
-                                onToggle={() => handleToggle(index)}
+                                defaultOpen={index === 0}
                             />
                         ))}
                     </div>

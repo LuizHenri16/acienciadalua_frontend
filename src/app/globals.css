@@ -46,6 +46,7 @@
 
 html {
   scroll-padding-top: calc(var(--header-h) + 0.5rem);
+  scroll-behavior: smooth;
 }
 
 :where(a, button, [role="button"], [role="switch"], input, select, textarea, summary):focus-visible {
@@ -55,8 +56,8 @@ html {
 }
 
 :root {
-  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.52' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.52  0 0 0 0 0.47  0 0 0 0 0.40  0 0 0 0.085 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
-  --paper-fibers: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360' viewBox='0 0 360 360'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.032' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.60  0 0 0 0 0.54  0 0 0 0 0.45  0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23f)'/%3E%3C/svg%3E");
+  --paper-grain: url("/paper-grain.webp");
+  --paper-fibers: url("/paper-fibers.webp");
   --torn-paper-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' fill-opacity='0.62' d='M0,120 L0,88.1 L6,88.9 L12,88.9 L18,88.9 L24,88.1 L30,87 L36,84.9 L42,84.9 L48,84.6 L54,84.6 L60,83.8 L66,84.4 L72,83.8 L78,84.1 L84,83.6 L90,83 L96,82.5 L102,82.8 L108,82.8 L114,82.2 L120,81.2 L126,80.6 L132,80.4 L138,79.8 L144,78.2 L150,77.7 L156,76.9 L162,76.4 L168,75.8 L174,75 L180,74.5 L186,71.5 L192,69.4 L198,68.1 L204,67 L210,65.1 L216,63.5 L222,63 L228,62.7 L234,61.7 L240,59 L246,58.2 L252,57.9 L258,57.4 L264,57.1 L270,56.6 L276,55.8 L282,55.5 L288,55 L294,54.2 L300,53.4 L306,52.1 L312,51 L318,50.7 L324,50.5 L330,49.9 L336,48.9 L342,47.8 L348,47.8 L354,48.9 L360,49.4 L366,50.7 L372,52.1 L378,51.5 L384,51.3 L390,51.5 L396,51.5 L402,51 L408,51.3 L414,51.8 L420,52.1 L426,52.3 L432,52.6 L438,53.7 L444,54.5 L450,52.9 L456,53.4 L462,52.3 L468,51.8 L474,52.1 L480,51.8 L486,52.1 L492,51.5 L498,51.3 L504,51.5 L510,51.3 L516,51.8 L522,52.1 L528,53.9 L534,55.5 L540,56.6 L546,57.7 L552,57.9 L558,58.2 L564,58.2 L570,58.7 L576,59.3 L582,58.7 L588,58.7 L594,58.7 L600,59.5 L606,59.3 L612,59.3 L618,59.3 L624,58.5 L630,58.7 L636,59 L642,59 L648,58.7 L654,58.5 L660,57.9 L666,57.4 L672,57.4 L678,57.9 L684,57.4 L690,57.1 L696,56.9 L702,56.3 L708,56.1 L714,56.1 L720,54.2 L726,53.7 L732,53.1 L738,52.9 L744,52.3 L750,52.6 L756,52.3 L762,52.3 L768,51.8 L774,52.1 L780,52.1 L786,52.1 L792,52.1 L798,51.8 L804,51.8 L810,51.5 L816,51.5 L822,50.7 L828,50.7 L834,50.7 L840,50.7 L846,50.2 L852,48.9 L858,47.8 L864,47.3 L870,47 L876,46.2 L882,45.4 L888,44.8 L894,44.6 L900,43.8 L906,43.5 L912,41.6 L918,40.6 L924,38.4 L930,38.7 L936,38.2 L942,37.6 L948,37.1 L954,36.3 L960,34.7 L966,33.9 L972,33.6 L978,32.8 L984,32.3 L990,31.2 L996,30.4 L1002,29.4 L1008,27.8 L1014,27.8 L1020,27.2 L1026,26.7 L1032,25.6 L1038,21.1 L1044,20.3 L1050,20 L1056,19.8 L1062,20.3 L1068,20 L1074,19.5 L1080,20 L1086,19.5 L1092,19.2 L1098,18.7 L1104,17.9 L1110,17.9 L1116,17.6 L1122,17.6 L1128,17.6 L1134,17.3 L1140,17.3 L1146,17.9 L1152,17.6 L1158,17.6 L1164,17.1 L1170,15.7 L1176,14.9 L1182,12.3 L1188,11.7 L1194,10.9 L1200,10.4 L1206,10.4 L1212,9.9 L1218,10.4 L1224,10.1 L1230,10.1 L1236,9.9 L1242,9.6 L1248,9.3 L1254,9.1 L1260,8.8 L1266,8.5 L1272,8.5 L1278,9.1 L1284,9.9 L1290,9.9 L1296,10.1 L1302,10.1 L1308,9.3 L1314,9.1 L1320,10.1 L1326,10.7 L1332,10.9 L1338,11.5 L1344,11.7 L1350,12 L1356,12.8 L1362,13.1 L1368,13.3 L1374,13.3 L1380,13.6 L1386,13.9 L1392,13.3 L1398,12.8 L1404,11.7 L1410,11.5 L1416,10.9 L1422,8.5 L1428,6.9 L1434,7.5 L1440,4 L1440,120 Z'/%3E%3Cpath fill='%23ffffff' d='M0,120 L0,95.3 L6,92.4 L12,91.8 L18,91.3 L24,91 L30,90.5 L36,89.2 L42,86.5 L48,86.8 L54,87.3 L60,87 L66,86.8 L72,86.8 L78,87 L84,87 L90,87 L96,86.5 L102,86 L108,85.4 L114,85.2 L120,84.1 L126,83.8 L132,82.5 L138,82.2 L144,81.2 L150,80.9 L156,80.9 L162,80.4 L168,79.8 L174,78.8 L180,78.2 L186,77.4 L192,77.7 L198,77.2 L204,77.4 L210,77.2 L216,76.4 L222,74.8 L228,74.2 L234,73.2 L240,72.1 L246,71.8 L252,71 L258,70.7 L264,70.5 L270,69.4 L276,66.7 L282,65.9 L288,65.9 L294,65.1 L300,64.6 L306,64.6 L312,64.6 L318,64.3 L324,64.3 L330,64.3 L336,64.1 L342,63.5 L348,62.2 L354,61.1 L360,60.9 L366,60.3 L372,60.1 L378,60.1 L384,58.7 L390,59.5 L396,60.3 L402,61.1 L408,61.7 L414,61.9 L420,61.7 L426,59.5 L432,59.5 L438,59.5 L444,58.2 L450,57.1 L456,57.9 L462,57.7 L468,57.7 L474,57.4 L480,56.9 L486,57.1 L492,57.7 L498,58.2 L504,58.5 L510,57.4 L516,57.4 L522,56.9 L528,57.1 L534,57.4 L540,58.5 L546,59 L552,59.5 L558,59.3 L564,59.3 L570,60.6 L576,60.9 L582,61.4 L588,61.7 L594,61.4 L600,61.4 L606,61.4 L612,61.4 L618,61.7 L624,61.4 L630,61.1 L636,60.9 L642,60.9 L648,61.4 L654,61.1 L660,60.6 L666,60.6 L672,60.3 L678,60.6 L684,60.3 L690,60.3 L696,60.1 L702,59.8 L708,59.3 L714,59 L720,58.7 L726,57.9 L732,57.7 L738,57.7 L744,57.7 L750,57.1 L756,56.9 L762,56.3 L768,56.3 L774,56.3 L780,56.6 L786,57.1 L792,56.9 L798,56.6 L804,56.6 L810,56.1 L816,55.5 L822,56.1 L828,56.3 L834,55.8 L840,55.5 L846,54.5 L852,53.7 L858,52.6 L864,52.1 L870,51.3 L876,51.5 L882,50.7 L888,51 L894,50.5 L900,49.7 L906,48.9 L912,47.5 L918,46.5 L924,44.8 L930,43.8 L936,43.2 L942,43 L948,42.4 L954,41.6 L960,40.8 L966,40 L972,39.5 L978,37.6 L984,37.4 L990,37.1 L996,37.1 L1002,36.6 L1008,36.6 L1014,35.8 L1020,35 L1026,33.9 L1032,31.2 L1038,30.4 L1044,29.4 L1050,27.5 L1056,26.2 L1062,25.9 L1068,27 L1074,27.2 L1080,27.5 L1086,26.4 L1092,26.4 L1098,26.7 L1104,26.2 L1110,25.6 L1116,26.2 L1122,25.1 L1128,24.8 L1134,24.6 L1140,25.4 L1146,26.2 L1152,25.6 L1158,25.1 L1164,24.3 L1170,23.8 L1176,24 L1182,23.8 L1188,23.5 L1194,23.2 L1200,22.4 L1206,22.2 L1212,21.1 L1218,20.8 L1224,20.3 L1230,20 L1236,19.2 L1242,17.3 L1248,17.1 L1254,16.8 L1260,16 L1266,15.7 L1272,14.7 L1278,13.9 L1284,13.6 L1290,13.3 L1296,13.1 L1302,12.8 L1308,12 L1314,11.2 L1320,12 L1326,12.8 L1332,13.3 L1338,13.6 L1344,13.1 L1350,13.3 L1356,13.6 L1362,13.9 L1368,14.1 L1374,14.7 L1380,14.7 L1386,14.9 L1392,14.4 L1398,14.1 L1404,13.9 L1410,13.6 L1416,13.3 L1422,13.1 L1428,11.5 L1434,11.2 L1440,10.5 L1440,120 Z'/%3E%3C/svg%3E");
 }
 
@@ -259,23 +260,169 @@ body {
   animation: page-fade-in 200ms cubic-bezier(0, 0, 0.2, 1) both;
 }
 
-/*
- * Mobile GPUs struggle with stacked backdrop blurs and with translating whole
- * sections. Keep the opacity reveal, but drop those expensive effects on small
- * screens.
- */
+@property --stat-count {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 9;
+}
+
+@keyframes section-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes content-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes content-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stat-count-up {
+  from {
+    --stat-count: 0;
+  }
+
+  to {
+    --stat-count: 9;
+  }
+}
+
+/* Keep content visible by default; supported browsers reveal sections on scroll. */
+.scroll-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: section-reveal 1s linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+.nav-pill-enter,
+.content-fade-in {
+  animation: content-fade-in 180ms ease-out both;
+}
+
+.track-art-enter {
+  animation: content-fade-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.track-copy-enter {
+  animation: content-fade-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.stat-count {
+  counter-reset: stat var(--stat-count);
+  animation: stat-count-up 1200ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+.stat-count::before {
+  content: counter(stat);
+}
+
+.content-enter {
+  animation: content-rise-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.content-enter-delayed {
+  animation: content-rise-in 500ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+}
+
+.admin-drawer-layer {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 180ms ease, visibility 0s linear 180ms;
+}
+
+.admin-drawer-layer[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 180ms ease, visibility 0s;
+}
+
+.admin-drawer-backdrop {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.admin-drawer-panel {
+  transform: translateX(-100%);
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.admin-drawer-layer[data-open="true"] .admin-drawer-backdrop {
+  opacity: 1;
+}
+
+.admin-drawer-layer[data-open="true"] .admin-drawer-panel {
+  transform: translateX(0);
+}
+
+/* Keep sections visible on mobile so viewport changes during pinch zoom cannot
+   reset a scroll-driven reveal animation and hide their content temporarily. */
 @media (max-width: 767px) {
   .bg-hero::before {
     filter: none;
   }
 
-  [data-motion-reveal] {
+  .scroll-reveal {
+    animation: none;
+    opacity: 1;
     transform: none !important;
   }
 
   .mobile-no-blur {
     backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Scrolling past 40px swaps padding, width, background and shadow in the
+     header. Transitioning all of them at once drops frames on mobile, so the
+     compact state is applied instantly here. Desktop keeps the animation. */
+  header,
+  header nav,
+  header nav a,
+  header nav a img {
+    transition: none !important;
+  }
+
+  /* Isolate each accordion card so opening one doesn't repaint the section. */
+  #faq details {
+    contain: layout paint;
+  }
+
+  /* `corner-shape: squircle` is a software-rendered curve on many mobile
+     browsers. Rounded corners look almost the same and cost much less. */
+  .squircle-border,
+  .squircle-border-t,
+  .squircle-border-sm,
+  [class*="rounded-"] {
+    corner-shape: round !important;
   }
 }
 
@@ -283,8 +430,22 @@ body {
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .scroll-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .admin-drawer-layer,
+  .admin-drawer-backdrop,
+  .admin-drawer-panel {
+    animation: none !important;
+    transition: none !important;
   }
 }
