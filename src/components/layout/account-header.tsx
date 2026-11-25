@@ -24,7 +24,7 @@ export function AccountHeader() {
                     role="button"
                     aria-label="Voltar para a página inicial"
                 >
-                    <Image src="/acienciadalua-logo-var1.svg" alt="Logotipo A Ciência da Lua" width={32} height={32} />
+                    <Image src="/logo.webp" alt="Logotipo A Ciência da Lua" width={32} height={32} />
                     <div className="font-unkempt text-xl sm:text-2xl text-ouro-ink">
                         A Ciência da <span className="text-xl sm:text-2xl text-turquesa-deep">Lua</span>
                     </div>

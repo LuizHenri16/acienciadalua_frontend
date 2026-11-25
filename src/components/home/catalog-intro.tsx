@@ -16,8 +16,8 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import studyDeskImg from "@/assets/images/estudar_objetos_quimica_1795571144140.jpg";
-import teachDeskImg from "@/assets/images/dar_aula_objetos_quimica_1795571144885.jpg";
+import studyDeskImg from "@/assets/images/estudar_objetos_quimica_1795571144140.webp";
+import teachDeskImg from "@/assets/images/dar_aula_objetos_quimica_1795571144885.webp";
 
 type TrackMode = "student" | "teacher";
 
@@ -184,7 +184,7 @@ export function CatalogIntro() {
           <div
             role="tablist"
             aria-label="Alternar bancada entre materiais para estudar e para dar aula"
-            className="relative grid grid-cols-2 sm:inline-flex items-center gap-1.5 p-1.5 squircle-border bg-linear-to-b from-off-white/90 via-off-white/70 to-off-white/95 backdrop-blur-xl backdrop-saturate-150 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.95),inset_0_-1px_2px_rgba(30,27,75,0.04)] w-full sm:w-auto"
+            className="relative grid grid-cols-2 sm:inline-flex items-center gap-1.5 p-1.5 squircle-border bg-linear-to-b from-off-white/90 via-off-white/70 to-off-white/95 backdrop-blur-xl backdrop-saturate-150 mobile-no-blur shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.95),inset_0_-1px_2px_rgba(30,27,75,0.04)] w-full sm:w-auto"
           >
             {(["student", "teacher"] as const).map((key) => {
               const item = WORKBENCH_TRACKS[key];
@@ -205,22 +205,33 @@ export function CatalogIntro() {
                   }`}
                 >
                   {active && (
-                    <motion.span
-                      layoutId="workbench-tab-liquid-glass"
-                      transition={
-                        reduceMotion
-                          ? { duration: 0 }
-                          : { type: "spring", stiffness: 380, damping: 32 }
-                      }
-                      aria-hidden="true"
-                      className={`absolute inset-0 squircle-border backdrop-blur-md backdrop-saturate-150 border border-white/40 overflow-hidden ${
-                        key === "teacher"
-                          ? "bg-linear-to-b from-rosa-deep/90 via-rosa-deep/95 to-[#8F354A]/95 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.55),inset_0_-2px_4px_rgba(242,184,198,0.32)]"
-                          : "bg-linear-to-b from-turquesa-deep/90 via-turquesa-deep/95 to-[#165C56]/95 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.55),inset_0_-2px_4px_rgba(109,213,202,0.3)]"
-                      }`}
-                    >
-                      <span className="pointer-events-none absolute inset-x-2 top-0.5 h-1/2 squircle-border bg-linear-to-b from-white/28 to-transparent" />
-                    </motion.span>
+                    <>
+                      {/* On phones the shared-layout spring is skipped entirely. */}
+                      <span
+                        aria-hidden="true"
+                        className={`sm:hidden absolute inset-0 squircle-border border border-white/40 ${
+                          key === "teacher"
+                            ? "bg-linear-to-b from-rosa-deep/90 via-rosa-deep/95 to-[#8F354A]/95"
+                            : "bg-linear-to-b from-turquesa-deep/90 via-turquesa-deep/95 to-[#165C56]/95"
+                        }`}
+                      />
+                      <motion.span
+                        layoutId="workbench-tab-liquid-glass"
+                        transition={
+                          reduceMotion
+                            ? { duration: 0 }
+                            : { type: "spring", stiffness: 380, damping: 32 }
+                        }
+                        aria-hidden="true"
+                        className={`hidden sm:block absolute inset-0 squircle-border backdrop-blur-md backdrop-saturate-150 border border-white/40 overflow-hidden ${
+                          key === "teacher"
+                            ? "bg-linear-to-b from-rosa-deep/90 via-rosa-deep/95 to-[#8F354A]/95 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.55),inset_0_-2px_4px_rgba(242,184,198,0.32)]"
+                            : "bg-linear-to-b from-turquesa-deep/90 via-turquesa-deep/95 to-[#165C56]/95 shadow-[inset_0_1.5px_1px_rgba(255,255,255,0.55),inset_0_-2px_4px_rgba(109,213,202,0.3)]"
+                        }`}
+                      >
+                        <span className="pointer-events-none absolute inset-x-2 top-0.5 h-1/2 squircle-border bg-linear-to-b from-white/28 to-transparent" />
+                      </motion.span>
+                    </>
                   )}
                   <Icon className="relative z-10 w-4 h-4 shrink-0" aria-hidden="true" />
                   <span className="relative z-10">{item.tabLabel}</span>
@@ -237,9 +248,9 @@ export function CatalogIntro() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={track.mode}
-                initial={reduceMotion ? false : { opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98 }}
+                initial={reduceMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={reduceMotion ? undefined : { opacity: 0 }}
                 transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                 className="relative"
               >
@@ -328,9 +339,9 @@ export function CatalogIntro() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={track.mode}
-                initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
+                initial={reduceMotion ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={reduceMotion ? undefined : { opacity: 0 }}
                 transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-col gap-5"
               >

@@ -105,7 +105,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
         {/* Brand lockup */}
         <div className="flex items-center gap-2.5 px-2 py-1.5 select-none">
           <Image
-            src="/acienciadalua-logo-var1.svg"
+            src="/logo.webp"
             alt="Logotipo A Ciência da Lua"
             width={30}
             height={30}
@@ -240,7 +240,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
             </button>
             <Link href="/painel" className="flex items-center gap-1.5 min-w-0">
               <Image
-                src="/acienciadalua-logo-var1.svg"
+                src="/logo.webp"
                 alt="Logotipo A Ciência da Lua"
                 width={24}
                 height={24}
