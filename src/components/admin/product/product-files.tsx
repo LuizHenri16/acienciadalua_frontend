@@ -73,16 +73,16 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
           type="button"
           onClick={() => fileInputRef.current?.click()}
           aria-describedby={hasError ? "product-form-error" : undefined}
-          className={`w-full flex items-center gap-3 border-2 border-dashed squircle-border px-4 py-4 transition-all cursor-pointer group ${hasFile
-              ? 'border-turquesa-dark bg-turquesa-light/30 hover:bg-turquesa-light/50'
-              : 'border-gray-200 bg-gray-50/50 hover:border-turquesa-dark hover:bg-turquesa-light/20'
+          className={`w-full flex items-center gap-3 border-2 border-dashed rounded-2xl px-4 py-4 transition-all cursor-pointer group ${hasFile
+              ? 'border-turquesa-deep/45 bg-[#E7F6F4]/70 hover:bg-[#E7F6F4]'
+              : 'border-marinho/[0.14] bg-[#F5F4F0]/60 hover:border-turquesa-deep/45 hover:bg-[#E7F6F4]/35'
             }`}
         >
-          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${hasFile ? 'bg-turquesa-dark' : 'bg-white border border-gray-200 shadow-sm group-hover:border-turquesa-dark'
+          <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${hasFile ? 'bg-turquesa-deep' : 'bg-white border border-marinho/[0.1] shadow-sm group-hover:border-turquesa-deep/40'
             }`}>
             {hasFile
               ? <FileCheck className="w-4 h-4 text-white" />
-              : <Upload className="w-4 h-4 text-turquesa-dark" />
+              : <Upload className="w-4 h-4 text-turquesa-deep" />
             }
           </div>
           <div className="flex flex-col items-start text-left">
@@ -106,10 +106,10 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
             type="button"
             onClick={() => coverInputRef.current?.click()}
             aria-describedby={hasError ? "product-form-error" : undefined}
-            className="flex-1 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-200 squircle-border py-6 hover:border-turquesa-dark hover:bg-turquesa-light/20 transition-all cursor-pointer group"
+            className="flex-1 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-marinho/[0.14] bg-[#F5F4F0]/60 rounded-2xl py-6 hover:border-turquesa-deep/45 hover:bg-[#E7F6F4]/35 transition-all cursor-pointer group"
           >
-            <div className="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center bg-white shadow-sm group-hover:border-turquesa-dark transition-colors">
-              <Upload className="w-4 h-4 text-turquesa-dark" />
+            <div className="w-9 h-9 rounded-xl border border-marinho/[0.1] flex items-center justify-center bg-white shadow-sm group-hover:border-turquesa-deep/40 transition-colors">
+              <Upload className="w-4 h-4 text-turquesa-deep" />
             </div>
             <div className="flex flex-col items-center gap-0.5">
               <span className="text-sm font-semibold text-texto-secundario">
@@ -122,11 +122,11 @@ export function ProductFiles({ data, onChange, existingCoverUrl, existingFileUrl
           </button>
           <input type="file" ref={coverInputRef} onChange={handleCoverChange} accept="image/jpeg, image/png" className="hidden" />
 
-          <div className="w-[90px] squircle-border overflow-hidden border border-borda bg-linear-to-br from-turquesa-light to-menta flex items-center justify-center shrink-0 relative">
+          <div className="w-[90px] rounded-2xl overflow-hidden border border-marinho/[0.08] bg-linear-to-br from-[#E7F6F4] to-[#FDF0F3] flex items-center justify-center shrink-0 relative">
             {coverPreviewUrl ? (
               <Image src={coverPreviewUrl} alt="Preview da capa do produto" fill className="object-cover" sizes="90px" />
             ) : (
-              <ImageIcon className="w-6 h-6 text-turquesa-dark/40" />
+              <ImageIcon className="w-6 h-6 text-turquesa-deep/40" />
             )}
           </div>
         </div>

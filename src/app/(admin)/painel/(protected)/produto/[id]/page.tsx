@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { ArrowLeft } from "lucide-react";
 import { adminGetProductById } from "@/lib/api/admin-products";
 import { ADMIN_TOKEN_COOKIE } from "@/lib/auth/constants";
+import { ADMIN_SIGNIN_ROUTE } from "@/lib/auth/routes";
 import { ProductForm } from "@/components/admin/product/product-form";
 
 interface EditProdutoPageProps {
@@ -15,9 +16,11 @@ export default async function EditProdutoPage({ params }: EditProdutoPageProps) 
   const cookieStore = await cookies();
   const token = cookieStore.get(ADMIN_TOKEN_COOKIE)?.value ?? "";
 
-  if (!token) redirect("/painel/signin");
+  if (!token) {
+    redirect(ADMIN_SIGNIN_ROUTE);
+  }
 
-  const product = await adminGetProductById(id, token);
+  const product = await adminGetProductById(id, token).catch(() => null);
 
   if (!product) notFound();
 
@@ -27,7 +30,7 @@ export default async function EditProdutoPage({ params }: EditProdutoPageProps) 
         <Link
           href="/painel/produtos"
           aria-label="Voltar para produtos"
-          className="flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-borda text-texto-principal hover:bg-off-white transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-full painel-control hover:bg-[#F5F4F0]"
         >
           <ArrowLeft className="w-4 h-4" />
         </Link>

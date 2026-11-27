@@ -31,18 +31,18 @@ export function SaleDetailDrawer({ sale, onClose }: SaleDetailDrawerProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-end bg-texto-principal/35 backdrop-blur-[2px]"
+      className="fixed inset-0 z-50 flex justify-end bg-marinho/35 backdrop-blur-[3px]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="sale-detail-title"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md h-full bg-white border-l border-borda shadow-2xl flex flex-col justify-between overflow-y-auto"
+        className="w-full max-w-md h-full bg-white border-l border-marinho/[0.08] shadow-2xl flex flex-col justify-between overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
-          <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 sm:py-5 border-b border-borda sticky top-0 bg-white z-10">
+          <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 sm:py-5 border-b border-marinho/[0.07] sticky top-0 bg-white z-10">
             <div>
               <p className="text-xs font-medium text-texto-terciario">
                 Detalhes da venda
@@ -58,7 +58,7 @@ export function SaleDetailDrawer({ sale, onClose }: SaleDetailDrawerProps) {
               type="button"
               onClick={onClose}
               aria-label="Fechar detalhes da venda"
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-texto-terciario hover:text-texto-principal hover:bg-off-white transition-colors cursor-pointer"
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-texto-terciario hover:text-texto-principal hover:bg-[#F5F4F0] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -66,7 +66,7 @@ export function SaleDetailDrawer({ sale, onClose }: SaleDetailDrawerProps) {
 
           <div className="p-4 sm:p-6 flex flex-col gap-5 sm:gap-6">
             {/* Value & status */}
-            <div className="flex items-center justify-between gap-4 pb-5 border-b border-borda">
+            <div className="flex items-center justify-between gap-4 pb-5 border-b border-marinho/[0.07]">
               <div>
                 <p className="text-xs text-texto-secundario">Valor total</p>
                 <p className="text-2xl font-bold text-texto-principal tabular-nums mt-1">
@@ -97,7 +97,7 @@ export function SaleDetailDrawer({ sale, onClose }: SaleDetailDrawerProps) {
             </div>
 
             {/* Product */}
-            <div className="flex flex-col gap-1.5 pt-4 border-t border-borda">
+            <div className="flex flex-col gap-1.5 pt-4 border-t border-marinho/[0.07]">
               <p className="text-xs font-semibold text-texto-terciario">
                 Material adquirido
               </p>
@@ -110,7 +110,7 @@ export function SaleDetailDrawer({ sale, onClose }: SaleDetailDrawerProps) {
             </div>
 
             {/* Payment details */}
-            <div className="flex flex-col gap-3 pt-4 border-t border-borda">
+            <div className="flex flex-col gap-3 pt-4 border-t border-marinho/[0.07]">
               <p className="text-xs font-semibold text-texto-terciario">
                 Pagamento e liberação
               </p>
@@ -164,7 +164,7 @@ export function SaleDetailDrawer({ sale, onClose }: SaleDetailDrawerProps) {
           </div>
         </div>
 
-        <div className="p-4 sm:p-6 border-t border-borda bg-off-white/60 flex items-center justify-between gap-3">
+        <div className="p-4 sm:p-6 border-t border-marinho/[0.07] bg-[#F5F4F0]/75 flex items-center justify-between gap-3">
           <Link
             href={`/painel/produto/${sale.productId}`}
             className="inline-flex items-center gap-1.5 text-xs font-bold text-turquesa-deep hover:underline"
@@ -175,7 +175,7 @@ export function SaleDetailDrawer({ sale, onClose }: SaleDetailDrawerProps) {
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 rounded-xl border border-borda-med bg-white text-xs font-bold text-texto-principal hover:bg-off-white transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-full painel-control text-xs font-bold hover:bg-[#F5F4F0] cursor-pointer"
           >
             Fechar
           </button>

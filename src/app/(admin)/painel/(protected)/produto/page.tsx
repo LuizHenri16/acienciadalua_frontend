@@ -27,7 +27,7 @@ export default async function ProdutoPage({ searchParams }: ProdutoPageProps) {
         <Link
           href="/painel/produtos"
           aria-label="Voltar para produtos"
-          className="flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-borda text-texto-principal hover:bg-off-white transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-full painel-control hover:bg-[#F5F4F0]"
         >
           <ArrowLeft className="w-4 h-4" />
         </Link>

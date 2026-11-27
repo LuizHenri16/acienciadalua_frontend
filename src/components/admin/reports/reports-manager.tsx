@@ -133,7 +133,7 @@ export function ReportsManager() {
             type="button"
             onClick={handleExportCsv}
             disabled={!data}
-            className="inline-flex items-center justify-center gap-2 px-4 min-h-10 rounded-xl bg-turquesa-deep text-white text-xs font-bold hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50 whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-5 min-h-10 rounded-full painel-btn-primary text-xs font-bold cursor-pointer disabled:opacity-50 whitespace-nowrap"
           >
             <FileSpreadsheet className="w-4 h-4" />
             <span>Exportar CSV</span>
@@ -143,7 +143,7 @@ export function ReportsManager() {
             type="button"
             onClick={handleExportJson}
             disabled={!data}
-            className="inline-flex items-center justify-center gap-2 px-4 min-h-10 rounded-xl bg-white border border-borda text-xs font-bold text-texto-principal hover:bg-off-white transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+            className="inline-flex items-center justify-center gap-2 px-5 min-h-10 rounded-full painel-control text-xs font-bold hover:bg-[#F5F4F0] cursor-pointer disabled:opacity-50 whitespace-nowrap"
           >
             <Download className="w-4 h-4 text-turquesa-deep" />
             <span>Exportar JSON</span>
@@ -152,11 +152,11 @@ export function ReportsManager() {
       </div>
 
       {/* Period & Category Bar */}
-      <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+      <div className="rounded-3xl painel-card p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
         <div
           role="tablist"
           aria-label="Período do relatório"
-          className="grid grid-cols-4 sm:inline-flex items-center gap-1 p-1 rounded-xl bg-off-white border border-borda w-full sm:w-auto"
+          className="grid grid-cols-4 sm:inline-flex items-center gap-1 p-1 rounded-full painel-well w-full sm:w-auto"
         >
           {PERIOD_OPTIONS.map((opt) => (
             <button
@@ -165,9 +165,9 @@ export function ReportsManager() {
               role="tab"
               aria-selected={period === opt.value}
               onClick={() => handlePeriodChange(opt.value)}
-              className={`px-2 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center ${
+              className={`px-2.5 sm:px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center ${
                 period === opt.value
-                  ? "bg-white text-texto-principal shadow-sm"
+                  ? "bg-white text-marinho shadow-sm"
                   : "text-texto-secundario hover:text-texto-principal"
               }`}
             >
@@ -180,7 +180,7 @@ export function ReportsManager() {
           aria-label="Filtrar ranking por categoria"
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value as CategoryFilter)}
-          className="w-full sm:w-auto min-h-10 px-3 rounded-xl bg-off-white/70 border border-borda text-xs font-semibold text-texto-principal focus:bg-white focus:border-turquesa-dark cursor-pointer"
+          className="w-full sm:w-auto min-h-10 px-4 rounded-full painel-control text-xs font-semibold cursor-pointer"
         >
           <option value="all">Todas as categorias</option>
           <option value={MaterialType.STUDENT}>Material de estudo</option>
@@ -189,26 +189,89 @@ export function ReportsManager() {
       </div>
 
       {loading || !data ? (
-        <div className="flex flex-col gap-4 animate-pulse">
+        <div
+          role="status"
+          aria-live="polite"
+          aria-busy="true"
+          className="flex flex-col gap-4 sm:gap-5"
+        >
+          <span className="sr-only">Carregando dados dos relatórios…</span>
+
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-2.5 sm:gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-28 rounded-2xl bg-white border border-borda" />
+              <div
+                key={i}
+                className={`rounded-3xl p-4 sm:p-5 flex flex-col gap-3 ${
+                  i === 1 ? "painel-card-accent" : "painel-card-soft"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <div className="h-3.5 w-20 rounded-full skeleton-shimmer" />
+                  <div className="w-8 h-8 rounded-full skeleton-shimmer shrink-0" />
+                </div>
+                <div className="h-7 w-28 rounded-xl skeleton-shimmer" />
+                <div className="h-3 w-24 rounded-full skeleton-shimmer" />
+              </div>
             ))}
           </div>
-          <div className="h-80 rounded-2xl bg-white border border-borda" />
+
+          <div className="rounded-3xl painel-card-navy p-5 sm:p-6 flex flex-col gap-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="space-y-2">
+                <div className="h-4 w-44 rounded-full skeleton-shimmer-dark" />
+                <div className="h-3.5 w-60 rounded-full skeleton-shimmer-dark" />
+              </div>
+              <div className="h-9 w-full sm:w-56 rounded-full skeleton-shimmer-dark" />
+            </div>
+            <div className="h-48 flex items-end justify-between gap-2 sm:gap-3 pt-2">
+              {[38, 60, 48, 76, 58, 90, 70, 84].map((pct, idx) => (
+                <div
+                  key={idx}
+                  className="flex-1 rounded-t-2xl skeleton-shimmer-dark"
+                  style={{ height: `${pct}%` }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 xl:grid-cols-[1.6fr_1fr] gap-4 sm:gap-5">
+            <div className="rounded-3xl painel-card p-5 sm:p-6 flex flex-col gap-4">
+              <div className="h-4 w-44 rounded-full skeleton-shimmer" />
+              {[1, 2, 3, 4].map((row) => (
+                <div key={row} className="flex items-center justify-between gap-3 py-1.5">
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="h-4 w-6 rounded-full skeleton-shimmer shrink-0" />
+                    <div className="h-4 w-3/5 rounded-full skeleton-shimmer" />
+                  </div>
+                  <div className="h-4 w-20 rounded-full skeleton-shimmer shrink-0" />
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-3xl painel-card p-5 sm:p-6 flex flex-col gap-4">
+              <div className="space-y-1.5">
+                <div className="h-4 w-40 rounded-full skeleton-shimmer" />
+                <div className="h-3 w-52 rounded-full skeleton-shimmer" />
+              </div>
+              <div className="h-20 rounded-2xl skeleton-shimmer" />
+              <div className="h-20 rounded-2xl skeleton-shimmer" />
+            </div>
+          </div>
         </div>
       ) : (
         <>
           {/* Summary KPIs */}
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-2.5 sm:gap-4">
-            <div className="rounded-xl sm:rounded-2xl bg-white border border-turquesa-dark/30 p-3.5 sm:p-5">
+            <div className="rounded-3xl painel-card-accent p-4 sm:p-5">
               <div className="flex items-center justify-between gap-1">
                 <span className="text-[11px] sm:text-xs font-medium text-texto-secundario">
                   Faturamento
                 </span>
-                <Wallet className="w-4 h-4 text-turquesa-deep shrink-0" />
+                <span className="w-8 h-8 rounded-full bg-turquesa-deep text-white flex items-center justify-center shrink-0">
+                  <Wallet className="w-3.5 h-3.5" />
+                </span>
               </div>
-              <p className="text-lg sm:text-2xl font-bold text-turquesa-deep tabular-nums mt-1.5 sm:mt-2 truncate">
+              <p className="text-lg sm:text-2xl font-bold text-marinho tabular-nums mt-1.5 sm:mt-2 truncate">
                 {formatCurrency(data.periodSummary.totalRevenue)}
               </p>
               <p className="text-[11px] sm:text-xs text-turquesa-deep font-semibold mt-1 tabular-nums truncate">
@@ -219,44 +282,50 @@ export function ReportsManager() {
               </p>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-5">
+            <div className="rounded-3xl painel-card-soft p-4 sm:p-5">
               <div className="flex items-center justify-between gap-1">
                 <span className="text-[11px] sm:text-xs font-medium text-texto-secundario">
                   Vendas
                 </span>
-                <ShoppingBag className="w-4 h-4 text-texto-terciario shrink-0" />
+                <span className="w-8 h-8 rounded-full bg-marinho text-white flex items-center justify-center shrink-0">
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                </span>
               </div>
-              <p className="text-lg sm:text-2xl font-bold text-texto-principal tabular-nums mt-1.5 sm:mt-2">
+              <p className="text-lg sm:text-2xl font-bold text-marinho tabular-nums mt-1.5 sm:mt-2">
                 {data.periodSummary.totalSalesCount}
               </p>
-              <p className="text-[11px] sm:text-xs text-texto-terciario mt-1 tabular-nums">
+              <p className="text-[11px] sm:text-xs text-texto-secundario mt-1 tabular-nums">
                 Aprovação: {data.periodSummary.approvalRate}%
               </p>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-5">
+            <div className="rounded-3xl painel-card-soft p-4 sm:p-5">
               <div className="flex items-center justify-between gap-1">
                 <span className="text-[11px] sm:text-xs font-medium text-texto-secundario">
                   Novos clientes
                 </span>
-                <Users className="w-4 h-4 text-marinho shrink-0" />
+                <span className="w-8 h-8 rounded-full bg-marinho text-white flex items-center justify-center shrink-0">
+                  <Users className="w-3.5 h-3.5" />
+                </span>
               </div>
-              <p className="text-lg sm:text-2xl font-bold text-texto-principal tabular-nums mt-1.5 sm:mt-2">
+              <p className="text-lg sm:text-2xl font-bold text-marinho tabular-nums mt-1.5 sm:mt-2">
                 {data.periodSummary.newCustomersCount}
               </p>
-              <p className="text-[11px] sm:text-xs text-texto-terciario mt-1">
+              <p className="text-[11px] sm:text-xs text-texto-secundario mt-1">
                 No período
               </p>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-5">
+            <div className="rounded-3xl painel-card-soft p-4 sm:p-5">
               <div className="flex items-center justify-between gap-1">
                 <span className="text-[11px] sm:text-xs font-medium text-texto-secundario">
                   Ticket médio
                 </span>
-                <TrendingUp className="w-4 h-4 text-turquesa-deep shrink-0" />
+                <span className="w-8 h-8 rounded-full bg-marinho text-white flex items-center justify-center shrink-0">
+                  <TrendingUp className="w-3.5 h-3.5" />
+                </span>
               </div>
-              <p className="text-lg sm:text-2xl font-bold text-texto-principal tabular-nums mt-1.5 sm:mt-2 truncate">
+              <p className="text-lg sm:text-2xl font-bold text-marinho tabular-nums mt-1.5 sm:mt-2 truncate">
                 {formatCurrency(data.periodSummary.averageTicket)}
               </p>
               <p className="text-[11px] sm:text-xs text-turquesa-deep font-semibold mt-1 tabular-nums">
@@ -266,27 +335,31 @@ export function ReportsManager() {
           </div>
 
           {/* Evolution Chart */}
-          <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-5">
+          <div className="relative overflow-hidden rounded-3xl painel-card-navy p-5 sm:p-6">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-20 -right-16 w-56 h-56 rounded-full bg-turquesa/10 blur-2xl"
+            />
+            <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-5">
               <div>
-                <h2 className="text-sm sm:text-base font-bold text-texto-principal">
+                <h2 className="text-sm sm:text-base font-bold text-white">
                   {chartMetric === "revenue"
                     ? "Faturamento por período"
                     : "Evolução das vendas"}
                 </h2>
-                <p className="text-xs text-texto-terciario mt-0.5">
+                <p className="text-xs text-white/65 mt-0.5">
                   Toque ou passe o cursor pelos pontos para ver os valores exatos.
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 sm:inline-flex items-center gap-1 p-1 rounded-xl bg-off-white border border-borda w-full sm:w-auto">
+              <div className="grid grid-cols-2 sm:inline-flex items-center gap-1 p-1 rounded-full bg-white/[0.09] w-full sm:w-auto">
                 <button
                   type="button"
                   onClick={() => setChartMetric("revenue")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer text-center whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer text-center whitespace-nowrap ${
                     chartMetric === "revenue"
-                      ? "bg-white text-texto-principal shadow-sm"
-                      : "text-texto-secundario hover:text-texto-principal"
+                      ? "bg-white text-marinho shadow-sm"
+                      : "text-white/75 hover:text-white"
                   }`}
                 >
                   Faturamento (R$)
@@ -294,10 +367,10 @@ export function ReportsManager() {
                 <button
                   type="button"
                   onClick={() => setChartMetric("salesCount")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer text-center whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer text-center whitespace-nowrap ${
                     chartMetric === "salesCount"
-                      ? "bg-white text-texto-principal shadow-sm"
-                      : "text-texto-secundario hover:text-texto-principal"
+                      ? "bg-white text-marinho shadow-sm"
+                      : "text-white/75 hover:text-white"
                   }`}
                 >
                   Qtd. de vendas
@@ -305,22 +378,25 @@ export function ReportsManager() {
               </div>
             </div>
 
-            <RevenueChart
-              data={data.revenueSeries}
-              metric={chartMetric}
-              height={240}
-            />
+            <div className="relative">
+              <RevenueChart
+                data={data.revenueSeries}
+                metric={chartMetric}
+                height={240}
+                variant="dark"
+              />
+            </div>
           </div>
 
           {/* Bottom Split: Top Selling Table + Category Distribution */}
           <div className="grid grid-cols-1 xl:grid-cols-[1.6fr_1fr] gap-4 sm:gap-5">
-            <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-6">
+            <div className="rounded-3xl painel-card p-5 sm:p-6">
               <h2 className="text-sm sm:text-base font-bold text-texto-principal mb-3.5 sm:mb-4">
                 Produtos mais vendidos
               </h2>
 
               {/* Mobile ranking list */}
-              <div className="md:hidden divide-y divide-borda border-t border-borda -mx-3.5 px-3.5">
+              <div className="md:hidden divide-y divide-marinho/[0.06] border-t border-marinho/[0.07] -mx-4 px-4">
                 {filteredTopProducts.map((item, index) => (
                   <div key={item.id} className="py-3 flex items-center justify-between gap-3">
                     <div className="flex items-start gap-2.5 min-w-0">
@@ -347,14 +423,14 @@ export function ReportsManager() {
               <div className="hidden md:block overflow-x-auto -mx-6 px-6">
                 <table className="w-full text-left border-collapse min-w-[520px]">
                   <thead>
-                    <tr className="border-y border-borda text-[11px] font-semibold tracking-wider text-texto-terciario uppercase">
+                    <tr className="border-y border-marinho/[0.07] text-[11px] font-semibold tracking-wider text-texto-terciario uppercase">
                       <th className="py-3 pr-3">Material</th>
                       <th className="py-3 px-3">Categoria</th>
                       <th className="py-3 px-3 text-right">Vendas</th>
                       <th className="py-3 pl-3 text-right">Faturamento</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-borda">
+                  <tbody className="divide-y divide-marinho/[0.06]">
                     {filteredTopProducts.map((item, index) => (
                       <tr key={item.id}>
                         <td className="py-3.5 pr-3">
@@ -386,7 +462,7 @@ export function ReportsManager() {
             </div>
 
             {/* Category Comparison */}
-            <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-6 flex flex-col justify-between gap-4 sm:gap-5">
+            <div className="rounded-3xl painel-card p-5 sm:p-6 flex flex-col justify-between gap-4 sm:gap-5">
               <div>
                 <h2 className="text-sm sm:text-base font-bold text-texto-principal">
                   Desempenho por público
@@ -396,37 +472,37 @@ export function ReportsManager() {
                 </p>
 
                 <div className="mt-4 sm:mt-5 flex flex-col gap-3 sm:gap-4">
-                  <div className="rounded-xl bg-[#EEF8F6] border border-[#CFEAE5] p-4">
+                  <div className="rounded-2xl bg-[#EEF8F6] p-4">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-turquesa-deep">
                         Material de estudo (Alunos)
                       </span>
-                      <span className="text-xs font-bold text-texto-principal tabular-nums">
+                      <span className="text-xs font-bold text-marinho tabular-nums">
                         {categoryBreakdown.student.count} vendas
                       </span>
                     </div>
-                    <p className="text-lg font-bold text-texto-principal tabular-nums mt-1.5">
+                    <p className="text-lg font-bold text-marinho tabular-nums mt-1.5">
                       {formatCurrency(categoryBreakdown.student.revenue)}
                     </p>
                   </div>
 
-                  <div className="rounded-xl bg-[#F3F0FA] border border-[#E4DDF5] p-4">
+                  <div className="rounded-2xl bg-[#FDF0F3] p-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#5B4B9A]">
+                      <span className="text-xs font-bold text-rosa-deep">
                         Plano de aula (Professores)
                       </span>
-                      <span className="text-xs font-bold text-texto-principal tabular-nums">
+                      <span className="text-xs font-bold text-marinho tabular-nums">
                         {categoryBreakdown.teacher.count} vendas
                       </span>
                     </div>
-                    <p className="text-lg font-bold text-texto-principal tabular-nums mt-1.5">
+                    <p className="text-lg font-bold text-marinho tabular-nums mt-1.5">
                       {formatCurrency(categoryBreakdown.teacher.revenue)}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <p className="text-xs text-texto-terciario leading-relaxed border-t border-borda pt-4">
+              <p className="text-xs text-texto-terciario leading-relaxed border-t border-marinho/[0.07] pt-4">
                 Todos os produtos são materiais digitais entregues automaticamente na área “Minha Conta” após confirmação do Mercado Pago.
               </p>
             </div>

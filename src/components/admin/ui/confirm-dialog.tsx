@@ -41,7 +41,7 @@ export function ConfirmDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-texto-principal/40 backdrop-blur-[2px]"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-marinho/35 backdrop-blur-[3px]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="confirm-dialog-title"
@@ -51,7 +51,7 @@ export function ConfirmDialog({
       }}
     >
       <div
-        className="w-full max-w-md rounded-2xl bg-white border border-borda shadow-xl p-6"
+        className="w-full max-w-md rounded-2xl bg-white border border-marinho/[0.08] shadow-[0_20px_50px_-15px_rgba(30,27,75,0.22)] p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -60,7 +60,7 @@ export function ConfirmDialog({
               className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                 destructive
                   ? "bg-red-50 text-coral-dark"
-                  : "bg-turquesa-light/60 text-turquesa-deep"
+                  : "bg-[#E7F6F4] text-turquesa-deep"
               }`}
             >
               <AlertTriangle className="w-5 h-5" />
@@ -77,7 +77,7 @@ export function ConfirmDialog({
             onClick={onCancel}
             disabled={loading}
             aria-label="Fechar confirmação"
-            className="p-1.5 rounded-lg text-texto-terciario hover:text-texto-principal hover:bg-off-white transition-colors cursor-pointer disabled:opacity-50"
+            className="p-1.5 rounded-xl text-texto-terciario hover:text-texto-principal hover:bg-[#F5F4F0] transition-colors cursor-pointer disabled:opacity-50"
           >
             <X className="w-4 h-4" />
           </button>
@@ -95,7 +95,7 @@ export function ConfirmDialog({
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="px-4 py-2.5 min-h-11 rounded-xl border border-borda-med text-sm font-semibold text-texto-secundario hover:bg-off-white transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+            className="px-4 py-2.5 min-h-10 rounded-full painel-control text-xs font-bold text-texto-secundario hover:bg-[#F5F4F0] transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
           >
             {cancelLabel}
           </button>
@@ -103,8 +103,8 @@ export function ConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className={`px-4 py-2.5 min-h-11 rounded-xl text-sm font-bold text-white flex items-center justify-center gap-2 transition-opacity hover:opacity-90 cursor-pointer disabled:opacity-60 whitespace-nowrap ${
-              destructive ? "bg-coral-dark" : "bg-turquesa-deep"
+            className={`px-5 py-2.5 min-h-10 rounded-full text-xs font-bold text-white flex items-center justify-center gap-2 transition-opacity hover:opacity-90 cursor-pointer disabled:opacity-60 whitespace-nowrap ${
+              destructive ? "bg-coral-dark" : "painel-btn-primary"
             }`}
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}

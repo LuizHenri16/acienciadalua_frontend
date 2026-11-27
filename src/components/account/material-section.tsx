@@ -10,18 +10,18 @@ interface MaterialSectionProps {
 
 function SkeletonPurchasedCard() {
     return (
-        <div className="flex items-stretch bg-white border border-borda-med squircle-border shadow-sm overflow-hidden animate-pulse">
-            <div className="w-1.5 shrink-0 bg-gray-200" />
+        <div className="flex items-stretch bg-white border border-borda-med squircle-border shadow-sm overflow-hidden">
+            <div className="w-1.5 shrink-0 skeleton-shimmer" />
             <div className="flex items-center gap-4 flex-1 p-4">
-                <div className="w-14 h-14 shrink-0 squircle-border bg-gray-200" />
+                <div className="w-14 h-14 shrink-0 squircle-border skeleton-shimmer" />
                 <div className="flex flex-col flex-1 min-w-0 gap-2">
-                    <div className="h-4 bg-gray-200 rounded w-3/5" />
+                    <div className="h-4 rounded-full w-3/5 skeleton-shimmer" />
                     <div className="flex items-center gap-2">
-                        <div className="h-3 bg-gray-200 rounded w-16" />
-                        <div className="h-3 bg-gray-200 rounded w-20" />
+                        <div className="h-3 rounded-full w-16 skeleton-shimmer" />
+                        <div className="h-3 rounded-full w-20 skeleton-shimmer" />
                     </div>
                 </div>
-                <div className="w-16 h-9 bg-gray-200 squircle-border shrink-0" />
+                <div className="w-20 h-9 rounded-full skeleton-shimmer shrink-0" />
             </div>
         </div>
     );

@@ -16,7 +16,7 @@ export function ProductInfo({ data, onChange, hasError = false }: ProductInfoPro
     onChange('priceValue', parseCurrencyInput(formatted));
   };
 
-  const inputClass = "w-full border border-borda-forte squircle-border px-3.5 py-2.5 text-sm text-texto-principal placeholder-gray-500 bg-gray-50/50 focus:border-turquesa-dark focus:bg-white transition-all";
+  const inputClass = "w-full rounded-xl painel-control px-3.5 py-2.5 text-sm placeholder-texto-terciario";
 
   return (
     <div className="flex flex-col gap-4">

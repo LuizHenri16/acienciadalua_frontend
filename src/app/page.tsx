@@ -36,12 +36,23 @@ async function TeachProducts() {
 
 function ProductsSkeleton() {
   return (
-    <div role="status" aria-live="polite" className="flex flex-col gap-6">
+    <div role="status" aria-live="polite" aria-busy="true" className="flex flex-col gap-6">
       <span className="sr-only">Carregando materiais…</span>
-      <div className="h-8 w-64 bg-gray-200/70 squircle-border-sm animate-pulse" />
+      <div className="h-8 w-64 rounded-xl skeleton-shimmer" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="aspect-4/3 bg-gray-200/70 squircle-border animate-pulse" />
+          <div
+            key={i}
+            className="rounded-3xl bg-white/90 p-4 shadow-xs flex flex-col gap-3"
+          >
+            <div className="aspect-4/3 rounded-2xl skeleton-shimmer" />
+            <div className="h-4 w-24 rounded-full skeleton-shimmer" />
+            <div className="h-5 w-5/6 rounded-full skeleton-shimmer" />
+            <div className="flex items-center justify-between pt-2">
+              <div className="h-5 w-20 rounded-full skeleton-shimmer" />
+              <div className="h-8 w-24 rounded-full skeleton-shimmer" />
+            </div>
+          </div>
         ))}
       </div>
     </div>

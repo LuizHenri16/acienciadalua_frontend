@@ -8,6 +8,7 @@ interface RevenueChartProps {
   data: RevenueSeriesPoint[];
   metric?: "revenue" | "salesCount";
   height?: number;
+  variant?: "light" | "dark";
 }
 
 function buildSmoothPath(points: Array<{ x: number; y: number }>): string {
@@ -35,9 +36,12 @@ export function RevenueChart({
   data,
   metric = "revenue",
   height = 230,
+  variant = "light",
 }: RevenueChartProps) {
   const gradientId = useId();
+  const strokeGradientId = useId();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const isDark = variant === "dark";
 
   const width = 680;
   const padTop = 18;
@@ -98,7 +102,11 @@ export function RevenueChart({
 
   if (data.length === 0) {
     return (
-      <div className="h-[220px] flex items-center justify-center text-sm text-texto-terciario">
+      <div
+        className={`h-[220px] flex items-center justify-center text-sm ${
+          isDark ? "text-white/65" : "text-texto-terciario"
+        }`}
+      >
         Sem registros para o período selecionado.
       </div>
     );
@@ -124,8 +132,21 @@ export function RevenueChart({
       >
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2C9E95" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#2C9E95" stopOpacity="0.01" />
+            <stop
+              offset="0%"
+              stopColor={isDark ? "#F5A623" : "#2C9E95"}
+              stopOpacity={isDark ? "0.34" : "0.22"}
+            />
+            <stop
+              offset="100%"
+              stopColor={isDark ? "#6DD5CA" : "#2C9E95"}
+              stopOpacity="0.01"
+            />
+          </linearGradient>
+          <linearGradient id={strokeGradientId} x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor={isDark ? "#FAD07A" : "#1F7A73"} />
+            <stop offset="55%" stopColor={isDark ? "#F5A623" : "#1F7A73"} />
+            <stop offset="100%" stopColor={isDark ? "#6DD5CA" : "#2C9E95"} />
           </linearGradient>
         </defs>
 
@@ -143,14 +164,16 @@ export function RevenueChart({
                 y1={y}
                 x2={width - padRight}
                 y2={y}
-                stroke="rgba(43, 45, 91, 0.08)"
+                stroke={isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(43, 45, 91, 0.08)"}
                 strokeWidth="1"
               />
               <text
                 x={padLeft - 10}
                 y={y + 4}
                 textAnchor="end"
-                className="fill-[#6868A0] text-[11px] tabular-nums"
+                className={`${
+                  isDark ? "fill-white/60" : "fill-[#6868A0]"
+                } text-[11px] tabular-nums`}
               >
                 {label}
               </text>
@@ -165,8 +188,8 @@ export function RevenueChart({
         <path
           d={linePath}
           fill="none"
-          stroke="#1F7A73"
-          strokeWidth="2.25"
+          stroke={`url(#${strokeGradientId})`}
+          strokeWidth={isDark ? "2.75" : "2.25"}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -181,7 +204,9 @@ export function RevenueChart({
               x={pt.x}
               y={height - 6}
               textAnchor="middle"
-              className="fill-[#6868A0] text-[11px] tabular-nums"
+              className={`${
+                isDark ? "fill-white/60" : "fill-[#6868A0]"
+              } text-[11px] tabular-nums`}
             >
               {pt.item.label}
             </text>
@@ -196,17 +221,17 @@ export function RevenueChart({
               y1={padTop}
               x2={activePoint.x}
               y2={padTop + plotHeight}
-              stroke="#1F7A73"
-              strokeOpacity="0.28"
+              stroke={isDark ? "#FAD07A" : "#1F7A73"}
+              strokeOpacity={isDark ? "0.45" : "0.28"}
               strokeDasharray="3 3"
               strokeWidth="1.25"
             />
             <circle
               cx={activePoint.x}
               cy={activePoint.y}
-              r="5"
-              fill="#FFFFFF"
-              stroke="#1F7A73"
+              r="5.5"
+              fill={isDark ? "#1e1b4b" : "#FFFFFF"}
+              stroke={isDark ? "#F5A623" : "#1F7A73"}
               strokeWidth="2.5"
             />
           </g>
@@ -239,18 +264,30 @@ export function RevenueChart({
 
       {activePoint && (
         <div
-          className="pointer-events-none absolute top-1 z-10 rounded-xl bg-texto-principal text-white px-3 py-2 text-xs shadow-lg whitespace-nowrap"
+          className={`pointer-events-none absolute top-1 z-10 rounded-2xl px-3.5 py-2 text-xs shadow-xl whitespace-nowrap ${
+            isDark
+              ? "bg-white text-marinho"
+              : "bg-texto-principal text-white"
+          }`}
           style={{
             left: `min(calc(100% - 160px), max(8px, ${(activePoint.x / width) * 100}% - 70px))`,
           }}
         >
-          <p className="text-[11px] text-white/70 tabular-nums">
+          <p
+            className={`text-[11px] tabular-nums ${
+              isDark ? "text-texto-secundario" : "text-white/70"
+            }`}
+          >
             {activePoint.item.label}
           </p>
           <p className="font-bold tabular-nums mt-0.5">
             {formatCurrency(activePoint.item.revenue)}
           </p>
-          <p className="text-[11px] text-turquesa-light tabular-nums">
+          <p
+            className={`text-[11px] font-semibold tabular-nums ${
+              isDark ? "text-turquesa-deep" : "text-turquesa-light"
+            }`}
+          >
             {activePoint.item.salesCount}{" "}
             {activePoint.item.salesCount === 1 ? "venda" : "vendas"}
           </p>

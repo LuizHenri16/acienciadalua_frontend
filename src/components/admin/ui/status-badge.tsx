@@ -66,7 +66,7 @@ export function SaleStatusIndicator({ status }: { status: SaleStatus }) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-semibold whitespace-nowrap ${cfg.bg} ${cfg.text} ${cfg.border}`}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold whitespace-nowrap ${cfg.bg} ${cfg.text} ${cfg.border}`}
     >
       <Icon className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
       <span>{cfg.label}</span>

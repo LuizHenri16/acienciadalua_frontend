@@ -132,6 +132,47 @@ function getActivityMeta(type: ActivityType) {
   }
 }
 
+function getTimeGreeting(date: Date = new Date()): string {
+  const hour = date.getHours();
+  if (hour >= 5 && hour < 12) return "Bom dia";
+  if (hour >= 12 && hour < 18) return "Boa tarde";
+  return "Boa noite";
+}
+
+function getAdminDisplayNameFromToken(token: string): string {
+  if (!token) return "Profa. Lua";
+  try {
+    const parts = token.split(".");
+    if (parts.length < 2) return "Profa. Lua";
+    const base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=");
+    const json = decodeURIComponent(
+      Array.from(atob(padded), (ch) => `%${ch.charCodeAt(0).toString(16).padStart(2, "0")}`).join("")
+    );
+    const payload = JSON.parse(json) as Record<string, unknown>;
+
+    const rawName =
+      (typeof payload.username === "string" && payload.username.trim()) ||
+      (typeof payload.name === "string" && payload.name.trim()) ||
+      (typeof payload.preferred_username === "string" && payload.preferred_username.trim()) ||
+      (typeof payload.given_name === "string" && payload.given_name.trim());
+
+    if (rawName) return rawName;
+
+    const emailOrSub =
+      (typeof payload.email === "string" && payload.email.trim()) ||
+      (typeof payload.sub === "string" && payload.sub.includes("@") ? payload.sub.trim() : "");
+
+    if (emailOrSub) {
+      const localPart = emailOrSub.split("@")[0]?.trim();
+      if (localPart) return localPart;
+    }
+  } catch {
+    // Fallback gracefully when token is opaque or cannot be parsed
+  }
+  return "Profa. Lua";
+}
+
 export function AdminDashboard() {
   const [period, setPeriod] = useState<DashboardPeriod>("30d");
   const [selectedMonth, setSelectedMonth] = useState(REFERENCE_MONTHS[0]);
@@ -142,6 +183,8 @@ export function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedSale, setSelectedSale] = useState<AdminSale | null>(null);
+  const [greeting, setGreeting] = useState<string>("");
+  const [adminUsername, setAdminUsername] = useState<string>("Profa. Lua");
 
   const fetchDashboard = useCallback((targetPeriod: DashboardPeriod) => {
     return getAdminDashboardData(getAdminToken(), targetPeriod)
@@ -155,6 +198,21 @@ export function AdminDashboard() {
       .finally(() => {
         setLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    const syncGreetingAndUser = () => {
+      setGreeting(getTimeGreeting());
+      setAdminUsername(getAdminDisplayNameFromToken(getAdminToken()));
+    };
+    const initialTimer = window.setTimeout(syncGreetingAndUser, 0);
+    const interval = window.setInterval(() => {
+      setGreeting(getTimeGreeting());
+    }, 60_000);
+    return () => {
+      window.clearTimeout(initialTimer);
+      window.clearInterval(interval);
+    };
   }, []);
 
   useEffect(() => {
@@ -193,27 +251,103 @@ export function AdminDashboard() {
 
   if (loading && !data) {
     return (
-      <div role="status" aria-live="polite" aria-busy="true" className="flex flex-col gap-6 animate-pulse">
+      <div
+        role="status"
+        aria-live="polite"
+        aria-busy="true"
+        className="flex flex-col gap-4 sm:gap-6"
+      >
         <span className="sr-only">Carregando visão geral do painel…</span>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+        {/* Header skeleton */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 sm:gap-4">
           <div className="space-y-2">
-            <div className="h-5 w-44 rounded-lg bg-borda" />
-            <div className="h-8 w-64 rounded-lg bg-borda" />
-            <div className="h-4 w-56 rounded-lg bg-borda" />
+            <div className="h-7 sm:h-8 w-56 sm:w-64 rounded-full skeleton-shimmer" />
+            <div className="h-4 w-48 sm:w-60 rounded-full skeleton-shimmer" />
           </div>
-          <div className="flex items-center gap-2.5">
-            <div className="h-10 w-36 rounded-xl bg-borda" />
-            <div className="h-10 w-36 rounded-xl bg-borda" />
+          <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+            <div className="h-10 flex-1 sm:flex-initial sm:w-36 rounded-full skeleton-shimmer" />
+            <div className="h-10 w-10 rounded-full skeleton-shimmer shrink-0" />
+            <div className="h-10 w-32 sm:w-36 rounded-full skeleton-shimmer shrink-0" />
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+
+        {/* 4 KPI cards skeleton */}
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-2.5 sm:gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-36 rounded-2xl bg-white border border-borda" />
+            <div
+              key={i}
+              className={`rounded-3xl p-4 sm:p-5 flex flex-col justify-between gap-4 ${
+                i === 2 ? "painel-card-accent" : "painel-card-soft"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <div className="w-9 h-9 rounded-full skeleton-shimmer shrink-0" />
+                <div className="h-5 w-14 rounded-full skeleton-shimmer" />
+              </div>
+              <div className="space-y-2">
+                <div className="h-3.5 w-24 rounded-full skeleton-shimmer" />
+                <div className="h-7 w-28 rounded-xl skeleton-shimmer" />
+                <div className="h-3 w-32 rounded-full skeleton-shimmer" />
+              </div>
+            </div>
           ))}
         </div>
-        <div className="grid grid-cols-1 xl:grid-cols-[1.65fr_1fr] gap-5">
-          <div className="h-80 rounded-2xl bg-white border border-borda" />
-          <div className="h-80 rounded-2xl bg-white border border-borda" />
+
+        {/* Dark Marinho Chart + Top Products */}
+        <div className="grid grid-cols-1 xl:grid-cols-[1.65fr_1fr] gap-4 sm:gap-5 items-stretch">
+          <div className="rounded-3xl painel-card-navy p-5 sm:p-6 flex flex-col justify-between gap-5">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+              <div className="space-y-2">
+                <div className="h-4 w-44 rounded-full skeleton-shimmer-dark" />
+                <div className="h-7 w-36 rounded-xl skeleton-shimmer-dark" />
+              </div>
+              <div className="h-9 w-full sm:w-56 rounded-full skeleton-shimmer-dark" />
+            </div>
+
+            <div className="h-44 flex items-end justify-between gap-2 sm:gap-3 pt-4">
+              {[42, 66, 54, 80, 62, 92, 74, 86].map((pct, idx) => (
+                <div
+                  key={idx}
+                  className="flex-1 rounded-t-2xl skeleton-shimmer-dark"
+                  style={{ height: `${pct}%` }}
+                />
+              ))}
+            </div>
+
+            <div className="pt-4 border-t border-white/10 grid grid-cols-3 gap-3 sm:gap-4">
+              {[1, 2, 3].map((m) => (
+                <div key={m} className="space-y-1.5">
+                  <div className="h-3 w-16 rounded-full skeleton-shimmer-dark" />
+                  <div className="h-5 w-20 rounded-lg skeleton-shimmer-dark" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-3xl painel-card p-5 sm:p-6 flex flex-col justify-between gap-5">
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-5">
+                <div className="h-4 w-32 rounded-full skeleton-shimmer" />
+                <div className="h-3.5 w-20 rounded-full skeleton-shimmer" />
+              </div>
+              <div className="flex flex-col gap-4">
+                {[1, 2, 3, 4, 5].map((row) => (
+                  <div key={row} className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full skeleton-shimmer shrink-0" />
+                    <div className="flex-1 space-y-2">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="h-3.5 w-3/5 rounded-full skeleton-shimmer" />
+                        <div className="h-3.5 w-8 rounded-full skeleton-shimmer" />
+                      </div>
+                      <div className="h-1.5 w-full rounded-full skeleton-shimmer" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="h-10 w-full rounded-full skeleton-shimmer" />
+          </div>
         </div>
       </div>
     );
@@ -223,7 +357,7 @@ export function AdminDashboard() {
     return (
       <div
         role="alert"
-        className="rounded-2xl bg-white border border-coral/30 p-8 text-center flex flex-col items-center gap-3"
+        className="rounded-3xl painel-card p-8 text-center flex flex-col items-center gap-3"
       >
         <p className="text-base font-bold text-texto-principal">
           Não foi possível carregar os indicadores do painel.
@@ -234,7 +368,7 @@ export function AdminDashboard() {
         <button
           type="button"
           onClick={handleRetry}
-          className="mt-1 px-5 py-2.5 rounded-xl bg-turquesa-deep text-white text-sm font-bold hover:opacity-90 transition-opacity cursor-pointer"
+          className="mt-1 px-5 py-2.5 rounded-full painel-btn-primary text-sm font-bold cursor-pointer"
         >
           Tentar novamente
         </button>
@@ -257,7 +391,7 @@ export function AdminDashboard() {
         <div className="flex flex-col gap-1.5 sm:gap-2">
           <div>
             <h1 className="text-xl sm:text-[28px] font-bold text-texto-principal tracking-tight leading-tight">
-              Olá, seja bem-vinda! 👋
+              {greeting || "Olá"}, {adminUsername}! 👋
             </h1>
             <p className="text-xs sm:text-sm text-texto-secundario mt-1">
               Acompanhe o desempenho da sua plataforma.
@@ -276,7 +410,7 @@ export function AdminDashboard() {
                 setNotificationsOpen(false);
               }}
               aria-expanded={monthMenuOpen}
-              className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center gap-2 px-3 sm:px-3.5 min-h-10 rounded-xl bg-white border border-borda text-xs font-semibold text-texto-principal hover:bg-off-white/60 transition-colors cursor-pointer whitespace-nowrap"
+              className="w-full sm:w-auto inline-flex items-center justify-between sm:justify-center gap-2 px-3.5 sm:px-4 min-h-10 rounded-full painel-control text-xs font-semibold cursor-pointer whitespace-nowrap"
             >
               <span className="inline-flex items-center gap-1.5 truncate">
                 <Calendar className="w-3.5 h-3.5 text-texto-terciario shrink-0" />
@@ -286,7 +420,7 @@ export function AdminDashboard() {
             </button>
 
             {monthMenuOpen && (
-              <div className="absolute left-0 sm:left-auto sm:right-0 mt-1.5 w-44 rounded-xl bg-white border border-borda shadow-lg py-1.5 z-20">
+              <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-48 rounded-3xl bg-white shadow-[0_20px_44px_-14px_rgba(30,27,75,0.2)] p-2 z-20">
                 {REFERENCE_MONTHS.map((month) => (
                   <button
                     key={month}
@@ -295,10 +429,10 @@ export function AdminDashboard() {
                       setSelectedMonth(month);
                       setMonthMenuOpen(false);
                     }}
-                    className={`w-full text-left px-3.5 py-2 text-xs transition-colors cursor-pointer ${
+                    className={`w-full text-left px-3.5 py-2 rounded-2xl text-xs transition-colors cursor-pointer ${
                       month === selectedMonth
-                        ? "bg-[#E7F6F4] text-turquesa-deep font-bold"
-                        : "text-texto-secundario hover:bg-off-white"
+                        ? "bg-[#EAEBF2] text-marinho font-bold"
+                        : "text-texto-secundario hover:bg-[#F5F4F0]"
                     }`}
                   >
                     {month}
@@ -319,7 +453,7 @@ export function AdminDashboard() {
               }}
               aria-expanded={notificationsOpen}
               aria-label="Notificações recentes"
-              className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-borda text-texto-principal hover:bg-off-white/60 transition-colors cursor-pointer"
+              className="relative flex items-center justify-center w-10 h-10 rounded-full painel-control cursor-pointer"
             >
               <Bell className="w-4 h-4" />
               {unreadNotifications && (
@@ -331,15 +465,15 @@ export function AdminDashboard() {
             </button>
 
             {notificationsOpen && (
-              <div className="absolute right-0 mt-1.5 w-80 max-w-[calc(100vw-24px)] rounded-2xl bg-white border border-borda shadow-xl p-4 z-20">
-                <div className="flex items-center justify-between pb-2.5 border-b border-borda">
+              <div className="absolute right-0 mt-2 w-80 max-w-[calc(100vw-24px)] rounded-3xl bg-white shadow-[0_22px_48px_-14px_rgba(30,27,75,0.22)] p-4 z-20">
+                <div className="flex items-center justify-between pb-2.5 border-b border-marinho/[0.06]">
                   <p className="text-xs font-bold text-texto-principal">
                     Atualizações recentes
                   </p>
                   <button
                     type="button"
                     onClick={() => setNotificationsOpen(false)}
-                    className="text-[11px] font-semibold text-turquesa-deep hover:underline cursor-pointer"
+                    className="text-[11px] font-semibold text-marinho hover:underline cursor-pointer"
                   >
                     Fechar
                   </button>
@@ -366,7 +500,7 @@ export function AdminDashboard() {
           {/* Primary CTA */}
           <Link
             href="/painel/produto"
-            className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 min-h-10 rounded-xl bg-turquesa-deep text-white text-xs font-bold hover:opacity-90 transition-opacity whitespace-nowrap shadow-sm shrink-0"
+            className="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 min-h-10 rounded-full painel-btn-primary text-xs font-bold whitespace-nowrap shrink-0"
           >
             <Plus className="w-4 h-4" />
             <span>Novo produto</span>
@@ -380,12 +514,12 @@ export function AdminDashboard() {
         className="grid grid-cols-2 xl:grid-cols-4 gap-2.5 sm:gap-4"
       >
         {/* 1. Vendas do mês */}
-        <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-5 flex flex-col justify-between shadow-[0_1px_2px_rgba(28,28,46,0.03)]">
+        <div className="rounded-3xl painel-card-soft p-4 sm:p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-1.5">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#E7F6F4] flex items-center justify-center text-turquesa-deep shrink-0">
+            <div className="w-9 h-9 rounded-full bg-marinho flex items-center justify-center text-white shrink-0">
               <ShoppingBag className="w-4 h-4" />
             </div>
-            <span className="inline-flex items-center gap-0.5 px-1.5 sm:px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 text-[11px] sm:text-xs font-semibold tabular-nums">
+            <span className="inline-flex items-center gap-0.5 px-2.5 py-0.5 rounded-full bg-white/85 text-turquesa-deep text-[11px] sm:text-xs font-bold tabular-nums">
               <TrendingUp className="w-3 h-3 shrink-0" />
               {data.kpis.monthlySalesDeltaPct.toFixed(1).replace(".", ",")}%
             </span>
@@ -394,10 +528,10 @@ export function AdminDashboard() {
             <p className="text-[11px] sm:text-xs font-medium text-texto-secundario">
               Vendas do mês
             </p>
-            <p className="text-xl sm:text-[28px] font-bold text-texto-principal tabular-nums leading-tight mt-0.5 sm:mt-1">
+            <p className="text-xl sm:text-[28px] font-bold text-marinho tabular-nums leading-tight mt-0.5 sm:mt-1">
               {data.kpis.monthlySalesCount}
             </p>
-            <p className="text-[11px] sm:text-xs text-texto-terciario mt-1 leading-snug">
+            <p className="text-[11px] sm:text-xs text-texto-secundario mt-1 leading-snug">
               <span className="hidden sm:inline">vendas aprovadas · </span>
               {data.kpis.previousMonthlySalesCount} no mês anterior
             </p>
@@ -405,16 +539,16 @@ export function AdminDashboard() {
         </div>
 
         {/* 2. Faturamento */}
-        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-white border border-turquesa-dark/35 p-3.5 sm:p-5 flex flex-col justify-between shadow-[0_1px_3px_rgba(31,122,115,0.06)]">
+        <div className="relative overflow-hidden rounded-3xl painel-card-accent p-4 sm:p-5 flex flex-col justify-between">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -top-10 -right-10 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-turquesa-light/30"
           />
           <div className="relative flex items-center justify-between gap-1.5">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-turquesa-deep flex items-center justify-center text-white shrink-0">
+            <div className="w-9 h-9 rounded-full bg-turquesa-deep flex items-center justify-center text-white shrink-0">
               <Wallet className="w-4 h-4" />
             </div>
-            <span className="inline-flex items-center gap-0.5 px-1.5 sm:px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 text-[11px] sm:text-xs font-semibold tabular-nums">
+            <span className="inline-flex items-center gap-0.5 px-2.5 py-0.5 rounded-full bg-[#E7F6F4] text-turquesa-deep text-[11px] sm:text-xs font-bold tabular-nums">
               <TrendingUp className="w-3 h-3 shrink-0" />
               {data.kpis.monthlyRevenueDeltaPct.toFixed(1).replace(".", ",")}%
             </span>
@@ -423,7 +557,7 @@ export function AdminDashboard() {
             <p className="text-[11px] sm:text-xs font-medium text-texto-secundario">
               Faturamento
             </p>
-            <p className="text-xl sm:text-[28px] font-bold text-turquesa-deep tabular-nums leading-tight mt-0.5 sm:mt-1 truncate">
+            <p className="text-xl sm:text-[28px] font-bold text-marinho tabular-nums leading-tight mt-0.5 sm:mt-1 truncate">
               {revenueSplit.whole}
               <span className="text-sm sm:text-lg font-bold">,{revenueSplit.decimals}</span>
             </p>
@@ -434,12 +568,12 @@ export function AdminDashboard() {
         </div>
 
         {/* 3. Produtos ativos */}
-        <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-5 flex flex-col justify-between shadow-[0_1px_2px_rgba(28,28,46,0.03)]">
+        <div className="rounded-3xl painel-card-soft p-4 sm:p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-1.5">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#F1EEFA] flex items-center justify-center text-[#5B4B9A] shrink-0">
+            <div className="w-9 h-9 rounded-full bg-marinho flex items-center justify-center text-white shrink-0">
               <Eye className="w-4 h-4" />
             </div>
-            <span className="text-[11px] sm:text-xs text-texto-terciario font-medium tabular-nums truncate">
+            <span className="text-[11px] sm:text-xs text-texto-secundario font-semibold tabular-nums truncate">
               de {data.kpis.totalProductsCount} <span className="hidden sm:inline">cadastrados</span>
             </span>
           </div>
@@ -447,17 +581,17 @@ export function AdminDashboard() {
             <p className="text-[11px] sm:text-xs font-medium text-texto-secundario">
               Produtos ativos
             </p>
-            <p className="text-xl sm:text-[28px] font-bold text-texto-principal tabular-nums leading-tight mt-0.5 sm:mt-1">
+            <p className="text-xl sm:text-[28px] font-bold text-marinho tabular-nums leading-tight mt-0.5 sm:mt-1">
               {data.kpis.activeProductsCount}
             </p>
             <div className="mt-2 flex items-center gap-2">
-              <div className="flex-1 h-1.5 rounded-full bg-off-white overflow-hidden">
+              <div className="flex-1 h-1.5 rounded-full bg-white/80 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-[#6868A0] transition-all duration-300"
+                  className="h-full rounded-full bg-rosa-deep transition-all duration-300"
                   style={{ width: `${activeRatio}%` }}
                 />
               </div>
-              <span className="text-[11px] sm:text-xs text-texto-terciario shrink-0">
+              <span className="text-[11px] sm:text-xs text-texto-secundario shrink-0">
                 na vitrine
               </span>
             </div>
@@ -465,12 +599,12 @@ export function AdminDashboard() {
         </div>
 
         {/* 4. Clientes cadastrados */}
-        <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-5 flex flex-col justify-between shadow-[0_1px_2px_rgba(28,28,46,0.03)]">
+        <div className="rounded-3xl painel-card-soft p-4 sm:p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-1.5">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#EDF1F8] flex items-center justify-center text-marinho shrink-0">
+            <div className="w-9 h-9 rounded-full bg-marinho flex items-center justify-center text-white shrink-0">
               <Users className="w-4 h-4" />
             </div>
-            <span className="inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-lg bg-[#E7F6F4] text-turquesa-deep text-[11px] sm:text-xs font-semibold tabular-nums whitespace-nowrap">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-white/85 text-marinho text-[11px] sm:text-xs font-bold tabular-nums whitespace-nowrap">
               +{data.kpis.newCustomersMonthCount} <span className="hidden sm:inline ml-1">no mês</span>
             </span>
           </div>
@@ -478,38 +612,46 @@ export function AdminDashboard() {
             <p className="text-[11px] sm:text-xs font-medium text-texto-secundario">
               Clientes cadastrados
             </p>
-            <p className="text-xl sm:text-[28px] font-bold text-texto-principal tabular-nums leading-tight mt-0.5 sm:mt-1">
+            <p className="text-xl sm:text-[28px] font-bold text-marinho tabular-nums leading-tight mt-0.5 sm:mt-1">
               {data.kpis.totalCustomersCount}
             </p>
-            <p className="text-[11px] sm:text-xs text-texto-terciario mt-1 leading-snug">
+            <p className="text-[11px] sm:text-xs text-texto-secundario mt-1 leading-snug">
               contas registradas
             </p>
           </div>
         </div>
       </section>
 
-      {/* Performance Row: Revenue Chart + Top Products */}
+      {/* Performance Row: Revenue Chart (Marinho Navy) + Top Products */}
       <section
         aria-label="Gráficos e desempenho"
         className="grid grid-cols-1 xl:grid-cols-[1.65fr_1fr] gap-4 sm:gap-5 items-stretch"
       >
         {/* Revenue Chart Card */}
-        <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-6 flex flex-col justify-between shadow-[0_1px_2px_rgba(28,28,46,0.03)]">
-          <div>
+        <div className="relative overflow-hidden rounded-3xl painel-card-navy p-5 sm:p-6 flex flex-col justify-between">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-20 -right-16 w-56 h-56 rounded-full bg-turquesa/10 blur-2xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-24 -left-16 w-56 h-56 rounded-full bg-ouro/10 blur-2xl"
+          />
+          <div className="relative">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
               <div>
-                <h2 className="text-sm sm:text-base font-bold text-texto-principal">
+                <h2 className="text-sm sm:text-base font-bold text-white">
                   Evolução do faturamento
                 </h2>
                 <div className="flex flex-wrap items-baseline gap-2 mt-1">
-                  <span className="text-lg sm:text-xl font-bold text-texto-principal tabular-nums">
+                  <span className="text-lg sm:text-2xl font-bold text-white tabular-nums">
                     {periodRevenueSplit.whole},{periodRevenueSplit.decimals}
                   </span>
-                  <span className="inline-flex items-center gap-0.5 text-xs font-bold text-turquesa-deep tabular-nums">
+                  <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-ouro/20 text-xs font-bold text-ouro-light tabular-nums">
                     <TrendingUp className="w-3.5 h-3.5" />
                     {data.periodSummary.revenueDeltaPct.toFixed(1).replace(".", ",")}%
                   </span>
-                  <span className="text-xs text-texto-terciario">
+                  <span className="text-xs text-white/65">
                     {data.periodSummary.comparisonLabel}
                   </span>
                 </div>
@@ -519,7 +661,7 @@ export function AdminDashboard() {
               <div
                 role="tablist"
                 aria-label="Período de faturamento"
-                className="grid grid-cols-4 sm:inline-flex items-center gap-1 p-1 rounded-xl bg-off-white border border-borda w-full sm:w-auto"
+                className="grid grid-cols-4 sm:inline-flex items-center gap-1 p-1 rounded-full bg-white/[0.09] w-full sm:w-auto"
               >
                 {PERIOD_OPTIONS.map((opt) => {
                   const selected = opt.value === period;
@@ -530,10 +672,10 @@ export function AdminDashboard() {
                       role="tab"
                       aria-selected={selected}
                       onClick={() => handlePeriodChange(opt.value)}
-                      className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center ${
+                      className={`px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap text-center ${
                         selected
-                          ? "bg-white text-texto-principal shadow-sm"
-                          : "text-texto-secundario hover:text-texto-principal"
+                          ? "bg-white text-marinho shadow-sm"
+                          : "text-white/75 hover:text-white"
                       }`}
                     >
                       {opt.label}
@@ -544,43 +686,48 @@ export function AdminDashboard() {
             </div>
 
             <div className="mt-4 sm:mt-5">
-              <RevenueChart data={data.revenueSeries} metric="revenue" height={225} />
+              <RevenueChart
+                data={data.revenueSeries}
+                metric="revenue"
+                height={225}
+                variant="dark"
+              />
             </div>
           </div>
 
           {/* Sub-metrics footer */}
-          <div className="mt-4 sm:mt-5 pt-3.5 sm:pt-4 border-t border-borda grid grid-cols-3 gap-2 sm:gap-4">
+          <div className="relative mt-4 sm:mt-5 pt-3.5 sm:pt-4 border-t border-white/10 grid grid-cols-3 gap-2 sm:gap-4">
             <div>
-              <p className="text-[11px] sm:text-xs text-texto-terciario">Ticket médio</p>
+              <p className="text-[11px] sm:text-xs text-white/65">Ticket médio</p>
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5 mt-0.5 sm:mt-1">
-                <span className="text-xs sm:text-base font-bold text-texto-principal tabular-nums">
+                <span className="text-xs sm:text-base font-bold text-white tabular-nums">
                   {formatCurrency(data.periodSummary.averageTicket)}
                 </span>
-                <span className="text-[11px] sm:text-xs font-semibold text-turquesa-deep tabular-nums">
+                <span className="text-[11px] sm:text-xs font-semibold text-turquesa-light tabular-nums">
                   ↑ {data.periodSummary.averageTicketDeltaPct.toFixed(1).replace(".", ",")}%
                 </span>
               </div>
             </div>
 
             <div>
-              <p className="text-[11px] sm:text-xs text-texto-terciario truncate">Taxa aprovação</p>
+              <p className="text-[11px] sm:text-xs text-white/65 truncate">Taxa aprovação</p>
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5 mt-0.5 sm:mt-1">
-                <span className="text-xs sm:text-base font-bold text-texto-principal tabular-nums">
+                <span className="text-xs sm:text-base font-bold text-white tabular-nums">
                   {data.periodSummary.approvalRate}%
                 </span>
-                <span className="text-[11px] sm:text-xs font-semibold text-turquesa-deep tabular-nums">
+                <span className="text-[11px] sm:text-xs font-semibold text-turquesa-light tabular-nums">
                   ↑ {data.periodSummary.approvalRateDeltaPp} p.p.
                 </span>
               </div>
             </div>
 
             <div>
-              <p className="text-[11px] sm:text-xs text-texto-terciario">Reembolsos</p>
+              <p className="text-[11px] sm:text-xs text-white/65">Reembolsos</p>
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-1.5 mt-0.5 sm:mt-1">
-                <span className="text-xs sm:text-base font-bold text-texto-principal tabular-nums">
+                <span className="text-xs sm:text-base font-bold text-white tabular-nums">
                   {data.periodSummary.refundsCount}
                 </span>
-                <span className="inline-flex items-center gap-0.5 text-[11px] sm:text-xs font-semibold text-turquesa-deep tabular-nums">
+                <span className="inline-flex items-center gap-0.5 text-[11px] sm:text-xs font-semibold text-ouro-light tabular-nums">
                   {data.periodSummary.refundsDelta <= 0 ? (
                     <>
                       <TrendingDown className="w-3 h-3" />
@@ -596,7 +743,7 @@ export function AdminDashboard() {
         </div>
 
         {/* Top Selling Products */}
-        <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-6 flex flex-col justify-between shadow-[0_1px_2px_rgba(28,28,46,0.03)]">
+        <div className="rounded-3xl painel-card p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between gap-2">
               <h2 className="text-sm sm:text-base font-bold text-texto-principal">
@@ -616,7 +763,7 @@ export function AdminDashboard() {
                 return (
                   <div key={item.id} className="flex items-center gap-3">
                     <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${style.bg} ${style.text}`}
+                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${style.bg} ${style.text}`}
                     >
                       <Icon className="w-4 h-4" aria-hidden="true" />
                     </div>
@@ -625,13 +772,13 @@ export function AdminDashboard() {
                         <p className="text-xs sm:text-[13px] font-semibold text-texto-principal truncate">
                           {item.title}
                         </p>
-                        <span className="text-xs font-bold text-texto-principal tabular-nums shrink-0">
+                        <span className="text-xs font-bold text-marinho tabular-nums shrink-0">
                           {item.salesCount}
                         </span>
                       </div>
-                      <div className="mt-1.5 h-1.5 w-full rounded-full bg-off-white overflow-hidden">
+                      <div className="mt-1.5 h-1.5 w-full rounded-full bg-[#EAEBF2] overflow-hidden">
                         <div
-                          className="h-full rounded-full bg-turquesa-deep transition-all duration-300"
+                          className="h-full rounded-full bg-marinho transition-all duration-300"
                           style={{ width: `${widthPct}%` }}
                         />
                       </div>
@@ -644,7 +791,7 @@ export function AdminDashboard() {
 
           <Link
             href="/painel/produtos"
-            className="mt-5 sm:mt-6 w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-borda text-xs font-bold text-texto-principal hover:bg-off-white transition-colors"
+            className="mt-5 sm:mt-6 w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-[#EAEBF2] text-marinho text-xs font-bold hover:bg-marinho hover:text-white transition-colors"
           >
             <span>Ver todos os produtos</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -658,7 +805,7 @@ export function AdminDashboard() {
         className="grid grid-cols-1 xl:grid-cols-[1.65fr_1fr] gap-4 sm:gap-5 items-stretch"
       >
         {/* Recent Sales */}
-        <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-6 flex flex-col justify-between shadow-[0_1px_2px_rgba(28,28,46,0.03)]">
+        <div className="rounded-3xl painel-card p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3.5 sm:pb-4">
               <div>
@@ -671,7 +818,7 @@ export function AdminDashboard() {
               </div>
               <Link
                 href="/painel/vendas"
-                className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#E7F6F4] text-turquesa-deep text-xs font-bold hover:bg-turquesa-light/60 transition-colors whitespace-nowrap w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-marinho text-white text-xs font-bold hover:bg-[#2B276B] transition-colors whitespace-nowrap w-full sm:w-auto"
               >
                 <span>Ver todas as vendas</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -679,7 +826,7 @@ export function AdminDashboard() {
             </div>
 
             {/* Mobile Card List (Full width, zero horizontal scroll) */}
-            <div className="md:hidden divide-y divide-borda border-t border-borda -mx-3.5 px-3.5">
+            <div className="md:hidden divide-y divide-marinho/[0.06] -mx-3.5 px-3.5">
               {data.recentSales.map((sale) => (
                 <button
                   key={sale.id}
@@ -689,7 +836,7 @@ export function AdminDashboard() {
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded-full bg-[#E7F6F4] text-turquesa-deep text-[11px] font-bold flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-[#EAEBF2] text-marinho text-[11px] font-bold flex items-center justify-center shrink-0">
                         {getInitials(sale.customerName)}
                       </div>
                       <span className="text-xs font-bold text-texto-principal truncate">
@@ -719,7 +866,7 @@ export function AdminDashboard() {
             <div className="hidden md:block overflow-x-auto -mx-6 px-6">
               <table className="w-full text-left border-collapse min-w-[600px]">
                 <thead>
-                  <tr className="border-y border-borda text-[11px] font-semibold tracking-wider text-texto-terciario uppercase">
+                  <tr className="border-b border-marinho/[0.06] text-[11px] font-semibold tracking-wider text-texto-terciario uppercase">
                     <th className="py-3 pr-3">Cliente</th>
                     <th className="py-3 px-3">Produto</th>
                     <th className="py-3 px-3 text-right">Valor</th>
@@ -727,7 +874,7 @@ export function AdminDashboard() {
                     <th className="py-3 pl-3 text-right">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-borda">
+                <tbody className="divide-y divide-marinho/[0.05]">
                   {data.recentSales.map((sale) => (
                     <tr
                       key={sale.id}
@@ -739,11 +886,11 @@ export function AdminDashboard() {
                           setSelectedSale(sale);
                         }
                       }}
-                      className="group hover:bg-off-white/60 transition-colors cursor-pointer"
+                      className="group hover:bg-[#F5F4F0]/65 transition-colors cursor-pointer"
                     >
                       <td className="py-3.5 pr-3">
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <div className="w-8 h-8 rounded-full bg-[#E7F6F4] text-turquesa-deep text-[11px] font-bold flex items-center justify-center shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-[#EAEBF2] text-marinho text-[11px] font-bold flex items-center justify-center shrink-0">
                             {getInitials(sale.customerName)}
                           </div>
                           <span className="text-xs font-bold text-texto-principal truncate max-w-[140px]">
@@ -777,14 +924,14 @@ export function AdminDashboard() {
           </div>
 
           {data.isDemo && (
-            <p className="mt-3 sm:mt-4 pt-3 border-t border-borda text-[11px] text-texto-terciario">
+            <p className="mt-3 sm:mt-4 pt-3 border-t border-marinho/[0.07] text-[11px] text-texto-terciario">
               Valores demonstrativos para a prévia visual — conecte os endpoints administrativos do backend Go para exibir transações reais.
             </p>
           )}
         </div>
 
         {/* Recent Activity Panel */}
-        <div className="rounded-xl sm:rounded-2xl bg-white border border-borda p-3.5 sm:p-6 flex flex-col justify-between shadow-[0_1px_2px_rgba(28,28,46,0.03)]">
+        <div className="rounded-3xl painel-card p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between gap-2 pb-3.5 sm:pb-4">
               <h2 className="text-sm sm:text-base font-bold text-texto-principal">
@@ -803,7 +950,7 @@ export function AdminDashboard() {
                 return (
                   <div key={act.id} className="flex items-start gap-3">
                     <div
-                      className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${meta.bg} ${meta.text}`}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${meta.bg} ${meta.text}`}
                     >
                       <Icon className="w-4 h-4" aria-hidden="true" />
                     </div>
@@ -823,12 +970,12 @@ export function AdminDashboard() {
           </div>
 
           {/* Mercado Pago Webhook Connection Summary */}
-          <div className="mt-5 sm:mt-6 rounded-xl bg-[#EEF8F6] border border-[#CFEAE5] p-3.5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-white border border-[#CFEAE5] flex items-center justify-center text-turquesa-deep shrink-0">
+          <div className="mt-5 sm:mt-6 rounded-2xl bg-[#EAEBF2] p-3.5 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-marinho flex items-center justify-center text-white shrink-0">
               <PlugZap className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-bold text-texto-principal">
+              <p className="text-xs font-bold text-marinho">
                 Mercado Pago conectado
               </p>
               <p className="text-[11px] text-texto-secundario truncate">
