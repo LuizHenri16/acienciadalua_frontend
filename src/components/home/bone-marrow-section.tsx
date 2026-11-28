@@ -13,7 +13,7 @@ export function BoneMarrowSection() {
         className="pointer-events-none select-none absolute top-9 sm:top-9 lg:top-0 right-0 translate-x-[10%] sm:translate-x-[5%] md:translate-x-[4%] lg:translate-x-0 z-0 w-[300px] min-[400px]:w-[330px] sm:w-[460px] md:w-[600px] lg:w-[700px] xl:w-[800px] aspect-[1569/1080]"
       >
         <Image
-          src="/assets/aistudio/Post_Instagram_vermelho_e_branco_doa__o_de_medula__ssea__2__2e2ce0b8.webp"
+          src="/heart_hand.webp"
           alt=""
           fill
           quality={100}
