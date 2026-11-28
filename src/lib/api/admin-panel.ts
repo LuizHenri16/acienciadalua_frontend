@@ -9,19 +9,6 @@ import type {
 import { apiUrl, privateApiUrl } from "./client";
 import { HTTP_ONLY_SESSION } from "@/lib/auth/cookies";
 import { adminGetProducts } from "./admin-products";
-import {
-  buildDemoDashboard,
-  DEFAULT_ADMIN_SETTINGS,
-  DEMO_CUSTOMERS,
-  DEMO_PRODUCTS,
-  DEMO_PRODUCT_SALES_MAP,
-  DEMO_SALES,
-} from "@/lib/admin/demo-data";
-
-export interface AdminResult<T> {
-  data: T;
-  isDemo: boolean;
-}
 
 // Go serializes decimal values as strings; the panel works with numbers.
 function decimalToNumber(value: unknown, fallback = 0): number {
@@ -42,7 +29,7 @@ async function fetchProducts(token: string): Promise<Material[]> {
   return products.map(normalizeProduct);
 }
 
-type RawDashboard = Omit<AdminDashboardPayload, "isDemo" | "productsLive">;
+type RawDashboard = AdminDashboardPayload;
 
 function normalizeDashboard(data: RawDashboard): RawDashboard {
   return {
@@ -74,143 +61,83 @@ function normalizeDashboard(data: RawDashboard): RawDashboard {
   };
 }
 
-async function fetchJsonWithAuth<T>(path: string, token: string): Promise<T | null> {
-  if (!token) return null;
-  try {
-    const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl(path) : apiUrl(path), {
-      ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
-      cache: "no-store",
-    });
-    if (!response.ok) return null;
-    return (await response.json()) as T;
-  } catch {
-    return null;
+async function fetchJsonWithAuth<T>(path: string, token: string): Promise<T> {
+  if (!token) throw new Error("A sessão administrativa não está disponível.");
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl(path) : apiUrl(path), {
+    ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error(`Falha ao carregar dados do painel (${response.status}).`);
   }
+  return (await response.json()) as T;
 }
 
-export async function getAdminProductsWithFallback(
+export async function getAdminProductsData(
   token: string
-): Promise<AdminResult<{ products: Material[]; salesByProduct: Record<string, number> }>> {
-  try {
-    const products = await fetchProducts(token);
-    const salesMap = await fetchJsonWithAuth<Record<string, number>>(
-      "/admin/products/sales-count",
-      token
-    );
-    return {
-      data: {
-        products,
-        salesByProduct: salesMap ?? {},
-      },
-      isDemo: false,
-    };
-  } catch {
-    return {
-      data: {
-        products: DEMO_PRODUCTS,
-        salesByProduct: DEMO_PRODUCT_SALES_MAP,
-      },
-      isDemo: true,
-    };
-  }
+): Promise<{ products: Material[]; salesByProduct: Record<string, number> }> {
+  const [products, salesByProduct] = await Promise.all([
+    fetchProducts(token),
+    fetchJsonWithAuth<Record<string, number>>("/admin/products/sales-count", token),
+  ]);
+  return { products, salesByProduct };
 }
 
 export async function getAdminDashboardData(
   token: string,
   period: DashboardPeriod
 ): Promise<AdminDashboardPayload> {
-  const [liveDashboard, liveProducts] = await Promise.all([
-    fetchJsonWithAuth<RawDashboard>(
-      `/admin/dashboard?period=${encodeURIComponent(period)}`,
-      token
-    ),
-    fetchProducts(token).catch(() => null),
-  ]);
-
-  if (liveDashboard) {
-    return {
-      ...normalizeDashboard(liveDashboard),
-      isDemo: false,
-      productsLive: true,
-    };
-  }
-
-  return buildDemoDashboard(period, liveProducts);
+  const liveDashboard = await fetchJsonWithAuth<RawDashboard>(
+    `/admin/dashboard?period=${encodeURIComponent(period)}`,
+    token
+  );
+  return normalizeDashboard(liveDashboard);
 }
 
 export async function getAdminSalesData(
   token: string
-): Promise<AdminResult<AdminSale[]>> {
+): Promise<AdminSale[]> {
   const liveSales = await fetchJsonWithAuth<AdminSale[]>("/admin/sales", token);
-  if (liveSales) {
-    return {
-      data: liveSales.map((sale) => ({ ...sale, amount: decimalToNumber(sale.amount) })),
-      isDemo: false,
-    };
-  }
-  return { data: DEMO_SALES, isDemo: true };
+  return liveSales.map((sale) => ({ ...sale, amount: decimalToNumber(sale.amount) }));
 }
 
 export async function getAdminCustomersData(
   token: string
-): Promise<AdminResult<AdminCustomer[]>> {
+): Promise<AdminCustomer[]> {
   const liveCustomers = await fetchJsonWithAuth<AdminCustomer[]>(
     "/admin/customers",
     token
   );
-  if (liveCustomers) {
-    return {
-      data: liveCustomers.map((customer) => ({
-        ...customer,
-        totalSpent: decimalToNumber(customer.totalSpent),
-        purchases: (customer.purchases ?? []).map((purchase) => ({
-          ...purchase,
-          amount: decimalToNumber(purchase.amount),
-        })),
-      })),
-      isDemo: false,
-    };
-  }
-  return { data: DEMO_CUSTOMERS, isDemo: true };
+  return liveCustomers.map((customer) => ({
+    ...customer,
+    totalSpent: decimalToNumber(customer.totalSpent),
+    purchases: (customer.purchases ?? []).map((purchase) => ({
+      ...purchase,
+      amount: decimalToNumber(purchase.amount),
+    })),
+  }));
 }
 
 export async function getAdminSettingsData(
   token: string
-): Promise<AdminResult<AdminSettings>> {
-  const liveSettings = await fetchJsonWithAuth<AdminSettings>(
-    "/admin/settings",
-    token
-  );
-  if (liveSettings) {
-    return { data: liveSettings, isDemo: false };
-  }
-  return { data: DEFAULT_ADMIN_SETTINGS, isDemo: true };
+): Promise<AdminSettings> {
+  return fetchJsonWithAuth<AdminSettings>("/admin/settings", token);
 }
 
 export async function saveAdminSettingsData(
   token: string,
   settings: AdminSettings
 ): Promise<{ savedRemotely: boolean; settings: AdminSettings }> {
-  if (!token) {
-    return { savedRemotely: false, settings };
-  }
-
-  try {
-    const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl("/admin/settings") : apiUrl("/admin/settings"), {
-      method: "PUT",
-      headers: token === HTTP_ONLY_SESSION
-        ? { "Content-Type": "application/json" }
-        : { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify(settings),
-    });
-
-    if (response.ok) {
-      const updated = (await response.json()) as AdminSettings;
-      return { savedRemotely: true, settings: updated };
-    }
-  } catch {
-    // Fallback handled gracefully when endpoint is not yet deployed in Go
-  }
-
-  return { savedRemotely: false, settings };
+  if (!token) throw new Error("A sessão administrativa não está disponível.");
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl("/admin/settings") : apiUrl("/admin/settings"), {
+    method: "PUT",
+    headers: token === HTTP_ONLY_SESSION
+      ? { "Content-Type": "application/json" }
+      : { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify(settings),
+    cache: "no-store",
+  });
+  if (!response.ok) throw new Error(`Falha ao salvar configurações (${response.status}).`);
+  const updated = (await response.json()) as AdminSettings;
+  return { savedRemotely: true, settings: updated };
 }

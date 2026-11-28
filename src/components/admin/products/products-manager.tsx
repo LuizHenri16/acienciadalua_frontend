@@ -20,7 +20,7 @@ import { MaterialType, type Material } from "@/types/material";
 import { getAdminToken } from "@/lib/auth/cookies";
 import { uploadUrl } from "@/lib/api/client";
 import { adminDeleteProduct, adminToggleProduct } from "@/lib/api/admin-products";
-import { getAdminProductsWithFallback } from "@/lib/api/admin-panel";
+import { getAdminProductsData } from "@/lib/api/admin-panel";
 import { formatCurrency } from "@/lib/format/currency";
 import { getMaterialFormat, getMaterialTypeLabel } from "@/lib/format/material";
 import { ConfirmDialog } from "@/components/admin/ui/confirm-dialog";
@@ -41,7 +41,6 @@ export function ProductsManager() {
 
   const [products, setProducts] = useState<Material[]>([]);
   const [salesByProduct, setSalesByProduct] = useState<Record<string, number>>({});
-  const [isDemo, setIsDemo] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -58,11 +57,10 @@ export function ProductsManager() {
   const reloadProducts = useCallback(() => {
     setLoading(true);
     setError(false);
-    getAdminProductsWithFallback(getAdminToken())
+    getAdminProductsData(getAdminToken())
       .then((res) => {
-        setProducts(res.data.products);
-        setSalesByProduct(res.data.salesByProduct);
-        setIsDemo(res.isDemo);
+        setProducts(res.products);
+        setSalesByProduct(res.salesByProduct);
       })
       .catch(() => {
         setError(true);
@@ -74,12 +72,11 @@ export function ProductsManager() {
 
   useEffect(() => {
     let active = true;
-    getAdminProductsWithFallback(getAdminToken())
+    getAdminProductsData(getAdminToken())
       .then((res) => {
         if (!active) return;
-        setProducts(res.data.products);
-        setSalesByProduct(res.data.salesByProduct);
-        setIsDemo(res.isDemo);
+        setProducts(res.products);
+        setSalesByProduct(res.salesByProduct);
       })
       .catch(() => {
         if (active) setError(true);
@@ -98,9 +95,7 @@ export function ProductsManager() {
     const nextState = !product.isActive;
 
     try {
-      if (!isDemo) {
-        await adminToggleProduct(product.id, getAdminToken());
-      }
+      await adminToggleProduct(product.id, getAdminToken());
       setProducts((prev) =>
         prev.map((p) => (p.id === product.id ? { ...p, isActive: nextState } : p))
       );
@@ -123,9 +118,7 @@ export function ProductsManager() {
     if (!productToDelete) return;
     setDeleting(true);
     try {
-      if (!isDemo) {
-        await adminDeleteProduct(productToDelete.id, getAdminToken());
-      }
+      await adminDeleteProduct(productToDelete.id, getAdminToken());
       setProducts((prev) => prev.filter((p) => p.id !== productToDelete.id));
       showToast({
         title: "Produto excluído",
@@ -144,23 +137,6 @@ export function ProductsManager() {
   }
 
   function handleDuplicate(product: Material) {
-    if (isDemo) {
-      const cloned: Material = {
-        ...product,
-        id: `demo-copy-${Date.now()}`,
-        title: `${product.title} (Cópia)`,
-        isActive: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      setProducts((prev) => [cloned, ...prev]);
-      showToast({
-        title: "Produto duplicado como rascunho",
-        description: cloned.title,
-      });
-      return;
-    }
-
     router.push(`/painel/produto?duplicate=${encodeURIComponent(product.id)}`);
   }
 
@@ -562,24 +538,13 @@ export function ProductsManager() {
                     </button>
 
                     <div className="inline-flex items-center gap-1">
-                      {!isDemo ? (
-                        <Link
+                      <Link
                           href={`/painel/produto/${product.id}`}
                           aria-label={`Editar ${product.title}`}
                           className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-texto-secundario hover:text-turquesa-deep hover:bg-[#E7F6F4] transition-colors"
                         >
                           <Edit3 className="w-4 h-4" />
                         </Link>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={() => setPreviewProduct(product)}
-                          aria-label={`Editar ${product.title}`}
-                          className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-texto-secundario hover:text-turquesa-deep hover:bg-[#E7F6F4] transition-colors cursor-pointer"
-                        >
-                          <Edit3 className="w-4 h-4" />
-                        </button>
-                      )}
                       <button
                         type="button"
                         onClick={() => handleDuplicate(product)}
@@ -731,8 +696,7 @@ export function ProductsManager() {
 
                       <td className="py-3.5 pl-3 pr-5 text-right whitespace-nowrap">
                         <div className="inline-flex items-center justify-end gap-1">
-                          {!isDemo ? (
-                            <Link
+                          <Link
                               href={`/painel/produto/${product.id}`}
                               title="Editar produto"
                               aria-label={`Editar ${product.title}`}
@@ -740,17 +704,6 @@ export function ProductsManager() {
                             >
                               <Edit3 className="w-4 h-4" />
                             </Link>
-                          ) : (
-                            <button
-                              type="button"
-                              onClick={() => setPreviewProduct(product)}
-                              title="Editar produto"
-                              aria-label={`Editar ${product.title}`}
-                              className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-texto-secundario hover:text-turquesa-deep hover:bg-[#E7F6F4] transition-colors cursor-pointer"
-                            >
-                              <Edit3 className="w-4 h-4" />
-                            </button>
-                          )}
 
                           <button
                             type="button"
@@ -878,8 +831,7 @@ export function ProductsManager() {
             </div>
 
             <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#F5F4F0]/75 border-t border-marinho/[0.07] flex flex-wrap items-center justify-between gap-3">
-              {!isDemo ? (
-                <Link
+              <Link
                   href={`/produto/${previewProduct.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -888,21 +840,14 @@ export function ProductsManager() {
                   <span>Abrir página pública</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </Link>
-              ) : (
-                <span className="text-xs text-texto-terciario">
-                  Item demonstrativo de prévia
-                </span>
-              )}
 
               <div className="flex items-center gap-2 ml-auto">
-                {!isDemo && (
-                  <Link
+                <Link
                     href={`/painel/produto/${previewProduct.id}`}
                     className="px-4 py-2 rounded-full painel-btn-primary text-xs font-bold"
                   >
                     Editar material
-                  </Link>
-                )}
+                </Link>
                 <button
                   type="button"
                   onClick={() => setPreviewProduct(null)}

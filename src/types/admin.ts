@@ -123,8 +123,6 @@ export interface AdminDashboardPayload {
     connected: boolean;
     lastEventRelative: string;
   };
-  isDemo: boolean;
-  productsLive: boolean;
 }
 
 export interface AdminSettings {

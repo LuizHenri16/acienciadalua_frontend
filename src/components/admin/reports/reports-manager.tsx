@@ -18,6 +18,7 @@ import { getMaterialTypeLabel } from "@/lib/format/material";
 import { downloadCsv, downloadJson } from "@/lib/format/csv";
 import { RevenueChart } from "@/components/admin/ui/revenue-chart";
 import { useAdminToast } from "@/components/admin/ui/toast";
+import { DataError } from "@/components/admin/ui/data-error";
 
 const PERIOD_OPTIONS: Array<{ value: DashboardPeriod; label: string }> = [
   { value: "7d", label: "7 dias" },
@@ -35,24 +36,35 @@ export function ReportsManager() {
   const [chartMetric, setChartMetric] = useState<"revenue" | "salesCount">("revenue");
   const [data, setData] = useState<AdminDashboardPayload | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     let active = true;
     getAdminDashboardData(getAdminToken(), period)
       .then((res) => {
-        if (active) setData(res);
+        if (active) { setData(res); setError(false); }
       })
+      .catch(() => { if (active) setError(true); })
       .finally(() => {
         if (active) setLoading(false);
       });
     return () => {
       active = false;
     };
-  }, [period]);
+  }, [period, retryCount]);
 
   function handlePeriodChange(nextPeriod: DashboardPeriod) {
     setLoading(true);
+    setError(false);
+    setData(null);
     setPeriod(nextPeriod);
+  }
+
+  function handleRetry() {
+    setLoading(true);
+    setError(false);
+    setRetryCount((count) => count + 1);
   }
 
   const filteredTopProducts = useMemo(() => {
@@ -188,7 +200,7 @@ export function ReportsManager() {
         </select>
       </div>
 
-      {loading || !data ? (
+      {error && !loading ? <DataError onRetry={handleRetry} /> : loading || !data ? (
         <div
           role="status"
           aria-live="polite"
