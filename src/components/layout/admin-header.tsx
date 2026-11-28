@@ -9,8 +9,8 @@ import { clearAdminTokens } from "@/lib/auth/cookies";
 export function AdminHeader() {
   const router = useRouter();
 
-  function handleExit() {
-    clearAdminTokens();
+  async function handleExit() {
+    await clearAdminTokens();
     router.push("/painel/signin");
   }
 

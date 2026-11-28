@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BackVitrine } from "@/components/ui/back-vitrine";
 import { resetPassword } from "@/lib/api/customers";
-import { setCustomerToken } from "@/lib/auth/cookies";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function ResetPasswordForm() {
@@ -28,8 +27,7 @@ export function ResetPasswordForm() {
         setError("");
 
         try {
-            const result = await resetPassword(token, password);
-            setCustomerToken(result.access_token);
+            await resetPassword(token, password);
             setDone(true);
         } catch {
             setError("Token inválido ou expirado. Solicite uma nova redefinição.");
