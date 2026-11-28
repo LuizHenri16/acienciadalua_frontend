@@ -3,6 +3,7 @@ import Image from "next/image";
 import { RefreshCw, Shield } from "lucide-react";
 import { FaInstagram, FaPix } from "react-icons/fa6";
 import { SiDevelopmentcontainers } from "react-icons/si";
+import { BoneMarrowSection } from "@/components/home/bone-marrow-section";
 
 const sections = [
     { label: "Início", href: "/#banner" },
@@ -41,38 +42,48 @@ const trustBadges = [
     },
 ];
 
-export function SiteFooter({ className = "mt-10" }: { className?: string } = {}) {
+export function SiteFooter({
+    className = "mt-10",
+    showBoneMarrow = false,
+}: {
+    className?: string;
+    showBoneMarrow?: boolean;
+} = {}) {
     return (
-        <footer className={`${className} bg-paper-texture`}>
-            <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-12 md:py-16">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    {trustBadges.map((badge) => (
-                        <div key={badge.title} className="flex items-center gap-3.5">
-                            <span className={`flex items-center justify-center w-12 h-12 squircle-border-sm shrink-0 ${badge.boxClass}`}>
-                                {badge.kind === "react-icon" ? (
-                                    <badge.icon size={22} />
-                                ) : (
-                                    <badge.icon
-                                        size={22}
-                                        strokeWidth={badge.kind === "lucide-filled" ? 0 : 2.1}
-                                        fill={badge.kind === "lucide-filled" ? "currentColor" : "none"}
-                                    />
-                                )}
-                            </span>
-                            <div className="flex flex-col gap-0.5">
-                                <span className="text-sm font-bold text-marinho">
-                                    {badge.title}
+        <>
+            <div className={`${className} bg-paper-texture`}>
+                <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-12 md:py-16">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        {trustBadges.map((badge) => (
+                            <div key={badge.title} className="flex items-center gap-3.5">
+                                <span className={`flex items-center justify-center w-12 h-12 squircle-border-sm shrink-0 ${badge.boxClass}`}>
+                                    {badge.kind === "react-icon" ? (
+                                        <badge.icon size={22} />
+                                    ) : (
+                                        <badge.icon
+                                            size={22}
+                                            strokeWidth={badge.kind === "lucide-filled" ? 0 : 2.1}
+                                            fill={badge.kind === "lucide-filled" ? "currentColor" : "none"}
+                                        />
+                                    )}
                                 </span>
-                                <span className="text-xs text-texto-terciario leading-snug">
-                                    {badge.text}
-                                </span>
+                                <div className="flex flex-col gap-0.5">
+                                    <span className="text-sm font-bold text-marinho">
+                                        {badge.title}
+                                    </span>
+                                    <span className="text-xs text-texto-terciario leading-snug">
+                                        {badge.text}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            <div className="relative overflow-hidden bg-[#15123B] text-white footer-torn-top">
+            {showBoneMarrow && <BoneMarrowSection />}
+
+            <footer className="relative overflow-hidden bg-[#15123B] text-white footer-torn-top">
                 <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pt-20 pb-12 md:pt-28 md:pb-16">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
                         <div className="md:col-span-5 flex flex-col gap-4 max-w-sm">
@@ -142,7 +153,7 @@ export function SiteFooter({ className = "mt-10" }: { className?: string } = {})
                         </p>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </>
     );
 }
