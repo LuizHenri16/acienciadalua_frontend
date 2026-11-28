@@ -84,7 +84,7 @@ export default function Home() {
         </div>
         <FaqSection />
       </main>
-      <SiteFooter className="mt-0" />
+      <SiteFooter className="mt-0" showBoneMarrow />
     </div>
   );
 }
