@@ -10,7 +10,7 @@ import { getMaterialTypeLabel } from '@/lib/format/material';
 import { adminCreateProduct, adminUpdateProduct, adminDeleteProduct } from '@/lib/api/admin-products';
 import { uploadUrl } from '@/lib/api/client';
 import { getAdminToken } from '@/lib/auth/cookies';
-import { Trash2, Send, FileText, Loader2, Eye, ImageIcon } from 'lucide-react';
+import { Trash2, Send, FileText, Loader2, Eye, ImageIcon, FolderUp, SlidersHorizontal } from 'lucide-react';
 import Image from 'next/image';
 
 interface ProductFormProps {
@@ -113,46 +113,46 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
   const categoryLabel = getMaterialTypeLabel(formData.category as MaterialType);
 
   const previewCard = (
-    <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-      <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
-        <div className="w-7 h-7 rounded-lg bg-rosa-rose/20 flex items-center justify-center shrink-0">
-          <Eye className="w-3.5 h-3.5 text-rosa-rose" />
+    <div className="rounded-3xl painel-card overflow-hidden">
+      <div className="flex items-center gap-2.5 px-5 py-4 bg-[#EAEBF2]/65">
+        <div className="w-7 h-7 rounded-full bg-marinho flex items-center justify-center shrink-0">
+          <Eye className="w-3.5 h-3.5 text-white" />
         </div>
-        <p className="text-xs font-bold text-texto-principal tracking-wide">Pré-visualização</p>
+        <p className="text-xs font-bold text-marinho tracking-wide">Pré-visualização</p>
       </div>
 
       <div className="p-4">
         {/* Capa */}
-        <div className="w-full aspect-[3/4] squircle-border overflow-hidden bg-linear-to-br from-turquesa-light to-menta flex items-center justify-center mb-4 border border-borda relative">
+        <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-linear-to-br from-[#E7F6F4] to-[#FDF0F3] flex items-center justify-center mb-4 relative">
           {coverPreviewUrl ? (
             <Image src={coverPreviewUrl} alt={formData.title || "Preview da capa do produto"} fill className="object-cover" sizes="300px" />
           ) : (
-            <ImageIcon className="w-10 h-10 text-turquesa-dark/30" />
+            <ImageIcon className="w-10 h-10 text-turquesa-deep/30" />
           )}
         </div>
-        <span className={`inline-flex items-center px-2 py-0 squircle-border text-legenda font-bold mb-2 ${
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-legenda font-bold mb-2 ${
           isTeacher
-            ? 'bg-rosa-rose/15 text-rosa-deep'
-            : 'bg-turquesa-light text-petroleo'
+            ? 'bg-[#FDF0F3] text-rosa-deep'
+            : 'bg-[#E7F6F4] text-turquesa-deep'
         }`}>
           {categoryLabel}
         </span>
 
         <p className="text-sm font-bold text-texto-principal leading-snug mb-1 line-clamp-2">
-          {formData.title || <span className="text-gray-300 font-normal">Título do produto</span>}
+          {formData.title || <span className="text-texto-terciario/60 font-normal">Título do produto</span>}
         </p>
-          <p className="text-xs text-texto-secundario leading-relaxed line-clamp-3 mb-3">
-          {formData.description || <span className="text-gray-300">A descrição aparecerá aqui...</span>}
+        <p className="text-xs text-texto-secundario leading-relaxed line-clamp-3 mb-3">
+          {formData.description || <span className="text-texto-terciario/60">A descrição aparecerá aqui...</span>}
         </p>
 
-        <div className="border-t border-borda pt-3 flex items-center justify-between">
-          <span className="text-base font-bold text-turquesa-deep">
+        <div className="border-t border-marinho/[0.07] pt-3 flex items-center justify-between">
+          <span className="text-base font-bold text-turquesa-deep tabular-nums">
             {formData.price || 'R$ 0,00'}
           </span>
-          <span className={`text-legenda font-semibold px-2 py-0 rounded-full ${
+          <span className={`text-legenda font-semibold px-2.5 py-0.5 rounded-full ${
             formData.isActive
-              ? 'bg-turquesa-light text-petroleo'
-              : 'bg-gray-100 text-texto-terciario'
+              ? 'bg-[#E7F6F4] text-turquesa-deep'
+              : 'bg-[#F5F4F0] text-texto-terciario'
           }`}>
             {formData.isActive ? 'Ativo' : 'Rascunho'}
           </span>
@@ -164,8 +164,8 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
   const renderActionButtons = (errorId?: string) => (
     <div className="flex flex-col gap-3">
       {error && (
-        <div id={errorId} role="alert" className="flex items-center gap-2 bg-red-50 border border-red-200 squircle-border px-3 py-2">
-          <span className="text-red-700 text-xs">{error}</span>
+        <div id={errorId} role="alert" className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-3.5 py-2.5">
+          <span className="text-red-700 text-xs font-medium">{error}</span>
         </div>
       )}
 
@@ -173,7 +173,7 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
         type="button"
         disabled={loading}
         onClick={() => handleSubmitWithActive(formData.isActive)}
-        className="w-full flex items-center justify-center gap-2 py-3 squircle-border bg-turquesa-deep hover:opacity-90 active:scale-[0.98] text-white text-sm font-bold transition-all shadow-md disabled:opacity-60 cursor-pointer"
+        className="w-full flex items-center justify-center gap-2 py-3 rounded-full painel-btn-primary text-xs sm:text-sm font-bold disabled:opacity-60 cursor-pointer"
       >
         {loading
           ? <><Loader2 className="w-4 h-4 animate-spin" /> Salvando...</>
@@ -185,7 +185,7 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
         type="button"
         onClick={() => handleSubmitWithActive(false)}
         disabled={loading}
-        className="w-full py-2.5 squircle-border text-sm font-semibold border border-borda-med text-texto-secundario hover:bg-gray-50 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50"
+        className="w-full py-2.5 rounded-full painel-control text-xs sm:text-sm font-semibold text-texto-secundario hover:bg-[#F5F4F0] cursor-pointer disabled:opacity-50"
       >
         Salvar como rascunho
       </button>
@@ -204,10 +204,10 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
         type="button"
         onClick={handleDelete}
         disabled={deleting}
-        className={`flex items-center justify-center gap-2 w-full min-h-11 py-2.5 squircle-border text-sm font-bold transition-all active:scale-[0.98] cursor-pointer ${
+        className={`flex items-center justify-center gap-2 w-full min-h-11 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all active:scale-[0.98] cursor-pointer ${
           confirmDelete
-            ? 'bg-red-600 text-white hover:bg-red-700'
-            : 'border border-red-300 text-red-700 hover:bg-red-50'
+            ? 'bg-coral-dark text-white hover:opacity-90'
+            : 'border border-red-200 bg-white text-coral-dark hover:bg-red-50'
         }`}
       >
         <Trash2 className="w-4 h-4" />
@@ -217,7 +217,7 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
         <button
           type="button"
           onClick={() => setConfirmDelete(false)}
-          className="text-xs text-texto-terciario hover:text-gray-600 text-center cursor-pointer"
+          className="text-xs text-texto-terciario hover:text-texto-principal text-center cursor-pointer"
         >
           Cancelar
         </button>
@@ -226,25 +226,25 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
   );
 
   return (
-    <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-5 lg:items-start flex flex-col gap-4">
+    <div className="lg:grid lg:grid-cols-[1fr_308px] lg:gap-5 lg:items-start flex flex-col gap-4">
       <div className="flex flex-col gap-4">
-        <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
-            <div className="w-7 h-7 rounded-lg bg-turquesa-light flex items-center justify-center shrink-0">
-              <FileText className="w-3.5 h-3.5 text-turquesa-dark" />
+        <div className="rounded-3xl painel-card overflow-hidden">
+          <div className="flex items-center gap-2.5 px-5 py-4 bg-[#EAEBF2]/65">
+            <div className="w-7 h-7 rounded-full bg-marinho flex items-center justify-center shrink-0">
+              <FileText className="w-3.5 h-3.5 text-white" />
             </div>
-            <p className="text-xs font-bold text-texto-principal tracking-wide">Informações</p>
+            <p className="text-xs font-bold text-marinho tracking-wide">Informações</p>
           </div>
           <div className="px-5 py-5">
             <ProductInfo data={formData} onChange={handleChange} hasError={!!error} />
           </div>
         </div>
-        <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
-            <div className="w-7 h-7 rounded-lg bg-ouro-light flex items-center justify-center shrink-0">
-              <svg className="w-3.5 h-3.5 text-ouro" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <div className="rounded-3xl painel-card overflow-hidden">
+          <div className="flex items-center gap-2.5 px-5 py-4 bg-[#EAEBF2]/65">
+            <div className="w-7 h-7 rounded-full bg-marinho flex items-center justify-center shrink-0">
+              <FolderUp className="w-3.5 h-3.5 text-ouro-light" />
             </div>
-            <p className="text-xs font-bold text-texto-principal tracking-wide">Arquivos</p>
+            <p className="text-xs font-bold text-marinho tracking-wide">Arquivos</p>
           </div>
           <div className="px-5 py-5">
             <ProductFiles
@@ -256,12 +256,12 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
             />
           </div>
         </div>
-        <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
-            <div className="w-7 h-7 rounded-lg bg-marinho/10 flex items-center justify-center shrink-0">
-              <svg className="w-3.5 h-3.5 text-marinho" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        <div className="rounded-3xl painel-card overflow-hidden">
+          <div className="flex items-center gap-2.5 px-5 py-4 bg-[#EAEBF2]/65">
+            <div className="w-7 h-7 rounded-full bg-marinho flex items-center justify-center shrink-0">
+              <SlidersHorizontal className="w-3.5 h-3.5 text-turquesa-light" />
             </div>
-            <p className="text-xs font-bold text-texto-principal tracking-wide">Configurações</p>
+            <p className="text-xs font-bold text-marinho tracking-wide">Configurações</p>
           </div>
           <div className="flex items-center justify-between px-5 py-4">
             <div className="flex flex-col gap-0.5">
@@ -275,7 +275,7 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
               aria-labelledby="product-active-label"
               onClick={() => handleChange('isActive', !formData.isActive)}
               className={`relative w-12 h-6 rounded-full transition-all duration-300 cursor-pointer after:absolute after:inset-x-0 after:-inset-y-2.5 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-turquesa-dark ${
-                formData.isActive ? 'bg-turquesa-dark shadow-md shadow-turquesa-dark/30' : 'bg-gray-200'
+                formData.isActive ? 'bg-turquesa-deep shadow-sm' : 'bg-marinho/20'
               }`}
             >
               <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-300 ${
@@ -285,12 +285,12 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
           </div>
         </div>
 
-        <div className="lg:hidden bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
-            <div className="w-7 h-7 rounded-lg bg-turquesa-light flex items-center justify-center shrink-0">
-              <Send className="w-3.5 h-3.5 text-turquesa-dark" />
+        <div className="lg:hidden rounded-3xl painel-card overflow-hidden">
+          <div className="flex items-center gap-2.5 px-5 py-4 bg-[#EAEBF2]/65">
+            <div className="w-7 h-7 rounded-full bg-marinho flex items-center justify-center shrink-0">
+              <Send className="w-3.5 h-3.5 text-white" />
             </div>
-            <p className="text-xs font-bold text-texto-principal tracking-wide">Publicação</p>
+            <p className="text-xs font-bold text-marinho tracking-wide">Publicação</p>
           </div>
           <div className="px-5 py-5">{renderActionButtons()}</div>
         </div>
@@ -299,12 +299,12 @@ export function ProductForm({ product, duplicateFrom }: ProductFormProps) {
       </div>
       <div className="hidden lg:flex flex-col gap-4">
         {previewCard}
-        <div className="bg-white border border-borda squircle-border overflow-hidden shadow-sm">
-          <div className="flex items-center gap-2.5 px-5 py-4 border-b border-borda bg-linear-to-r from-white to-gray-50/60">
-            <div className="w-7 h-7 rounded-lg bg-turquesa-light flex items-center justify-center shrink-0">
-              <Send className="w-3.5 h-3.5 text-turquesa-dark" />
+        <div className="rounded-3xl painel-card overflow-hidden">
+          <div className="flex items-center gap-2.5 px-5 py-4 bg-[#EAEBF2]/65">
+            <div className="w-7 h-7 rounded-full bg-marinho flex items-center justify-center shrink-0">
+              <Send className="w-3.5 h-3.5 text-white" />
             </div>
-            <p className="text-xs font-bold text-texto-principal tracking-wide">Publicação</p>
+            <p className="text-xs font-bold text-marinho tracking-wide">Publicação</p>
           </div>
           <div className="px-5 py-5">{renderActionButtons("product-form-error")}</div>
         </div>

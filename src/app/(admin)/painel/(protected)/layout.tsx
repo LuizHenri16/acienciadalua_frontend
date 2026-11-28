@@ -12,7 +12,7 @@ export default async function ProtectedAdminLayout({
 }) {
   const cookieStore = await cookies();
 
-  if (!cookieStore.get(ADMIN_TOKEN_COOKIE)) {
+  if (!cookieStore.get(ADMIN_TOKEN_COOKIE)?.value) {
     redirect(ADMIN_SIGNIN_ROUTE);
   }
 

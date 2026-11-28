@@ -13,7 +13,17 @@ export default function RedefinirSenha() {
                 </div>
             }
         >
-            <Suspense fallback={<div className="text-white">Carregando...</div>}>
+            <Suspense
+                fallback={
+                    <div role="status" aria-live="polite" className="w-full space-y-4 py-2">
+                        <span className="sr-only">Carregando formulário…</span>
+                        <div className="h-5 w-40 rounded-full skeleton-shimmer-dark mx-auto" />
+                        <div className="h-11 w-full rounded-xl skeleton-shimmer-dark" />
+                        <div className="h-11 w-full rounded-xl skeleton-shimmer-dark" />
+                        <div className="h-11 w-full rounded-full skeleton-shimmer-dark mt-2" />
+                    </div>
+                }
+            >
                 <ResetPasswordForm />
             </Suspense>
         </AuthShell>

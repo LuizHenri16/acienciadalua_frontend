@@ -98,7 +98,7 @@ export function AdminToastProvider({ children }: { children: ReactNode }) {
             <div
               key={toast.id}
               role="status"
-              className="pointer-events-auto flex items-start gap-3 rounded-xl bg-white border border-borda shadow-lg px-4 py-3 text-texto-principal transition-all"
+              className="pointer-events-auto flex items-start gap-3 rounded-2xl bg-white border border-marinho/[0.08] shadow-[0_12px_28px_-10px_rgba(30,27,75,0.18)] px-4 py-3 text-texto-principal transition-all"
             >
               <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${iconColor}`} />
               <div className="min-w-0 flex-1">
@@ -113,7 +113,7 @@ export function AdminToastProvider({ children }: { children: ReactNode }) {
                 type="button"
                 onClick={() => dismiss(toast.id)}
                 aria-label="Fechar aviso"
-                className="p-1 rounded-lg text-texto-terciario hover:text-texto-principal hover:bg-off-white transition-colors cursor-pointer shrink-0"
+                className="p-1 rounded-xl text-texto-terciario hover:text-texto-principal hover:bg-[#F5F4F0] transition-colors cursor-pointer shrink-0"
               >
                 <X className="w-3.5 h-3.5" />
               </button>

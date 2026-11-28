@@ -7,7 +7,7 @@ import { CUSTOMER_SIGNIN_ROUTE } from "@/lib/auth/routes";
 export default async function ProtectedAccountLayout({ children }: { children: ReactNode }) {
   const cookieStore = await cookies();
 
-  if (!cookieStore.get(CUSTOMER_TOKEN_COOKIE)) {
+  if (!cookieStore.get(CUSTOMER_TOKEN_COOKIE)?.value) {
     redirect(CUSTOMER_SIGNIN_ROUTE);
   }
 
