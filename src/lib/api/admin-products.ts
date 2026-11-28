@@ -1,11 +1,12 @@
 import type { Material } from "@/types/material";
-import { apiUrl } from "./client";
+import { apiUrl, privateApiUrl } from "./client";
+import { HTTP_ONLY_SESSION } from "@/lib/auth/cookies";
 
 // ─── Autenticado (painel admin) ───────────────────────────────────────────────
 
 export async function adminGetProducts(token: string): Promise<Material[]> {
-  const response = await fetch(apiUrl("/products"), {
-    headers: { Authorization: `Bearer ${token}` },
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl("/products") : apiUrl("/products"), {
+    ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
     cache: "no-store",
   });
 
@@ -14,8 +15,9 @@ export async function adminGetProducts(token: string): Promise<Material[]> {
 }
 
 export async function adminGetProductById(id: string, token: string): Promise<Material> {
-  const response = await fetch(apiUrl(`/products/${id}`), {
-    headers: { Authorization: `Bearer ${token}` },
+  const path = `/products/${encodeURIComponent(id)}`;
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl(path) : apiUrl(path), {
+    ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
     cache: "no-store",
   });
 
@@ -24,9 +26,9 @@ export async function adminGetProductById(id: string, token: string): Promise<Ma
 }
 
 export async function adminCreateProduct(data: FormData, token: string): Promise<Material> {
-  const response = await fetch(apiUrl("/products"), {
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl("/products") : apiUrl("/products"), {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
+    ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
     body: data,
   });
 
@@ -35,9 +37,10 @@ export async function adminCreateProduct(data: FormData, token: string): Promise
 }
 
 export async function adminUpdateProduct(id: string, data: FormData, token: string): Promise<Material> {
-  const response = await fetch(apiUrl(`/products/${id}`), {
+  const path = `/products/${encodeURIComponent(id)}`;
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl(path) : apiUrl(path), {
     method: "PUT",
-    headers: { Authorization: `Bearer ${token}` },
+    ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
     body: data,
   });
 
@@ -46,9 +49,10 @@ export async function adminUpdateProduct(id: string, data: FormData, token: stri
 }
 
 export async function adminToggleProduct(id: string, token: string): Promise<Material> {
-  const response = await fetch(apiUrl(`/products/${id}/toggle`), {
+  const path = `/products/${encodeURIComponent(id)}/toggle`;
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl(path) : apiUrl(path), {
     method: "PATCH",
-    headers: { Authorization: `Bearer ${token}` },
+    ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
   });
 
   if (!response.ok) throw new Error("Falha ao alterar status do produto");
@@ -56,9 +60,10 @@ export async function adminToggleProduct(id: string, token: string): Promise<Mat
 }
 
 export async function adminDeleteProduct(id: string, token: string): Promise<void> {
-  const response = await fetch(apiUrl(`/products/${id}`), {
+  const path = `/products/${encodeURIComponent(id)}`;
+  const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl(path) : apiUrl(path), {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
+    ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
   });
 
   if (!response.ok) throw new Error("Falha ao excluir produto");
