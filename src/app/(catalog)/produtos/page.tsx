@@ -10,42 +10,40 @@ import { SiteFooter } from "@/components/layout/site-footer";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-    title: "Catálogo de Materiais",
-    description:
-        "Explore todos os materiais didáticos de Ciências da Profa. Lua: resumos, mapas conceituais e exercícios para alunos, e jogos, slides e planos de aula para professores.",
-    alternates: {
-        canonical: "/produtos",
-    },
+  title: "Catálogo de Materiais",
+  description:
+    "Explore todos os materiais didáticos de Ciências da Profa. Lua: resumos, mapas conceituais e exercícios para alunos, e jogos, slides e planos de aula para professores.",
+  alternates: {
+    canonical: "/produtos",
+  },
 };
 
 async function fetchAllProducts(): Promise<{ materials: Material[]; error: string | null }> {
-    try {
-        const [students, teachers] = await Promise.all([
-            getProducts("STUDENT"),
-            getProducts("TEACHER"),
-        ]);
-        return { materials: [...students, ...teachers], error: null };
-    } catch {
-        return {
-            materials: [],
-            error: "Não foi possível carregar os materiais. Tente novamente mais tarde.",
-        };
-    }
+  try {
+    const [students, teachers] = await Promise.all([
+      getProducts("STUDENT"),
+      getProducts("TEACHER"),
+    ]);
+    return { materials: [...students, ...teachers], error: null };
+  } catch {
+    return {
+      materials: [],
+      error: "Não foi possível carregar os materiais. Tente novamente mais tarde.",
+    };
+  }
 }
 
 export default async function ProdutosPage() {
-    const { materials, error } = await fetchAllProducts();
+  const { materials, error } = await fetchAllProducts();
 
-    return (
-        <CatalogShell>
-            <main id="main-content" tabIndex={-1} className="flex-1 pt-[var(--header-h)]">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-14">
-                    <Suspense fallback={<CatalogSkeleton />}>
-                        <CatalogContent materials={materials} error={error} />
-                    </Suspense>
-                </div>
-            </main>
-            <SiteFooter />
-        </CatalogShell>
-    );
+  return (
+    <CatalogShell headerVariant="hero">
+      <main id="main-content" tabIndex={-1} className="flex-1 flex flex-col">
+        <Suspense fallback={<CatalogSkeleton />}>
+          <CatalogContent materials={materials} error={error} />
+        </Suspense>
+      </main>
+      <SiteFooter className="mt-0" />
+    </CatalogShell>
+  );
 }
