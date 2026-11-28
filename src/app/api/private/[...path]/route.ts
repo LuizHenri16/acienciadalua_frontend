@@ -80,7 +80,7 @@ async function handle(request: Request, params: Promise<{ path: string[] }>) {
   const upstreamUrl = new URL(`${API_URL.replace(/\/$/, "")}${path}`);
   if (path === "/admin/dashboard") {
     const period = new URL(request.url).searchParams.get("period");
-    if (period && ["day", "week", "month", "year"].includes(period)) {
+    if (period && ["7d", "30d", "90d", "1y"].includes(period)) {
       upstreamUrl.searchParams.set("period", period);
     }
   }

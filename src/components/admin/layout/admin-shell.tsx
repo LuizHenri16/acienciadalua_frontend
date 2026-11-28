@@ -107,7 +107,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
   const router = useRouter();
   const [drawerPathname, setDrawerPathname] = useState<string | null>(null);
   const mobileOpen = drawerPathname === pathname;
-  const [pendingSalesCount, setPendingSalesCount] = useState<number>(0);
+  const [pendingSalesCount, setPendingSalesCount] = useState<number | null>(null);
   const [adminDisplayName, setAdminDisplayName] = useState<string>("Profa. Lua");
   const adminInitial = adminDisplayName.trim().charAt(0).toUpperCase() || "P";
 
@@ -118,13 +118,13 @@ export function AdminShell({ children }: { children: ReactNode }) {
       if (active) setAdminDisplayName(getAdminDisplayNameFromToken(token));
     }, 0);
     getAdminSalesData(token)
-      .then((res) => {
+      .then((sales) => {
         if (!active) return;
-        const count = res.data.filter((sale) => sale.status === "pending").length;
+        const count = sales.filter((sale) => sale.status === "pending").length;
         setPendingSalesCount(count);
       })
       .catch(() => {
-        // Ignore silent badge load failure
+        if (active) setPendingSalesCount(null);
       });
     return () => {
       active = false;
@@ -210,7 +210,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           {NAV_ITEMS.map((item) => {
             const active = item.match(pathname);
             const Icon = item.icon;
-            const showPending = item.href === "/painel/vendas" && pendingSalesCount > 0;
+            const showPending = item.href === "/painel/vendas" && (pendingSalesCount ?? 0) > 0;
 
             return (
               <Link
@@ -332,7 +332,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
                 {NAV_ITEMS.map((item) => {
                   const active = item.match(pathname);
                   const Icon = item.icon;
-                  const showPending = item.href === "/painel/vendas" && pendingSalesCount > 0;
+                  const showPending = item.href === "/painel/vendas" && (pendingSalesCount ?? 0) > 0;
 
                   return (
                     <Link
