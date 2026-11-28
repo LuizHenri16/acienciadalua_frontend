@@ -141,8 +141,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
 
-  function handleSignOut() {
-    clearAdminTokens();
+  async function handleSignOut() {
+    await clearAdminTokens();
     router.push("/painel/signin");
   }
 

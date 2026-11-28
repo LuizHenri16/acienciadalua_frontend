@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { adminSignIn } from "@/lib/api/auth";
 import { HttpError } from "@/lib/api/http-error";
-import { setAdminTokens } from "@/lib/auth/cookies";
 
 export function AdminSignInForm() {
   const [loading, setLoading] = useState(false);
@@ -25,10 +24,7 @@ export function AdminSignInForm() {
     setError("");
 
     try {
-      const { access_token, refresh_token } = await adminSignIn(user.email, user.password);
-
-      // Salva os tokens em cookies (acessíveis pelo middleware)
-      setAdminTokens(access_token, refresh_token);
+      await adminSignIn(user.email, user.password);
 
       router.push("/painel");
     } catch (err) {

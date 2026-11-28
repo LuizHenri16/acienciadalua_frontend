@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signIn, setPassword as setCustomerPassword } from "@/lib/api/customers";
 import { HttpError } from "@/lib/api/http-error";
-import { setCustomerToken } from "@/lib/auth/cookies";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -28,8 +27,7 @@ export function SignInForm({ initialEmail }: SignInFormProps) {
         setError("");
 
         try {
-            const result = await signIn(email, password);
-            setCustomerToken(result.access_token);
+            await signIn(email, password);
             router.push("/minha-conta");
         } catch (err: unknown) {
             if (err instanceof HttpError && err.status === 401 && err.message === "NO_PASSWORD_SET") {
@@ -51,8 +49,7 @@ export function SignInForm({ initialEmail }: SignInFormProps) {
         setError("");
 
         try {
-            const result = await setCustomerPassword(email, password);
-            setCustomerToken(result.access_token);
+            await setCustomerPassword(email, password);
             router.push("/minha-conta");
         } catch {
             setError("Erro ao criar senha. Tente novamente.");

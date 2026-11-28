@@ -51,9 +51,9 @@ export function AccountHeader({ userName }: AccountHeaderProps) {
     };
   }, []);
 
-  const handleExit = () => {
+  const handleExit = async () => {
     setMobileOpen(false);
-    clearCustomerToken();
+    await clearCustomerToken();
     router.push("/");
   };
 

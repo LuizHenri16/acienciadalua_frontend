@@ -4,6 +4,10 @@ export function apiUrl(path: string): string {
   return `${API_URL}${path}`;
 }
 
+export function privateApiUrl(path: string): string {
+  return `/api/private${path.startsWith("/") ? path : `/${path}`}`;
+}
+
 export function uploadUrl(file?: string | null): string | null {
   return file ? `${API_URL}/uploads/${file}` : null;
 }

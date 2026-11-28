@@ -6,7 +6,8 @@ import type {
   AdminSettings,
   DashboardPeriod,
 } from "@/types/admin";
-import { apiUrl } from "./client";
+import { apiUrl, privateApiUrl } from "./client";
+import { HTTP_ONLY_SESSION } from "@/lib/auth/cookies";
 import { adminGetProducts } from "./admin-products";
 import {
   buildDemoDashboard,
@@ -76,8 +77,8 @@ function normalizeDashboard(data: RawDashboard): RawDashboard {
 async function fetchJsonWithAuth<T>(path: string, token: string): Promise<T | null> {
   if (!token) return null;
   try {
-    const response = await fetch(apiUrl(path), {
-      headers: { Authorization: `Bearer ${token}` },
+    const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl(path) : apiUrl(path), {
+      ...(token === HTTP_ONLY_SESSION ? {} : { headers: { Authorization: `Bearer ${token}` } }),
       cache: "no-store",
     });
     if (!response.ok) return null;
@@ -195,12 +196,11 @@ export async function saveAdminSettingsData(
   }
 
   try {
-    const response = await fetch(apiUrl("/admin/settings"), {
+    const response = await fetch(token === HTTP_ONLY_SESSION ? privateApiUrl("/admin/settings") : apiUrl("/admin/settings"), {
       method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+      headers: token === HTTP_ONLY_SESSION
+        ? { "Content-Type": "application/json" }
+        : { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       body: JSON.stringify(settings),
     });
 
