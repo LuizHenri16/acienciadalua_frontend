@@ -22,6 +22,7 @@ import {
 } from "@/components/admin/ui/status-badge";
 import { SaleDetailDrawer } from "@/components/admin/sales/sale-detail-drawer";
 import { useAdminToast } from "@/components/admin/ui/toast";
+import { DataError } from "@/components/admin/ui/data-error";
 
 type StatusFilter = "all" | SaleStatus;
 type MethodFilter = "all" | PaymentMethodType;
@@ -40,25 +41,29 @@ export function SalesManager() {
 
   const [sales, setSales] = useState<AdminSale[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [methodFilter, setMethodFilter] = useState<MethodFilter>("all");
   const [selectedSale, setSelectedSale] = useState<AdminSale | null>(null);
 
+  function loadSales() {
+    setLoading(true);
+    setError(false);
+    getAdminSalesData(getAdminToken())
+      .then(setSales)
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }
+
   useEffect(() => {
     let active = true;
     getAdminSalesData(getAdminToken())
-      .then((res) => {
-        if (!active) return;
-        setSales(res.data);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
+      .then((salesData) => { if (active) setSales(salesData); })
+      .catch(() => { if (active) setError(true); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
   }, []);
 
   const filteredSales = useMemo(() => {
@@ -92,6 +97,10 @@ export function SalesManager() {
       refundedCount: refunded.length,
     };
   }, [sales]);
+
+  if (error && !loading) {
+    return <div className="flex flex-col gap-4 sm:gap-6"><h1 className="text-xl sm:text-2xl font-bold text-texto-principal">Vendas</h1><DataError onRetry={loadSales} /></div>;
+  }
 
   function handleExportCsv() {
     downloadCsv(

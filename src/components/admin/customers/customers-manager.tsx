@@ -20,30 +20,35 @@ import {
   getPaymentMethodLabel,
   SaleStatusIndicator,
 } from "@/components/admin/ui/status-badge";
+import { DataError } from "@/components/admin/ui/data-error";
 
 type CustomerSort = "recent" | "spent_desc" | "purchases_desc" | "name_asc";
 
 export function CustomersManager() {
   const [customers, setCustomers] = useState<AdminCustomer[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<CustomerSort>("recent");
   const [selectedCustomer, setSelectedCustomer] = useState<AdminCustomer | null>(null);
 
+  function loadCustomers() {
+    setLoading(true);
+    setError(false);
+    getAdminCustomersData(getAdminToken())
+      .then(setCustomers)
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }
+
   useEffect(() => {
     let active = true;
     getAdminCustomersData(getAdminToken())
-      .then((res) => {
-        if (!active) return;
-        setCustomers(res.data);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
+      .then((customerData) => { if (active) setCustomers(customerData); })
+      .catch(() => { if (active) setError(true); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
   }, []);
 
   useEffect(() => {
@@ -92,6 +97,10 @@ export function CustomersManager() {
       totalRevenue,
     };
   }, [customers]);
+
+  if (error && !loading) {
+    return <div className="flex flex-col gap-4 sm:gap-6"><h1 className="text-xl sm:text-2xl font-bold text-texto-principal">Clientes</h1><DataError onRetry={loadCustomers} /></div>;
+  }
 
   return (
     <div className="flex flex-col gap-4 sm:gap-6">
